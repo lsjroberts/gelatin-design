@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>gelatindesign | coding web + games</title>
+		<title>gelatindesign | a coder making websites + games</title>
 
 		<meta charset="utf-8">
 
@@ -27,7 +27,7 @@
 			<section id="sidebar">
 				<header>
 					<h1><a href="/">gelatindesign</a></h1>
-					<p>im a coder making websites + games</p>
+					<p>i'm a coder making websites + games</p>
 
 					<p><small class="twitter"><a href="http://www.twitter.com/gelatindesign">@gelatindesign</a></small></p>
 					<p><small class="email"><a href="mailto:info@gelatindesign.co.uk">info@gelatindesign.co.uk</a></small></p>

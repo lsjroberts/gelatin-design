@@ -1,6 +1,6 @@
 environment:
   development: %localhost%
-  production:  %whatsourplan.com%
+  production:  %gelatindesign.co.uk%
 
 path:
   controllers: controllers/
