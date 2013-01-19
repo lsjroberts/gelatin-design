@@ -12,4 +12,4 @@ path:
 
 routes:
   Pages:
-    view: (:string)?/?
+    view: :string?/?

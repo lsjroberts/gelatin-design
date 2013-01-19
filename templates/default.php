@@ -44,8 +44,8 @@
 				<section class="games">
 					<h2>games</h2>
 
-					<p><a href="/ipatw">i painted a tiny world <small>ludum dare 23</small></a></p>
 					<p><a href="/neon-spores">neon spores <small>ludum dare 24</small></a></p>
+					<p><a href="/ipatw">i painted a tiny world <small>ludum dare 23</small></a></p>
 				</section>
 			</section>
 
