@@ -1,0 +1,17 @@
+{
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "git@bitbucket.org:gelatindesign/ares.git"
+		}
+	],
+
+	"autoload": {
+		"psr-0": { "": ["controllers/", "models/"] }
+	},
+
+	"require": {
+		"gelatindesign/ares": "dev-develop",
+		"nesbot/carbon": "1.2.*"
+	}
+}

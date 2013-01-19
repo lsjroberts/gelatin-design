@@ -1,0 +1,40 @@
+#flex { /*-- FLEXIBLE BOX MODEL MIXIN BUNDLE --*/
+	
+	/* @orient: horizontal | vertical | inherit */
+	/* @align: start | end | center | baseline | stretch */
+	/* @direction: normal | reverse */
+	/* @pack: start | end | center | justify */
+	
+	.parent(@orient, @align, @direction, @pack) {
+		display:-webkit-box; 
+		display:-moz-box; 
+		display:box;
+		
+		-webkit-box-orient:@orient; 
+		-moz-box-orient:@orient;
+		box-orient:@orient;
+		
+		-webkit-box-align:@align;
+		-moz-box-align:@align;
+		box-align:@align;
+		
+		-webkit-box-direction:@direction;
+		-moz-box-direction:@direction;
+		box-direction:@direction;
+		
+		-webkit-box-pack:@pack;
+		-moz-box-pack:@pack;
+		box-pack:@pack;
+	}
+	
+	/*Note: @flex:0 = inflexible. */
+	.child(@flex:0, @ordinal:1) {
+		-webkit-box-flex:@flex;
+		-moz-box-flex:@flex;
+		box-flex:@flex;
+		
+		-webkit-box-ordinal-group:@ordinal;
+		-moz-box-ordinal-group:@ordinal;
+		box-ordinal-group:@ordinal;
+	}
+}

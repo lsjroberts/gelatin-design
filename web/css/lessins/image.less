@@ -1,0 +1,16 @@
+#image { /*-- IMAGE MIXIN BUNDLE --*/
+
+	.replace(@image, @width, @height, @posX, @posY) {
+		#display > .block();
+		width:@width;
+		height:@height;
+		background:url('@{image}') @posX @posY;
+		text-indent:-9999px;
+		text-align: left;
+	}
+	
+	.mask(@image) {
+		-webkit-mask-image:url('@{image}');
+		-moz-mask-image:url('@{image}');
+	}
+}

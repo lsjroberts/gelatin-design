@@ -1,0 +1,15 @@
+environment:
+  development: %localhost%
+  production:  %whatsourplan.com%
+
+path:
+  controllers: controllers/
+  models:      models/
+  templates:   templates/
+  views:       views/
+  partials:    partials/
+  web:         web/
+
+routes:
+  Pages:
+    view: (:string)?/?

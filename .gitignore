@@ -1,0 +1,9 @@
+# Rubbish files
+.DS_Store
+
+# Log files
+log/*
+!log/.gitkeep
+
+# Composer
+vendor/*
