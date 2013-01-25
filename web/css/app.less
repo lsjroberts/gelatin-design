@@ -153,6 +153,10 @@ pre {
 
 /**** Content *****/
 
+#wrapper {
+	padding-top: 45px;
+}
+
 .bar {
 	margin-bottom: 30px;
 	height: 15px;
@@ -175,7 +179,15 @@ pre {
 	.lighterorange { background: @lighterOrange; }
 }
 
+#top-bar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
 #sidebar {
+	position: fixed;
 	float: left;
 	padding: 2em 3% 2em 0;
 	border-right: 1px solid #CCC;

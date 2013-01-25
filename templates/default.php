@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<section class="bar">
+			<section id="top-bar" class="bar">
 				<div class="red"></div>
 				<div class="darkorange"></div>
 				<div class="orange"></div>

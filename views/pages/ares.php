@@ -13,7 +13,7 @@
 <h3>Ares Standard</h3>
 
 <p>Ares Standard is a quick way to get setup to use an Ares project. It provides you with the default configuration
-	files and example <code>Pages</code> &amp; <code>Blog</code> modules.</p>
+	files and example <code>Pages</code> &amp; <code>Blog</code> components.</p>
 
 <p>You can clone the repository using <a href="http://git-scm.com/">Git</a> like so:</p>
 
@@ -30,7 +30,7 @@ $ git clone https://bitbucket.org/gelatindesign/ares-standard.git
 
 <pre>$ composer update</pre>
 
-<p>If you want to add Ares to your own project from scratch, add it to your <code>composer.json</code> file:</p>
+<p>If you want to add Ares to your own project from scratch, you can add it to your <code>composer.json</code> file:</p>
 
 <pre class="brush: js;">
 {
@@ -137,7 +137,9 @@ class User extends Ares\Model {
 		return $this->hasOne('Address');
 	}
 }
+</pre>
 
+<pre class="brush: php">
 class Address extends Ares\Model {
 	
 	protected $postcode;
