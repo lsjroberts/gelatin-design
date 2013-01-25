@@ -3,8 +3,8 @@
 <p><small>Source - <a href="https://bitbucket.org/gelatindesign/ares">https://bitbucket.org/gelatindesign/ares</a></small><br>
 	<small>Status - Alpha</small></p>
 
-<p>Ares is a medium-sized php framework. It is for those projects that don't require the full power of something like Symfony,
-but could do with some routing and MVC. This site is running on it.</p>
+<p>Ares is a medium-sized php framework. It is for those projects that don't require a great deal of code,
+	but could do with some routing and MVC. This site is running on it.</p>
 
 <pre>Note: This is not yet actually production ready</pre>
 
@@ -29,8 +29,6 @@ $ git clone https://bitbucket.org/gelatindesign/ares-standard.git
 <p>Make sure you have installed <a href="http://www.getcomposer.org">Composer</a>, then run:</p>
 
 <pre>$ composer update</pre>
-
-<p>and you are ready to go.</p>
 
 <p>If you want to add Ares to your own project from scratch, add it to your <code>composer.json</code> file:</p>
 
@@ -75,7 +73,7 @@ path:
 
 <h3>Routing</h3>
 
-<p>You'll need to setup routes to your controllers, these direct urls to a controller and method:</p>
+<p>You'll need to set routes to direct each urn to a controller and method:</p>
 
 <pre class="brush: plain">
 routes:
@@ -83,7 +81,7 @@ routes:
     list: blog/
 </pre>
 
-<p>You can use pattern matching to group types of urls to the same method:</p>
+<p>You can use pattern matching to pattern match different urns to the same method:</p>
 
 <pre class="brush: plain">
 routes:
@@ -113,18 +111,62 @@ routes:
 <pre class="brush: php">
 class Article extends Ares\Model {
 	
-	public $title;
-	public $slug;
-	public $content;
+	protected $id;
+	protected $title;
+	protected $slug;
+	protected $content;
 
 }
 </pre>
 
-<p>An article can also have comments, a one-to-many relationship:</p>
+<p>Each <code>protected</code> property maps to a table column in your database. Ares does not check your if database actually
+	matches your model, so you will need to ensure your database is correct by hand.</p>
+
+
+<h4>One-to-One Relationships</h4>
+
+<p>A user has an address, a one-to-one relationship, this can be represented in Ares by defining joining methods that
+	return a relationship:</p>
 
 <pre class="brush: php">
-function comments() {
-	return $this->hasMany('Comment');
+class User extends Ares\Model {
+	
+	protected $name;
+
+	function address() {
+		return $this->hasOne('Address');
+	}
+}
+
+class Address extends Ares\Model {
+	
+	protected $postcode;
+
+	function user() {
+		return $this->hasOne('User');
+	}
+}
+</pre>
+
+<p>You can access the joined model as a property directly to retrieve the data:</p>
+
+<pre class="brush: php">
+$user = User::find(1);
+echo $user->address->postcode;
+</pre>
+
+<h4>One-to-Many Relationships</h4>
+
+<p>An article can have comments, a one-to-many relationship:</p>
+
+<pre class="brush: php">
+class Article extends Ares\Model {
+	
+	// ...
+
+	function comments() {
+		return $this->hasMany('Comment');
+	}
 }
 </pre>
 
@@ -133,16 +175,39 @@ function comments() {
 <pre class="brush: php">
 class Comment extends Ares\Model {
 	
-	public $user;
-	public $message;
+	protected $id;
+	protected $article_id;
+	protected $user_id;
+	protected $message;
 
 	public function article() {
 		return $this->belongsTo('Article');
 	}
 
+	public function user() {
+		return $this->belongsTo('User');
+	}
+
 }
 </pre>
 
+<p>Again, you can access the property directly, in a one-to-many relationship though an array of results will be returned:</p>
+
+<pre class="brush: php">
+$article = Article::find(1);
+foreach ($article->comments as $comment) {
+	echo $comment->user->name;
+	echo $comment->message;
+}
+</pre>
+
+<p>Alternatively you can call the method to get access to the <code>ActiveRecord</code>. This allows you to continue
+	manipulating the query:</p>
+
+<pre class="brush: php">
+$article = Article::find(1);
+$approved_comments = $article->comments()->where('status', '=', 'approved');
+</pre>
 
 <h3>Controllers</h3>
 
@@ -168,8 +233,19 @@ class BlogFront extends Ares\FrontController {
 	}
 
 	function getArticle($slug) {
-		$article = Article::find()->where('slug', $slug);
+		$article = Article::find()->where('slug', '=', $slug);
 		Ares\View::render(compact('article'));
+	}
+
+	function postNewComment($article_id) {
+		$article = Article::find($article_id);
+
+		$comment = new Comment(array(
+			'message' => $_POST['message']
+		));
+		$comment->user()->set(User::getLoggedIn());
+
+		$article->comments()->insert($comment);
 	}
 
 }
