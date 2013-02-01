@@ -8,13 +8,18 @@
 		<link href="/css/app.less" rel="stylesheet/less">
 
 		<script src="/js/less.js"></script>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		
+		<script src="/js/gamepad.js"></script>
+		<script src="/js/playgame.js"></script>
 		<script src="/js/app.js"></script>
 
 		<script src="/js/sh/shCore.js"></script>
 		<script src="/js/sh/shAutoloader.js"></script>
 	</head>
 	<body>
+		<div id="player" style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: #F00;"></div>
 		<div id="wrapper">
 			<section id="top-bar" class="bar">
 				<div class="red"></div>

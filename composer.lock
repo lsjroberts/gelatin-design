@@ -7,13 +7,13 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:gelatindesign/ares.git",
-                "reference": "b42e2c1c63e6de591b25b3b5dc33ab487d9ddf20"
+                "reference": "411bd3c3048ec8f193878ff7d590225e10a5b9fd"
             },
             "require": {
                 "php": ">=5.3.3",
                 "symfony/yaml": "2.*"
             },
-            "time": "2013-01-19 02:21:00",
+            "time": "2013-01-23 22:07:02",
             "type": "library",
             "installation-source": "source",
             "autoload": {
