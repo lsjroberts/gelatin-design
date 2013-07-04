@@ -3,7 +3,10 @@
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+		"jasonlewis/basset": "dev-master",
+        "natxet/CssMin": "dev-master",
+        "linkorb/jsmin-php": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

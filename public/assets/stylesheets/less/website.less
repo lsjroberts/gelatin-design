@@ -1,0 +1,272 @@
+/*
+|--------------------------------------------------------------------------
+| Gelatin Design - Website Stylesheet
+|--------------------------------------------------------------------------
+| 
+| Styles for the front-end website of www.gelatindesign.co.uk
+| 
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Foundation
+|--------------------------------------------------------------------------
+| 
+| Changes to foundation base styles
+| 
+*/
+
+.row {
+    max-width: 1400px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Brand
+|--------------------------------------------------------------------------
+*/
+
+// Fonts
+@font-title: "Open Sans", Helvetica, Arial, sans-serif;
+@font-content: "Open Sans", Helvetica, Arial, sans-serif;
+@font-mono: Consolas, "Courier New", Courier, monospace;
+
+// Colours
+@grey: #333333;
+@red: #c03435;
+@dark-orange: #e08226;
+@orange: #eca531;
+@light-orange: #f9c43a;
+@lighter-orange: #ffd53f;
+
+@code-bg: #ffe176;
+
+@text-colour: @grey;
+
+
+/*
+|--------------------------------------------------------------------------
+| Global
+|--------------------------------------------------------------------------
+*/
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: @font-content;
+    font-size: 16px;
+    color: @text-colour;
+}
+
+#wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+#inner-wrapper {
+    padding-bottom: 120px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: @font-title;
+    line-height: 1.4em;
+    color: @red;
+}
+
+ul, ol {
+    padding: 0 1em;
+}
+
+small {
+    font-size: .85em;
+}
+
+strong, em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+strong {
+    color: @red;
+}
+
+a {
+    color: darken(@dark-orange, 10%);
+
+    &:visited {
+        color: @dark-orange;
+    }
+
+    &:hover {
+        text-decoration: underline;
+        color: @red;
+    }
+}
+
+code {
+    padding: .3em .5em;
+    font-family: @font-mono;
+    font-weight: normal;
+    font-size: .9em;
+    color: #000;
+    background: #ddd;
+}
+
+body pre.prettyprint {
+    margin: 1em 0 2em;
+    padding: 20px;
+    border: 0;
+    font-family: @font-mono;
+    font-size: .9em;
+    line-height: 1.9em;
+    color: #e9e4e5;
+    background-color: #333;
+
+    ol.linenums {
+        padding-left: 2em;
+
+        li {
+            list-style-type: decimal !important;
+            background: none;
+        }
+    }
+
+    .pln {color:#e9e4e5;}
+    .str {color:#bcd42a;}
+    .kwd {color:#4bb1b1;}
+    .com {color:#888888;}
+    .typ {color:#ef7c61;}
+    .lit {color:#bcd42a;}
+    .pun, .opn, .clo {color:#ffffff;}
+    .tag {color:#4bb1b1;}
+    .atn {color:#ef7c61;}
+    .atv {color:#bcd42a;}
+    .dec, .var {color:#660066;}
+    .fun {color:#ff0000;}
+}
+
+pre.filename {
+    margin-bottom: -1em;
+    padding: 1em .5em 1em 2em;
+    border: 0;
+    width: 70%;
+    font-family: @font-mono;
+    color: #fff;
+    background: @red;
+}
+
+blockquote {
+    padding: 1em;
+    color: #fff;
+    background: lighten(@red, 15%);
+
+    strong, p {
+        color: #fff;
+    }
+
+    :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.bar {
+    margin-bottom: 20px;
+
+    div {
+        height: 20px;
+    }
+
+    .red { background: @red; }
+    .dark-orange { background: @dark-orange; }
+    .orange { background: @orange; }
+    .light-orange { background: @light-orange; }
+    .lighter-orange { background: @lighter-orange; }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+*/
+
+#site-header {
+    border-right: 1px solid #ccc;
+    padding: 22px 2em 30px 0;
+    text-align: right;
+
+    h2 {
+        font-size: 2.5em;
+
+        a {
+            color: @red;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+
+    nav {
+        margin: 30px 0;
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+*/
+
+#site-content {
+
+    h1 {
+        margin-bottom: 14px;
+        font-size: 3.6em;
+    }
+
+    h3, h4, h5, h6 {
+        margin-top: 2em;
+    }
+
+    h3 small {
+        position: relative;
+        top: 23px;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+*/
+
+#site-footer {
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}

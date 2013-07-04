@@ -1,5 +1,8 @@
 <?php
 
+require 'injections.php';
+require 'helpers.php';
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,5 +16,25 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
+});
+
+Route::get('/shopavel', function()
+{
+    return View::make('pages.shopavel');
+});
+
+Route::get('/laravel-packages', function()
+{
+    return View::make('pages.laravel-packages');
+});
+
+Route::get('/neon-spores', function()
+{
+    return View::make('pages.neon-spores');
+});
+
+Route::get('/i-painted-a-tiny-world', function()
+{
+    return View::make('pages.i-painted-a-tiny-world');
 });

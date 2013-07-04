@@ -3,3 +3,8 @@
 composer.phar
 composer.lock
 .DS_Store
+
+/public/builds
+!/public/builds/.gitkeep
+
+/node_modules
