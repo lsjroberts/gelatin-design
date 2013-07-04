@@ -54,7 +54,7 @@
     <pre class="prettyprint">
 return array(
     ...
-    'theme' => 'basic'
+    'theme' => 'my-theme'
     ...
 );</pre>
 
