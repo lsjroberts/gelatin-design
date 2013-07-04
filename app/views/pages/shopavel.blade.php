@@ -21,7 +21,7 @@
 
     <blockquote>
         <p><strong>Note:</strong> Initially it will be self-hosted, though there are plans to do a hosted version with
-            full source control.</p>
+            full source access with git.</p>
     </blockquote>
 
 
