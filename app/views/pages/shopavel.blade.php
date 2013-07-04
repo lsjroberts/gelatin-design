@@ -20,8 +20,8 @@
     <p>It comes with a full CMS for managing all aspects of your shop, products, customers and orders.</p>
 
     <blockquote>
-        <p><strong>Note:</strong> Initially it will be self-hosted, though there are plans to do a hosted version with
-            full source access with git.</p>
+        <p><strong>Note:</strong> This documentation is temporary and will be expanded upon and available separately at
+            <a href="http://shopavel.org">http://shopavel.org</a>.</p>
     </blockquote>
 
 
@@ -29,6 +29,7 @@
 
     <ul>
         <li><a href="#themes">Themes</a></li>
+        <li><a href="#loops">Loops</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="#categories">Categories</a></li>
         <li><a href="#features">Features &amp; Variations</a></li>
@@ -72,6 +73,53 @@ return array(
     etc...</pre>
 
 
+
+    <h3 id="loops">Loops <small class="pull-right"><a href="#top">top</a></small></h3>
+
+    <p>There are several types of loops added to the blade templating engine by shopavel. These are called using one of
+        the <code>@loop_*()</code> methods, for example:</p>
+
+    <pre class="prettyprint"><?php echo preencode('
+@loop_examples()
+    <h3>{b $example->title b}<h3>
+@end_loop()'); ?></pre>
+
+    <p>Additionally you can pass through options to the methods to allow customisation of the query using
+        <code>@loop_examples(['option' => 'value'])</code>. Each type of loop may have it's own options available, but
+        they all share these defaults:</p>
+
+    <pre class="prettyprint">
+[
+    'order' => 'id|created|random',
+    'take'  => '#'
+]</pre>
+
+    
+    <h5>Extending Loop Handlers</h5>
+
+    <p>You can extend a loop handler with new options by using the <code>Loop::extend()</code> method, as below:</p>
+
+    <pre class="prettyprint"><?php echo preencode('
+use Illuminate\Database\Eloquent\Builder;
+
+Loop::extend(\'Product\', \'order\', function(Builder $query, $value)
+{
+    if ($value == \'title\')
+    {
+        $query->orderBy(\'title\', \'asc\');
+    }
+});
+
+Loop::extend(\'Product\', \'only-jelly\', function(Builder $query, $value)
+{
+    if ($value === true)
+    {
+        $query->where(\'title\', \'like\', \'%jelly%\')
+    }
+});'); ?></pre>
+
+
+
     <h3 id="products">Products <small class="pull-right"><a href="#top">top</a></small></h3>
 
     <h5>Creating Views</h5>
@@ -88,6 +136,16 @@ return array(
         </article>
     @end_loop()
 </div>') ?></pre>
+
+    <p>You can customise which products are queried by passing options through to <code>@loop_products($options)</code>.</p>
+
+    <p>In addition to the standard loop options, these are available:</p>
+
+    <pre class="prettyprint">
+[
+    'order' => 'lastest|bestselling'
+]
+</pre>
 
     <p>If you prefer standard php, you can use <code>Product::all()</code> to retrieve the products:</p>
 
