@@ -84,6 +84,15 @@ return array(
     <h3>{b $example->title b}<h3>
 @end_loop()'); ?></pre>
 
+    <p>The default loops available are:</p>
+    <pre class="prettyprint">
+@loop_products()
+@loop_categories()
+@loop_variations()
+@loop_features()
+@loop_stock()
+@loop_warehouses()</pre>
+
     <p>Additionally you can pass through options to the methods to allow customisation of the query using
         <code>@loop_examples(['option' => 'value'])</code>. Each type of loop may have it's own options available, but
         they all share these defaults:</p>
@@ -97,12 +106,17 @@ return array(
     
     <h5>Extending Loop Handlers</h5>
 
-    <p>You can extend a loop handler with new options by using the <code>Loop::extend()</code> method, as below:</p>
+    <p>You can extend a loop handler with new options by using the <code>Loop::extend($looper, $option, $callback)</code>
+        method, as below:</p>
 
     <pre class="prettyprint"><?php echo preencode('
 use Illuminate\Database\Eloquent\Builder;
 
-Loop::extend(\'Product\', \'order\', function(Builder $query, $value)
+/**
+ * Add \'title\' as a choice on \'order\'
+ * @loop_products([\'order\' => \'title\'])
+ */
+Loop::extend(\'products\', \'order\', function(Builder $query, $value)
 {
     if ($value == \'title\')
     {
@@ -110,7 +124,11 @@ Loop::extend(\'Product\', \'order\', function(Builder $query, $value)
     }
 });
 
-Loop::extend(\'Product\', \'only-jelly\', function(Builder $query, $value)
+/**
+ * Create a new option \'only-jelly\'
+ * @loop_products([\'only-jelly\' => true])
+ */
+Loop::extend(\'products\', \'only-jelly\', function(Builder $query, $value)
 {
     if ($value === true)
     {
@@ -118,9 +136,33 @@ Loop::extend(\'Product\', \'only-jelly\', function(Builder $query, $value)
     }
 });'); ?></pre>
 
+    <p>You can even create a new type of loop using <code>Loop::create($looper, $model)</code>:</p>
+
+    <pre class="prettyprint"><?php echo preencode('
+use Illuminate\Database\Eloquent\Builder;
+
+Loop::create(\'authors\', \'Author\');
+Loop::extend(\'authors\', \'book-category\', function(Builder $query, $value)
+{
+    $query->with(\'book.category\' => function($with) use ($value)
+    {
+        $with->where(\'title\', \'=\', $value);
+    });
+});
+'); ?></pre>
+
+    <pre class="prettyprint"><?php echo preencode('
+{b-- List authors who have written thrillers --b}
+@loop_authors([\'book-category\' => \'Thriller\'])
+    {b $author->name b}
+@end_loop()
+'); ?></pre>
+
 
 
     <h3 id="products">Products <small class="pull-right"><a href="#top">top</a></small></h3>
+
+    <p>A product can represent any physical or digital good you wish to sell.</p>
 
     <h5>Creating Views</h5>
 
