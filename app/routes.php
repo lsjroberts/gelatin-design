@@ -38,3 +38,8 @@ Route::get('/i-painted-a-tiny-world', function()
 {
     return View::make('pages.i-painted-a-tiny-world');
 });
+
+Route::get('/setcookie', function()
+{
+    return Response::make()->withCookie(Cookie::forever('laurence', 'true'));
+});
