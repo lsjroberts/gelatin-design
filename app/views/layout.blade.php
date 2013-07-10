@@ -8,6 +8,10 @@
 
         @stylesheets('website')
 
+        @section('head')
+
+        @stop
+
         @if (Cookie::get('laurence') != 'true')
             <script type="text/javascript">
             var _gaq = _gaq || [];
@@ -40,7 +44,7 @@
                         <p>i'm a coder making websites + games</p>
 
                         <p><small class="twitter"><a href="http://www.twitter.com/gelatindesign">@gelatindesign</a></small></p>
-                        <p><small class="email"><a href="mailto:info@gelatindesign.co.uk">info@gelatindesign.co.uk</a></small></p>
+                        <p><small class="email"><a href="mailto:lsjroberts@gmail.com">lsjroberts@gmail.com</a></small></p>
 
                         <nav>
                             <h3>web</h3>
