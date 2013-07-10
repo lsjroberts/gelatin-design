@@ -59,6 +59,8 @@
                                 <li><a href="/i-painted-a-tiny-world">i painted a tiny world <small>ludum dare 23</small></a></li>
                             </ul>
                         </nav>
+
+                        <div class="clearfix"></div>
                     </header>
                 </div>
 

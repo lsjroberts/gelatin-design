@@ -60,6 +60,10 @@ body {
     font-family: @font-content;
     font-size: 16px;
     color: @text-colour;
+
+    @media (max-width: 800px) {
+        font-size: 14px;
+    }
 }
 
 #wrapper {
@@ -150,10 +154,11 @@ body pre.prettyprint {
 }
 
 pre.filename {
+    display: inline-block;
     margin-bottom: -1em;
-    padding: 1em .5em 1em 2em;
+    padding: 1em 2em 1em 2em;
     border: 0;
-    width: 70%;
+    min-width: 70%;
     font-family: @font-mono;
     color: #fff;
     background: @red;
@@ -206,7 +211,19 @@ blockquote {
     .light-orange { background: @light-orange; }
     .lighter-orange { background: @lighter-orange; }
 }
+ 
+.clearfix {
+    display: inline-block;
 
+    &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        line-height: 0;
+    }
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -215,9 +232,17 @@ blockquote {
 */
 
 #site-header {
-    border-right: 1px solid #ccc;
     padding: 22px 2em 30px 0;
+    border-right: 1px solid #ccc;
     text-align: right;
+
+    @media (max-width: 620px) {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-right: 0;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+    }
 
     h2 {
         font-size: 2.5em;
@@ -233,6 +258,12 @@ blockquote {
 
     nav {
         margin: 30px 0;
+
+        @media (max-width: 620px) {
+            float: left;
+            margin-bottom: 0;
+            width: 50%;
+        }
 
         ul {
             padding: 0;
