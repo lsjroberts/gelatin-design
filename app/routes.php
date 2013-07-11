@@ -39,9 +39,9 @@ Route::get('/i-painted-a-tiny-world', function()
     return View::make('pages.i-painted-a-tiny-world');
 });
 
-Route::get('/maths/primes', function()
+Route::get('/maths/primes-ulam-spirals', function()
 {
-    return View::make('maths.primes');
+    return View::make('maths.primes-ulam-spirals');
 });
 
 Route::get('/setcookie', function()
