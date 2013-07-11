@@ -73,6 +73,7 @@ body {
 
 #inner-wrapper {
     padding-bottom: 120px;
+    width: 95%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -225,6 +226,15 @@ blockquote {
     }
 }
 
+canvas {
+    position: relative;
+    width: 100%;
+
+    &.bordered {
+        border: 3px solid #ccc;
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Header
@@ -242,6 +252,18 @@ blockquote {
         border-right: 0;
         border-bottom: 1px solid #ccc;
         text-align: left;
+    }
+
+    &.layout-full {
+        padding-top: 0;
+        border-right: 0;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+
+        h2, p {
+            display: inline;
+            padding-right: 10px;
+        }
     }
 
     h2 {
@@ -296,6 +318,12 @@ blockquote {
     h3 small {
         position: relative;
         top: 23px;
+    }
+
+    h2, h3, h4, h5, h6, p {
+        &:first-child {
+            margin-top: 0;
+        }
     }
 }
 
