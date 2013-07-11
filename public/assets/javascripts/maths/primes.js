@@ -75,7 +75,11 @@ primes.controller('PrimesController', ['$scope', function($scope) {
 
         number = from;
 
-        drawNumber(x, y, number);
+        if ($scope.drawType == 'dots') {
+            drawDot(x, y);
+        } else {
+            drawNumber(x, y, number);
+        }
 
         while (number < to) {
             for (i = 0; i < sideLength; i++) {
