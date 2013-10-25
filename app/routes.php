@@ -44,6 +44,11 @@ Route::get('/maths/primes-ulam-spirals', function()
     return View::make('maths.primes-ulam-spirals');
 });
 
+Route::get('/p2p', function()
+{
+    return View::make('p2p.index');
+});
+
 Route::get('/setcookie', function()
 {
     return Response::make()->withCookie(Cookie::forever('laurence', 'true'));

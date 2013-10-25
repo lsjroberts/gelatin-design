@@ -4,13 +4,15 @@
         <meta charset="UTF-8">
         <title>gelatindesign | a coder making websites + games</title>
 
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css"> -->
 
         @stylesheets('website')
 
         @section('head')
-            
-        @show
+
+        @stop
 
         @if (Cookie::get('laurence') != 'true')
             <script type="text/javascript">
@@ -27,36 +29,33 @@
         @endif
     </head>
     <body>
-        <div id="top"></div>
-        <div id="wrapper">
-            <div class="bar">
-                <div class="red"></div>
-                <div class="dark-orange"></div>
-                <div class="orange"></div>
-                <div class="light-orange"></div>
-                <div class="lighter-orange"></div>
-            </div>
 
-            <div id="inner-wrapper" class="row">
-                <header id="site-header" class="layout-full">
-                    <h2><a href="/">gelatindesign</a></h2>
-                    <p>i'm a coder making websites + games</p>
-
-                    <p><small class="twitter"><a href="http://www.twitter.com/gelatindesign">@gelatindesign</a></small></p>
-                    <p><small class="email"><a href="mailto:info@gelatindesign.co.uk">info@gelatindesign.co.uk</a></small></p>
-                </header>
-
-                <div id="site-content">
-                    @yield('content')
+        <div id="site-nav" class="small-12 large-12 columns">
+            <div class="diamonds">
+                <div class="row">
+                    <a href="/" class="diamond red"></a>
+                </div>
+                <div class="row">
+                    <a href="/shopavel" class="diamond pull-1 dark-orange"></a>
+                    <a href="/laravel-packages" class="diamond push-1 dark-orange"></a>
+                </div>
+                <div class="row">
+                    <a href="/neon-spores" class="diamond pull-2 orange"></a>
+                    <a href="/i-painted-a-tiny-world" class="diamond orange"></a>
+                    <div class="diamond push-2 orange"></div>
+                </div>
+                <div class="row">
+                    <div class="diamond pull-1 light-orange"></div>
+                    <div class="diamond push-1 light-orange"></div>
+                </div>
+                <div class="row">
+                    <div class="diamond lighter-orange"></div>
                 </div>
             </div>
+        </div>
 
-            <footer id ="site-footer">
-                <div class="bar">
-                    <div class="red"></div>
-                </div>
-                <p>gelatindesign - <a href="http://www.gelatindesign.co.uk">www.gelatindesign.co.uk</a></p>
-            </footer>
+        <div id="site-content" class="small-12 large-12 columns">
+            @yield('content')
         </div>
 
         @javascripts('website')

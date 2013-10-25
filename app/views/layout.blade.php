@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <title>gelatindesign | a coder making websites + games</title>
 
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
 
         @stylesheets('website')
 
@@ -27,6 +29,36 @@
         @endif
     </head>
     <body>
+
+        <div id="site-nav" class="small-12 large-4 columns">
+            <div class="diamonds">
+                <div class="row">
+                    <a href="/" class="diamond red"></a>
+                </div>
+                <div class="row">
+                    <a href="/shopavel" class="diamond pull-1 dark-orange"></a>
+                    <a href="/laravel-packages" class="diamond push-1 dark-orange"></a>
+                </div>
+                <div class="row">
+                    <a href="/neon-spores" class="diamond pull-2 orange"></a>
+                    <a href="/i-painted-a-tiny-world" class="diamond orange"></a>
+                    <div class="diamond push-2 orange"></div>
+                </div>
+                <div class="row">
+                    <div class="diamond pull-1 light-orange"></div>
+                    <div class="diamond push-1 light-orange"></div>
+                </div>
+                <div class="row">
+                    <div class="diamond lighter-orange"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="site-content" class="small-12 large-8 columns">
+            @yield('content')
+        </div>
+
+        {{--
         <div id="top"></div>
         <div id="wrapper">
             <div class="bar">
@@ -80,6 +112,8 @@
                 <p>gelatindesign - <a href="http://www.gelatindesign.co.uk">www.gelatindesign.co.uk</a></p>
             </footer>
         </div>
+
+        --}}
 
         @javascripts('website')
     </body>
