@@ -1,0 +1,299 @@
+/*
+|--------------------------------------------------------------------------
+| Gelatin Design - Website Stylesheet
+|--------------------------------------------------------------------------
+| 
+| Styles for the front-end website of www.gelatindesign.co.uk
+| 
+*/
+/*
+|--------------------------------------------------------------------------
+| Foundation
+|--------------------------------------------------------------------------
+| 
+| Changes to foundation base styles
+| 
+*/
+.row {
+  max-width: 1400px;
+}
+/*
+|--------------------------------------------------------------------------
+| Brand
+|--------------------------------------------------------------------------
+*/
+/*
+|--------------------------------------------------------------------------
+| Global
+|--------------------------------------------------------------------------
+*/
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #333333;
+}
+@media (max-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+}
+#wrapper {
+  position: relative;
+  min-height: 100%;
+}
+#inner-wrapper {
+  padding-bottom: 120px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  color: #c03435;
+}
+ul,
+ol {
+  padding: 0 1em;
+}
+small {
+  font-size: .85em;
+}
+strong,
+em {
+  font-weight: bold;
+  font-style: normal;
+}
+strong {
+  color: #c03435;
+}
+a {
+  color: #b9691a;
+}
+a:visited {
+  color: #e08226;
+}
+a:hover {
+  text-decoration: underline;
+  color: #c03435;
+}
+code {
+  padding: .3em .5em;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  font-weight: normal;
+  font-size: .9em;
+  color: #000;
+  background: #ddd;
+}
+body pre.prettyprint {
+  margin: 1em 0 2em;
+  padding: 20px;
+  border: 0;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  font-size: .9em;
+  line-height: 1.9em;
+  color: #e9e4e5;
+  background-color: #333;
+}
+body pre.prettyprint ol.linenums {
+  padding-left: 2em;
+}
+body pre.prettyprint ol.linenums li {
+  list-style-type: decimal !important;
+  background: none;
+}
+body pre.prettyprint .pln {
+  color: #e9e4e5;
+}
+body pre.prettyprint .str {
+  color: #bcd42a;
+}
+body pre.prettyprint .kwd {
+  color: #4bb1b1;
+}
+body pre.prettyprint .com {
+  color: #888888;
+}
+body pre.prettyprint .typ {
+  color: #ef7c61;
+}
+body pre.prettyprint .lit {
+  color: #bcd42a;
+}
+body pre.prettyprint .pun,
+body pre.prettyprint .opn,
+body pre.prettyprint .clo {
+  color: #ffffff;
+}
+body pre.prettyprint .tag {
+  color: #4bb1b1;
+}
+body pre.prettyprint .atn {
+  color: #ef7c61;
+}
+body pre.prettyprint .atv {
+  color: #bcd42a;
+}
+body pre.prettyprint .dec,
+body pre.prettyprint .var {
+  color: #660066;
+}
+body pre.prettyprint .fun {
+  color: #ff0000;
+}
+pre.filename {
+  display: inline-block;
+  margin-bottom: -1em;
+  padding: 1em 2em 1em 2em;
+  border: 0;
+  min-width: 70%;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  color: #fff;
+  background: #c03435;
+}
+blockquote {
+  padding: 1em;
+  color: #fff;
+  background: #d76a6b;
+}
+blockquote strong,
+blockquote p {
+  color: #fff;
+}
+blockquote a {
+  color: #ffa;
+}
+blockquote a:visited {
+  color: #ffd;
+}
+blockquote a:hover {
+  color: #ff0;
+}
+blockquote :last-child {
+  margin-bottom: 0;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.bar {
+  margin-bottom: 20px;
+}
+.bar div {
+  height: 20px;
+}
+.bar .red {
+  background: #c03435;
+}
+.bar .dark-orange {
+  background: #e08226;
+}
+.bar .orange {
+  background: #eca531;
+}
+.bar .light-orange {
+  background: #f9c43a;
+}
+.bar .lighter-orange {
+  background: #ffd53f;
+}
+.clearfix {
+  display: inline-block;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+}
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+*/
+#site-header {
+  padding: 22px 2em 30px 0;
+  border-right: 1px solid #ccc;
+  text-align: right;
+}
+@media (max-width: 620px) {
+  #site-header {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-right: 0;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+}
+#site-header.layout-full {
+  padding-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+#site-header h2 {
+  font-size: 2.5em;
+}
+#site-header h2 a {
+  color: #c03435;
+}
+#site-header p {
+  margin: 0;
+}
+#site-header nav {
+  margin: 30px 0;
+}
+@media (max-width: 620px) {
+  #site-header nav {
+    float: left;
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+#site-header nav ul {
+  padding: 0;
+}
+#site-header nav li {
+  list-style: none;
+}
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+*/
+#site-content h1 {
+  margin-bottom: 14px;
+  font-size: 3.6em;
+}
+#site-content h3,
+#site-content h4,
+#site-content h5,
+#site-content h6 {
+  margin-top: 2em;
+}
+#site-content h3 small {
+  position: relative;
+  top: 23px;
+}
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+*/
+#site-footer {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+}
