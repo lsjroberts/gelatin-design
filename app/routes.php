@@ -1,5 +1,12 @@
 <?php
 
+$app['basset.manifest'] = $app->share(function($app)
+{
+    $meta = base_path() . '/public/builds';
+
+    return new \Basset\Manifest\Manifest($app['files'], $meta);
+});
+
 require 'helpers.php';
 
 /*
