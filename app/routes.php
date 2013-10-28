@@ -1,6 +1,5 @@
 <?php
 
-require 'injections.php';
 require 'helpers.php';
 
 /*
