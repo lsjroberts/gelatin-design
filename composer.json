@@ -1,17 +1,39 @@
 {
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "git@bitbucket.org:gelatindesign/ares.git"
-		}
-	],
-
-	"autoload": {
-		"psr-0": { "": ["controllers/", "models/"] }
-	},
-
+	"name": "laravel/laravel",
+	"description": "The Laravel Framework.",
+	"keywords": ["framework", "laravel"],
 	"require": {
-		"gelatindesign/ares": "dev-develop",
-		"nesbot/carbon": "1.2.*"
-	}
+		"laravel/framework": "4.0.*",
+		"jasonlewis/basset": "dev-master",
+        "natxet/CssMin": "dev-master",
+        "linkorb/jsmin-php": "dev-master"
+	},
+	"autoload": {
+		"classmap": [
+			"app/commands",
+			"app/controllers",
+			"app/models",
+			"app/database/migrations",
+			"app/database/seeds",
+			"app/tests/TestCase.php"
+		]
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"php artisan optimize"
+		],
+		"pre-update-cmd": [
+			"php artisan clear-compiled"
+		],
+		"post-update-cmd": [
+			"php artisan optimize"
+		],
+		"post-create-project-cmd": [
+			"php artisan key:generate"
+		]
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev"
 }

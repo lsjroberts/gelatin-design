@@ -1,9 +1,7 @@
-# Rubbish files
+/bootstrap/compiled.php
+/vendor
+composer.phar
+composer.lock
 .DS_Store
 
-# Log files
-log/*
-!log/.gitkeep
-
-# Composer
-vendor/*
+/node_modules
