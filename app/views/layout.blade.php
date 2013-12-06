@@ -6,9 +6,11 @@
 
         <link rel="shortcut icon" href="/assets/images/icon.png">
 
-        <link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
+        {{ HTML::style('http://fonts.googleapis.com/css?family=Lato:300') }}
 
-        @stylesheets('website')
+        {{ HTML::style('assets/stylesheets/normalize.css') }}
+        {{ HTML::style('assets/stylesheets/foundation.min.css') }}
+        {{ HTML::style('assets/website.css') }}
 
         @section('head')
 
@@ -115,6 +117,6 @@
 
         --}}
 
-        @javascripts('website')
+        {{ HTML::script('assets/javascripts/website.js') }}
     </body>
 </html>

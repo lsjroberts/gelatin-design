@@ -16,8 +16,7 @@ p {
   color: #555;
 }
 body {
-  /*background: url('/assets/stylesheets/less/bg.png') repeat center center #fff;*/
-
+  /*background: url('bg.png') repeat center center #fff;*/
 }
 .pull-left {
   float: left;
