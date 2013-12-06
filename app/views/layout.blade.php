@@ -10,7 +10,7 @@
 
         {{ HTML::style('assets/stylesheets/normalize.css') }}
         {{ HTML::style('assets/stylesheets/foundation.min.css') }}
-        {{ HTML::style('assets/website.css') }}
+        {{ HTML::style('assets/stylesheets/website.css') }}
 
         @section('head')
 

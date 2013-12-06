@@ -9,7 +9,7 @@
         {{ HTML::style('http://fonts.googleapis.com/css?family=Lato:300') }}
         {{ HTML::style('assets/stylesheets/normalize.css') }}
         {{ HTML::style('assets/stylesheets/foundation.min.css') }}
-        {{ HTML::style('assets/website.css') }}
+        {{ HTML::style('assets/stylesheets/website.css') }}
 
         @section('head')
 
