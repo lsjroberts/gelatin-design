@@ -1,4 +1,4 @@
-@extends('layout-full')
+@extends('layout')
 
 @section('head')
     @parent
