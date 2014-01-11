@@ -50,10 +50,6 @@ body {
 #site-nav a.diamond:hover {
   z-index: 2;
   opacity: .8;
-  -webkit-transform: rotate(45deg) scale(1.2, 1.2);
-}
-#site-nav .diamond.large {
-  -webkit-transform: rotate(45deg) scale(2, 2);
 }
 #site-nav a.red {
   background: #c03435;

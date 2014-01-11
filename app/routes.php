@@ -2,53 +2,34 @@
 
 require 'helpers.php';
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
-Route::get('/', function()
+// Index
+Route::get('/', ['as' => 'index', function()
 {
-	return View::make('index');
-});
+    $articles = Article::latest(4);
 
-Route::get('/shopavel', function()
-{
-    return View::make('pages.shopavel');
-});
+	return View::make('index')->with('articles', $articles);
+}]);
 
-Route::get('/laravel-packages', function()
+// Blog Post
+Route::get('blog/post/{slug}', ['as' => 'blog.post', function($slug)
 {
-    return View::make('pages.laravel-packages');
-});
+    $article = Article::findBySlug($slug);
 
-Route::get('/neon-spores', function()
-{
-    return View::make('pages.neon-spores');
-});
+    return View::make('blog.post')->with('article', $article);
+}]);
 
-Route::get('/i-painted-a-tiny-world', function()
+// Blog Post Comments
+Route::get('blog/post/{slug}#comments', ['as' => 'blog.post.comments', function($slug)
 {
-    return View::make('pages.i-painted-a-tiny-world');
-});
+    $article = Article::findBySlug($slug);
 
-Route::get('/maths/primes-ulam-spirals', function()
-{
-    return View::make('maths.primes-ulam-spirals');
-});
+    return View::make('blog.post')->with('article', $article);
+}]);
 
-Route::get('/p2p', function()
+// Blog Tag
+Route::get('blog/tag/{tag}', ['as' => 'blog.tag', function($tag)
 {
-    return View::make('p2p.index');
-});
+    $articles = Article::findByTag($tag);
 
-Route::get('/setcookie', function()
-{
-    return Response::make()->withCookie(Cookie::forever('laurence', 'true'));
-});
+    return View::make('blog.list')->with('articles', $articles);
+}]);

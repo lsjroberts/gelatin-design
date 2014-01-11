@@ -11,15 +11,9 @@
         <li><a href="//twitter.com/gelatindesign">twitter</a></li>
     </ul>
 
-    <h3>Current Projects</h3>
-    <ul>
-        <li><a href="/shopavel">Shopavel</a> - an ecommerce platform for developers, built on Laravel 4.</li>
-    </ul>
-
-
-    <h3>Other stuff</h3>
-    <ul>
-        <li><a href="/maths/primes-ulam-spirals">Primes &amp; Ulam Spirals</a> - a quick interactive demo of prime
-            number patterns in an ulam spiral.</li>
-    </ul>
+    <section class="blog-list">
+        @foreach ($articles as $article)
+            @include('blog.includes.post', ['article' => $article])
+        @endforeach
+    </section>
 @stop
