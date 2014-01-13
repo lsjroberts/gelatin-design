@@ -205,3 +205,11 @@ body {
 #site-content blockquote :last-child {
   margin-bottom: 0;
 }
+a.tag {
+  padding: .3em .5em;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  font-weight: normal;
+  font-size: .9em;
+  color: #fff;
+  background: #2ba6cb;
+}

@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
-    @include('blog.includes.post', ['article' => $article])
+	<article class="blog-article">
+    	@include('blog.includes.post', ['article' => $article])
+    </article>
+
     @include('blog.includes.comments', ['article' => $article])
 @stop
