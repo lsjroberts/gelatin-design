@@ -1,15 +1,17 @@
-<article class="post">
+<article class="blog-article">
     <header>
-        <h3>{{ link_to_route('blog.post', $article->title, ['slug' => $article->slug]) }}</h3>
+        <h1>{{ link_to_route('blog.post', $article->title, ['slug' => $article->slug]) }}</h1>
+
+        <span class="date">{{ $article->date->toFormattedDateString() }}</span>
     </header>
 
     @include('blog.articles.' . $article->view)
 
     <footer>
-        <ul class="tags">
+        <nav class="tags">
             @foreach ($article->tags as $tag)
-                <li>{{ link_to_route('blog.tag', $tag, ['tag' => $tag]) }}</li>
+                {{ link_to_route('blog.tag', $tag, ['tag' => $tag], ['class' => 'tag']) }}
             @endforeach
-        </ul>
+        </nav>
     </footer>
 </article>

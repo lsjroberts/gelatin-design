@@ -13,7 +13,7 @@ class ArticleCollectionRepository {
 
     public function latest($count = 1)
     {
-        return $this->articles->slice($this->articles->count() - $count, $count);
+        return $this->articles->slice(max(0, $this->articles->count() - $count), $count);
     }
 
     public function findBySlug($slug)
