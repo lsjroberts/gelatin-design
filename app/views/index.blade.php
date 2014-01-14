@@ -14,7 +14,7 @@
 
     <p>You can find all my open-source code at {{ link_to('//github.com/lsjroberts', 'github') }}.</p>
 
-    <p>And follow my outbursts of anger while coding on {{ link_to('//twitter.com/gelatindesign', 'twitter @gelatindesign') }}.</p>
+    <p>And follow my various ramblings and thoughts while coding on {{ link_to('//twitter.com/gelatindesign', 'twitter @gelatindesign') }}.</p>
 
     <section class="blog-list">
         @foreach ($articles as $article)
