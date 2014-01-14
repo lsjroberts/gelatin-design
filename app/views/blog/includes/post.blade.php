@@ -10,7 +10,7 @@
     <footer>
         <nav class="tags">
             @foreach ($article->tags as $tag)
-                {{ link_to_route('blog.tag', $tag, ['tag' => $tag], ['class' => 'tag']) }}
+                {{ link_to_route('blog.tag', $tag, ['tag' => $tag], ['class' => 'tag tag-' . $tag]) }}
             @endforeach
         </nav>
     </footer>

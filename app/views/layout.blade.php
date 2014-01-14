@@ -36,15 +36,15 @@
         <div id="site-nav" class="small-12 large-4 columns">
             <div class="diamonds">
                 <div class="row">
-                    <a href="/" class="diamond red"></a>
+                    {{ link_to_route('index', '', null, ['class' => 'diamond red']) }}
                 </div>
                 <div class="row">
-                    <a href="/shopavel" class="diamond pull-1 dark-orange"></a>
-                    <a href="/laravel-packages" class="diamond push-1 dark-orange"></a>
+                    {{ link_to_route('blog.tag', '', ['tag' => 'php'], ['class' => 'diamond pull-1 dark-orange']) }}
+                    {{ link_to_route('blog.tag', '', ['tag' => 'javascript'], ['class' => 'diamond push-1 dark-orange']) }}
                 </div>
                 <div class="row">
-                    <a href="/neon-spores" class="diamond pull-2 orange"></a>
-                    <a href="/i-painted-a-tiny-world" class="diamond orange"></a>
+                    {{ link_to_route('blog.tag', '', ['tag' => 'python'], ['class' => 'diamond pull-2 orange']) }}
+                    {{ link_to_route('blog.tag', '', ['tag' => 'unity'], ['class' => 'diamond orange']) }}
                     <div class="diamond push-2 orange"></div>
                 </div>
                 <div class="row">

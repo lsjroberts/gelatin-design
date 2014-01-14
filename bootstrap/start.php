@@ -24,11 +24,15 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment(function() use ($app)
+{
+    if (str_contains($app->request->server('HTTP_HOST'), 'localhost'))
+    {
+        return 'local';
+    }
 
-	'local' => array('Jelly-PC', 'Laurences-MacBook-Air.local'),
-
-));
+    return 'production';
+});
 
 /*
 |--------------------------------------------------------------------------

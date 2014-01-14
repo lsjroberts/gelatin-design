@@ -31,5 +31,7 @@ Route::get('blog/tag/{tag}', ['as' => 'blog.tag', function($tag)
 {
     $articles = Article::findByTag($tag);
 
-    return View::make('blog.list')->with('articles', $articles);
+    return View::make('blog.list')
+        ->with('title', 'Articles tagged "' . $tag . '"')
+        ->with('articles', $articles);
 }]);
