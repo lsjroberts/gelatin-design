@@ -171,6 +171,7 @@ p {
   color: #000;
   background: #ddd;
 }
+#site-content pre,
 #site-content pre.prettyprint {
   margin: 1em 0 2em;
   padding: 20px;
@@ -181,49 +182,66 @@ p {
   color: #e9e4e5;
   background-color: #333;
 }
+#site-content pre ol.linenums,
 #site-content pre.prettyprint ol.linenums {
   padding-left: 2em;
 }
+#site-content pre ol.linenums li,
 #site-content pre.prettyprint ol.linenums li {
   list-style-type: decimal !important;
   background: none;
 }
+#site-content pre .pln,
 #site-content pre.prettyprint .pln {
   color: #e9e4e5;
 }
+#site-content pre .str,
 #site-content pre.prettyprint .str {
   color: #bcd42a;
 }
+#site-content pre .kwd,
 #site-content pre.prettyprint .kwd {
   color: #4bb1b1;
 }
+#site-content pre .com,
 #site-content pre.prettyprint .com {
   color: #888888;
 }
+#site-content pre .typ,
 #site-content pre.prettyprint .typ {
   color: #ef7c61;
 }
+#site-content pre .lit,
 #site-content pre.prettyprint .lit {
   color: #bcd42a;
 }
+#site-content pre .pun,
 #site-content pre.prettyprint .pun,
+#site-content pre .opn,
 #site-content pre.prettyprint .opn,
+#site-content pre .clo,
 #site-content pre.prettyprint .clo {
   color: #ffffff;
 }
+#site-content pre .tag,
 #site-content pre.prettyprint .tag {
   color: #4bb1b1;
 }
+#site-content pre .atn,
 #site-content pre.prettyprint .atn {
   color: #ef7c61;
 }
+#site-content pre .atv,
 #site-content pre.prettyprint .atv {
   color: #bcd42a;
 }
+#site-content pre .dec,
 #site-content pre.prettyprint .dec,
+#site-content pre .var,
 #site-content pre.prettyprint .var {
   color: #660066;
 }
+#site-content pre .fun,
 #site-content pre.prettyprint .fun {
   color: #ff0000;
 }

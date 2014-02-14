@@ -5,27 +5,19 @@ use Carbon\Carbon;
 return [
 
     [
-        'slug'  => 'tesco-php',
-        'date'  => new Carbon('2014-01-13'),
-        'title' => 'Tesco PHP',
-        'view'  => 'tesco-php',
-        'tags'  => ['tesco-php', 'php']
+        'slug'  => 'shopavels-first-pull-request',
+        'date'  => new Carbon('2014-02-13'),
+        'title' => 'Shopavel\'s first pull request',
+        'view'  => 'shopavels-first-pull-request',
+        'tags'  => ['shopavel', 'php'],
     ],
 
     [
-        'slug'  => 'tesco-php',
-        'date'  => new Carbon('2014-11-01'),
-        'title' => 'Tesco PHP',
-        'view'  => 'tesco-php',
-        'tags'  => ['tesco-php', 'php']
-    ],
-
-    [
-        'slug'  => 'tesco-php',
-        'date'  => new Carbon('2014-11-01'),
-        'title' => 'Tesco PHP',
-        'view'  => 'tesco-php',
-        'tags'  => ['tesco-php', 'php']
+        'slug'  => 'every-coder-should-teach-codeclub',
+        'date'  => new Carbon('2014-02-04'),
+        'title' => 'Every coder should teach CodeClub',
+        'view'  => 'every-coder-should-teach-codeclub',
+        'tags'  => ['codeclub'],
     ],
 
 ];

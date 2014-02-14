@@ -1,0 +1,1 @@
+<p>Read about my {{ link_to('http://www.message.co.uk/every-coder-should-teach-codeclub', 'experiences teaching a CodeClub at the Message blog.') }}</p>
