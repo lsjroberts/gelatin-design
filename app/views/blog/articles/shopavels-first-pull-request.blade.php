@@ -4,7 +4,7 @@
 
 <p>It will allow you to apply a presenter to a collection of models:</p>
 
-<pre>
+<pre class="prettyprint php">
 public function index()
 {
     $products = $this->product->all()->each(function($product) {

@@ -105,7 +105,7 @@ gulp.task('statics', ['fonts', 'images'], function() {
 // file watchers
 gulp.task('watch', function() {
     gulp.watch(paths.styles, ['styles']);
-    gulp.watch(paths.scripts, ['scripts']);
+    gulp.watch(paths.scripts.js, ['scripts']);
     gulp.watch(paths.images, ['images']);
     gulp.watch(paths.fonts, ['fonts']);
 });

@@ -5,7 +5,7 @@
         <span class="date">{{ $article->date->toFormattedDateString() }}</span>
     </header>
 
-    @include('blog.articles.' . $article->view)
+    @include('blog.articles.' . $article->view, ['split' => (isset($split) and $split)])
 
     <footer>
         <nav class="tags">
