@@ -5,6 +5,14 @@ use Carbon\Carbon;
 return [
 
     [
+        'slug'  => 'easily-build-assets-with-gulpjs',
+        'date'  => new Carbon('2014-02-15'),
+        'title' => 'Easily build assets with gulpjs',
+        'view'  => 'easily-build-assets-with-gulpjs',
+        'tags'  => ['gulpjs', 'javascript']
+    ],
+
+    [
         'slug'  => 'shopavels-first-pull-request',
         'date'  => new Carbon('2014-02-13'),
         'title' => 'Shopavel\'s first pull request',
