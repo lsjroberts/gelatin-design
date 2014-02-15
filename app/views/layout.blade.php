@@ -6,8 +6,6 @@
 
         <link rel="shortcut icon" href="/assets/images/icon.png">
 
-        {{ HTML::style('http://fonts.googleapis.com/css?family=Lato:300') }}
-
         {{ HTML::style('build/styles/combined.css') }}
 
         @section('head')
