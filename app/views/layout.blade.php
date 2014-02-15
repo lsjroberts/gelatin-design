@@ -8,9 +8,7 @@
 
         {{ HTML::style('http://fonts.googleapis.com/css?family=Lato:300') }}
 
-        {{ HTML::style('assets/stylesheets/normalize.css') }}
-        {{ HTML::style('assets/stylesheets/foundation.min.css') }}
-        {{ HTML::style('assets/stylesheets/website.css') }}
+        {{ HTML::style('build/styles/combined.css') }}
 
         @section('head')
 
@@ -61,6 +59,6 @@
             @yield('content')
         </div>
 
-        {{ HTML::script('assets/javascripts/website.js') }}
+        {{ HTML::script('build/scripts/combined.js') }}
     </body>
 </html>
