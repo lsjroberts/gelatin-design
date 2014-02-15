@@ -13,5 +13,7 @@
                 {{ link_to_route('blog.tag', $tag, ['tag' => $tag], ['class' => 'tag tag-' . $tag]) }}
             @endforeach
         </nav>
+
+        <p class="comments-link"><a href="{{ route('blog.post', ['slug' => $article->slug]) }}#comments">Comments</a></p>
     </footer>
 </article>

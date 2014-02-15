@@ -1,4 +1,4 @@
-<section class="comments">
+<section id="comments">
     <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname

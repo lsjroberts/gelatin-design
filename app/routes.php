@@ -18,14 +18,6 @@ Route::get('blog/post/{slug}', ['as' => 'blog.post', function($slug)
     return View::make('blog.post')->with('article', $article);
 }]);
 
-// Blog Post Comments
-Route::get('blog/post/{slug}#comments', ['as' => 'blog.post.comments', function($slug)
-{
-    $article = Article::findBySlug($slug);
-
-    return View::make('blog.post')->with('article', $article);
-}]);
-
 // Blog Tag
 Route::get('blog/tag/{tag}', ['as' => 'blog.tag', function($tag)
 {
