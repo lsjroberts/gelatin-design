@@ -5,6 +5,14 @@ use Carbon\Carbon;
 return [
 
     [
+        'slug'  => 'clean-your-html-with-jade',
+        'date'  => new Carbon('2014-02-16'),
+        'title' => 'Clean your HTML with Jade',
+        'view'  => 'clean-your-html-with-jade',
+        'tags'  => ['jade', 'node']
+    ],
+
+    [
         'slug'  => 'easily-build-assets-with-gulpjs',
         'date'  => new Carbon('2014-02-15'),
         'title' => 'Easily build assets with gulpjs',

@@ -7,7 +7,11 @@ Route::get('/', ['as' => 'index', function()
 {
     $articles = Article::latest(4);
 
-	return View::make('index')->with('articles', $articles);
+    $tags = Tag::all();
+
+	return View::make('index')
+        ->with('articles', $articles)
+        ->with('tags', $tags);
 }]);
 
 // Blog Post
