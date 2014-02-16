@@ -175,7 +175,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Article'         => 'Blog\Facades\Blog',
+		'Article'         => 'Blog\Facades\Article',
+		'Tag'             => 'Blog\Facades\Tag',
 
 	),
 

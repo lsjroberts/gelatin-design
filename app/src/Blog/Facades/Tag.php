@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Blog extends Facade {
+class Tag extends Facade {
 
     /**
      * Get the registered name of the component.
@@ -11,7 +11,7 @@ class Blog extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return 'blog';
+        return 'blog.tags';
     }
 
 }

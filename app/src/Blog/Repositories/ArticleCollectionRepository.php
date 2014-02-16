@@ -2,13 +2,18 @@
 
 use Illuminate\Support\Collection;
 
-class ArticleCollectionRepository {
+class ArticleCollectionRepository implements ArticleRepositoryInterface {
 
     protected $articles;
 
     public function __construct(Collection $articles)
     {
         $this->articles = $articles;
+    }
+
+    public function all()
+    {
+        return $this->articles;
     }
 
     public function latest($count = 1)

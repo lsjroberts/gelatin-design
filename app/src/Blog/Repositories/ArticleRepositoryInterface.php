@@ -2,8 +2,9 @@
 
 interface ArticleRepositoryInterface {
 
-    public function getLatest($count = 1);
-    public function getBySlug($slug);
-    public function getByTag($tag);
+    public function all();
+    public function latest($count = 1);
+    public function findBySlug($slug);
+    public function findByTag($tag);
 
 }

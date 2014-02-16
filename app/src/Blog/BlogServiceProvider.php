@@ -4,6 +4,7 @@ use Blog\Articles\Article;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Blog\Repositories\ArticleCollectionRepository;
+use Blog\Repositories\TagArticleRepository;
 
 class BlogServiceProvider extends ServiceProvider {
 
@@ -21,7 +22,7 @@ class BlogServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['blog'] = $this->app->share(function()
+        $this->app['blog.articles'] = $this->app->share(function()
         {
             $data = require app_path() . '/database/articles.php';
 
@@ -34,6 +35,13 @@ class BlogServiceProvider extends ServiceProvider {
 
             return new ArticleCollectionRepository($articles);
         });
+
+        $this->app['blog.tags'] = $this->app->share(function($app)
+        {
+            $tags = new TagArticleRepository($app['blog.articles']);
+
+            return $tags;
+        });
     }
 
 
@@ -44,7 +52,7 @@ class BlogServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array('blog');
+        return array('blog.articles', 'blog.tags');
     }
 
 }
