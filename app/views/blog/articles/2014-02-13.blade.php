@@ -4,8 +4,8 @@
 
 <p>It will allow you to apply a presenter to a collection of models:</p>
 
-<pre class="prettyprint php">
-public function index()
+<pre>
+<code class="php">public function index()
 {
     $products = $this->product->all()->each(function($product) {
             return $this->presenter->newInstance($product);
@@ -13,6 +13,6 @@ public function index()
 
     return $this->theme->make('product.index')->withProducts($products);
 }
-</pre>
+</code></pre>
 
 <p>I have set March 31st as the deadline for {{ link_to('https://github.com/shopavel/shopavel/issues?milestone=1&state=open', 'alpha1') }} of Shopavel, so hopefully I'll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>

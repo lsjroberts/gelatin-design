@@ -58,5 +58,9 @@
         </div>
 
         {{ HTML::script('build/scripts/combined.js') }}
+        <script>
+            hljs.configure({classPrefix: 'hljs-'});
+            hljs.initHighlightingOnLoad();
+        </script>
     </body>
 </html>

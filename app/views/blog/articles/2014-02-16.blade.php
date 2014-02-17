@@ -12,8 +12,8 @@
 
 <p>It has a wonderfully basic syntax:</p>
 
-<pre class="prettyprint jade">
-doctype html
+<pre>
+<code class="jade">doctype html
 html
     head
         title Hello World
@@ -21,27 +21,27 @@ html
     body
         div.container
             p Hello World
-</pre>
+</code></pre>
 
 
 <h2>Layouts and blocks</h2>
 
 <p>Jade allows you to create layouts and extend them for your different views:</p>
 
-<pre class="prettyprint jade">
-// layouts/master.jade
+<pre>
+<code class="jade">// layouts/master.jade
 body
     block content
-</pre>
+</code></pre>
 
-<pre class="prettyprint jade">
-// index.jade
+<pre>
+<code class="jade">// index.jade
 extends layouts/master
 
 block content
     header.hero
         h1 Hello World
-</pre>
+</code></pre>
 
 
 <h2>Use mixins to power your views</h2>
@@ -50,8 +50,8 @@ block content
     rather quickly. Using jade mixins you can speed this process up and cleanly
     define your form without all the verbosity.</p>
 
-<pre class="prettyprint jade">
-// mixins/form.jade
+<pre>
+<code class="jade">// mixins/form.jade
 mixin form(action, method)
     unless method
         - method= "get"
@@ -64,17 +64,17 @@ mixin form(action, method)
 mixin field(name, type)
     label= name
     input(type= type, name= name)
-</pre>
+</code></pre>
 
-<pre class="prettyprint jade">
-// login.jade
+<pre>
+<code class="jade">// login.jade
 
 include mixins/form
 
 +form("auth/login", "post")
     +field("email", "text")
     +field("password", "password")
-</pre>
+</code></pre>
 
 <p>So that's pretty cool, but there's a lot more you can do with the field
     mixin. You can run any javascript inside jade, so we can add an
@@ -82,8 +82,8 @@ include mixins/form
     Address". Then add in some input type guessing and we've got something
     pretty useful really quickly.</p>
 
-<pre class="prettyprint jade">
-// mixins/form.jade
+<pre>
+<code class="jade">// mixins/form.jade
 
 //- ...
 
@@ -110,23 +110,23 @@ mixin field(name, type)
     div.field
         label= unslugify(name)
         input(type= type, name= name)
-</pre>
+</code></pre>
 
-<pre class="prettyprint jade">
-// login.jade
+<pre>
+<code class="jade">// login.jade
 
 include mixins/form
 
 +form("auth/login", "post")
     +field("email")
     +field("password")
-</pre>
+</code></pre>
 
 
 <h2>Lovely</h2>
 
 <p>There's a few more things you can do in jade, {{ link_to('http://jade-lang.com/reference/',
-    'check out the reference to see') }} all your options. But hopefully you can
+    'check out the reference') }} to see all your options. But hopefully you can
     see from this quick rundown how much cleaner you can make your views.</p>
 
 <p>Coding should be fun and jade brings that enjoyment back to html.</p>

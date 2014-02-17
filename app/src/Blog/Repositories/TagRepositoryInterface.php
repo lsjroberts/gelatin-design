@@ -3,5 +3,6 @@
 interface TagRepositoryInterface {
 
     public function all();
+    public function allByCount();
 
 }

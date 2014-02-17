@@ -16,9 +16,16 @@ class ArticleCollectionRepository implements ArticleRepositoryInterface {
         return $this->articles;
     }
 
+    public function paginate($page, $perPage)
+    {
+        return $this->articles->reverse()->slice(($page - 1) * $perPage, $perPage);
+    }
+
     public function latest($count = 1)
     {
-        return $this->articles->slice(max(0, $this->articles->count() - $count), $count);
+        return $this->articles->slice(
+            max(0, $this->articles->count() - $count), $count
+        )->reverse();
     }
 
     public function findBySlug($slug)

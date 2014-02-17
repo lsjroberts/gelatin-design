@@ -25,4 +25,27 @@ class TagArticleRepository implements TagRepositoryInterface {
         return $tags;
     }
 
+    public function allByCount()
+    {
+        $tags = [];
+
+        foreach ($this->articles->all() as $article) {
+            foreach ($article->tags as $tag)
+            {
+                if (!isset($tags[$tag])) $tags[$tag] = 0;
+                $tags[$tag]++;
+            }
+        }
+
+        ksort($tags);
+
+        uasort($tags, function($a, $b)
+        {
+            if ($a == $b) return 0;
+            return $a < $b;
+        });
+
+        return array_keys($tags);
+    }
+
 }

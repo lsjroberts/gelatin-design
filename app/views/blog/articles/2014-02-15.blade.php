@@ -23,37 +23,37 @@ npm install gulp-concat gulp-coffee
 
 <p>Then require them at the top of your <code>gulpfile.js</code>:</p>
 
-<pre class="prettyprint js">
-var concat = require('gulp-concat');
+<pre>
+<code class="javascript">var concat = require('gulp-concat');
 var coffee = require('gulp-coffee');
-</pre>
+</code></pre>
 
 <h3>Writing tasks</h3>
 
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
 
-<pre class="prettyprint js">
-gulp.task('coffeescripts', function() {
+<pre>
+<code class="javascript">gulp.task('coffeescripts', function() {
     return gulp.src('assets/scripts/**/*.coffee')
         .pipe(concat('combined.coffee'))
         .pipe(coffee())
         .pipe(gulp.dest('build/scripts/combined.js'));
 });
-</pre>
+</code></pre>
 
 <p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
 
-<p>It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single <code>(function() { ... });</code> block and can easily reference each other without having to resort to the global <code>window</code> object.</p>
+<p>It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single <code>(function() { ... })();</code> block and can easily reference each other without having to resort to the global <code>window</code> object.</p>
 
 <p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
 
 
 <h2>Task dependancies</h2>
 
-<p>So now you've got your coffeescripts compiling, you may also have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you'll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
+<p>So now you've got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you'll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
 
-<pre class="prettyprint js">
-gulp.task('coffeescripts', function() {
+<pre>
+<code class="javascript">gulp.task('coffeescripts', function() {
     return gulp.src('assets/scripts/**/*.coffee')
         .pipe(concat('combined-coffee.coffee'))
         .pipe(coffee())
@@ -66,15 +66,15 @@ gulp.task('scripts', ['coffeescripts'], function() {
         .pipe(uglify())
         .pipe(gulp.dest('build/scripts'));
 });
-</pre>
+</code></pre>
 
 <p>By passing in <code>['coffeescripts']</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
 
-<pre class="prettyprint js">
-var uglify = require('gulp-uglify')
-</pre>
+<pre>
+<code class="javascript">var uglify = require('gulp-uglify')
+</code></pre>
 
 <p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 
@@ -83,8 +83,8 @@ var uglify = require('gulp-uglify')
 
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
 
-<pre class="prettyprint js">
-gulp.task('watch', function() {
+<pre>
+<code class="javascript">gulp.task('watch', function() {
     gulp.watch([
         'assets/scripts/**/*.coffee',
         'assets/scripts/**/*.js'
@@ -95,7 +95,7 @@ gulp.task('watch', function() {
         'assets/styles/**/*.css'
     ], ['styles']);
 });
-</pre>
+</code></pre>
 
 <p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 

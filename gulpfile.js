@@ -78,7 +78,7 @@ gulp.task('scripts-coffee', function() {
 gulp.task('scripts', ['scripts-clean', 'scripts-coffee'], function() {
     return gulp.src(paths.scripts.js)
         .pipe(concat('combined.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('public/build/scripts'))
         .pipe(notify({ message: 'scripts built' }));
 });
