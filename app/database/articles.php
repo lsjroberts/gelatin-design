@@ -34,4 +34,10 @@ return [
         'tags'  => ['coffeescript', 'javascript']
     ],
 
+    [
+        'date'  => new Carbon('2014-02-20'),
+        'title' => 'Semantic versioning is not enough',
+        'tags'  => ['semvar', 'laravel']
+    ],
+
 ];
