@@ -15,7 +15,7 @@
 
         @stop
 
-        @if (Cookie::get('laurence') != 'true')
+        @if (Cookie::has('laurence'))
             <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-18813637-1']);
