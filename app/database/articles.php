@@ -34,4 +34,10 @@ return [
         'tags'  => ['coffeescript', 'javascript']
     ],
 
+    [
+        'date'  => new Carbon('2014-04-30'),
+        'title' => 'Playing with pythons and turtles',
+        'tags'  => ['python', 'turtle']
+    ],
+
 ];

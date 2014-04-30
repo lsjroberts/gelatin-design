@@ -7,6 +7,12 @@
         <p>My name is Laurence Roberts, I'm a developer who makes websites and games.</p>
 
         <p>Here you'll find stuff on
+            <a class="tag tag-python" href="/blog/tag/python">python</a>,
+            <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a>,
+            <a class="tag tag-php" href="/blog/tag/php">php</a>
+            and <a class="tag tag-codeclub" href="/blog/tag/codeclub">codeclub</a>
+
+            {{--
             @foreach ($tags as $key => $tag)
                 @if ($key == count($tags) - 1)
                     and
@@ -16,6 +22,7 @@
                     ,
                 @endif
             @endforeach
+            --}}
             .
         </p>
 
