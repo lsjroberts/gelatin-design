@@ -2,7 +2,7 @@
 
 <p>For something that is so basic in functionality it's surprising how the results can be so satisfying.</p>
 
-<p>{{ link_to('http://github.com/lsjroberts/codeclub/python/turtle/', 'You can check out the code at github.') }}</p>
+<p>{{ link_to('https://github.com/lsjroberts/codeclub/tree/master/python/turtle', 'You can check out the code at github.') }}</p>
 
 <p>
     <a href="{{ url('/build/images/blog/2014-04-30/turtle-1.png') }}">
