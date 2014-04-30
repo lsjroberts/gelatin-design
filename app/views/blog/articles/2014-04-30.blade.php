@@ -10,6 +10,13 @@
     </a>
 </p>
 
+
+@if (isset($split) and $split)
+    <p>&nbsp;</p>
+
+    <p><em>{{ link_to_route('blog.post', 'Continue reading "' . $article->title . '" ...', ['slug' => $article->slug]) }}</em></p>
+@else
+
 <p>
     <a href="{{ url('/build/images/blog/2014-04-30/turtle-2.png') }}">
         <img src="/build/images/blog/2014-04-30/turtle-2.png" alt="Python Turtle Screenshot 2">
@@ -17,10 +24,5 @@
 </p>
 
 <iframe width="1000" height="563" src="//www.youtube.com/embed/WC75-nAJylo" frameborder="0" allowfullscreen></iframe>
-
-
-@if (isset($split) and $split)
-    <p><em>{{ link_to_route('blog.post', 'Continue reading "' . $article->title . '" ...', ['slug' => $article->slug]) }}</em></p>
-@else
 
 @endif
