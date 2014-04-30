@@ -1,0 +1,96 @@
+html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, a {
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 1.4em;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background: #eee;
+	/*background: #c67a6d;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Georgia, serif;
+}
+
+.container {
+	display: block;
+	margin: 0 auto;
+	width: 900px;
+}
+
+header {
+	margin: 0 0 2em 0;
+	padding: 5em 0;
+	text-shadow: 1px 2px #333;
+	color: #fff;
+	background: #ba493e;
+}
+
+header h1 {
+	font-size: 4em;
+}
+
+header p {
+	font-family: Georgia, serif;
+	font-size: 1.8em;
+}
+
+section {
+	padding: 2em 0 0 0;
+}
+
+section h2 {
+	font-size: 1.8em;
+	color: #ba493e;
+}
+
+section ul, section ol {
+	margin: 1.4em;
+}
+
+.jelly-picker {
+	margin: 2em 0;
+	width: 40%;
+}
+
+.jelly-picker p {
+	padding: 1em;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+
+.jelly-picker ul {
+	margin: 0;
+}
+
+.jelly-picker li {
+	margin: 4px 0;
+	list-style: none;
+	background: #fff;
+}
+
+.jelly-picker li a {
+	display: block;
+	padding: 1em 2em;
+	text-decoration: none;
+	color: #222;
+}
+
+.jelly-picker li.strawberry a:hover {
+	color: #fff;
+	background: #ff2222;
+}
+
+.jelly-picker li.orange a:hover {
+	color: #fff;
+	background: #ff6000;
+}
+
+.jelly-picker li.raspberry a:hover {
+	color: #fff;
+	background: #ff2266;
+}

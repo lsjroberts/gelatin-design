@@ -35,6 +35,12 @@ return [
     ],
 
     [
+        'date'  => new Carbon('2014-02-20'),
+        'title' => 'Semantic versioning is not enough',
+        'tags'  => ['semver', 'laravel']
+    ],
+
+    [
         'date'  => new Carbon('2014-04-30'),
         'title' => 'Playing with pythons and turtles',
         'tags'  => ['python', 'turtle']
