@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Easily build assets with gulpjs"
+title: "Easily build assets with GulpJS"
 date: 2014-02-15
-categories: gulpjs, javascript
+categories: javascript, gulpjs
 ---
 I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I've never been too happy with them and they often seem to fail for various and difficult to debug reasons.
 

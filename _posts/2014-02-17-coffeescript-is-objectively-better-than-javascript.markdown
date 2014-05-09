@@ -1,0 +1,128 @@
+---
+layout: post
+title: "Coffeescript is objectively better than javascript"
+date: 2014-02-17
+categories: javascript, coffeescript
+---
+I can see no reason why anyone would use javascript over [coffeescript](http://coffeescript.org/). The latter is without a doubt objectively better. Sure, it will take a bit of time to learn, perhaps a day or two. But if you are in the web development game you should be learning every single day. One day off and you are behind and have to play catch up.
+
+The time investment is clearly worth it.
+
+<!-- more -->
+
+## It's just better looking javascript
+
+I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.
+
+Clean code is good code is fun code.
+
+So how do you write a class in coffeescript? One line.
+
+{% highlight coffeescript %}
+class Foo
+{% endhighlight %}
+
+Compare that to the generated javascript:
+
+{% highlight javascript %}
+(function() {
+  var Foo;
+
+  Foo = (function() {
+    function Foo() {}
+
+    return Foo;
+
+  })();
+
+}).call(this);
+{% endhighlight %}
+
+There's definitely some boilerplate going on, but what about something a touch less trivial?
+
+{% highlight coffeescript %}
+class Foo
+    constructor: (@who) ->
+
+    say: ->
+        console.log('Hello ' + @who + '!')
+
+class Bar extends Foo
+    say: ->
+        console.log('Good evening ' + @who + '!')
+{% endhighlight %}
+
+Looking at the generated javascript it's hard to deny the superiority of coffeescript.
+
+{% highlight javascript %}
+(function() {
+  var Bar, Foo,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Foo = (function() {
+    function Foo(who) {
+      this.who = who;
+    }
+
+    Foo.prototype.say = function() {
+      return console.log('Hello ' + this.who + '!');
+    };
+
+    return Foo;
+
+  })();
+
+  Bar = (function(_super) {
+    __extends(Bar, _super);
+
+    function Bar() {
+      return Bar.__super__.constructor.apply(this, arguments);
+    }
+
+    Bar.prototype.say = function() {
+      return console.log('Good evening ' + this.who + '!');
+    };
+
+    return Bar;
+
+  })(Foo);
+
+}).call(this);
+{% endhighlight %}
+
+Really the only thing going against coffeescript is that it needs to be compiled. But using [a build tool like gulpjs](/post/easily-build-assets-with-gulpjs) solves that. Indeed, compiling to javascript is one of it's greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.
+
+There's far more to coffeescript as well, things like looping over array comprehensions:
+
+{% highlight coffeescript %}
+console.log fruit for fruit in ['apple', 'banana', 'grape']
+{% endhighlight %}
+
+Block regular expressions:
+
+{% highlight coffeescript %}
+OPERATOR = /// ^ (
+  ?: [-=]>             # function
+   | [-+*/%<>&|^!?=]=  # compound assign / compare
+   | >>>=?             # zero-fill right shift
+   | ([-+:])\1         # doubles
+   | ([&|<>])\2=?      # logic / shift
+   | \?\.              # soak access
+   | \.{2,3}           # range or splat
+) ///
+{% endhighlight %}
+
+Function argument splats:
+
+{% highlight coffeescript %}
+foo = (first, rest...) ->
+    console.log first, rest
+
+# console.log('a', ['b', 'c', 'd'])
+foo('a', 'b', 'c', 'd')
+{% endhighlight %}
+
+And [much more](http://coffeescript.org).
+
+The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.
