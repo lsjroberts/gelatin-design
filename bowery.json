@@ -1,0 +1,10 @@
+{
+  "web": {
+    "image": "base",
+    "path": ".",
+    "ports": [
+      4000
+    ],
+    "start": "jekyll serve --detach"
+  }
+}

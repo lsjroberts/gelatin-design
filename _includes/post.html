@@ -1,0 +1,25 @@
+<article class="blog-article">
+    <header>
+        <h1>
+            <a href="{{ page.url }}">
+                {{ page.title }}
+            </a>
+        </h1>
+    </header>
+
+    {{ content }}
+
+    <footer>
+        <nav class="categories">
+            {% for category in page.categories %}
+                {{ category }}
+            {% endfor %}
+        </nav>
+
+        <nav class="tags">
+            {% for tag in page.tags %}
+                {{ tag }}
+            {% endfor %}
+        </nav>
+    </footer>
+</div>

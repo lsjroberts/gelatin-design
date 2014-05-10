@@ -1,0 +1,18 @@
+# Site settings
+name: gelatindesign | a coder making websites + games
+title: gelatindesign
+email: lsjroberts@gmail.com
+description: ""
+baseurl: ""
+url: "http://gelatindesign.co.uk"
+
+# Build settings
+markdown: kramdown
+permalinks: /blog/post/:title
+
+# Serve settings
+port: 80
+
+# Asset settings
+sass:
+    style: compressed
