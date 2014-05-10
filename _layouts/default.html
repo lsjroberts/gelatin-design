@@ -5,35 +5,8 @@
     <body>
         {% include header.html %}
 
-        <!-- mmm div-soup, do this better -->
-        <div id="site-nav" class="small-12 large-4 columns">
-            <div class="diamonds">
-                <div class="row">
-                    {{ link_to_route('index', '', null, ['class' => 'diamond red']) }}
-                </div>
-                <div class="row">
-                    {{ link_to_route('blog.tag', '', ['tag' => 'php'], ['class' => 'diamond pull-1 dark-orange']) }}
-                    {{ link_to_route('blog.tag', '', ['tag' => 'javascript'], ['class' => 'diamond push-1 dark-orange']) }}
-                </div>
-                <div class="row">
-                    {{ link_to_route('blog.tag', '', ['tag' => 'python'], ['class' => 'diamond pull-2 orange']) }}
-                    {{ link_to_route('blog.tag', '', ['tag' => 'unity'], ['class' => 'diamond orange']) }}
-                    <div class="diamond push-2 orange"></div>
-                </div>
-                <div class="row">
-                    <div class="diamond pull-1 light-orange"></div>
-                    <div class="diamond push-1 light-orange"></div>
-                </div>
-                <div class="row">
-                    <div class="diamond lighter-orange"></div>
-                </div>
-            </div>
-        </div>
-
         <div id="site-content" class="small-12 large-8 columns">
             {{ content }}
         </div>
-
-        {% include footer.html %}
     </body>
 </html>

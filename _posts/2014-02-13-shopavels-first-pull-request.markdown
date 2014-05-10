@@ -2,7 +2,8 @@
 layout: post
 title: "Shopavel's first pull request"
 date: 2014-02-13
-categories: php, shopavel
+categories: php
+tags: shopavel
 ---
 Today I received my first [pull-request](https://github.com/shopavel/shopavel/pull/8) from another developer for one of my open source projects. How exciting.
 

@@ -2,7 +2,11 @@
 layout: post
 title: "Semantic versioning is not complete"
 date: 2014-02-15
-categories: semver, composer, laravel
+categories: coding
+tags:
+    - semver
+    - composer
+    - laravel
 ---
 [Semantic versioning](http://semver.org/) is an incredibly important concept that has allowed package management to thrive. Combined with [composer](http://getcomposer.org) it has helped transform PHP from a unregulated crazy world to one of order and compatibility.
 

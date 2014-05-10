@@ -2,11 +2,12 @@
 layout: post
 title: "Easily build assets with GulpJS"
 date: 2014-02-15
-categories: javascript, gulpjs
+categories: javascript
+tags: gulpjs
 ---
 I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I've never been too happy with them and they often seem to fail for various and difficult to debug reasons.
 
-[Gulpjs]('http://gulpjs.com) is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.
+[Gulpjs](http://gulpjs.com) is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.
 
 <!-- more -->
 

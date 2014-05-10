@@ -2,7 +2,8 @@
 layout: post
 title: "Coffeescript is objectively better than javascript"
 date: 2014-02-17
-categories: javascript, coffeescript
+categories: javascript
+tags: coffeescript
 ---
 I can see no reason why anyone would use javascript over [coffeescript](http://coffeescript.org/). The latter is without a doubt objectively better. Sure, it will take a bit of time to learn, perhaps a day or two. But if you are in the web development game you should be learning every single day. One day off and you are behind and have to play catch up.
 

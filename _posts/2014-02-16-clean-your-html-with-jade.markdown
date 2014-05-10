@@ -2,7 +2,10 @@
 layout: post
 title: "Clean your HTML with Jade"
 date: 2014-02-16
-categories: javascript, node, jade
+categories: javascript
+tags:
+    - node
+    - jade
 ---
 As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.
 

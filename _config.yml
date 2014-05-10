@@ -9,3 +9,10 @@ url: "http://gelatindesign.co.uk"
 # Build settings
 markdown: kramdown
 permalinks: /blog/post/:title
+
+# Serve settings
+port: 80
+
+# Asset settings
+sass:
+    style: compressed
