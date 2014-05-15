@@ -42,3 +42,7 @@
 <p>With that in mind I've been looking to get away from my final non-terminal based development tool, the text editor (Sublime Text 2 in my case). I've been learning vim, indeed I wrote this article with vim. It's fantastic. If you are interested in learning vim, run <code>vimtutor</code> and go through it's lessons every day and you'll soon get the hang of this powerful tool.</p>
 
 <p>Once I'm comfortable using vim I'll write up a tutorial on customising it, though it might take a few weeks to get to that stage.</p>
+
+<hr>
+
+<p>Got any preferences or thoughts on how you configure your terminal? Please share them in the comments below.</p>
