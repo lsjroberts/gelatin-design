@@ -46,4 +46,9 @@ return [
         'tags'  => ['python', 'turtle']
     ],
 
+    [
+        'date'  => new Carbon('2014-05-15'),
+        'title' => 'Improve your terminal',
+        'tags'  => ['terminal'],
+    ],
 ];
