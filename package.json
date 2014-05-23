@@ -1,5 +1,12 @@
 {
   "dependencies": {
-    "metalsmith": "^0.8.0"
+    "async": "^0.9.0",
+    "metalsmith": "^0.8.0",
+    "metalsmith-drafts": "0.0.1",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-permalinks": "^0.3.0",
+    "metalsmith-sass": "^0.1.1",
+    "node-sass": "^0.8.6",
+    "path": "^0.4.9"
   }
 }
