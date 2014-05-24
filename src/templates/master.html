@@ -1,0 +1,25 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% if title %}
+            <title>{{ title }} | gelatindesign</title>
+        {% else %}
+            <title>gelatindesign | a coder making websites + games</title>
+        {% endif %}
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        {% if not image %}
+            {% set image = '/assets/images/logo-header.png' %}
+        {% endif %}
+
+        <a href="/"><img class="header" src="{{ image }}" alt="{{ title }}"></a>
+
+        <div id="site-content">
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Semantic versioning is not complete | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        
+            
+        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Semantic versioning is not complete"></a>
+
+        <div id="site-content">
+            
+    <nav class="post-prevnext row">
+        
+            <a class="left" href="/blog/post/coffeescript-is-objectively-better-than-javascript">&laquo; Coffeescript is objectively better than javascript</a>
+        
+
+        
+            <a class="right" href="/blog/post/playing-with-pythons-and-turtles">Playing with pythons and turtles &raquo;</a>
+        
+    </nav>
+
+    <article class="post">
+    <header>
+        <h1><a href="/blog/post/">Semantic versioning is not complete</a></h1>
+
+        <span class="date">20th February, 2014</span>
+    </header>
+
+    <p><a href="http://semver.org/">Semantic versioning</a> is an incredibly important concept that has allowed package management to thrive. Combined with <a href="http://getcomposer.org">composer</a> it has helped transform PHP from a unregulated crazy world to one of order and compatibility.</p>
+<p>Yet there is one major problem that I have experienced and seen in several projects. It needs a fourth number at the start, a &quot;philosophical&quot; or &quot;brand&quot; version number.</p>
+<!-- more -->
+
+<p>A good example of this is the <a href="http://laravel.com/docs/upgrade#upgrade-4.1">Laravel 4.0 to 4.1 update</a>. 4.1 is a backwards incompatible change, if you just update your <code>composer.json</code> to point to the new version your app will break on update. Yet Taylor Otwell rightly doesn&#39;t want to change to Laravel 5 as the brand is Laravel 4. You could say Laravel 4 is philoshophically different from Laravel 3, the involved packages have a set approach to them that differs from the previous version.</p>
+<p>So really, it shouldn&#39;t be numbered as <code>4.1.0</code> but <code>4.1.0.0</code> and incrementing:</p>
+<ol>
+<li>BRAND version when you made philosophical changes,</li>
+<li>MAJOR version when you make incompatible API changes,</li>
+<li>MINOR version when you add functionality in a backwards-compatible manner, and</li>
+<li>PATCH version when you make backwards-compatible bug fixes.</li>
+</ol>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
+                <a class="tag tag-semver" href="/blog/tag/semver">semver</a></li>
+            
+                <a class="tag tag-composer" href="/blog/tag/composer">composer</a></li>
+            
+                <a class="tag tag-laravel" href="/blog/tag/laravel">laravel</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/sematic-versioning-is-not-enough#comments">Comments</a>
+    </footer>
+</article>
+    <section id="comments">
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+        </div>
+    </body>
+</html>

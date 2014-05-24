@@ -1,0 +1,16 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    <nav class="post-prevnext row">
+        {% if next %}
+            <a class="left" href="/blog/post/{{ next.slug }}">&laquo; {{ next.title }}</a>
+        {% endif %}
+
+        {% if previous %}
+            <a class="right" href="/blog/post/{{ previous.slug }}">{{ previous.title }} &raquo;</a>
+        {% endif %}
+    </nav>
+
+    {% include '_post.html' %}
+    {% include '_comments.html' %}
+{% endblock %}

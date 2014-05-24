@@ -1,0 +1,11 @@
+<nav class="pagination-wrapper">
+    <ul class="pagination">
+        {% for page in pagination %}
+            {% set pageClass = "" %}
+            {% if page.num == currentPage %}
+                {% set pageClass = "active" %}
+            {% endif %}
+            <li class="{{ pageClass }}"><a href="{{ page.url }}">{{ page.num }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>

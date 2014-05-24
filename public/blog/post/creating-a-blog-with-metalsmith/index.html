@@ -1,0 +1,146 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Creating a blog with Metalsmith | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        
+            
+        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Creating a blog with Metalsmith"></a>
+
+        <div id="site-content">
+            
+    <nav class="post-prevnext row">
+        
+            <a class="left" href="/blog/post/improve-your-terminal">&laquo; Improve your terminal</a>
+        
+
+        
+    </nav>
+
+    <article class="post">
+    <header>
+        <h1><a href="/blog/post/">Creating a blog with Metalsmith</a></h1>
+
+        <span class="date">24th May, 2014</span>
+    </header>
+
+    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+<pre><code class="lang-js">var metalsmith  = require(&#39;metalsmith&#39;),
+    collections = require(&#39;metalsmith-collections&#39;);
+
+metalsmith(__dirname)
+
+    // group together all files in the `/blog/` directory as posts
+    .use(collections({
+        posts: {
+            pattern: &#39;blog/*&#39;,
+            sortBy: &#39;date&#39;,
+            reverse: true,
+        }
+    }))
+
+    // generate the tag listing pages
+    .use(blogTagLists)
+
+    // build
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
+
+    // loop the posts collection, creating new groups on the tags
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    // loop the tags and create a new index file for each tag
+    for (tag in tags) {
+        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
+            template: &#39;list.html&#39;,
+            mode: &#39;0644&#39;,
+            contents: &#39;&#39;,
+            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+</code></pre>
+<p>You can see my full <a href="http://github.com/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
+<p>If you&#39;re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
+<hr>
+<p>What are your thoughts on Metalsmith? Do you prefer Jekyll or another static-site generator? Leave your comments below.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
+            
+                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
+            
+                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
+    </footer>
+</article>
+    <section id="comments">
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+        </div>
+    </body>
+</html>

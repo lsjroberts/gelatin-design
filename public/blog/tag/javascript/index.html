@@ -1,0 +1,448 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Posts tagged &#39;javascript&#39; | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        
+            
+        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Posts tagged &#39;javascript&#39;"></a>
+
+        <div id="site-content">
+            
+    
+    <article class="page">
+        <header>
+            <h1>Posts tagged &#39;javascript&#39;</h1>
+        </header>
+
+        
+    </article>
+
+
+    <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/creating-a-blog-with-metalsmith">Creating a blog with Metalsmith</a></h1>
+
+        <span class="date">24th May, 2014</span>
+    </header>
+
+    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+<pre><code class="lang-js">var metalsmith  = require(&#39;metalsmith&#39;),
+    collections = require(&#39;metalsmith-collections&#39;);
+
+metalsmith(__dirname)
+
+    // group together all files in the `/blog/` directory as posts
+    .use(collections({
+        posts: {
+            pattern: &#39;blog/*&#39;,
+            sortBy: &#39;date&#39;,
+            reverse: true,
+        }
+    }))
+
+    // generate the tag listing pages
+    .use(blogTagLists)
+
+    // build
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
+
+    // loop the posts collection, creating new groups on the tags
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    // loop the tags and create a new index file for each tag
+    for (tag in tags) {
+        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
+            template: &#39;list.html&#39;,
+            mode: &#39;0644&#39;,
+            contents: &#39;&#39;,
+            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+</code></pre>
+<p>You can see my full <a href="http://github.com/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
+<p>If you&#39;re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
+<hr>
+<p>What are your thoughts on Metalsmith? Do you prefer Jekyll or another static-site generator? Leave your comments below.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
+            
+                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
+            
+                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/coffeescript-is-objectively-better-than-javascript">Coffeescript is objectively better than javascript</a></h1>
+
+        <span class="date">17th February, 2014</span>
+    </header>
+
+    <p>I can see no reason why anyone would use javascript over <a href="http://coffeescript.org/">coffeescript</a>. The latter is without a doubt objectively better. Sure, it will take a bit of time to learn, perhaps a day or two. But if you are in the web development game you should be learning every single day. One day off and you are behind and have to play catch up.</p>
+<p>The time investment is clearly worth it.</p>
+<!-- more -->
+
+<h2 id="it-s-just-better-looking-javascript">It&#39;s just better looking javascript</h2>
+<p>I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.</p>
+<p>Clean code is good code is fun code.</p>
+<p>So how do you write a class in coffeescript? One line.</p>
+<pre><code class="lang-coffeescript">class Foo
+</code></pre>
+<p>Compare that to the generated javascript:</p>
+<pre><code class="lang-javascript">(function() {
+  var Foo;
+
+  Foo = (function() {
+    function Foo() {}
+
+    return Foo;
+
+  })();
+
+}).call(this);
+</code></pre>
+<p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
+<pre><code class="lang-coffeescript">class Foo
+    constructor: (@who) -&gt;
+
+    say: -&gt;
+        console.log(&#39;Hello &#39; + @who + &#39;!&#39;)
+
+class Bar extends Foo
+    say: -&gt;
+        console.log(&#39;Good evening &#39; + @who + &#39;!&#39;)
+</code></pre>
+<p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
+<pre><code class="lang-javascript">(function() {
+  var Bar, Foo,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Foo = (function() {
+    function Foo(who) {
+      this.who = who;
+    }
+
+    Foo.prototype.say = function() {
+      return console.log(&#39;Hello &#39; + this.who + &#39;!&#39;);
+    };
+
+    return Foo;
+
+  })();
+
+  Bar = (function(_super) {
+    __extends(Bar, _super);
+
+    function Bar() {
+      return Bar.__super__.constructor.apply(this, arguments);
+    }
+
+    Bar.prototype.say = function() {
+      return console.log(&#39;Good evening &#39; + this.who + &#39;!&#39;);
+    };
+
+    return Bar;
+
+  })(Foo);
+
+}).call(this);
+</code></pre>
+<p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
+<p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
+<pre><code class="lang-coffeescript">console.log fruit for fruit in [&#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]
+</code></pre>
+<p>Block regular expressions:</p>
+<pre><code class="lang-coffeescript">OPERATOR = /// ^ (
+  ?: [-=]&gt;             # function
+   | [-+*/%&lt;&gt;&amp;|^!?=]=  # compound assign / compare
+   | &gt;&gt;&gt;=?             # zero-fill right shift
+   | ([-+:])\1         # doubles
+   | ([&amp;|&lt;&gt;])\2=?      # logic / shift
+   | \?\.              # soak access
+   | \.{2,3}           # range or splat
+) ///
+</code></pre>
+<p>Function argument splats:</p>
+<pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
+    console.log first, rest
+
+# console.log(&#39;a&#39;, [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+</code></pre>
+<p>And <a href="http://coffeescript.org">much more</a>.</p>
+<p>The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-coffeescript" href="/blog/tag/coffeescript">coffeescript</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/coffeescript-is-objectively-better-than-javascript#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/clean-your-html-with-jade">Clean your HTML with Jade</a></h1>
+
+        <span class="date">16th February, 2014</span>
+    </header>
+
+    <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
+<p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
+<!-- more -->
+
+<p>It has a wonderfully basic syntax:</p>
+<pre><code class="lang-jade">doctype html
+html
+    head
+        title Hello World
+        link(rel=&quot;stylesheet&quot;, href=&quot;build/styles/combined.css&quot;)
+    body
+        div.container
+            p Hello World
+</code></pre>
+<h2 id="layouts-and-blocks">Layouts and blocks</h2>
+<p>Jade allows you to create layouts and extend them for your different views:</p>
+<pre><code class="lang-jade">// layouts/master.jade
+body
+    block content
+{% endhighlight %}
+
+{% highlight jade %}
+// index.jade
+extends layouts/master
+
+block content
+    header.hero
+        h1 Hello World
+</code></pre>
+<h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
+<p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
+<pre><code class="lang-jade">// mixins/form.jade
+mixin form(action, method)
+    unless method
+        - method= &quot;get&quot;
+    form(action= action, method= method)
+        if block
+            block
+        else
+            p Looks like you forgot to add any inputs to your form
+
+mixin field(name, type)
+    label= name
+    input(type= type, name= name)
+</code></pre>
+<pre><code class="lang-jade">// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;, &quot;text&quot;)
+    +field(&quot;password&quot;, &quot;password&quot;)
+</code></pre>
+<p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
+<pre><code class="lang-jade">// mixins/form.jade
+
+//- ...
+
+mixin field(name, type)
+    //- Convert &quot;foo_bar&quot; to &quot;Foo Bar&quot;
+    -var unslugify = function(input) {
+    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
+    -       return &#39; &#39; + group1.toUpperCase();
+    -   });
+    -}
+
+    //- If no type has been set, try to pick an appropriate one
+    unless type
+        case name
+            when &quot;password&quot;
+                - type= &quot;password&quot;
+            when &quot;password_confirmation&quot;
+                - type= &quot;password&quot;
+            when &quot;email&quot;
+                - type= &quot;email&quot;
+            default
+                - type= &quot;text&quot;
+
+    div.field
+        label= unslugify(name)
+        input(type= type, name= name)
+</code></pre>
+<pre><code class="lang-jade">// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;)
+    +field(&quot;password&quot;)
+</code></pre>
+<h2 id="lovely">Lovely</h2>
+<p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
+<p>Coding should be fun and jade brings that enjoyment back to html.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-node" href="/blog/tag/node">node</a></li>
+            
+                <a class="tag tag-jade" href="/blog/tag/jade">jade</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/clean-your-html-with-jade#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/easily-build-assets-with-gulpjs">Easily build assets with GulpJS</a></h1>
+
+        <span class="date">15th February, 2014</span>
+    </header>
+
+    <p>I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I&#39;ve never been too happy with them and they often seem to fail for various and difficult to debug reasons.</p>
+<p><a href="http://gulpjs.com">Gulpjs</a> is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.</p>
+<!-- more -->
+
+<h2 id="getting-started-with-gulp">Getting started with gulp</h2>
+<p>Follow <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started">these instructions</a> to get gulp installed and running.</p>
+<h3 id="plugins">Plugins</h3>
+<p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
+<p>You can install plugins through npm:</p>
+<pre><code>npm install gulp-concat gulp-coffee
+</code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
+<pre><code class="lang-js">var concat = require(&#39;gulp-concat&#39;);
+var coffee = require(&#39;gulp-coffee&#39;);
+</code></pre>
+<h3 id="writing-tasks">Writing tasks</h3>
+<p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
+<pre><code class="lang-js">gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
+});
+</code></pre>
+<p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
+<p>It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single <code>(function() { ... })();</code> block and can easily reference each other without having to resort to the global <code>window</code> object.</p>
+<p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
+<h2 id="task-dependancies">Task dependancies</h2>
+<p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
+<pre><code>gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined-coffee.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
+});
+
+gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
+    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
+        .pipe(concat(&#39;combined.js&#39;))
+        .pipe(uglify())
+        .pipe(gulp.dest(&#39;build/scripts&#39;));
+});
+</code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
+<p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
+<pre><code>var uglify = require(&#39;gulp-uglify&#39;)
+</code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
+<h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
+<p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
+<pre><code>gulp.task(&#39;watch&#39;, function() {
+    gulp.watch([
+        &#39;assets/scripts/**/*.coffee&#39;,
+        &#39;assets/scripts/**/*.js&#39;
+    ], [&#39;scripts&#39;]);
+
+    gulp.watch([
+        &#39;assets/styles/**/*.sass&#39;,
+        &#39;assets/styles/**/*.css&#39;
+    ], [&#39;styles&#39;]);
+});
+</code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
+<pre><code>gulp watch
+</code></pre><h2 id="taking-it-further">Taking it further</h2>
+<p>There are <a href="http://gulpjs.com/plugins/">lot of existing plugins for gulp</a> and I&#39;d suggest taking some time to look through and see which ones might prove useful in your code environment.</p>
+<p>This <a href="https://gist.github.com/lsjroberts/8810740">example build script</a> shows how I run my usual full build process, feel free it use it as you wish.</p>
+<p>You may wish to install your dependancies through a <code>package.json</code> file and running <code>npm install</code> to ensure all your developers are working with the same node modules.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-gulpjs" href="/blog/tag/gulpjs">gulpjs</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/easily-build-assets-with-gulpjs#comments">Comments</a>
+    </footer>
+</article>
+        
+    </section>
+
+    <nav class="pagination-wrapper">
+    <ul class="pagination">
+        
+    </ul>
+</nav>
+
+        </div>
+    </body>
+</html>
