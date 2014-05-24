@@ -42,36 +42,36 @@
 <p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
 <p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
 <p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js">var metalsmith  = require(&#39;metalsmith&#39;),
-    collections = require(&#39;metalsmith-collections&#39;);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
+    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
 
 metalsmith(__dirname)
 
-    // group together all files in the `/blog/` directory as posts
+    <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
     .use(collections({
         posts: {
-            pattern: &#39;blog/*&#39;,
-            sortBy: &#39;date&#39;,
-            reverse: true,
+            pattern: <span class="hljs-string">'blog/*'</span>,
+            sortBy: <span class="hljs-string">'date'</span>,
+            reverse: <span class="hljs-literal">true</span>,
         }
     }))
 
-    // generate the tag listing pages
+    <span class="hljs-comment">// generate the tag listing pages</span>
     .use(blogTagLists)
 
-    // build
-    .build(function(err) {
-        if (err) throw err;
+    <span class="hljs-comment">// build</span>
+    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
     });
 
-function blogTagLists(files, metalsmith, done) {
-    var tags = {};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
+    <span class="hljs-keyword">var</span> tags = {};
 
-    // loop the posts collection, creating new groups on the tags
-    for (p in metalsmith.data.posts) {
-        for (t in metalsmith.data.posts[p].tags) {
+    <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
+    <span class="hljs-keyword">for</span> (p <span class="hljs-keyword">in</span> metalsmith.data.posts) {
+        <span class="hljs-keyword">for</span> (t <span class="hljs-keyword">in</span> metalsmith.data.posts[p].tags) {
             tag = metalsmith.data.posts[p].tags[t];
-            if (! tags[tag]) {
+            <span class="hljs-keyword">if</span> (! tags[tag]) {
                 tags[tag] = [];
             }
 
@@ -79,13 +79,13 @@ function blogTagLists(files, metalsmith, done) {
         }
     }
 
-    // loop the tags and create a new index file for each tag
-    for (tag in tags) {
-        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
-            template: &#39;list.html&#39;,
-            mode: &#39;0644&#39;,
-            contents: &#39;&#39;,
-            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+    <span class="hljs-comment">// loop the tags and create a new index file for each tag</span>
+    <span class="hljs-keyword">for</span> (tag <span class="hljs-keyword">in</span> tags) {
+        files[<span class="hljs-string">'blog/tag/'</span> + tag + <span class="hljs-string">'/index.md'</span>] = {
+            template: <span class="hljs-string">'list.html'</span>,
+            mode: <span class="hljs-string">'0644'</span>,
+            contents: <span class="hljs-string">''</span>,
+            title: <span class="hljs-string">"Posts tagged '"</span> + tag + <span class="hljs-string">"'"</span>,
             posts: tags[tag],
         }
     }

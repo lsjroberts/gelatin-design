@@ -46,18 +46,18 @@
 <h3 id="plugins">Plugins</h3>
 <p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
 <p>You can install plugins through npm:</p>
-<pre><code>npm install gulp-concat gulp-coffee
+<pre><code>npm install gulp<span class="hljs-attribute">-concat</span> gulp<span class="hljs-attribute">-coffee</span>
 </code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
-<pre><code class="lang-js">var concat = require(&#39;gulp-concat&#39;);
-var coffee = require(&#39;gulp-coffee&#39;);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">concat</span> = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-concat'</span>);
+<span class="hljs-keyword">var</span> coffee = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-coffee'</span>);
 </code></pre>
 <h3 id="writing-tasks">Writing tasks</h3>
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
-<pre><code class="lang-js">gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined.coffee&#39;))
+<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
+        .pipe(concat(<span class="hljs-string">'combined.coffee'</span>))
         .pipe(coffee())
-        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'build/scripts/combined.js'</span>));
 });
 </code></pre>
 <p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
@@ -65,35 +65,35 @@ var coffee = require(&#39;gulp-coffee&#39;);
 <p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
 <h2 id="task-dependancies">Task dependancies</h2>
 <p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
-<pre><code>gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined-coffee.coffee&#39;))
+<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
+        .pipe(concat(<span class="hljs-string">'combined-coffee.coffee'</span>))
         .pipe(coffee())
-        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'assets/scripts/'</span>));
 });
 
-gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
-    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
-        .pipe(concat(&#39;combined.js&#39;))
+gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.js'</span>)
+        .pipe(concat(<span class="hljs-string">'combined.js'</span>))
         .pipe(uglify())
-        .pipe(gulp.dest(&#39;build/scripts&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'build/scripts'</span>));
 });
 </code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
-<pre><code>var uglify = require(&#39;gulp-uglify&#39;)
+<pre><code><span class="hljs-keyword">var</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gulp-uglify'</span>)
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(&#39;watch&#39;, function() {
+<pre><code>gulp.task(<span class="hljs-string">'watch'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
     gulp.watch([
-        &#39;assets/scripts/**/*.coffee&#39;,
-        &#39;assets/scripts/**/*.js&#39;
-    ], [&#39;scripts&#39;]);
+        <span class="hljs-string">'assets/scripts/**/*.coffee'</span>,
+        <span class="hljs-string">'assets/scripts/**/*.js'</span>
+    ], [<span class="hljs-string">'scripts'</span>]);
 
     gulp.watch([
-        &#39;assets/styles/**/*.sass&#39;,
-        &#39;assets/styles/**/*.css&#39;
-    ], [&#39;styles&#39;]);
+        <span class="hljs-string">'assets/styles/**/*.sass'</span>,
+        <span class="hljs-string">'assets/styles/**/*.css'</span>
+    ], [<span class="hljs-string">'styles'</span>]);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 <pre><code>gulp watch

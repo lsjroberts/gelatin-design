@@ -41,14 +41,14 @@
 <h2 id="oh-my-zshell-">Oh my zshell!</h2>
 <p><a href="https://github.com/robbyrussell/oh-my-zsh">on-my-zsh</a> is a must-have tool for frequent terminal users. It makes it easy to use themes for styling, but provides so much more functionality than that.</p>
 <p>If you trust the author of that tool then you can install it by just running</p>
-<pre><code>$ curl -L http://install.ohmyz.sh | sh
+<pre><code>$ curl -L http://install<span class="hljs-preprocessor">.ohmyz</span><span class="hljs-preprocessor">.sh</span> | sh
 </code></pre><p>That&#39;ll set up the default config at <code>~/.zshrc</code>.</p>
 <p>If you want to you can install it manually, check that out at the <a href="https://github.com/robbyrussell/oh-my-zsh">github repo</a>.</p>
 <h3 id="pick-a-theme">Pick a theme</h3>
 <p>I personally use the <code>ys</code> theme, it presents your current directory, git branch and status and the current type before each command you type. This lets you see at a glance what&#39;s going on and when you fired a long running command allowing you to see how long it&#39;s taking.</p>
 <p><img src="/assets/images/blog/2014-05-15/ys-line-header.png" alt="ys line header"></p>
 <p>To install your theme of choice, change your <code>~/.zshrc</code> to include</p>
-<pre><code>ZSH_THEME=ys
+<pre><code><span class="hljs-attribute">ZSH_THEME</span>=<span class="hljs-string">ys</span>
 </code></pre><h2 id="fonts-and-colours">Fonts and colours</h2>
 <p>In addition to your theme you should set your default text font and colour and your terminal background colour. On a Mac you can do this quite easily within the terminal preferences by going to <code>Terminal &gt; Preferences...</code> and change the options under <code>Text</code> and <code>Window</code>. On Linux you can do this under <code>Edit &gt; Profile Preferences</code>.</p>
 <p>Picking a font is pretty important, it has to be monospaced and some good choices are Monaco, Source Code Pro, Inconsolata. I personally use Iconsolata.</p>
@@ -58,7 +58,7 @@
 <h2 id="the-terminal-is-the-best-place-for-a-developer-to-develop">The terminal is the best place for a developer to develop</h2>
 <p>So much of development requires running a command-line tool here and there that you may as well just stay in the terminal the whole time. Don&#39;t use a gui program to manage your git repos, they are all slower than just running the git commands yourself. It takes time to learn but once you&#39;ve learnt it you&#39;ll gain that back in time saved getting things done.</p>
 <p>With that in mind I&#39;ve been looking to get away from my final non-terminal based development tool, the text editor (Sublime Text 2 in my case). I&#39;ve been learning vim, indeed I wrote this article with vim. It&#39;s fantastic. If you are interested in learning vim, run</p>
-<pre><code>$ vimtutor
+<pre><code><span class="hljs-variable">$ </span>vimtutor
 </code></pre><p>and go through it&#39;s lessons every day and you&#39;ll soon get the hang of this powerful tool.</p>
 <p>Once I&#39;m comfortable using vim I&#39;ll write up a tutorial on customising it, though it might take a few weeks to get to that stage.</p>
 <hr>

@@ -42,36 +42,36 @@
 <p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
 <p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
 <p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js">var metalsmith  = require(&#39;metalsmith&#39;),
-    collections = require(&#39;metalsmith-collections&#39;);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
+    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
 
 metalsmith(__dirname)
 
-    // group together all files in the `/blog/` directory as posts
+    <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
     .use(collections({
         posts: {
-            pattern: &#39;blog/*&#39;,
-            sortBy: &#39;date&#39;,
-            reverse: true,
+            pattern: <span class="hljs-string">'blog/*'</span>,
+            sortBy: <span class="hljs-string">'date'</span>,
+            reverse: <span class="hljs-literal">true</span>,
         }
     }))
 
-    // generate the tag listing pages
+    <span class="hljs-comment">// generate the tag listing pages</span>
     .use(blogTagLists)
 
-    // build
-    .build(function(err) {
-        if (err) throw err;
+    <span class="hljs-comment">// build</span>
+    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
     });
 
-function blogTagLists(files, metalsmith, done) {
-    var tags = {};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
+    <span class="hljs-keyword">var</span> tags = {};
 
-    // loop the posts collection, creating new groups on the tags
-    for (p in metalsmith.data.posts) {
-        for (t in metalsmith.data.posts[p].tags) {
+    <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
+    <span class="hljs-keyword">for</span> (p <span class="hljs-keyword">in</span> metalsmith.data.posts) {
+        <span class="hljs-keyword">for</span> (t <span class="hljs-keyword">in</span> metalsmith.data.posts[p].tags) {
             tag = metalsmith.data.posts[p].tags[t];
-            if (! tags[tag]) {
+            <span class="hljs-keyword">if</span> (! tags[tag]) {
                 tags[tag] = [];
             }
 
@@ -79,13 +79,13 @@ function blogTagLists(files, metalsmith, done) {
         }
     }
 
-    // loop the tags and create a new index file for each tag
-    for (tag in tags) {
-        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
-            template: &#39;list.html&#39;,
-            mode: &#39;0644&#39;,
-            contents: &#39;&#39;,
-            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+    <span class="hljs-comment">// loop the tags and create a new index file for each tag</span>
+    <span class="hljs-keyword">for</span> (tag <span class="hljs-keyword">in</span> tags) {
+        files[<span class="hljs-string">'blog/tag/'</span> + tag + <span class="hljs-string">'/index.md'</span>] = {
+            template: <span class="hljs-string">'list.html'</span>,
+            mode: <span class="hljs-string">'0644'</span>,
+            contents: <span class="hljs-string">''</span>,
+            title: <span class="hljs-string">"Posts tagged '"</span> + tag + <span class="hljs-string">"'"</span>,
             posts: tags[tag],
         }
     }
@@ -131,89 +131,89 @@ function blogTagLists(files, metalsmith, done) {
 <p>I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.</p>
 <p>Clean code is good code is fun code.</p>
 <p>So how do you write a class in coffeescript? One line.</p>
-<pre><code class="lang-coffeescript">class Foo
+<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
 </code></pre>
 <p>Compare that to the generated javascript:</p>
-<pre><code class="lang-javascript">(function() {
-  var Foo;
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">var</span> Foo;
 
-  Foo = (function() {
-    function Foo() {}
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">()</span> {</span>}
 
-    return Foo;
+    <span class="hljs-keyword">return</span> Foo;
 
   })();
 
-}).call(this);
+}).call(<span class="hljs-keyword">this</span>);
 </code></pre>
 <p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
-<pre><code class="lang-coffeescript">class Foo
-    constructor: (@who) -&gt;
+<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
+    constructor: (<span class="hljs-annotation">@who</span>) -&gt;
 
     say: -&gt;
-        console.log(&#39;Hello &#39; + @who + &#39;!&#39;)
+        console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
 
-class Bar extends Foo
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
     say: -&gt;
-        console.log(&#39;Good evening &#39; + @who + &#39;!&#39;)
+        console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
 </code></pre>
 <p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
-<pre><code class="lang-javascript">(function() {
-  var Bar, Foo,
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">var</span> Bar, Foo,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child, parent)</span> {</span> <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> parent) { <span class="hljs-keyword">if</span> (__hasProp.call(parent, key)) child[key] = parent[key]; } <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ctor</span><span class="hljs-params">()</span> {</span> <span class="hljs-keyword">this</span>.constructor = child; } ctor.prototype = parent.prototype; child.prototype = <span class="hljs-keyword">new</span> ctor(); child.__super__ = parent.prototype; <span class="hljs-keyword">return</span> child; };
 
-  Foo = (function() {
-    function Foo(who) {
-      this.who = who;
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">(who)</span> {</span>
+      <span class="hljs-keyword">this</span>.who = who;
     }
 
-    Foo.prototype.say = function() {
-      return console.log(&#39;Hello &#39; + this.who + &#39;!&#39;);
+    Foo.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
-    return Foo;
+    <span class="hljs-keyword">return</span> Foo;
 
   })();
 
-  Bar = (function(_super) {
+  Bar = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_super)</span> {</span>
     __extends(Bar, _super);
 
-    function Bar() {
-      return Bar.__super__.constructor.apply(this, arguments);
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bar</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> Bar.__super__.constructor.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
     }
 
-    Bar.prototype.say = function() {
-      return console.log(&#39;Good evening &#39; + this.who + &#39;!&#39;);
+    Bar.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
-    return Bar;
+    <span class="hljs-keyword">return</span> Bar;
 
   })(Foo);
 
-}).call(this);
+}).call(<span class="hljs-keyword">this</span>);
 </code></pre>
 <p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
 <p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
-<pre><code class="lang-coffeescript">console.log fruit for fruit in [&#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]
+<pre><code class="lang-coffeescript">console.<span class="hljs-built_in">log</span> fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-operator">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
 </code></pre>
 <p>Block regular expressions:</p>
-<pre><code class="lang-coffeescript">OPERATOR = /// ^ (
-  ?: [-=]&gt;             # function
-   | [-+*/%&lt;&gt;&amp;|^!?=]=  # compound assign / compare
-   | &gt;&gt;&gt;=?             # zero-fill right shift
-   | ([-+:])\1         # doubles
-   | ([&amp;|&lt;&gt;])\2=?      # logic / shift
-   | \?\.              # soak access
-   | \.{2,3}           # range or splat
-) ///
+<pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span> ^ (</span>
+  ?: [-=]&gt;             <span class="hljs-preprocessor"># function</span>
+   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="hljs-preprocessor"># compound assign / compare</span>
+   | &gt;&gt;&gt;=?             <span class="hljs-preprocessor"># zero-fill right shift</span>
+   | ([-+:])\<span class="hljs-number">1</span>         <span class="hljs-preprocessor"># doubles</span>
+   | ([&amp;|&lt;&gt;])\<span class="hljs-number">2</span>=?      <span class="hljs-preprocessor"># logic / shift</span>
+   | \?\.              <span class="hljs-preprocessor"># soak access</span>
+   | \.{<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}           <span class="hljs-preprocessor"># range or splat</span>
+) <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span></span>
 </code></pre>
 <p>Function argument splats:</p>
 <pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
-    console.log first, rest
+    console.<span class="hljs-keyword">log</span> first, rest
 
-# console.log(&#39;a&#39;, [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
-foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+# console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'a'</span>, [<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
+foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>)
 </code></pre>
 <p>And <a href="http://coffeescript.org">much more</a>.</p>
 <p>The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.</p>
@@ -248,86 +248,86 @@ foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
 html
     head
         title Hello World
-        link(rel=&quot;stylesheet&quot;, href=&quot;build/styles/combined.css&quot;)
+        link(<span class="hljs-built_in">rel</span>=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)
     body
-        div.container
+        <span class="hljs-operator">div</span>.container
             p Hello World
 </code></pre>
 <h2 id="layouts-and-blocks">Layouts and blocks</h2>
 <p>Jade allows you to create layouts and extend them for your different views:</p>
-<pre><code class="lang-jade">// layouts/master.jade
+<pre><code class="lang-jade"><span class="hljs-comment">// layouts/master.jade</span>
 body
-    block content
-{% endhighlight %}
+    <span class="hljs-keyword">block</span> content
+<span class="hljs-comment">{% endhighlight %}</span>
 
-{% highlight jade %}
-// index.jade
+<span class="hljs-comment">{% highlight jade %}</span>
+<span class="hljs-comment">// index.jade</span>
 extends layouts/master
 
-block content
+<span class="hljs-keyword">block</span> content
     header.hero
         h1 Hello World
 </code></pre>
 <h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
 <p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
-<pre><code class="lang-jade">// mixins/form.jade
-mixin form(action, method)
-    unless method
-        - method= &quot;get&quot;
-    form(action= action, method= method)
-        if block
-            block
-        else
-            p Looks like you forgot to add any inputs to your form
+<pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
+mixin form(action, <span class="hljs-function"><span class="hljs-keyword">method</span>)
+    <span class="hljs-title">unless</span> <span class="hljs-title">method</span>
+        - <span class="hljs-title">method</span>= "<span class="hljs-title">get</span>"
+    <span class="hljs-title">form</span><span class="hljs-params">(action= action, <span class="hljs-keyword">method</span>= <span class="hljs-keyword">method</span>)</span>
+        <span class="hljs-title">if</span> <span class="hljs-title">block</span>
+            <span class="hljs-title">block</span>
+        <span class="hljs-title">else</span>
+            <span class="hljs-title">p</span> <span class="hljs-title">Looks</span> <span class="hljs-title">like</span> <span class="hljs-title">you</span> <span class="hljs-title">forgot</span> <span class="hljs-title">to</span> <span class="hljs-title">add</span> <span class="hljs-title">any</span> <span class="hljs-title">inputs</span> <span class="hljs-title">to</span> <span class="hljs-title">your</span> <span class="hljs-title">form</span>
 
-mixin field(name, type)
-    label= name
-    input(type= type, name= name)
+<span class="hljs-title">mixin</span> <span class="hljs-title">field</span><span class="hljs-params">(name, <span class="hljs-keyword">type</span>)</span>
+    <span class="hljs-title">label</span>= <span class="hljs-title">name</span>
+    <span class="hljs-title">input</span><span class="hljs-params">(<span class="hljs-keyword">type</span>= <span class="hljs-keyword">type</span>, name= name)</span></span>
 </code></pre>
-<pre><code class="lang-jade">// login.jade
+<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-include mixins/form
+<span class="hljs-keyword">include</span> mixins/form
 
-+form(&quot;auth/login&quot;, &quot;post&quot;)
-    +field(&quot;email&quot;, &quot;text&quot;)
-    +field(&quot;password&quot;, &quot;password&quot;)
++form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
+    +field(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)
+    +field(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)
 </code></pre>
 <p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
-<pre><code class="lang-jade">// mixins/form.jade
+<pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
 
-//- ...
+<span class="hljs-comment">//- ...</span>
 
-mixin field(name, type)
-    //- Convert &quot;foo_bar&quot; to &quot;Foo Bar&quot;
-    -var unslugify = function(input) {
-    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
-    -       return &#39; &#39; + group1.toUpperCase();
+mixin field(name, <span class="hljs-class"><span class="hljs-keyword">type</span>)</span>
+    <span class="hljs-comment">//- Convert "foo_bar" to "Foo Bar"</span>
+    -var unslugify = <span class="hljs-keyword">function</span>(input) {
+    -   <span class="hljs-keyword">return</span> input.charAt(<span class="hljs-number">0</span>).toUpperCase() + input.slice(<span class="hljs-number">1</span>).toLowerCase().replace(/[-|_](.)/g, <span class="hljs-keyword">function</span>(<span class="hljs-keyword">match</span>, group1) {
+    -       <span class="hljs-keyword">return</span> ' ' + group1.toUpperCase();
     -   });
     -}
 
-    //- If no type has been set, try to pick an appropriate one
-    unless type
+    <span class="hljs-comment">//- If no type has been set, try to pick an appropriate one</span>
+    unless <span class="hljs-class"><span class="hljs-keyword">type</span></span>
         case name
-            when &quot;password&quot;
-                - type= &quot;password&quot;
-            when &quot;password_confirmation&quot;
-                - type= &quot;password&quot;
-            when &quot;email&quot;
-                - type= &quot;email&quot;
-            default
-                - type= &quot;text&quot;
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"password"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"password"</span>
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"password_confirmation"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"password"</span>
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"email"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"email"</span>
+            <span class="hljs-keyword">default</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"text"</span>
 
     div.field
         label= unslugify(name)
-        input(type= type, name= name)
+        input(<span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">name</span>=</span> name)
 </code></pre>
-<pre><code class="lang-jade">// login.jade
+<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-include mixins/form
+<span class="hljs-keyword">include</span> mixins/form
 
-+form(&quot;auth/login&quot;, &quot;post&quot;)
-    +field(&quot;email&quot;)
-    +field(&quot;password&quot;)
++form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
+    +field(<span class="hljs-string">"email"</span>)
+    +field(<span class="hljs-string">"password"</span>)
 </code></pre>
 <h2 id="lovely">Lovely</h2>
 <p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
@@ -365,18 +365,18 @@ include mixins/form
 <h3 id="plugins">Plugins</h3>
 <p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
 <p>You can install plugins through npm:</p>
-<pre><code>npm install gulp-concat gulp-coffee
+<pre><code>npm install gulp<span class="hljs-attribute">-concat</span> gulp<span class="hljs-attribute">-coffee</span>
 </code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
-<pre><code class="lang-js">var concat = require(&#39;gulp-concat&#39;);
-var coffee = require(&#39;gulp-coffee&#39;);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">concat</span> = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-concat'</span>);
+<span class="hljs-keyword">var</span> coffee = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-coffee'</span>);
 </code></pre>
 <h3 id="writing-tasks">Writing tasks</h3>
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
-<pre><code class="lang-js">gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined.coffee&#39;))
+<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
+        .pipe(concat(<span class="hljs-string">'combined.coffee'</span>))
         .pipe(coffee())
-        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'build/scripts/combined.js'</span>));
 });
 </code></pre>
 <p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
@@ -384,35 +384,35 @@ var coffee = require(&#39;gulp-coffee&#39;);
 <p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
 <h2 id="task-dependancies">Task dependancies</h2>
 <p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
-<pre><code>gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined-coffee.coffee&#39;))
+<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
+        .pipe(concat(<span class="hljs-string">'combined-coffee.coffee'</span>))
         .pipe(coffee())
-        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'assets/scripts/'</span>));
 });
 
-gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
-    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
-        .pipe(concat(&#39;combined.js&#39;))
+gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.js'</span>)
+        .pipe(concat(<span class="hljs-string">'combined.js'</span>))
         .pipe(uglify())
-        .pipe(gulp.dest(&#39;build/scripts&#39;));
+        .pipe(gulp.dest(<span class="hljs-string">'build/scripts'</span>));
 });
 </code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
-<pre><code>var uglify = require(&#39;gulp-uglify&#39;)
+<pre><code><span class="hljs-keyword">var</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gulp-uglify'</span>)
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(&#39;watch&#39;, function() {
+<pre><code>gulp.task(<span class="hljs-string">'watch'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
     gulp.watch([
-        &#39;assets/scripts/**/*.coffee&#39;,
-        &#39;assets/scripts/**/*.js&#39;
-    ], [&#39;scripts&#39;]);
+        <span class="hljs-string">'assets/scripts/**/*.coffee'</span>,
+        <span class="hljs-string">'assets/scripts/**/*.js'</span>
+    ], [<span class="hljs-string">'scripts'</span>]);
 
     gulp.watch([
-        &#39;assets/styles/**/*.sass&#39;,
-        &#39;assets/styles/**/*.css&#39;
-    ], [&#39;styles&#39;]);
+        <span class="hljs-string">'assets/styles/**/*.sass'</span>,
+        <span class="hljs-string">'assets/styles/**/*.css'</span>
+    ], [<span class="hljs-string">'styles'</span>]);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 <pre><code>gulp watch

@@ -22,7 +22,11 @@ metalsmith(__dirname)
     }))
     .use(blogIndexList)
     .use(blogTagLists)
-    .use(markdown())
+    .use(markdown({
+        highlight: function (code) {
+            return require('highlight.js').highlightAuto(code).value;
+        }
+    }))
     .use(branch('blog/*')
         .use(drafts())
         .use(formatDate)

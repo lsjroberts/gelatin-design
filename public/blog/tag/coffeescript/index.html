@@ -45,89 +45,89 @@
 <p>I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.</p>
 <p>Clean code is good code is fun code.</p>
 <p>So how do you write a class in coffeescript? One line.</p>
-<pre><code class="lang-coffeescript">class Foo
+<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
 </code></pre>
 <p>Compare that to the generated javascript:</p>
-<pre><code class="lang-javascript">(function() {
-  var Foo;
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">var</span> Foo;
 
-  Foo = (function() {
-    function Foo() {}
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">()</span> {</span>}
 
-    return Foo;
+    <span class="hljs-keyword">return</span> Foo;
 
   })();
 
-}).call(this);
+}).call(<span class="hljs-keyword">this</span>);
 </code></pre>
 <p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
-<pre><code class="lang-coffeescript">class Foo
-    constructor: (@who) -&gt;
+<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
+    constructor: (<span class="hljs-annotation">@who</span>) -&gt;
 
     say: -&gt;
-        console.log(&#39;Hello &#39; + @who + &#39;!&#39;)
+        console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
 
-class Bar extends Foo
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
     say: -&gt;
-        console.log(&#39;Good evening &#39; + @who + &#39;!&#39;)
+        console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
 </code></pre>
 <p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
-<pre><code class="lang-javascript">(function() {
-  var Bar, Foo,
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">var</span> Bar, Foo,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child, parent)</span> {</span> <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> parent) { <span class="hljs-keyword">if</span> (__hasProp.call(parent, key)) child[key] = parent[key]; } <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ctor</span><span class="hljs-params">()</span> {</span> <span class="hljs-keyword">this</span>.constructor = child; } ctor.prototype = parent.prototype; child.prototype = <span class="hljs-keyword">new</span> ctor(); child.__super__ = parent.prototype; <span class="hljs-keyword">return</span> child; };
 
-  Foo = (function() {
-    function Foo(who) {
-      this.who = who;
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">(who)</span> {</span>
+      <span class="hljs-keyword">this</span>.who = who;
     }
 
-    Foo.prototype.say = function() {
-      return console.log(&#39;Hello &#39; + this.who + &#39;!&#39;);
+    Foo.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
-    return Foo;
+    <span class="hljs-keyword">return</span> Foo;
 
   })();
 
-  Bar = (function(_super) {
+  Bar = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_super)</span> {</span>
     __extends(Bar, _super);
 
-    function Bar() {
-      return Bar.__super__.constructor.apply(this, arguments);
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bar</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> Bar.__super__.constructor.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
     }
 
-    Bar.prototype.say = function() {
-      return console.log(&#39;Good evening &#39; + this.who + &#39;!&#39;);
+    Bar.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
-    return Bar;
+    <span class="hljs-keyword">return</span> Bar;
 
   })(Foo);
 
-}).call(this);
+}).call(<span class="hljs-keyword">this</span>);
 </code></pre>
 <p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
 <p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
-<pre><code class="lang-coffeescript">console.log fruit for fruit in [&#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]
+<pre><code class="lang-coffeescript">console.<span class="hljs-built_in">log</span> fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-operator">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
 </code></pre>
 <p>Block regular expressions:</p>
-<pre><code class="lang-coffeescript">OPERATOR = /// ^ (
-  ?: [-=]&gt;             # function
-   | [-+*/%&lt;&gt;&amp;|^!?=]=  # compound assign / compare
-   | &gt;&gt;&gt;=?             # zero-fill right shift
-   | ([-+:])\1         # doubles
-   | ([&amp;|&lt;&gt;])\2=?      # logic / shift
-   | \?\.              # soak access
-   | \.{2,3}           # range or splat
-) ///
+<pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span> ^ (</span>
+  ?: [-=]&gt;             <span class="hljs-preprocessor"># function</span>
+   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="hljs-preprocessor"># compound assign / compare</span>
+   | &gt;&gt;&gt;=?             <span class="hljs-preprocessor"># zero-fill right shift</span>
+   | ([-+:])\<span class="hljs-number">1</span>         <span class="hljs-preprocessor"># doubles</span>
+   | ([&amp;|&lt;&gt;])\<span class="hljs-number">2</span>=?      <span class="hljs-preprocessor"># logic / shift</span>
+   | \?\.              <span class="hljs-preprocessor"># soak access</span>
+   | \.{<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}           <span class="hljs-preprocessor"># range or splat</span>
+) <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span></span>
 </code></pre>
 <p>Function argument splats:</p>
 <pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
-    console.log first, rest
+    console.<span class="hljs-keyword">log</span> first, rest
 
-# console.log(&#39;a&#39;, [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
-foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+# console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'a'</span>, [<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
+foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>)
 </code></pre>
 <p>And <a href="http://coffeescript.org">much more</a>.</p>
 <p>The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.</p>
