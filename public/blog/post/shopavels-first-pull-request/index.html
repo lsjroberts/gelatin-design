@@ -1,0 +1,50 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Shopavel&#39;s first pull request | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        <div id="site-content" class="small-12 large-8 column">
+            
+    <article class="blog-article">
+        <header>
+            <h1>Shopavel&#39;s first pull request</h1>
+
+            <span class="date">[object Object]</span>
+        </header>
+
+        <p>Today I received my first <a href="https://github.com/shopavel/shopavel/pull/8">pull-request</a> from another developer for one of my open source projects. How exciting.</p>
+<p>Admitedly it is a tiny change, just one small new method, but it&#39;s still pretty cool.</p>
+<p>It will allow you to apply a presenter to a collection of models:</p>
+<pre><code class="lang-php">public function index()
+{
+    $products = $this-&gt;product-&gt;all()-&gt;each(function($product) {
+            return $this-&gt;presenter-&gt;newInstance($product);
+    });
+
+    return $this-&gt;theme-&gt;make(&#39;product.index&#39;)-&gt;withProducts($products);
+}
+</code></pre>
+<p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>
+
+
+        <footer>
+            <ul>
+                
+                    <li><a href="/blog/tag/php">php</a></li>
+                
+                    <li><a href="/blog/tag/shopavel">shopavel</a></li>
+                
+            </ul>
+        </footer>
+    </article>
+
+        </div>
+    </body>
+</html>

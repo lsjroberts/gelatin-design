@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    <article class="blog-article">
+        <header>
+            <h1>{{ title }}</h1>
+
+            <span class="date">{{ date }}</span>
+        </header>
+
+        {{ contents|raw }}
+
+        <footer>
+            <ul>
+                {% for tag in tags %}
+                    <li><a href="/blog/tag/{{ tag }}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
+        </footer>
+    </article>
+{% endblock %}

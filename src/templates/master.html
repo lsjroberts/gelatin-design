@@ -1,0 +1,19 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% if title %}
+            <title>{{ title }} | gelatindesign</title>
+        {% else %}
+            <title>gelatindesign | a coder making websites + games</title>
+        {% endif %}
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        <div id="site-content" class="small-12 large-8 column">
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,131 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Coffeescript is objectively better than javascript | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        <div id="site-content" class="small-12 large-8 column">
+            
+    <article class="blog-article">
+        <header>
+            <h1>Coffeescript is objectively better than javascript</h1>
+
+            <span class="date">[object Object]</span>
+        </header>
+
+        <p>I can see no reason why anyone would use javascript over <a href="http://coffeescript.org/">coffeescript</a>. The latter is without a doubt objectively better. Sure, it will take a bit of time to learn, perhaps a day or two. But if you are in the web development game you should be learning every single day. One day off and you are behind and have to play catch up.</p>
+<p>The time investment is clearly worth it.</p>
+<!-- more -->
+
+<h2 id="it-s-just-better-looking-javascript">It&#39;s just better looking javascript</h2>
+<p>I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.</p>
+<p>Clean code is good code is fun code.</p>
+<p>So how do you write a class in coffeescript? One line.</p>
+<pre><code class="lang-coffeescript">class Foo
+</code></pre>
+<p>Compare that to the generated javascript:</p>
+<pre><code class="lang-javascript">(function() {
+  var Foo;
+
+  Foo = (function() {
+    function Foo() {}
+
+    return Foo;
+
+  })();
+
+}).call(this);
+</code></pre>
+<p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
+<pre><code class="lang-coffeescript">class Foo
+    constructor: (@who) -&gt;
+
+    say: -&gt;
+        console.log(&#39;Hello &#39; + @who + &#39;!&#39;)
+
+class Bar extends Foo
+    say: -&gt;
+        console.log(&#39;Good evening &#39; + @who + &#39;!&#39;)
+</code></pre>
+<p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
+<pre><code class="lang-javascript">(function() {
+  var Bar, Foo,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Foo = (function() {
+    function Foo(who) {
+      this.who = who;
+    }
+
+    Foo.prototype.say = function() {
+      return console.log(&#39;Hello &#39; + this.who + &#39;!&#39;);
+    };
+
+    return Foo;
+
+  })();
+
+  Bar = (function(_super) {
+    __extends(Bar, _super);
+
+    function Bar() {
+      return Bar.__super__.constructor.apply(this, arguments);
+    }
+
+    Bar.prototype.say = function() {
+      return console.log(&#39;Good evening &#39; + this.who + &#39;!&#39;);
+    };
+
+    return Bar;
+
+  })(Foo);
+
+}).call(this);
+</code></pre>
+<p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
+<p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
+<pre><code class="lang-coffeescript">console.log fruit for fruit in [&#39;apple&#39;, &#39;banana&#39;, &#39;grape&#39;]
+</code></pre>
+<p>Block regular expressions:</p>
+<pre><code class="lang-coffeescript">OPERATOR = /// ^ (
+  ?: [-=]&gt;             # function
+   | [-+*/%&lt;&gt;&amp;|^!?=]=  # compound assign / compare
+   | &gt;&gt;&gt;=?             # zero-fill right shift
+   | ([-+:])\1         # doubles
+   | ([&amp;|&lt;&gt;])\2=?      # logic / shift
+   | \?\.              # soak access
+   | \.{2,3}           # range or splat
+) ///
+</code></pre>
+<p>Function argument splats:</p>
+<pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
+    console.log first, rest
+
+# console.log(&#39;a&#39;, [&#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+</code></pre>
+<p>And <a href="http://coffeescript.org">much more</a>.</p>
+<p>The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.</p>
+
+
+        <footer>
+            <ul>
+                
+                    <li><a href="/blog/tag/javascript">javascript</a></li>
+                
+                    <li><a href="/blog/tag/coffeescript">coffeescript</a></li>
+                
+            </ul>
+        </footer>
+    </article>
+
+        </div>
+    </body>
+</html>

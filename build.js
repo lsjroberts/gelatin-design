@@ -1,16 +1,32 @@
 var metalsmith = require('metalsmith'),
-	drafts     = require('metalsmith-drafts'),
-	markdown   = require('metalsmith-markdown'),
-	permalinks = require('metalsmith-permalinks'),
-	sass       = require('metalsmith-sass');
+    branch     = require('metalsmith-branch'),
+    ignore     = require('metalsmith-ignore'),
+    drafts     = require('metalsmith-drafts'),
+    templates  = require('metalsmith-templates'),
+    markdown   = require('metalsmith-markdown'),
+    permalinks = require('metalsmith-permalinks'),
+    sass       = require('metalsmith-sass');
 
 metalsmith(__dirname)
-	.source('src')
-	.destination('public')
-	.use(drafts())
-	.use(markdown())
-	.use(permalinks('blog/post/:slug'))
-	.use(sass({
-        outputStyle: 'compact'
+    .source('src')
+    .destination('public')
+    .use(markdown())
+    .use(branch('blog/*')
+        .use(drafts())
+        .use(permalinks({
+            pattern: 'blog/post/:slug'
+        }))
+    )
+    .use(templates({
+        engine: 'swig',
+        directory: 'src/templates',
     }))
-	.build();
+    .use(ignore([
+        'templates/*'
+    ]))
+    .use(sass({
+        outputStyle: 'compressed'
+    }))
+    .build(function(err) {
+        if (err) throw err;
+    });
