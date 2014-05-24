@@ -118,39 +118,57 @@ p {
     }
 }
 
+img.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
 // Content
 #site-content {
     position: relative;
     z-index: 2;
-    margin-top: 20px;
+    margin: 20px auto 0;
+    padding: 0 1em;
+    max-width: 50em;
     background: fade-out(white, 0.5);
+
     // Structure
     h2 {
         margin: 1.8em 0 1em;
     }
+
     h3 {
         margin: 2em 0 1em;
     }
+
     h4 {
         margin: 2em 0 1em;
     }
+
     h5 {
         margin: 2em 0 0.5em;
     }
+
     small {
         font-size: 0.8em;
     }
+
     aside {
         margin: 40px 0;
         padding: 40px;
         background: lighten($red, 50%);
     }
+
     ul, ol {
         margin-left: 1.1em;
     }
+
     // Links
     a {
         color: lighten($red, 15%);
+
         &.tag {
             padding: 0.3em 0.5em;
             font-family: $font-mono;
@@ -159,10 +177,16 @@ p {
             color: white;
             background: lighten($red, 15%);
         }
+
+        &.tag-php, &.tag-python, &.tag-javascript {
+            background: lighten($red, 5%);
+        }
+
         &:hover {
             text-decoration: underline;
         }
     }
+
     // Code
     code {
         padding: 0.1em 0.5em;
@@ -172,6 +196,7 @@ p {
         color: #e9e4e5;
         background: #333333;
     }
+
     pre {
         margin: 1em 0 2em;
         padding: 20px;
@@ -183,11 +208,13 @@ p {
         line-height: 1.9em;
         color: #e9e4e5;
         background-color: #333333;
+
         code {
             padding: 0;
             font-size: inherit;
         }
     }
+
     pre.filename {
         display: inline-block;
         margin-bottom: -1em;
@@ -196,41 +223,50 @@ p {
         font-family: $font-mono;
         color: $red;
     }
+
     // Quotes
     blockquote {
         padding: 1em;
         color: white;
         background: lighten($red, 15%);
+
         strong, p {
             color: white;
         }
+
         a {
             color: #ffffaa;
+
             &:visited {
                 color: #ffffdd;
             }
+
             &:hover {
                 color: yellow;
             }
         }
+
         last-child: {
             margin-bottom: 0;
         };
     }
+
     // Blog
-    .blog-list {
-        .blog-article {
+    .post-list {
+        .post {
             margin: 4em 0;
         }
     }
-    .blog-article {
+
+    .post {
         padding: 0 0 2em 0;
-        max-width: 50em;
         border-bottom: 1px dotted lighten($red, 25%);
+
         header {
             margin-bottom: 2em;
             padding: 1em 1em 1em 0;
             border-bottom: 1em solid lighten($red, 25%);
+
             h1 {
                 margin-top: 0;
                 margin-left: 0;
@@ -240,14 +276,17 @@ p {
                     margin-bottom: 0;
                 }
             }
+
             .date {
                 color: $red;
             }
         }
+
         footer {
             .tags {
                 margin: 1em 0;
             }
+
             .comments-link {
                 margin: 3em 0 0;
             }

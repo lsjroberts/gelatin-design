@@ -12,7 +12,11 @@
         <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
     </head>
     <body>
-        <div id="site-content" class="small-12 large-8 column">
+        {% if image %}
+            <img class="header" src="{{ image }}" alt="{{ title }}">
+        {% endif %}
+
+        <div id="site-content">
             {% block content %}{% endblock content %}
         </div>
     </body>

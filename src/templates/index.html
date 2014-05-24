@@ -1,0 +1,9 @@
+{% extends 'page.html' %}
+
+{% block content %}
+    {% parent %}
+
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+{% endblock content %}

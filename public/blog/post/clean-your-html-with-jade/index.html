@@ -10,16 +10,18 @@
         <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
     </head>
     <body>
-        <div id="site-content" class="small-12 large-8 column">
+        
+
+        <div id="site-content">
             
-    <article class="blog-article">
-        <header>
-            <h1>Clean your HTML with Jade</h1>
+    <article class="post">
+    <header>
+        <h1><a href="/blog/post/">Clean your HTML with Jade</a></h1>
 
-            <span class="date">[object Object]</span>
-        </header>
+        <span class="date">16th February, 2014</span>
+    </header>
 
-        <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
+    <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
 <p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
 <!-- more -->
 
@@ -114,18 +116,49 @@ include mixins/form
 <p>Coding should be fun and jade brings that enjoyment back to html.</p>
 
 
-        <footer>
-            <ul>
-                
-                    <li><a href="/blog/tag/javascript">javascript</a></li>
-                
-                    <li><a href="/blog/tag/node">node</a></li>
-                
-                    <li><a href="/blog/tag/jade">jade</a></li>
-                
-            </ul>
-        </footer>
-    </article>
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-node" href="/blog/tag/node">node</a></li>
+            
+                <a class="tag tag-jade" href="/blog/tag/jade">jade</a></li>
+            
+        </nav>
+
+        <a href="/blog/post/clean-your-html-with-jade#comments">Comments</a>
+    </footer>
+</article>
+    <section id="comments">
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
 
         </div>
     </body>
