@@ -251,6 +251,22 @@ img.header {
         };
     }
 
+    .pagination {
+        li {
+            a {
+                border-radius: 0;
+                color: white;
+                background: lighten($red, 15%);
+            }
+
+            &.active {
+                a {
+                    background: lighten($red, 5%);
+                }
+            }
+        }
+    }
+
     // Blog
     .post-list {
         .post {
@@ -288,8 +304,13 @@ img.header {
             }
 
             .comments-link {
+                display: block;
                 margin: 3em 0 0;
             }
         }
+    }
+
+    .post-prevnext {
+        margin: 0 0 2em;
     }
 }

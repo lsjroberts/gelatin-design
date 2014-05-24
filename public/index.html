@@ -11,8 +11,8 @@
     </head>
     <body>
         
-            <img class="header" src="/assets/images/logo-header.png" alt="Hi">
-        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Hi"></a>
 
         <div id="site-content">
             
@@ -31,57 +31,125 @@
     </article>
 
 
-    
-        <article class="post">
+    <section class="post-list">
+        
+            <article class="post">
     <header>
-        <h1><a href="/blog/post/playing-with-pythons-and-turtles">Playing with pythons and turtles</a></h1>
+        <h1><a href="/blog/post/creating-a-blog-with-metalsmith">Creating a blog with Metalsmith</a></h1>
 
-        <span class="date">30th April, 2014</span>
+        <span class="date">24th May, 2014</span>
     </header>
 
-    <p>For this week&#39;s CodeClub lesson we looked at the python library <a href="https://docs.python.org/3.4/library/turtle.html">turtle</a>. It&#39;s a easy and fun little graphics library based around moving a &quot;turtle&quot; cursor around the screen, drawing lines and filling in shapes.</p>
-<p>For something that is so basic in functionality it&#39;s surprising how the results can be so satisfying.</p>
-<p><a href="https://github.com/lsjroberts/codeclub/tree/master/python/lesson01-02">You can check out the code at github.</a></p>
-<p><a href="images/blog/2014-04-30/turtle-1.png"><img src="/images/blog/2014-04-30/turtle-1.png" alt="Python Turtle Screenshot 1"></a></p>
-<!-- more -->
+    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+<pre><code class="lang-js">var metalsmith  = require(&#39;metalsmith&#39;),
+    collections = require(&#39;metalsmith-collections&#39;);
 
-<p><a href="images/blog/2014-04-30/turtle-2.png"><img src="/images/blog/2014-04-30/turtle-2.png" alt="Python Turtle Screenshot 1"></a></p>
+metalsmith(__dirname)
+
+    // group together all files in the `/blog/` directory as posts
+    .use(collections({
+        posts: {
+            pattern: &#39;blog/*&#39;,
+            sortBy: &#39;date&#39;,
+            reverse: true,
+        }
+    }))
+
+    // generate the tag listing pages
+    .use(blogTagLists)
+
+    // build
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
+
+    // loop the posts collection, creating new groups on the tags
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    // loop the tags and create a new index file for each tag
+    for (tag in tags) {
+        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
+            template: &#39;list.html&#39;,
+            mode: &#39;0644&#39;,
+            contents: &#39;&#39;,
+            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+</code></pre>
 
 
     <footer>
         <nav class="tags">
             
-                <a class="tag tag-python" href="/blog/tag/python">python</a></li>
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
             
-                <a class="tag tag-turtle" href="/blog/tag/turtle">turtle</a></li>
+                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
             
-                <a class="tag tag-codeclub" href="/blog/tag/codeclub">codeclub</a></li>
+                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
+            
+                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
             
         </nav>
 
-        <a href="/blog/post/playing-with-pythons-and-turtles#comments">Comments</a>
+        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
     </footer>
 </article>
-    
-        <article class="post">
+        
+            <article class="post">
     <header>
-        <h1><a href="/blog/post/sematic-versioning-is-not-enough">Semantic versioning is not complete</a></h1>
+        <h1><a href="/blog/post/improve-your-terminal">Improve your terminal</a></h1>
 
-        <span class="date">20th February, 2014</span>
+        <span class="date">15th May, 2014</span>
     </header>
 
-    <p><a href="http://semver.org/">Semantic versioning</a> is an incredibly important concept that has allowed package management to thrive. Combined with <a href="http://getcomposer.org">composer</a> it has helped transform PHP from a unregulated crazy world to one of order and compatibility.</p>
-<p>Yet there is one major problem that I have experienced and seen in several projects. It needs a fourth number at the start, a &quot;philosophical&quot; or &quot;brand&quot; version number.</p>
-<!-- more -->
-
-<p>A good example of this is the <a href="http://laravel.com/docs/upgrade#upgrade-4.1">Laravel 4.0 to 4.1 update</a>. 4.1 is a backwards incompatible change, if you just update your <code>composer.json</code> to point to the new version your app will break on update. Yet Taylor Otwell rightly doesn&#39;t want to change to Laravel 5 as the brand is Laravel 4. You could say Laravel 4 is philoshophically different from Laravel 3, the involved packages have a set approach to them that differs from the previous version.</p>
-<p>So really, it shouldn&#39;t be numbered as <code>4.1.0</code> but <code>4.1.0.0</code> and incrementing:</p>
-<ol>
-<li>BRAND version when you made philosophical changes,</li>
-<li>MAJOR version when you make incompatible API changes,</li>
-<li>MINOR version when you add functionality in a backwards-compatible manner, and</li>
-<li>PATCH version when you make backwards-compatible bug fixes.</li>
-</ol>
+    <p>I believe one of the main contributing factors to people being wary of using the terminal is the terrible defaults for text and colours. The good news is that these are pretty easy to fix.</p>
+<p>After going through the following changes you&#39;ll end up with a lovely terminal like this:</p>
+<p><img src="/assets/images/blog/2014-05-15/lovely-terminal.png" alt="lovely terminal"></p>
+<h2 id="oh-my-zshell-">Oh my zshell!</h2>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh">on-my-zsh</a> is a must-have tool for frequent terminal users. It makes it easy to use themes for styling, but provides so much more functionality than that.</p>
+<p>If you trust the author of that tool then you can install it by just running</p>
+<pre><code>$ curl -L http://install.ohmyz.sh | sh
+</code></pre><p>That&#39;ll set up the default config at <code>~/.zshrc</code>.</p>
+<p>If you want to you can install it manually, check that out at the <a href="https://github.com/robbyrussell/oh-my-zsh">github repo</a>.</p>
+<h3 id="pick-a-theme">Pick a theme</h3>
+<p>I personally use the <code>ys</code> theme, it presents your current directory, git branch and status and the current type before each command you type. This lets you see at a glance what&#39;s going on and when you fired a long running command allowing you to see how long it&#39;s taking.</p>
+<p><img src="/assets/images/blog/2014-05-15/ys-line-header.png" alt="ys line header"></p>
+<p>To install your theme of choice, change your <code>~/.zshrc</code> to include</p>
+<pre><code>ZSH_THEME=ys
+</code></pre><h2 id="fonts-and-colours">Fonts and colours</h2>
+<p>In addition to your theme you should set your default text font and colour and your terminal background colour. On a Mac you can do this quite easily within the terminal preferences by going to <code>Terminal &gt; Preferences...</code> and change the options under <code>Text</code> and <code>Window</code>. On Linux you can do this under <code>Edit &gt; Profile Preferences</code>.</p>
+<p>Picking a font is pretty important, it has to be monospaced and some good choices are Monaco, Source Code Pro, Inconsolata. I personally use Iconsolata.</p>
+<p>Secondly you really should think about setting the font size to something nice and large, I go with 18px. You will be staring at your terminal for a long time, don&#39;t break your eyes to do it.</p>
+<p>It&#39;s worth nothing, that while background transparency might look cool, it will definitely hinder your ability to focus and work, so please just set it to 100% opacity.</p>
+<p>Finally, I personally like to add extra space between lines, I find it really helps reading, so I set line spacing to <code>1.5</code> and character spacing to <code>1.05</code>. But this will depend on your personal tastes and the font you chose.</p>
+<h2 id="the-terminal-is-the-best-place-for-a-developer-to-develop">The terminal is the best place for a developer to develop</h2>
+<p>So much of development requires running a command-line tool here and there that you may as well just stay in the terminal the whole time. Don&#39;t use a gui program to manage your git repos, they are all slower than just running the git commands yourself. It takes time to learn but once you&#39;ve learnt it you&#39;ll gain that back in time saved getting things done.</p>
+<p>With that in mind I&#39;ve been looking to get away from my final non-terminal based development tool, the text editor (Sublime Text 2 in my case). I&#39;ve been learning vim, indeed I wrote this article with vim. It&#39;s fantastic. If you are interested in learning vim, run</p>
+<pre><code>$ vimtutor
+</code></pre><p>and go through it&#39;s lessons every day and you&#39;ll soon get the hang of this powerful tool.</p>
+<p>Once I&#39;m comfortable using vim I&#39;ll write up a tutorial on customising it, though it might take a few weeks to get to that stage.</p>
+<hr>
+<p>Got any preferences or thoughts on how you configure your terminal? Please share them in the comments below.</p>
 
 
     <footer>
@@ -89,18 +157,43 @@
             
                 <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
             
-                <a class="tag tag-semver" href="/blog/tag/semver">semver</a></li>
-            
-                <a class="tag tag-composer" href="/blog/tag/composer">composer</a></li>
-            
-                <a class="tag tag-laravel" href="/blog/tag/laravel">laravel</a></li>
+                <a class="tag tag-terminal" href="/blog/tag/terminal">terminal</a></li>
             
         </nav>
 
-        <a href="/blog/post/sematic-versioning-is-not-enough#comments">Comments</a>
+        <a class="comments-link" href="/blog/post/improve-your-terminal#comments">Comments</a>
     </footer>
 </article>
-    
+        
+    </section>
+
+    <nav class="pagination-wrapper">
+    <ul class="pagination">
+        
+            
+            
+                
+            
+            <li class="active"><a href="/">1</a></li>
+        
+            
+            
+            <li class=""><a href="/index/2">2</a></li>
+        
+            
+            
+            <li class=""><a href="/index/3">3</a></li>
+        
+            
+            
+            <li class=""><a href="/index/4">4</a></li>
+        
+            
+            
+            <li class=""><a href="/index/5">5</a></li>
+        
+    </ul>
+</nav>
 
         </div>
     </body>

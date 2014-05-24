@@ -21,6 +21,7 @@ metalsmith(__dirname)
         }
     }))
     .use(blogIndexList)
+    .use(blogTagLists)
     .use(markdown())
     .use(branch('blog/*')
         .use(drafts())
@@ -56,11 +57,56 @@ function blogIndexList(files, metalsmith, done) {
         perPage = 2;
 
     index.posts = posts.slice(0,perPage);
-    index.numPages = perPage / posts.length;
+    index.currentPage = 1;
+    index.numPages = Math.ceil(posts.length / perPage);
+    index.pagination = [];
+
+    for (var i = 1; i <= index.numPages; i++) {
+        index.pagination.push({
+            num: i,
+            url: (1 == i) ? '/' : '/index/' + i
+        });
+
+        if (i > 1) {
+            files['index/' + i + '/index.md'] = {
+                template: 'list.html',
+                mode: '0644',
+                contents: '',
+                title: 'Page ' + i + ' of ' + index.numPages,
+                posts: posts.slice((i-1) * perPage, ((i-1) * perPage) + perPage),
+                currentPage: i,
+                numPages: index.numPages,
+                pagination: index.pagination,
+            }
+        }
+    }
 
     done();
 }
 
-function blogTagList(files, metalsmith, done) {
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
 
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    for (tag in tags) {
+        files['blog/tag/' + tag + '/index.md'] = {
+            template: 'list.html',
+            mode: '0644',
+            contents: '',
+            title: "Posts tagged '" + tag + "'",
+            posts: tags[tag],
+        }
+    }
+
+    done();
 }

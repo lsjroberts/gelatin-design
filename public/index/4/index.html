@@ -1,0 +1,186 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Page 4 of 5 | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        
+            
+        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Page 4 of 5"></a>
+
+        <div id="site-content">
+            
+    
+    <article class="page">
+        <header>
+            <h1>Page 4 of 5</h1>
+        </header>
+
+        
+    </article>
+
+
+    <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/easily-build-assets-with-gulpjs">Easily build assets with GulpJS</a></h1>
+
+        <span class="date">15th February, 2014</span>
+    </header>
+
+    <p>I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I&#39;ve never been too happy with them and they often seem to fail for various and difficult to debug reasons.</p>
+<p><a href="http://gulpjs.com">Gulpjs</a> is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.</p>
+<!-- more -->
+
+<h2 id="getting-started-with-gulp">Getting started with gulp</h2>
+<p>Follow <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started">these instructions</a> to get gulp installed and running.</p>
+<h3 id="plugins">Plugins</h3>
+<p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
+<p>You can install plugins through npm:</p>
+<pre><code>npm install gulp-concat gulp-coffee
+</code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
+<pre><code class="lang-js">var concat = require(&#39;gulp-concat&#39;);
+var coffee = require(&#39;gulp-coffee&#39;);
+</code></pre>
+<h3 id="writing-tasks">Writing tasks</h3>
+<p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
+<pre><code class="lang-js">gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
+});
+</code></pre>
+<p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
+<p>It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single <code>(function() { ... })();</code> block and can easily reference each other without having to resort to the global <code>window</code> object.</p>
+<p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
+<h2 id="task-dependancies">Task dependancies</h2>
+<p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
+<pre><code>gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined-coffee.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
+});
+
+gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
+    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
+        .pipe(concat(&#39;combined.js&#39;))
+        .pipe(uglify())
+        .pipe(gulp.dest(&#39;build/scripts&#39;));
+});
+</code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
+<p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
+<pre><code>var uglify = require(&#39;gulp-uglify&#39;)
+</code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
+<h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
+<p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
+<pre><code>gulp.task(&#39;watch&#39;, function() {
+    gulp.watch([
+        &#39;assets/scripts/**/*.coffee&#39;,
+        &#39;assets/scripts/**/*.js&#39;
+    ], [&#39;scripts&#39;]);
+
+    gulp.watch([
+        &#39;assets/styles/**/*.sass&#39;,
+        &#39;assets/styles/**/*.css&#39;
+    ], [&#39;styles&#39;]);
+});
+</code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
+<pre><code>gulp watch
+</code></pre><h2 id="taking-it-further">Taking it further</h2>
+<p>There are <a href="http://gulpjs.com/plugins/">lot of existing plugins for gulp</a> and I&#39;d suggest taking some time to look through and see which ones might prove useful in your code environment.</p>
+<p>This <a href="https://gist.github.com/lsjroberts/8810740">example build script</a> shows how I run my usual full build process, feel free it use it as you wish.</p>
+<p>You may wish to install your dependancies through a <code>package.json</code> file and running <code>npm install</code> to ensure all your developers are working with the same node modules.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-gulpjs" href="/blog/tag/gulpjs">gulpjs</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/easily-build-assets-with-gulpjs#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/shopavels-first-pull-request">Shopavel&#39;s first pull request</a></h1>
+
+        <span class="date">13th February, 2014</span>
+    </header>
+
+    <p>Today I received my first <a href="https://github.com/shopavel/shopavel/pull/8">pull-request</a> from another developer for one of my open source projects. How exciting.</p>
+<p>Admitedly it is a tiny change, just one small new method, but it&#39;s still pretty cool.</p>
+<p>It will allow you to apply a presenter to a collection of models:</p>
+<pre><code class="lang-php">public function index()
+{
+    $products = $this-&gt;product-&gt;all()-&gt;each(function($product) {
+            return $this-&gt;presenter-&gt;newInstance($product);
+    });
+
+    return $this-&gt;theme-&gt;make(&#39;product.index&#39;)-&gt;withProducts($products);
+}
+</code></pre>
+<p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-php" href="/blog/tag/php">php</a></li>
+            
+                <a class="tag tag-shopavel" href="/blog/tag/shopavel">shopavel</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/shopavels-first-pull-request#comments">Comments</a>
+    </footer>
+</article>
+        
+    </section>
+
+    <nav class="pagination-wrapper">
+    <ul class="pagination">
+        
+            
+            
+            <li class=""><a href="/">1</a></li>
+        
+            
+            
+            <li class=""><a href="/index/2">2</a></li>
+        
+            
+            
+            <li class=""><a href="/index/3">3</a></li>
+        
+            
+            
+                
+            
+            <li class="active"><a href="/index/4">4</a></li>
+        
+            
+            
+            <li class=""><a href="/index/5">5</a></li>
+        
+    </ul>
+</nav>
+
+        </div>
+    </body>
+</html>

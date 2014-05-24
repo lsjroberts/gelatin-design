@@ -1,0 +1,160 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+            <title>Posts tagged &#39;jade&#39; | gelatindesign</title>
+        
+
+        <link rel="shortcut icon" href="/assets/images/icon.png">
+
+        <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
+    </head>
+    <body>
+        
+            
+        
+
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Posts tagged &#39;jade&#39;"></a>
+
+        <div id="site-content">
+            
+    
+    <article class="page">
+        <header>
+            <h1>Posts tagged &#39;jade&#39;</h1>
+        </header>
+
+        
+    </article>
+
+
+    <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/clean-your-html-with-jade">Clean your HTML with Jade</a></h1>
+
+        <span class="date">16th February, 2014</span>
+    </header>
+
+    <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
+<p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
+<!-- more -->
+
+<p>It has a wonderfully basic syntax:</p>
+<pre><code class="lang-jade">doctype html
+html
+    head
+        title Hello World
+        link(rel=&quot;stylesheet&quot;, href=&quot;build/styles/combined.css&quot;)
+    body
+        div.container
+            p Hello World
+</code></pre>
+<h2 id="layouts-and-blocks">Layouts and blocks</h2>
+<p>Jade allows you to create layouts and extend them for your different views:</p>
+<pre><code class="lang-jade">// layouts/master.jade
+body
+    block content
+{% endhighlight %}
+
+{% highlight jade %}
+// index.jade
+extends layouts/master
+
+block content
+    header.hero
+        h1 Hello World
+</code></pre>
+<h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
+<p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
+<pre><code class="lang-jade">// mixins/form.jade
+mixin form(action, method)
+    unless method
+        - method= &quot;get&quot;
+    form(action= action, method= method)
+        if block
+            block
+        else
+            p Looks like you forgot to add any inputs to your form
+
+mixin field(name, type)
+    label= name
+    input(type= type, name= name)
+</code></pre>
+<pre><code class="lang-jade">// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;, &quot;text&quot;)
+    +field(&quot;password&quot;, &quot;password&quot;)
+</code></pre>
+<p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
+<pre><code class="lang-jade">// mixins/form.jade
+
+//- ...
+
+mixin field(name, type)
+    //- Convert &quot;foo_bar&quot; to &quot;Foo Bar&quot;
+    -var unslugify = function(input) {
+    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
+    -       return &#39; &#39; + group1.toUpperCase();
+    -   });
+    -}
+
+    //- If no type has been set, try to pick an appropriate one
+    unless type
+        case name
+            when &quot;password&quot;
+                - type= &quot;password&quot;
+            when &quot;password_confirmation&quot;
+                - type= &quot;password&quot;
+            when &quot;email&quot;
+                - type= &quot;email&quot;
+            default
+                - type= &quot;text&quot;
+
+    div.field
+        label= unslugify(name)
+        input(type= type, name= name)
+</code></pre>
+<pre><code class="lang-jade">// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;)
+    +field(&quot;password&quot;)
+</code></pre>
+<h2 id="lovely">Lovely</h2>
+<p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
+<p>Coding should be fun and jade brings that enjoyment back to html.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-node" href="/blog/tag/node">node</a></li>
+            
+                <a class="tag tag-jade" href="/blog/tag/jade">jade</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/clean-your-html-with-jade#comments">Comments</a>
+    </footer>
+</article>
+        
+    </section>
+
+    <nav class="pagination-wrapper">
+    <ul class="pagination">
+        
+    </ul>
+</nav>
+
+        </div>
+    </body>
+</html>

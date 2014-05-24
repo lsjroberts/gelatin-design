@@ -12,9 +12,11 @@
         <link media="all" type="text/css" rel="stylesheet" href="/assets/styles/master.css">
     </head>
     <body>
-        {% if image %}
-            <img class="header" src="{{ image }}" alt="{{ title }}">
+        {% if not image %}
+            {% set image = '/assets/images/logo-header.png' %}
         {% endif %}
+
+        <a href="/"><img class="header" src="{{ image }}" alt="{{ title }}"></a>
 
         <div id="site-content">
             {% block content %}{% endblock content %}
