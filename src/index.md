@@ -6,7 +6,7 @@ image: /assets/images/logo-header.png
 
 My name is Laurence Roberts, I'm a developer who makes websites and games.
 
-Here you'll find stuff on [python](/blog/tag/python), [javascript](/blog/tag/javascript) and [php](/blog/tag/php).
+Here you'll find stuff on [python](/blog/tag/python), [javascript](/blog/tag/javascript), [php](/blog/tag/php) and the occasional bit of [opinion](/blog/tag/opinion).
 
 You can find all my open-sourced code at [github](http://github.com/lsjroberts).
 
