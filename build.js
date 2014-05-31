@@ -13,6 +13,7 @@ var metalsmith  = require('metalsmith'),
 metalsmith(__dirname)
     .source('src')
     .destination('public')
+    .use(drafts())
     .use(collections({
         posts: {
             pattern: 'blog/*',
@@ -28,7 +29,6 @@ metalsmith(__dirname)
         }
     }))
     .use(branch('blog/*')
-        .use(drafts())
         .use(formatDate)
         .use(permalinks({
             pattern: 'blog/post/:slug'

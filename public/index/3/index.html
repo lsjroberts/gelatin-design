@@ -32,6 +32,44 @@
         
             <article class="post">
     <header>
+        <h1><a href="/blog/post/sematic-versioning-is-not-enough">Semantic versioning is not complete</a></h1>
+
+        <span class="date">20th February, 2014</span>
+    </header>
+
+    <p><a href="http://semver.org/">Semantic versioning</a> is an incredibly important concept that has allowed package management to thrive. Combined with <a href="http://getcomposer.org">composer</a> it has helped transform PHP from a unregulated crazy world to one of order and compatibility.</p>
+<p>Yet there is one major problem that I have experienced and seen in several projects. It needs a fourth number at the start, a &quot;philosophical&quot; or &quot;brand&quot; version number.</p>
+<!-- more -->
+
+<p>A good example of this is the <a href="http://laravel.com/docs/upgrade#upgrade-4.1">Laravel 4.0 to 4.1 update</a>. 4.1 is a backwards incompatible change, if you just update your <code>composer.json</code> to point to the new version your app will break on update. Yet Taylor Otwell rightly doesn&#39;t want to change to Laravel 5 as the brand is Laravel 4. You could say Laravel 4 is philoshophically different from Laravel 3, the involved packages have a set approach to them that differs from the previous version.</p>
+<p>So really, it shouldn&#39;t be numbered as <code>4.1.0</code> but <code>4.1.0.0</code> and incrementing:</p>
+<ol>
+<li>BRAND version when you made philosophical changes,</li>
+<li>MAJOR version when you make incompatible API changes,</li>
+<li>MINOR version when you add functionality in a backwards-compatible manner, and</li>
+<li>PATCH version when you make backwards-compatible bug fixes.</li>
+</ol>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
+                <a class="tag tag-semver" href="/blog/tag/semver">semver</a></li>
+            
+                <a class="tag tag-composer" href="/blog/tag/composer">composer</a></li>
+            
+                <a class="tag tag-laravel" href="/blog/tag/laravel">laravel</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/sematic-versioning-is-not-enough#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
         <h1><a href="/blog/post/coffeescript-is-objectively-better-than-javascript">Coffeescript is objectively better than javascript</a></h1>
 
         <span class="date">17th February, 2014</span>
@@ -143,123 +181,6 @@ foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, 
         </nav>
 
         <a class="comments-link" href="/blog/post/coffeescript-is-objectively-better-than-javascript#comments">Comments</a>
-    </footer>
-</article>
-        
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/clean-your-html-with-jade">Clean your HTML with Jade</a></h1>
-
-        <span class="date">16th February, 2014</span>
-    </header>
-
-    <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
-<p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
-<!-- more -->
-
-<p>It has a wonderfully basic syntax:</p>
-<pre><code class="lang-jade">doctype html
-html
-    head
-        title Hello World
-        link(<span class="hljs-built_in">rel</span>=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)
-    body
-        <span class="hljs-operator">div</span>.container
-            p Hello World
-</code></pre>
-<h2 id="layouts-and-blocks">Layouts and blocks</h2>
-<p>Jade allows you to create layouts and extend them for your different views:</p>
-<pre><code class="lang-jade"><span class="hljs-comment">// layouts/master.jade</span>
-body
-    <span class="hljs-keyword">block</span> content
-<span class="hljs-comment">{% endhighlight %}</span>
-
-<span class="hljs-comment">{% highlight jade %}</span>
-<span class="hljs-comment">// index.jade</span>
-extends layouts/master
-
-<span class="hljs-keyword">block</span> content
-    header.hero
-        h1 Hello World
-</code></pre>
-<h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
-<p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
-<pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
-mixin form(action, <span class="hljs-function"><span class="hljs-keyword">method</span>)
-    <span class="hljs-title">unless</span> <span class="hljs-title">method</span>
-        - <span class="hljs-title">method</span>= "<span class="hljs-title">get</span>"
-    <span class="hljs-title">form</span><span class="hljs-params">(action= action, <span class="hljs-keyword">method</span>= <span class="hljs-keyword">method</span>)</span>
-        <span class="hljs-title">if</span> <span class="hljs-title">block</span>
-            <span class="hljs-title">block</span>
-        <span class="hljs-title">else</span>
-            <span class="hljs-title">p</span> <span class="hljs-title">Looks</span> <span class="hljs-title">like</span> <span class="hljs-title">you</span> <span class="hljs-title">forgot</span> <span class="hljs-title">to</span> <span class="hljs-title">add</span> <span class="hljs-title">any</span> <span class="hljs-title">inputs</span> <span class="hljs-title">to</span> <span class="hljs-title">your</span> <span class="hljs-title">form</span>
-
-<span class="hljs-title">mixin</span> <span class="hljs-title">field</span><span class="hljs-params">(name, <span class="hljs-keyword">type</span>)</span>
-    <span class="hljs-title">label</span>= <span class="hljs-title">name</span>
-    <span class="hljs-title">input</span><span class="hljs-params">(<span class="hljs-keyword">type</span>= <span class="hljs-keyword">type</span>, name= name)</span></span>
-</code></pre>
-<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
-
-<span class="hljs-keyword">include</span> mixins/form
-
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)
-    +field(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)
-</code></pre>
-<p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
-<pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
-
-<span class="hljs-comment">//- ...</span>
-
-mixin field(name, <span class="hljs-class"><span class="hljs-keyword">type</span>)</span>
-    <span class="hljs-comment">//- Convert "foo_bar" to "Foo Bar"</span>
-    -var unslugify = <span class="hljs-keyword">function</span>(input) {
-    -   <span class="hljs-keyword">return</span> input.charAt(<span class="hljs-number">0</span>).toUpperCase() + input.slice(<span class="hljs-number">1</span>).toLowerCase().replace(/[-|_](.)/g, <span class="hljs-keyword">function</span>(<span class="hljs-keyword">match</span>, group1) {
-    -       <span class="hljs-keyword">return</span> ' ' + group1.toUpperCase();
-    -   });
-    -}
-
-    <span class="hljs-comment">//- If no type has been set, try to pick an appropriate one</span>
-    unless <span class="hljs-class"><span class="hljs-keyword">type</span></span>
-        case name
-            <span class="hljs-keyword">when</span> <span class="hljs-string">"password"</span>
-                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"password"</span>
-            <span class="hljs-keyword">when</span> <span class="hljs-string">"password_confirmation"</span>
-                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"password"</span>
-            <span class="hljs-keyword">when</span> <span class="hljs-string">"email"</span>
-                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"email"</span>
-            <span class="hljs-keyword">default</span>
-                - <span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-string">"text"</span>
-
-    div.field
-        label= unslugify(name)
-        input(<span class="hljs-class"><span class="hljs-keyword">type</span>=</span> <span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">name</span>=</span> name)
-</code></pre>
-<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
-
-<span class="hljs-keyword">include</span> mixins/form
-
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>)
-    +field(<span class="hljs-string">"password"</span>)
-</code></pre>
-<h2 id="lovely">Lovely</h2>
-<p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
-<p>Coding should be fun and jade brings that enjoyment back to html.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
-            
-                <a class="tag tag-node" href="/blog/tag/node">node</a></li>
-            
-                <a class="tag tag-jade" href="/blog/tag/jade">jade</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/clean-your-html-with-jade#comments">Comments</a>
     </footer>
 </article>
         

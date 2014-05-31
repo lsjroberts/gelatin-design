@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         
-            <title>Hi | gelatindesign</title>
+            <title>Isolationism, Division and Hate | gelatindesign</title>
         
 
         <link rel="shortcut icon" href="/assets/images/icon.png">
@@ -11,31 +11,24 @@
     </head>
     <body>
         
+            
+        
 
-        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Hi"></a>
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Isolationism, Division and Hate"></a>
 
         <div id="site-content">
             
-    
-    <article class="page">
-        <header>
-            <h1>Hi</h1>
-        </header>
-
-        <p>My name is Laurence Roberts, I&#39;m a developer who makes websites and games.</p>
-<p>Here you&#39;ll find stuff on <a href="/blog/tag/python">python</a>, <a href="/blog/tag/javascript">javascript</a> and <a href="/blog/tag/php">php</a>.</p>
-<p>You can find all my open-sourced code at <a href="http://github.com/lsjroberts">github</a>.</p>
-<p>And follow my various ramblings and thoughts while coding on <a href="http://twitter.com/gelatindesign">twitter</a>.</p>
-<hr>
-
-    </article>
-
-
-    <section class="post-list">
+    <nav class="post-prevnext row">
         
-            <article class="post">
+            <a class="left" href="/blog/post/creating-a-blog-with-metalsmith">&laquo; Creating a blog with Metalsmith</a>
+        
+
+        
+    </nav>
+
+    <article class="post">
     <header>
-        <h1><a href="/blog/post/isolationism-division-and-hate">Isolationism, Division and Hate</a></h1>
+        <h1><a href="/blog/post/">Isolationism, Division and Hate</a></h1>
 
         <span class="date">31st May, 2014</span>
     </header>
@@ -75,122 +68,35 @@
         <a class="comments-link" href="/blog/post/isolationism-division-and-hate#comments">Comments</a>
     </footer>
 </article>
-        
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/creating-a-blog-with-metalsmith">Creating a blog with Metalsmith</a></h1>
+    <section id="comments">
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
 
-        <span class="date">24th May, 2014</span>
-    </header>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
 
-    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
-<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
-<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
-<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
-<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
-    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gelatindesign'; // required: replace example with your forum shortname
 
-metalsmith(__dirname)
-
-    <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
-    .use(collections({
-        posts: {
-            pattern: <span class="hljs-string">'blog/*'</span>,
-            sortBy: <span class="hljs-string">'date'</span>,
-            reverse: <span class="hljs-literal">true</span>,
-        }
-    }))
-
-    <span class="hljs-comment">// generate the tag listing pages</span>
-    .use(blogTagLists)
-
-    <span class="hljs-comment">// build</span>
-    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
-        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
-    });
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
-    <span class="hljs-keyword">var</span> tags = {};
-
-    <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
-    <span class="hljs-keyword">for</span> (p <span class="hljs-keyword">in</span> metalsmith.data.posts) {
-        <span class="hljs-keyword">for</span> (t <span class="hljs-keyword">in</span> metalsmith.data.posts[p].tags) {
-            tag = metalsmith.data.posts[p].tags[t];
-            <span class="hljs-keyword">if</span> (! tags[tag]) {
-                tags[tag] = [];
-            }
-
-            tags[tag].push(metalsmith.data.posts[p]);
-        }
-    }
-
-    <span class="hljs-comment">// loop the tags and create a new index file for each tag</span>
-    <span class="hljs-keyword">for</span> (tag <span class="hljs-keyword">in</span> tags) {
-        files[<span class="hljs-string">'blog/tag/'</span> + tag + <span class="hljs-string">'/index.md'</span>] = {
-            template: <span class="hljs-string">'list.html'</span>,
-            mode: <span class="hljs-string">'0644'</span>,
-            contents: <span class="hljs-string">''</span>,
-            title: <span class="hljs-string">"Posts tagged '"</span> + tag + <span class="hljs-string">"'"</span>,
-            posts: tags[tag],
-        }
-    }
-
-    done();
-}
-</code></pre>
-<p>You can see my full <a href="http://github.com/lsjroberts/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
-<p>If you&#39;re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
-<hr>
-<p>What are your thoughts on Metalsmith? Do you prefer Jekyll or another static-site generator? Leave your comments below.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
-            
-                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
-            
-                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
-            
-                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
-    </footer>
-</article>
-        
-    </section>
-
-    <nav class="pagination-wrapper">
-    <ul class="pagination">
-        
-            
-            
-                
-            
-            <li class="active"><a href="/">1</a></li>
-        
-            
-            
-            <li class=""><a href="/index/2">2</a></li>
-        
-            
-            
-            <li class=""><a href="/index/3">3</a></li>
-        
-            
-            
-            <li class=""><a href="/index/4">4</a></li>
-        
-            
-            
-            <li class=""><a href="/index/5">5</a></li>
-        
-    </ul>
-</nav>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
 
         </div>
     </body>
