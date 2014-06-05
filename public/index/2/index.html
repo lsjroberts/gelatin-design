@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         
-            <title>Page 2 of 5 | gelatindesign</title>
+            <title>Page 2 of 6 | gelatindesign</title>
         
 
         <link rel="shortcut icon" href="/assets/images/icon.png">
@@ -25,14 +25,14 @@
             
         
 
-        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Page 2 of 5"></a>
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Page 2 of 6"></a>
 
         <div id="site-content">
             
     
     <article class="page">
         <header>
-            <h1>Page 2 of 5</h1>
+            <h1>Page 2 of 6</h1>
         </header>
 
         
@@ -40,6 +40,92 @@
 
 
     <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/creating-a-blog-with-metalsmith">Creating a blog with Metalsmith</a></h1>
+
+        <span class="date">24th May, 2014</span>
+    </header>
+
+    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
+    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
+
+metalsmith(__dirname)
+
+    <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
+    .use(collections({
+        posts: {
+            pattern: <span class="hljs-string">'blog/*'</span>,
+            sortBy: <span class="hljs-string">'date'</span>,
+            reverse: <span class="hljs-literal">true</span>,
+        }
+    }))
+
+    <span class="hljs-comment">// generate the tag listing pages</span>
+    .use(blogTagLists)
+
+    <span class="hljs-comment">// build</span>
+    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
+        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+    });
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
+    <span class="hljs-keyword">var</span> tags = {};
+
+    <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
+    <span class="hljs-keyword">for</span> (p <span class="hljs-keyword">in</span> metalsmith.data.posts) {
+        <span class="hljs-keyword">for</span> (t <span class="hljs-keyword">in</span> metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            <span class="hljs-keyword">if</span> (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    <span class="hljs-comment">// loop the tags and create a new index file for each tag</span>
+    <span class="hljs-keyword">for</span> (tag <span class="hljs-keyword">in</span> tags) {
+        files[<span class="hljs-string">'blog/tag/'</span> + tag + <span class="hljs-string">'/index.md'</span>] = {
+            template: <span class="hljs-string">'list.html'</span>,
+            mode: <span class="hljs-string">'0644'</span>,
+            contents: <span class="hljs-string">''</span>,
+            title: <span class="hljs-string">"Posts tagged '"</span> + tag + <span class="hljs-string">"'"</span>,
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+</code></pre>
+<p>You can see my full <a href="http://github.com/lsjroberts/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
+<p>If you&#39;re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
+<hr>
+<p>What are your thoughts on Metalsmith? Do you prefer Jekyll or another static-site generator? Leave your comments below.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
+            
+                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
+            
+                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
+    </footer>
+</article>
         
             <article class="post">
     <header>
@@ -91,37 +177,6 @@
     </footer>
 </article>
         
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/playing-with-pythons-and-turtles">Playing with pythons and turtles</a></h1>
-
-        <span class="date">30th April, 2014</span>
-    </header>
-
-    <p>For this week&#39;s CodeClub lesson we looked at the python library <a href="https://docs.python.org/3.4/library/turtle.html">turtle</a>. It&#39;s a easy and fun little graphics library based around moving a &quot;turtle&quot; cursor around the screen, drawing lines and filling in shapes.</p>
-<p>For something that is so basic in functionality it&#39;s surprising how the results can be so satisfying.</p>
-<p><a href="https://github.com/lsjroberts/codeclub/tree/master/python/lesson01-02">You can check out the code at github.</a></p>
-<p><a href="/assets/images/blog/2014-04-30/turtle-1.png"><img src="/assets/images/blog/2014-04-30/turtle-1.png" alt="Python Turtle Screenshot 1"></a></p>
-<!-- more -->
-
-<p><a href="/assets/images/blog/2014-04-30/turtle-2.png"><img src="/assets/images/blog/2014-04-30/turtle-2.png" alt="Python Turtle Screenshot 1"></a></p>
-<iframe width="960" height="540" src="//www.youtube.com/embed/WC75-nAJylo" frameborder="0" allowfullscreen></iframe>
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-python" href="/blog/tag/python">python</a></li>
-            
-                <a class="tag tag-turtle" href="/blog/tag/turtle">turtle</a></li>
-            
-                <a class="tag tag-codeclub" href="/blog/tag/codeclub">codeclub</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/playing-with-pythons-and-turtles#comments">Comments</a>
-    </footer>
-</article>
-        
     </section>
 
     <nav class="pagination-wrapper">
@@ -148,6 +203,10 @@
             
             
             <li class=""><a href="/index/5">5</a></li>
+        
+            
+            
+            <li class=""><a href="/index/6">6</a></li>
         
     </ul>
 </nav>

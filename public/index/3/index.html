@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         
-            <title>Page 3 of 5 | gelatindesign</title>
+            <title>Page 3 of 6 | gelatindesign</title>
         
 
         <link rel="shortcut icon" href="/assets/images/icon.png">
@@ -25,14 +25,14 @@
             
         
 
-        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Page 3 of 5"></a>
+        <a href="/"><img class="header" src="/assets/images/logo-header.png" alt="Page 3 of 6"></a>
 
         <div id="site-content">
             
     
     <article class="page">
         <header>
-            <h1>Page 3 of 5</h1>
+            <h1>Page 3 of 6</h1>
         </header>
 
         
@@ -40,6 +40,37 @@
 
 
     <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/playing-with-pythons-and-turtles">Playing with pythons and turtles</a></h1>
+
+        <span class="date">30th April, 2014</span>
+    </header>
+
+    <p>For this week&#39;s CodeClub lesson we looked at the python library <a href="https://docs.python.org/3.4/library/turtle.html">turtle</a>. It&#39;s a easy and fun little graphics library based around moving a &quot;turtle&quot; cursor around the screen, drawing lines and filling in shapes.</p>
+<p>For something that is so basic in functionality it&#39;s surprising how the results can be so satisfying.</p>
+<p><a href="https://github.com/lsjroberts/codeclub/tree/master/python/lesson01-02">You can check out the code at github.</a></p>
+<p><a href="/assets/images/blog/2014-04-30/turtle-1.png"><img src="/assets/images/blog/2014-04-30/turtle-1.png" alt="Python Turtle Screenshot 1"></a></p>
+<!-- more -->
+
+<p><a href="/assets/images/blog/2014-04-30/turtle-2.png"><img src="/assets/images/blog/2014-04-30/turtle-2.png" alt="Python Turtle Screenshot 1"></a></p>
+<iframe width="960" height="540" src="//www.youtube.com/embed/WC75-nAJylo" frameborder="0" allowfullscreen></iframe>
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-python" href="/blog/tag/python">python</a></li>
+            
+                <a class="tag tag-turtle" href="/blog/tag/turtle">turtle</a></li>
+            
+                <a class="tag tag-codeclub" href="/blog/tag/codeclub">codeclub</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/playing-with-pythons-and-turtles#comments">Comments</a>
+    </footer>
+</article>
         
             <article class="post">
     <header>
@@ -79,122 +110,6 @@
     </footer>
 </article>
         
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/coffeescript-is-objectively-better-than-javascript">Coffeescript is objectively better than javascript</a></h1>
-
-        <span class="date">17th February, 2014</span>
-    </header>
-
-    <p>I can see no reason why anyone would use javascript over <a href="http://coffeescript.org/">coffeescript</a>. The latter is without a doubt objectively better. Sure, it will take a bit of time to learn, perhaps a day or two. But if you are in the web development game you should be learning every single day. One day off and you are behind and have to play catch up.</p>
-<p>The time investment is clearly worth it.</p>
-<!-- more -->
-
-<h2 id="it-s-just-better-looking-javascript">It&#39;s just better looking javascript</h2>
-<p>I got driven to coffeescript through my frustration with the many opinions and methods of just simply writing class-based javascript. Prototypes work great but are messy, and inheritence is implemented in a slightly odd fashion.</p>
-<p>Clean code is good code is fun code.</p>
-<p>So how do you write a class in coffeescript? One line.</p>
-<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
-</code></pre>
-<p>Compare that to the generated javascript:</p>
-<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-keyword">var</span> Foo;
-
-  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">()</span> {</span>}
-
-    <span class="hljs-keyword">return</span> Foo;
-
-  })();
-
-}).call(<span class="hljs-keyword">this</span>);
-</code></pre>
-<p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
-<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
-    constructor: (<span class="hljs-annotation">@who</span>) -&gt;
-
-    say: -&gt;
-        console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
-    say: -&gt;
-        console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
-</code></pre>
-<p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
-<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-keyword">var</span> Bar, Foo,
-    __hasProp = {}.hasOwnProperty,
-    __extends = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child, parent)</span> {</span> <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> parent) { <span class="hljs-keyword">if</span> (__hasProp.call(parent, key)) child[key] = parent[key]; } <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ctor</span><span class="hljs-params">()</span> {</span> <span class="hljs-keyword">this</span>.constructor = child; } ctor.prototype = parent.prototype; child.prototype = <span class="hljs-keyword">new</span> ctor(); child.__super__ = parent.prototype; <span class="hljs-keyword">return</span> child; };
-
-  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">(who)</span> {</span>
-      <span class="hljs-keyword">this</span>.who = who;
-    }
-
-    Foo.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
-    };
-
-    <span class="hljs-keyword">return</span> Foo;
-
-  })();
-
-  Bar = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_super)</span> {</span>
-    __extends(Bar, _super);
-
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bar</span><span class="hljs-params">()</span> {</span>
-      <span class="hljs-keyword">return</span> Bar.__super__.constructor.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
-    }
-
-    Bar.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
-    };
-
-    <span class="hljs-keyword">return</span> Bar;
-
-  })(Foo);
-
-}).call(<span class="hljs-keyword">this</span>);
-</code></pre>
-<p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
-<p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
-<pre><code class="lang-coffeescript">console.<span class="hljs-built_in">log</span> fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-operator">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
-</code></pre>
-<p>Block regular expressions:</p>
-<pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span> ^ (</span>
-  ?: [-=]&gt;             <span class="hljs-preprocessor"># function</span>
-   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="hljs-preprocessor"># compound assign / compare</span>
-   | &gt;&gt;&gt;=?             <span class="hljs-preprocessor"># zero-fill right shift</span>
-   | ([-+:])\<span class="hljs-number">1</span>         <span class="hljs-preprocessor"># doubles</span>
-   | ([&amp;|&lt;&gt;])\<span class="hljs-number">2</span>=?      <span class="hljs-preprocessor"># logic / shift</span>
-   | \?\.              <span class="hljs-preprocessor"># soak access</span>
-   | \.{<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}           <span class="hljs-preprocessor"># range or splat</span>
-) <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span></span>
-</code></pre>
-<p>Function argument splats:</p>
-<pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
-    console.<span class="hljs-keyword">log</span> first, rest
-
-# console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'a'</span>, [<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
-foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>)
-</code></pre>
-<p>And <a href="http://coffeescript.org">much more</a>.</p>
-<p>The cleanliness of coffeescript allows you to write large applications and keep on top of it. With all redundant syntax removed it is far easier to see what your code is actually doing. Making your workflow more fun and your code better.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
-            
-                <a class="tag tag-coffeescript" href="/blog/tag/coffeescript">coffeescript</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/coffeescript-is-objectively-better-than-javascript#comments">Comments</a>
-    </footer>
-</article>
-        
     </section>
 
     <nav class="pagination-wrapper">
@@ -221,6 +136,10 @@ foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, 
             
             
             <li class=""><a href="/index/5">5</a></li>
+        
+            
+            
+            <li class=""><a href="/index/6">6</a></li>
         
     </ul>
 </nav>

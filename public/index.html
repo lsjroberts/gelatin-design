@@ -46,6 +46,42 @@
         
             <article class="post">
     <header>
+        <h1><a href="/blog/post/why-we-need-indie-tech">Why we need Indie Tech</a></h1>
+
+        <span class="date">3rd June, 2014</span>
+    </header>
+
+    <h2 id="free-is-a-lie">Free is a lie</h2>
+<p>Something you absolutely should do is watch <a href="http://twitter.com/aral">Aral Balkan&#39;s</a> talk <a href="https://indietech.org/video/">&quot;Free is a lie&quot;</a>.</p>
+<p>The driving point of the talk is that while a service may be monetarily free to use, you still have to pay. You pay with your data. How much of an issue that is can be debated. Personally I&#39;m in this probably common position of disliking the idea that Google etc are selling my data, but at the same time since it doesn&#39;t seem to affect me and they provide good services I happy to keep using them. And that is the exact reason why the concept of Indie Tech needs to succeed.</p>
+<h2 id="the-problem-with-existing-free-open-source-services">The problem with existing free / open source services</h2>
+<p><a href="http://duckduckgo.com">There</a> <a href="http://status.net/">are</a> <a href="http://owncloud.org/">services</a> that exist that do not sell your data or can be self-hosted. But the problem is, these are not integrated into your phone or operating system. If I told any non-tech friend, or indeed many tech friends, to setup their own self-hosted cloud I would just get blank stares. Why go through that hassle? Why buy a Raspberry Pi or find a hosting provider? When you can just go to <a href="http://drive.google.com">Google Drive</a> or <a href="http://dropbox.com">Dropbox</a>, click register, enter your name and email address and you&#39;re done.</p>
+<p>Compounding this issue, many open-source projects are never going to make money. They are going to be built by devs in their spare time for fun, and after <a href="http://heartbleed.com">Heartbleed</a> we know how that turns out.</p>
+<p>On the whole most of these services are made by programmers, not designers. It&#39;s just the way it is with open source projects. This leads to often ugly tools and terrible UX which turns away users who have gotten this far.</p>
+<h2 id="we-need-an-indie-ecosystem-or-three-">We need an indie ecosystem (or three)</h2>
+<p>So the better solution to this is an entirely indie ecosystem. That means hardware, software, services and design. It needs to be designed from scratch to be consistent with itself, not a mix of differing tools with different languages of interaction. It needs to be built from scratch to protect your data and privacy to the extent that you desire. It needs to be open about how it handles your data though not necessarily open source.</p>
+<p>A fantastic push in this direction is coming from <a href="http://indiephone.eu">Indie Phone</a>. It&#39;s not just an operating system, it&#39;s the full hardware and ecosystem as well. Though by itself this is not enough, ideally there needs to be choice for the consumer, rival products that compete for different sectors of the market.</p>
+<h2 id="cutting-out-the-middle-man">Cutting out the middle man</h2>
+<p>Beyond this we need more services that do not rely on capturing and analysing user data. An idea that I&#39;ve been thinking about for a while and have done experimenting with is a peer-to-peer social network.</p>
+<p>It would allow you to store your data wherever you like, locally on your computer or phone, on some free or private cloud service. It would allow you to share the exact data you want to share with exactly who you want to share it with. It would send that data directly to the other users via a peer-to-peer connection. Indeed, if it was abstracted enough it could be that the service itself becomes just an interface to sending and receiving data.</p>
+<p>I don&#39;t really know if this is a viable concept, or indeed if there is any business there, but it&#39;s something I&#39;d like to see discussed.</p>
+<h2 id="indie-tech-summit">Indie Tech Summit</h2>
+<p>If you&#39;re also interested in the idea of independent tech and an independent internet then you should join me in going to the <a href="https://indietech.org/summit/">Indie Tech Summit</a> on July 4th &amp; 5th in Brighton. It&#39;s not just a conference where you&#39;re talked at, it&#39;s a discussion with a great list of speakers. Bring you&#39;re ideas, arguments and concepts and get involved in ensuring we have a better independent internet for the future.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-indie-tech" href="/blog/tag/indie-tech">indie-tech</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/why-we-need-indie-tech#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
         <h1><a href="/blog/post/isolationism-division-and-hate">Isolationism, Division and Hate</a></h1>
 
         <span class="date">31st May, 2014</span>
@@ -87,92 +123,6 @@
     </footer>
 </article>
         
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/creating-a-blog-with-metalsmith">Creating a blog with Metalsmith</a></h1>
-
-        <span class="date">24th May, 2014</span>
-    </header>
-
-    <p>I&#39;ve been looking at converting this site to use a static-site generator. Prior to this I&#39;ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
-<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn&#39;t particuarly sold, not sure why I just didn&#39;t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
-<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
-<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
-<p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
-    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
-
-metalsmith(__dirname)
-
-    <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
-    .use(collections({
-        posts: {
-            pattern: <span class="hljs-string">'blog/*'</span>,
-            sortBy: <span class="hljs-string">'date'</span>,
-            reverse: <span class="hljs-literal">true</span>,
-        }
-    }))
-
-    <span class="hljs-comment">// generate the tag listing pages</span>
-    .use(blogTagLists)
-
-    <span class="hljs-comment">// build</span>
-    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
-        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
-    });
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
-    <span class="hljs-keyword">var</span> tags = {};
-
-    <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
-    <span class="hljs-keyword">for</span> (p <span class="hljs-keyword">in</span> metalsmith.data.posts) {
-        <span class="hljs-keyword">for</span> (t <span class="hljs-keyword">in</span> metalsmith.data.posts[p].tags) {
-            tag = metalsmith.data.posts[p].tags[t];
-            <span class="hljs-keyword">if</span> (! tags[tag]) {
-                tags[tag] = [];
-            }
-
-            tags[tag].push(metalsmith.data.posts[p]);
-        }
-    }
-
-    <span class="hljs-comment">// loop the tags and create a new index file for each tag</span>
-    <span class="hljs-keyword">for</span> (tag <span class="hljs-keyword">in</span> tags) {
-        files[<span class="hljs-string">'blog/tag/'</span> + tag + <span class="hljs-string">'/index.md'</span>] = {
-            template: <span class="hljs-string">'list.html'</span>,
-            mode: <span class="hljs-string">'0644'</span>,
-            contents: <span class="hljs-string">''</span>,
-            title: <span class="hljs-string">"Posts tagged '"</span> + tag + <span class="hljs-string">"'"</span>,
-            posts: tags[tag],
-        }
-    }
-
-    done();
-}
-</code></pre>
-<p>You can see my full <a href="http://github.com/lsjroberts/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
-<p>If you&#39;re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
-<hr>
-<p>What are your thoughts on Metalsmith? Do you prefer Jekyll or another static-site generator? Leave your comments below.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
-            
-                <a class="tag tag-nodejs" href="/blog/tag/nodejs">nodejs</a></li>
-            
-                <a class="tag tag-metalsmith" href="/blog/tag/metalsmith">metalsmith</a></li>
-            
-                <a class="tag tag-jekyll" href="/blog/tag/jekyll">jekyll</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/creating-a-blog-with-metalsmith#comments">Comments</a>
-    </footer>
-</article>
-        
     </section>
 
     <nav class="pagination-wrapper">
@@ -199,6 +149,10 @@ metalsmith(__dirname)
             
             
             <li class=""><a href="/index/5">5</a></li>
+        
+            
+            
+            <li class=""><a href="/index/6">6</a></li>
         
     </ul>
 </nav>
