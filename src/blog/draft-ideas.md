@@ -2,6 +2,7 @@
 template: post.html
 title: ideas
 slug: ideas
+draft: true
 date: 2014-06-07
 tags:
     - ideas
