@@ -8,8 +8,8 @@ My name is Laurence Roberts, I'm a developer who makes websites and games.
 
 Here you'll find stuff on [python](/blog/tag/python), [javascript](/blog/tag/javascript), [php](/blog/tag/php) and the occasional bit of [opinion](/blog/tag/opinion).
 
-You can find all my open-sourced code at [github](http://github.com/lsjroberts).
+You can find all my open-sourced code at <a href="http://github.com/lsjroberts" rel="me">github</a>.
 
-And follow my various ramblings and thoughts while coding on [twitter](http://twitter.com/gelatindesign).
+And follow my various ramblings and thoughts while coding on <a href="http://twitter.com/gelatindesign" rel="me">twitter</a>.
 
 ---
