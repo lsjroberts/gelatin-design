@@ -12,7 +12,7 @@ If you are doing a small task frequently then spending a little time to speed up
 
 ## Alias git
 
-First things first, you are going to want to alias `git` to something even shorter. Open up your `.bash_profile` (or `.zshrc` if you are using that) in nano or whatever and append:
+First things first, you are going to want to alias `git` to something even shorter. Open up your `.bash_profile` (or `.zshrc` [if you are using that](/blog/post/improve-your-terminal)) in nano or whatever and append:
 
 ```
 alias g="git"
