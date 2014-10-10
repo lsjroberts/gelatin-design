@@ -55,7 +55,7 @@ And we can take it one final step further. What is your most common action? Pull
 
 ```
 gqc() {
-    g sh && g pl && g sh pop && g a . && g c -m $1 && g ps
+    g sh && g pl && g sh pop && g a -A && g c -m $1 && g ps
 }
 ```
 

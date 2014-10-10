@@ -76,7 +76,7 @@ g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">a
 <h2 id="alias-your-workflow">Alias your workflow</h2>
 <p>And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your <code>.bash_profile</code> or <code>.zshrc</code> file and append it with a custom method:</p>
 <pre><code>gqc() {
-    g sh &amp;&amp; g pl &amp;&amp; g sh <span class="hljs-keyword">pop</span> &amp;&amp; g a . &amp;&amp; g c -<span class="hljs-keyword">m</span> <span class="hljs-variable">$1</span> &amp;&amp; g ps
+    g sh &amp;&amp; g pl &amp;&amp; g sh <span class="hljs-keyword">pop</span> &amp;&amp; g a -A &amp;&amp; g c -<span class="hljs-keyword">m</span> <span class="hljs-variable">$1</span> &amp;&amp; g ps
 }
 </code></pre><p>Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:</p>
 <pre><code><span class="hljs-variable">$ </span>gqc <span class="hljs-string">"Updated foo"</span>
