@@ -9,7 +9,7 @@ tags:
 ---
 ## Projects
 
-- Pi me a river
+- Pi me a River
 - No Spoilers
 - Clades
 - Clades API
@@ -20,4 +20,6 @@ tags:
 - HTML Platformer
 - Tesco PHP
 - P2P Social Network
-- Gladiator Game
+- Gladiator‽
+- Yay Trains‽
+- I am a Sheepdog‽

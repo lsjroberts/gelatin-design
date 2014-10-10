@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -43,6 +46,125 @@
         
             <article class="post">
     <header>
+        <h1><a href="/blog/post/clean-your-html-with-jade">Clean your HTML with Jade</a></h1>
+
+        <span class="date">16th February, 2014</span>
+    </header>
+
+    <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
+<p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
+<!-- more -->
+
+<p>It has a wonderfully basic syntax:</p>
+<pre><code class="lang-jade">doctype html
+html
+    head
+        title Hello World
+        link(<span class="hljs-preprocessor">rel</span>=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)
+    body
+        <span class="hljs-keyword">div</span>.container
+            p Hello World
+</code></pre>
+<h2 id="layouts-and-blocks">Layouts and blocks</h2>
+<p>Jade allows you to create layouts and extend them for your different views:</p>
+<pre><code class="lang-jade"><span class="hljs-comment">// layouts/master.jade</span>
+body
+    <span class="hljs-keyword">block</span> content
+<span class="hljs-comment">{% endhighlight %}</span>
+
+<span class="hljs-comment">{% highlight jade %}</span>
+<span class="hljs-comment">// index.jade</span>
+extends layouts/master
+
+<span class="hljs-keyword">block</span> content
+    header.hero
+        h1 Hello World
+</code></pre>
+<h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
+<p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
+<pre><code class="lang-jade">// mixins/form.jade
+<span class="hljs-keyword">mixin</span> form(action, <span class="hljs-keyword">method</span>)
+    unless <span class="hljs-keyword">method</span>
+        - <span class="hljs-keyword">method</span>= <span class="hljs-string">"get"</span>
+    form(action= action, <span class="hljs-keyword">method</span>= <span class="hljs-keyword">method</span>)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">block</span>
+            <span class="hljs-keyword">block</span>
+        <span class="hljs-keyword">else</span>
+            p <span class="hljs-type">Looks</span> like you forgot to add <span class="hljs-type">any</span> inputs to your form
+
+<span class="hljs-keyword">mixin</span> field(name, <span class="hljs-keyword">type</span>)
+    label= name
+    input(<span class="hljs-keyword">type</span>= <span class="hljs-keyword">type</span>, name= name)
+</code></pre>
+<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
+
+<span class="hljs-keyword">include</span> mixins/form
+
++form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
+    +field(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)
+    +field(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)
+</code></pre>
+<p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
+<pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
+
+<span class="hljs-comment">//- ...</span>
+
+mixin field(name, <span class="hljs-class"><span class="hljs-keyword">type</span>)</span>
+    <span class="hljs-comment">//- Convert "foo_bar" to "Foo Bar"</span>
+    -var unslugify = <span class="hljs-keyword">function</span>(input) {
+    -   <span class="hljs-keyword">return</span> input.charAt(<span class="hljs-number">0</span>).toUpperCase() + input.slice(<span class="hljs-number">1</span>).toLowerCase().replace(/[-|_](.)/g, <span class="hljs-keyword">function</span>(<span class="hljs-keyword">match</span>, group1) {
+    -       <span class="hljs-keyword">return</span> ' ' + group1.toUpperCase();
+    -   });
+    -}
+
+    <span class="hljs-comment">//- If no type has been set, try to pick an appropriate one</span>
+    unless <span class="hljs-class"><span class="hljs-keyword">type</span></span>
+        case name
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"password"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span></span>= <span class="hljs-string">"password"</span>
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"password_confirmation"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span></span>= <span class="hljs-string">"password"</span>
+            <span class="hljs-keyword">when</span> <span class="hljs-string">"email"</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span></span>= <span class="hljs-string">"email"</span>
+            <span class="hljs-keyword">default</span>
+                - <span class="hljs-class"><span class="hljs-keyword">type</span></span>= <span class="hljs-string">"text"</span>
+
+    div.field
+        label= unslugify(name)
+        input(<span class="hljs-class"><span class="hljs-keyword">type</span></span>= <span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">name</span></span>= name)
+</code></pre>
+<pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
+
+<span class="hljs-keyword">include</span> mixins/form
+
++form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
+    +field(<span class="hljs-string">"email"</span>)
+    +field(<span class="hljs-string">"password"</span>)
+</code></pre>
+<h2 id="lovely">Lovely</h2>
+<p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
+<p>Coding should be fun and jade brings that enjoyment back to html.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
+                <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
+            
+                <a class="tag tag-node" href="/blog/tag/node">node</a></li>
+            
+                <a class="tag tag-jade" href="/blog/tag/jade">jade</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/clean-your-html-with-jade#comments">Comments</a>
+    </footer>
+</article>
+        
+            <article class="post">
+    <header>
         <h1><a href="/blog/post/easily-build-assets-with-gulpjs">Easily build assets with GulpJS</a></h1>
 
         <span class="date">15th February, 2014</span>
@@ -57,14 +179,14 @@
 <h3 id="plugins">Plugins</h3>
 <p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
 <p>You can install plugins through npm:</p>
-<pre><code>npm install gulp<span class="hljs-attribute">-concat</span> gulp<span class="hljs-attribute">-coffee</span>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> gulp-<span class="hljs-keyword">concat</span> gulp-coffee</span>
 </code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">concat</span> = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-concat'</span>);
 <span class="hljs-keyword">var</span> coffee = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-coffee'</span>);
 </code></pre>
 <h3 id="writing-tasks">Writing tasks</h3>
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
-<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
         .pipe(concat(<span class="hljs-string">'combined.coffee'</span>))
         .pipe(coffee())
@@ -76,14 +198,14 @@
 <p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
 <h2 id="task-dependancies">Task dependancies</h2>
 <p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
-<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
         .pipe(concat(<span class="hljs-string">'combined-coffee.coffee'</span>))
         .pipe(coffee())
         .pipe(gulp.dest(<span class="hljs-string">'assets/scripts/'</span>));
 });
 
-gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.js'</span>)
         .pipe(concat(<span class="hljs-string">'combined.js'</span>))
         .pipe(uglify())
@@ -95,19 +217,19 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(<span class="hljs-string">'watch'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code>gulp.task(<span class="hljs-symbol">'watc</span>h', function() {
     gulp.watch([
-        <span class="hljs-string">'assets/scripts/**/*.coffee'</span>,
-        <span class="hljs-string">'assets/scripts/**/*.js'</span>
-    ], [<span class="hljs-string">'scripts'</span>]);
+        <span class="hljs-symbol">'assets</span>/scripts<span class="hljs-javadoc">/**/*.coffee',
+        'assets/scripts/**/</span>*.js'
+    ], [<span class="hljs-symbol">'script</span>s']);
 
     gulp.watch([
-        <span class="hljs-string">'assets/styles/**/*.sass'</span>,
-        <span class="hljs-string">'assets/styles/**/*.css'</span>
-    ], [<span class="hljs-string">'styles'</span>]);
+        <span class="hljs-symbol">'assets</span>/styles<span class="hljs-javadoc">/**/*.sass',
+        'assets/styles/**/</span>*.css'
+    ], [<span class="hljs-symbol">'style</span>s']);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
-<pre><code>gulp watch
+<pre><code><span class="hljs-title">gulp</span> watch
 </code></pre><h2 id="taking-it-further">Taking it further</h2>
 <p>There are <a href="http://gulpjs.com/plugins/">lot of existing plugins for gulp</a> and I&#39;d suggest taking some time to look through and see which ones might prove useful in your code environment.</p>
 <p>This <a href="https://gist.github.com/lsjroberts/8810740">example build script</a> shows how I run my usual full build process, feel free it use it as you wish.</p>
@@ -117,6 +239,8 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
     <footer>
         <nav class="tags">
             
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
                 <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
             
                 <a class="tag tag-gulpjs" href="/blog/tag/gulpjs">gulpjs</a></li>
@@ -124,41 +248,6 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
         </nav>
 
         <a class="comments-link" href="/blog/post/easily-build-assets-with-gulpjs#comments">Comments</a>
-    </footer>
-</article>
-        
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/shopavels-first-pull-request">Shopavel&#39;s first pull request</a></h1>
-
-        <span class="date">13th February, 2014</span>
-    </header>
-
-    <p>Today I received my first <a href="https://github.com/shopavel/shopavel/pull/8">pull-request</a> from another developer for one of my open source projects. How exciting.</p>
-<p>Admitedly it is a tiny change, just one small new method, but it&#39;s still pretty cool.</p>
-<p>It will allow you to apply a presenter to a collection of models:</p>
-<pre><code class="lang-php"><span class="hljs-keyword">public</span> function index()
-{
-    <span class="hljs-variable">$products</span> <span class="hljs-subst">=</span> <span class="hljs-variable">$this</span><span class="hljs-subst">-&gt;</span>product<span class="hljs-subst">-&gt;</span><span class="hljs-literal">all</span>()<span class="hljs-subst">-&gt;</span>each(function(<span class="hljs-variable">$product</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-subst">-&gt;</span>presenter<span class="hljs-subst">-&gt;</span>newInstance(<span class="hljs-variable">$product</span>);
-    });
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-subst">-&gt;</span>theme<span class="hljs-subst">-&gt;</span>make(<span class="hljs-string">'product.index'</span>)<span class="hljs-subst">-&gt;</span>withProducts(<span class="hljs-variable">$products</span>);
-}
-</code></pre>
-<p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-php" href="/blog/tag/php">php</a></li>
-            
-                <a class="tag tag-shopavel" href="/blog/tag/shopavel">shopavel</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/shopavels-first-pull-request#comments">Comments</a>
     </footer>
 </article>
         

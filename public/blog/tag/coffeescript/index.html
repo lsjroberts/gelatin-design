@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -59,11 +62,11 @@
 <pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
 </code></pre>
 <p>Compare that to the generated javascript:</p>
-<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">var</span> Foo;
 
-  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">()</span> {</span>}
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">()</span> </span>{}
 
     <span class="hljs-keyword">return</span> Foo;
 
@@ -76,40 +79,40 @@
     constructor: (<span class="hljs-annotation">@who</span>) -&gt;
 
     say: -&gt;
-        console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
+        console.log(<span class="hljs-symbol">'Hello</span> ' + <span class="hljs-annotation">@who</span> + '!')
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
     say: -&gt;
-        console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-annotation">@who</span> + <span class="hljs-string">'!'</span>)
+        console.log(<span class="hljs-symbol">'Good</span> evening ' + <span class="hljs-annotation">@who</span> + '!')
 </code></pre>
 <p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
-<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">var</span> Bar, Foo,
     __hasProp = {}.hasOwnProperty,
-    __extends = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child, parent)</span> {</span> <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> parent) { <span class="hljs-keyword">if</span> (__hasProp.call(parent, key)) child[key] = parent[key]; } <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ctor</span><span class="hljs-params">()</span> {</span> <span class="hljs-keyword">this</span>.constructor = child; } ctor.prototype = parent.prototype; child.prototype = <span class="hljs-keyword">new</span> ctor(); child.__super__ = parent.prototype; <span class="hljs-keyword">return</span> child; };
+    __extends = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child, parent)</span> </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> parent) { <span class="hljs-keyword">if</span> (__hasProp.call(parent, key)) child[key] = parent[key]; } <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ctor</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">this</span>.constructor = child; } ctor.prototype = parent.prototype; child.prototype = <span class="hljs-keyword">new</span> ctor(); child.__super__ = parent.prototype; <span class="hljs-keyword">return</span> child; };
 
-  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">(who)</span> {</span>
+  Foo = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span><span class="hljs-params">(who)</span> </span>{
       <span class="hljs-keyword">this</span>.who = who;
     }
 
-    Foo.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
+    Foo.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
     <span class="hljs-keyword">return</span> Foo;
 
   })();
 
-  Bar = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_super)</span> {</span>
+  Bar = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_super)</span> </span>{
     __extends(Bar, _super);
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bar</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bar</span><span class="hljs-params">()</span> </span>{
       <span class="hljs-keyword">return</span> Bar.__super__.constructor.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
     }
 
-    Bar.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-      <span class="hljs-keyword">return</span> console.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
+    Bar.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Good evening '</span> + <span class="hljs-keyword">this</span>.who + <span class="hljs-string">'!'</span>);
     };
 
     <span class="hljs-keyword">return</span> Bar;
@@ -120,10 +123,10 @@
 </code></pre>
 <p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
 <p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
-<pre><code class="lang-coffeescript">console.<span class="hljs-built_in">log</span> fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-operator">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
+<pre><code class="lang-coffeescript"><span class="hljs-built_in">console</span>.log fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
 </code></pre>
 <p>Block regular expressions:</p>
-<pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span> ^ (</span>
+<pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment">/// ^ (</span>
   ?: [-=]&gt;             <span class="hljs-preprocessor"># function</span>
    | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="hljs-preprocessor"># compound assign / compare</span>
    | &gt;&gt;&gt;=?             <span class="hljs-preprocessor"># zero-fill right shift</span>
@@ -131,13 +134,13 @@
    | ([&amp;|&lt;&gt;])\<span class="hljs-number">2</span>=?      <span class="hljs-preprocessor"># logic / shift</span>
    | \?\.              <span class="hljs-preprocessor"># soak access</span>
    | \.{<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}           <span class="hljs-preprocessor"># range or splat</span>
-) <span class="hljs-comment"><span class="hljs-xmlDocTag">///</span></span>
+) <span class="hljs-comment">///</span>
 </code></pre>
 <p>Function argument splats:</p>
-<pre><code class="lang-coffeescript">foo = (first, rest...) -&gt;
-    console.<span class="hljs-keyword">log</span> first, rest
+<pre><code class="lang-coffeescript">foo = (<span class="hljs-keyword">first</span>, rest...) -&gt;
+    console.<span class="hljs-built_in">log</span> <span class="hljs-keyword">first</span>, rest
 
-# console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'a'</span>, [<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
+# console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'a'</span>, [<span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
 foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>)
 </code></pre>
 <p>And <a href="http://coffeescript.org">much more</a>.</p>
@@ -146,6 +149,8 @@ foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, 
 
     <footer>
         <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
             
                 <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
             

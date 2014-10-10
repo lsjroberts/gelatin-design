@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -57,14 +60,14 @@
 <h3 id="plugins">Plugins</h3>
 <p>There are numerous plugins available for gulp which provide all the functionality you could want.</p>
 <p>You can install plugins through npm:</p>
-<pre><code>npm install gulp<span class="hljs-attribute">-concat</span> gulp<span class="hljs-attribute">-coffee</span>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> gulp-<span class="hljs-keyword">concat</span> gulp-coffee</span>
 </code></pre><p>Then require them at the top of your <code>gulpfile.js</code>:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">concat</span> = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-concat'</span>);
 <span class="hljs-keyword">var</span> coffee = <span class="hljs-keyword">require</span>(<span class="hljs-string">'gulp-coffee'</span>);
 </code></pre>
 <h3 id="writing-tasks">Writing tasks</h3>
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
-<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code class="lang-js">gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
         .pipe(concat(<span class="hljs-string">'combined.coffee'</span>))
         .pipe(coffee())
@@ -76,14 +79,14 @@
 <p>You can run this task with <code>gulp coffeescripts</code> in your terminal.</p>
 <h2 id="task-dependancies">Task dependancies</h2>
 <p>So now you&#39;ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you&#39;ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
-<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code>gulp.task(<span class="hljs-string">'coffeescripts'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.coffee'</span>)
         .pipe(concat(<span class="hljs-string">'combined-coffee.coffee'</span>))
         .pipe(coffee())
         .pipe(gulp.dest(<span class="hljs-string">'assets/scripts/'</span>));
 });
 
-gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string">'coffeescripts'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">'assets/scripts/**/*.js'</span>)
         .pipe(concat(<span class="hljs-string">'combined.js'</span>))
         .pipe(uglify())
@@ -95,19 +98,19 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(<span class="hljs-string">'watch'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+<pre><code>gulp.task(<span class="hljs-symbol">'watc</span>h', function() {
     gulp.watch([
-        <span class="hljs-string">'assets/scripts/**/*.coffee'</span>,
-        <span class="hljs-string">'assets/scripts/**/*.js'</span>
-    ], [<span class="hljs-string">'scripts'</span>]);
+        <span class="hljs-symbol">'assets</span>/scripts<span class="hljs-javadoc">/**/*.coffee',
+        'assets/scripts/**/</span>*.js'
+    ], [<span class="hljs-symbol">'script</span>s']);
 
     gulp.watch([
-        <span class="hljs-string">'assets/styles/**/*.sass'</span>,
-        <span class="hljs-string">'assets/styles/**/*.css'</span>
-    ], [<span class="hljs-string">'styles'</span>]);
+        <span class="hljs-symbol">'assets</span>/styles<span class="hljs-javadoc">/**/*.sass',
+        'assets/styles/**/</span>*.css'
+    ], [<span class="hljs-symbol">'style</span>s']);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
-<pre><code>gulp watch
+<pre><code><span class="hljs-title">gulp</span> watch
 </code></pre><h2 id="taking-it-further">Taking it further</h2>
 <p>There are <a href="http://gulpjs.com/plugins/">lot of existing plugins for gulp</a> and I&#39;d suggest taking some time to look through and see which ones might prove useful in your code environment.</p>
 <p>This <a href="https://gist.github.com/lsjroberts/8810740">example build script</a> shows how I run my usual full build process, feel free it use it as you wish.</p>
@@ -116,6 +119,8 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 
     <footer>
         <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
             
                 <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
             

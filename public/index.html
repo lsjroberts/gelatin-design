@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -43,6 +46,60 @@
 
 
     <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/speeding-up-your-git-workflow">Speeding up your git workflow</a></h1>
+
+        <span class="date">10th October, 2014</span>
+    </header>
+
+    <p>If you are doing a small task frequently then spending a little time to speed up that task really can pay off in a significant way (<a href="https://xkcd.com/1205/">relevant xkcd</a>). As a developer there are few tools you will be interacting with more times a day than git, so lets speed it up!</p>
+<h2 id="alias-git">Alias git</h2>
+<p>First things first, you are going to want to alias <code>git</code> to something even shorter. Open up your <code>.bash_profile</code> (or <code>.zshrc</code> if you are using that) in nano or whatever and append:</p>
+<pre><code><span class="hljs-keyword">alias</span> <span class="hljs-title">g</span>=<span class="hljs-string">"git"</span>
+</code></pre><p>Now you will be able to reference commands like <code>git checkout master</code> using just <code>g checkout master</code>.</p>
+<h2 id="alias-git-s-commands">Alias git&#39;s commands</h2>
+<p>That&#39;s a good start but <code>checkout</code> is a lot of characters, let&#39;s bring that down along with all the other git commands. Git comes with it&#39;s own aliasing which you can configure by running this in your terminal:</p>
+<pre><code>g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.a add
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.b branch
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.c commit
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.cf config
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.co checkout
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.s status
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.sh stash
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.pl pull
+g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">alias</span>.ps push
+</code></pre><p>Now your typical workflow can be reduced to:</p>
+<pre><code><span class="hljs-variable">$ </span>g co -b <span class="hljs-string">"feature/foo"</span>
+<span class="hljs-variable">$ </span>g a .
+<span class="hljs-variable">$ </span>g c -m <span class="hljs-string">"Added foo"</span>
+<span class="hljs-variable">$ </span>g ps
+</code></pre><p>This is pretty great, it may seem like only a few characters but if you are typing those characters dozens of times a day it can add up quickly.</p>
+<h2 id="alias-your-workflow">Alias your workflow</h2>
+<p>And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your <code>.bash_profile</code> or <code>.zshrc</code> file and append it with a custom method:</p>
+<pre><code>gqc() {
+    g sh &amp;&amp; g pl &amp;&amp; g sh <span class="hljs-keyword">pop</span> &amp;&amp; g a . &amp;&amp; g c -<span class="hljs-keyword">m</span> <span class="hljs-variable">$1</span> &amp;&amp; g ps
+}
+</code></pre><p>Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:</p>
+<pre><code><span class="hljs-variable">$ </span>gqc <span class="hljs-string">"Updated foo"</span>
+</code></pre><p>What would have required 80 keystrokes can now be done in 18. At 60 wpm that&#39;s a saving of about 13 seconds each time (not counting waiting) which could be 5 to 10 minutes a day. That&#39;s around 30 hours a year. Or 50 days in a 40 year career! 50 days saved, from what is a 5 minute job!</p>
+<p>Amazing.</p>
+<p><em>totally accurate numbers...</em></p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
+                <a class="tag tag-git" href="/blog/tag/git">git</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/speeding-up-your-git-workflow#comments">Comments</a>
+    </footer>
+</article>
         
             <article class="post">
     <header>
@@ -77,49 +134,6 @@
         </nav>
 
         <a class="comments-link" href="/blog/post/why-we-need-indie-tech#comments">Comments</a>
-    </footer>
-</article>
-        
-            <article class="post">
-    <header>
-        <h1><a href="/blog/post/isolationism-division-and-hate">Isolationism, Division and Hate</a></h1>
-
-        <span class="date">31st May, 2014</span>
-    </header>
-
-    <p><em>Warning, the following is opinion.</em></p>
-<p>I grew up being taught that I was in a special group of people that had been chosen to live in an eternal utopia and everyone else would burn. It came from a place of love and desire to help me, but it created a division between me and others. It isolated me and some of my friends from others around. No matter the intent, isolationism and division generate hate.</p>
-<p>I grew up being taught that I was in a special group of people who had been born in the greatest country, the one with the most history, the largest empire that has existed. Because I am English it is my destiny to conquer the world. I wasn&#39;t directly taught that people of other countries were lesser, but that my English blood makes me stronger. I wasn&#39;t taught to be racist, none of my friends or family were racist, but it created a division between me and others. It isolated me from others in the world. No matter the intent, isolationism and division generate hate.</p>
-<p>I grew up being taught that I was in a special group of people of my gender, and that as a male it was my role to grow up and lead my family, to be the breadwinner, to be the head of the family. I wasn&#39;t taught women were lesser, indeed I was specifically taught that we are equal but the man is in charge. I wasn&#39;t taught to be sexist, none of my friends or family were sexist, but it created a division between me and others. It isolated me from women and other genders in the world. No matter the intent, isolationism and division generate hate.</p>
-<p>I grew up being taught I was in a special group of people who were not broken, who were allowed to love since we were the ones who loved in the correct way. Because I am straight I am allowed my own family, I am allowed to declare my love for another and bind to them for life. I wasn&#39;t taught to be homophobic, I was taught to &quot;hate the sin not the sinner&quot;,  to despise the act not the person. But this created a division between me and others. It isolated me from the full scope of love that exists. No matter the intent, isolationism and division generate hate.</p>
-<p>No one intended to teach me to be isolationist, no one intended to teach me to be divisive, no one intended to teach me to hate. But I learnt isolationism, I learnt to be divisive and I learnt hate.</p>
-<p>Let me clarify, hate doesn&#39;t have to mean violence, it doesn&#39;t have to mean bullying, it doesn&#39;t have to mean directed aggression. Hate comes from the heart, it comes from deeply held beliefs that seperate you from others, it can be an entirely internal thought process.</p>
-<hr>
-<p>What is the result of this hate?</p>
-<p>For society it&#39;s an ongoing disaster. As political parties such as UKIP and the Scottish National Party continue to preach isolationism from international entities they are generating a society that fears and hates those of different nationality.</p>
-<p>UKIP tell us to beware the dirty Bulgarians who might come to our country and steal our jobs, our money, our NHS, our land. As if we are any different. As if we don&#39;t have our money and land as a direct result of going to other&#39;s countries and stealing it from them.</p>
-<p>A Bulgarian father is your father, a Syrian mother is your mother, an Israeli son is your son, a Palestinian daughter is your daughter, an Iranian cousin is your cousin and a North Korean grandmother is your grandmother. Your money is their money, your land is their land, your life is their life, your love is their love and this world is our world.</p>
-<p>Have no judgement in your heart for those who act in the way their society has taught them to act, for you act with all the prejudices and inequalities of your society. Instead come together to create a single society that consists of all humanity, accepts all humanity and preaches humanity.</p>
-<p>Does that sound like some unattainable utopia? Just let me say this, there is nothing that dictates what happens to us beyond ourselves. If we want to achieve something we can. We can achieve utopia through peace and abundance, a post-scarcity society built on freely available resources generated through technology. technology that comes from knowledge, knowledge that comes from education. You think that sounds like the silly statement of someone who hasn&#39;t seen the world? Then you have been defeated by the world, stand up and try again.</p>
-<p>Still don&#39;t think it&#39;s possible? Go read about <a href="http://www.sesame.org.jo/sesame/about-us/what-is-sesame.html">SESAME, Synchrotron-light for Experimental Science and Applications in the Middle East</a>. It&#39;s a joint effort of various Israeli, Palestinian, Iranian and other scientists building a particle accelerator in Jordan.</p>
-<p>Without hate there is no limit to what humanity can achieve.</p>
-<hr>
-<p>So what is the solution for hate on a personal level? What solved it for me?</p>
-<p>If conflicts are caused by ignorance, fear and hate then peace is found through education, acceptance and equality.</p>
-<p>Two years ago I was becoming disenchanted with my religious beliefs, I was beginning to see the cracks in the dogma. A religion of peace that has a god of war, a religion of life that condemns the ignorant to death. I took a step back and decided to look at both sides of the coin with as little emotion and bias as possible. It didn&#39;t take long to realise the truth of hate behind the facade of love. I was educated through online discussion, books and videos that taught me to accept others as equally deserving of a future.</p>
-<p>A bit less than a year ago I started a new job and made some new friends. One guy in particular struck me with a simple statement - &quot;I&#39;m a feminist&quot;. I didn&#39;t really understand, how can a man be a feminist? I had always been taught by society that feminists were this extreme group of women who hate men. Through conversation and discussion he and others educated me, I changed my opinion and accepted their viewpoint.</p>
-<p>Today I continue to internally fight the thoughts and prejudices that occassionaly attempt to resurface. But through continued self-education and conversation I try to accept all who cross my path and strive for equality in all I do and where I go.</p>
-<p>Please do the same.</p>
-
-
-    <footer>
-        <nav class="tags">
-            
-                <a class="tag tag-opinion" href="/blog/tag/opinion">opinion</a></li>
-            
-        </nav>
-
-        <a class="comments-link" href="/blog/post/isolationism-division-and-hate#comments">Comments</a>
     </footer>
 </article>
         

@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -71,11 +74,11 @@ metalsmith(__dirname)
     .use(blogTagLists)
 
     <span class="hljs-comment">// build</span>
-    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> {</span>
+    .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
         <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
     });
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> {</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">blogTagLists</span><span class="hljs-params">(files, metalsmith, done)</span> </span>{
     <span class="hljs-keyword">var</span> tags = {};
 
     <span class="hljs-comment">// loop the posts collection, creating new groups on the tags</span>
@@ -112,6 +115,8 @@ metalsmith(__dirname)
 
     <footer>
         <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
             
                 <a class="tag tag-javascript" href="/blog/tag/javascript">javascript</a></li>
             

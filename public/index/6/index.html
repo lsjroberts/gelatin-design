@@ -19,6 +19,9 @@
             ga('send', 'pageview');
 
         </script>
+
+        <script src="/assets/scripts/d3.v3.min.js" charset="utf-8"></script>
+        <script src="/assets/scripts/nv.d3.min.js" charset="utf-8"></script>
     </head>
     <body>
         
@@ -40,6 +43,43 @@
 
 
     <section class="post-list">
+        
+            <article class="post">
+    <header>
+        <h1><a href="/blog/post/shopavels-first-pull-request">Shopavel&#39;s first pull request</a></h1>
+
+        <span class="date">13th February, 2014</span>
+    </header>
+
+    <p>Today I received my first <a href="https://github.com/shopavel/shopavel/pull/8">pull-request</a> from another developer for one of my open source projects. How exciting.</p>
+<p>Admitedly it is a tiny change, just one small new method, but it&#39;s still pretty cool.</p>
+<p>It will allow you to apply a presenter to a collection of models:</p>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-variable">$products</span> = <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;product</span><span class="hljs-variable">-&gt;all</span>()<span class="hljs-variable">-&gt;each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$product</span>)</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;presenter</span><span class="hljs-variable">-&gt;newInstance</span>(<span class="hljs-variable">$product</span>);
+    });
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;theme</span><span class="hljs-variable">-&gt;make</span>(<span class="hljs-string">'product.index'</span>)<span class="hljs-variable">-&gt;withProducts</span>(<span class="hljs-variable">$products</span>);
+}
+</code></pre>
+<p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>
+
+
+    <footer>
+        <nav class="tags">
+            
+                <a class="tag tag-coding" href="/blog/tag/coding">coding</a></li>
+            
+                <a class="tag tag-php" href="/blog/tag/php">php</a></li>
+            
+                <a class="tag tag-shopavel" href="/blog/tag/shopavel">shopavel</a></li>
+            
+        </nav>
+
+        <a class="comments-link" href="/blog/post/shopavels-first-pull-request#comments">Comments</a>
+    </footer>
+</article>
         
             <article class="post">
     <header>

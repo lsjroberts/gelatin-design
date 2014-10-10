@@ -1,6 +1,7 @@
 @import "vendor/normalize";
 @import "vendor/foundation.min";
 @import "vendor/tomorrow-night-eighties";
+@import "vendor/nv.d3";
 
 // Fonts
 @font-face {
@@ -49,76 +50,6 @@ p {
     float: right;
 }
 
-// Diamond Nav
-#site-nav {
-    position: relative;
-    z-index: 1;
-    .diamonds {
-        position: relative;
-        margin: 50px 0 0 180px;
-        width: 206px;
-        transition: all 0.3s ease;
-    }
-    .diamonds.small {
-        margin: 20px auto;
-        -webkit-transform: scale(0.7, 0.7);
-    }
-    .diamond {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 100px;
-        height: 100px;
-        opacity: 0.5;
-        background: #cccccc;
-        -webkit-transform: rotate(45deg);
-        transition: all 0.3s linear;
-    }
-    a.diamond:hover {
-        z-index: 2;
-        opacity: 0.8;
-    }
-    a.red {
-        background: $red;
-    }
-    a.dark-orange {
-        background: #e08226;
-    }
-    a.orange {
-        background: #eca531;
-    }
-    a.light-orange {
-        background: #f9c43a;
-    }
-    a.lighter-orange {
-        background: #ffd53f;
-    }
-    .row {
-        position: relative;
-        height: 72px;
-    }
-    .diamond.pull-1 {
-        left: -72px;
-    }
-    .diamond.push-1 {
-        left: 72px;
-    }
-    .diamond.pull-2 {
-        left: -144px;
-    }
-    .diamond.push-2 {
-        left: 144px;
-    }
-}
-
-.large-12 {
-    .diamonds {
-        -webkit-transform: scale(1.2, 1.2);
-    }
-}
-
 img.header {
     position: absolute;
     top: 0;
@@ -133,7 +64,7 @@ img.header {
     margin: 20px auto 0;
     padding: 0 1em;
     max-width: 50em;
-    background: fade-out(white, 0.5);
+    background: fade-out(white, 0.2);
 
     // Structure
     h2 {
@@ -227,29 +158,52 @@ img.header {
 
     // Quotes
     blockquote {
+        position: relative;
         padding: 1em;
-        color: white;
-        background: lighten($red, 15%);
+        border: 0;
+        font-size: 1.3em;
+        font-style: italic;
+        color: $red;
+
+        // &:before {
+        //     position: absolute;
+        //     top: -.3em;
+        //     left: -.1em;
+        //     content: "\201C";
+        //     font-size: 3em;
+        // }
+
+        // &:after {
+        //     position: absolute;
+        //     bottom: -.3em;
+        //     right: -.1em;
+        //     content: "\201D";
+        //     font-size: 3em;
+        // }
 
         strong, p {
-            color: white;
+            color: $red;
         }
 
         a {
-            color: #ffffaa;
+            color: $dark-orange;
 
             &:visited {
-                color: #ffffdd;
+                color: $orange;
             }
 
             &:hover {
-                color: yellow;
+                color: $orange;
             }
         }
 
-        last-child: {
+        :last-child {
             margin-bottom: 0;
-        };
+        }
+    }
+
+    .chart {
+        height: 400px;
     }
 
     .pagination {
