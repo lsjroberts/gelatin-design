@@ -76,11 +76,11 @@ g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">a
 <h2 id="alias-your-workflow">Alias your workflow</h2>
 <p>And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your <code>.bash_profile</code> or <code>.zshrc</code> file and append it with a custom method:</p>
 <pre><code>gqc() {
-    g sh &amp;&amp; g pl &amp;&amp; g sh <span class="hljs-keyword">pop</span> &amp;&amp; g a -A &amp;&amp; g c -<span class="hljs-keyword">m</span> <span class="hljs-variable">$1</span> &amp;&amp; g ps
+    g sh &amp;&amp; g pl &amp;&amp; g sh pop &amp;&amp; g <span class="hljs-literal">a</span> -<span class="hljs-literal">A</span> &amp;&amp; g c -m $<span class="hljs-number">1</span> &amp;&amp; g ps
 }
 </code></pre><p>Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:</p>
 <pre><code><span class="hljs-variable">$ </span>gqc <span class="hljs-string">"Updated foo"</span>
-</code></pre><p>What would have required 80 keystrokes can now be done in 18. At 60 wpm that&#39;s a saving of about 13 seconds each time (not counting waiting) which could be 5 to 10 minutes a day. That&#39;s around 30 hours a year. Or 50 days in a 40 year career! 50 days saved, from what is a 5 minute job!</p>
+</code></pre><p>What would have required 80 keystrokes can now be done in 18. At 60 wpm that&#39;s a saving of about 4.5 seconds each time (not counting waiting) which could be up to 3 minutes a day. That&#39;s around 12 hours a year. Or 20 days in a 40 year career! 20 days saved, from what is a 5 minute job!</p>
 <p>Amazing.</p>
 <p><em>totally accurate numbers...</em></p>
 
@@ -110,13 +110,13 @@ g config --<span class="hljs-keyword">global</span> <span class="hljs-keyword">a
 <p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
 <p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
 <p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
-    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = require(<span class="hljs-string">'metalsmith'</span>),
+    collections = require(<span class="hljs-string">'metalsmith-collections'</span>);
 
 metalsmith(__dirname)
 
     <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
-    .use(collections({
+    .<span class="hljs-keyword">use</span>(collections({
         posts: {
             pattern: <span class="hljs-string">'blog/*'</span>,
             sortBy: <span class="hljs-string">'date'</span>,
@@ -125,7 +125,7 @@ metalsmith(__dirname)
     }))
 
     <span class="hljs-comment">// generate the tag listing pages</span>
-    .use(blogTagLists)
+    .<span class="hljs-keyword">use</span>(blogTagLists)
 
     <span class="hljs-comment">// build</span>
     .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
@@ -199,7 +199,7 @@ metalsmith(__dirname)
 <h2 id="oh-my-zshell-">Oh my zshell!</h2>
 <p><a href="https://github.com/robbyrussell/oh-my-zsh">on-my-zsh</a> is a must-have tool for frequent terminal users. It makes it easy to use themes for styling, but provides so much more functionality than that.</p>
 <p>If you trust the author of that tool then you can install it by just running</p>
-<pre><code>$ curl -L http:<span class="hljs-comment">//install.ohmyz.sh | sh</span>
+<pre><code>$ curl -L <span class="hljs-string">http:</span><span class="hljs-comment">//install.ohmyz.sh | sh</span>
 </code></pre><p>That&#39;ll set up the default config at <code>~/.zshrc</code>.</p>
 <p>If you want to you can install it manually, check that out at the <a href="https://github.com/robbyrussell/oh-my-zsh">github repo</a>.</p>
 <h3 id="pick-a-theme">Pick a theme</h3>
@@ -338,15 +338,15 @@ metalsmith(__dirname)
 }).call(<span class="hljs-keyword">this</span>);
 </code></pre>
 <p>There&#39;s definitely some boilerplate going on, but what about something a touch less trivial?</p>
-<pre><code class="lang-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>
-    constructor: (<span class="hljs-annotation">@who</span>) -&gt;
+<pre><code class="lang-coffeescript"><span class="hljs-attribute">class</span> Foo
+    <span class="hljs-attribute">constructor</span>: (<span class="hljs-variable">@who</span>) -&gt;
 
-    say: -&gt;
-        console.log(<span class="hljs-symbol">'Hello</span> ' + <span class="hljs-annotation">@who</span> + '!')
+    <span class="hljs-attribute">say</span>: -&gt;
+        console.<span class="hljs-function">log</span>(<span class="hljs-string">'Hello '</span> + <span class="hljs-variable">@who</span> + <span class="hljs-string">'!'</span>)
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
-    say: -&gt;
-        console.log(<span class="hljs-symbol">'Good</span> evening ' + <span class="hljs-annotation">@who</span> + '!')
+class Bar extends Foo
+    <span class="hljs-attribute">say</span>: -&gt;
+        console.<span class="hljs-function">log</span>(<span class="hljs-string">'Good evening '</span> + <span class="hljs-variable">@who</span> + <span class="hljs-string">'!'</span>)
 </code></pre>
 <p>Looking at the generated javascript it&#39;s hard to deny the superiority of coffeescript.</p>
 <pre><code class="lang-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
@@ -386,17 +386,17 @@ metalsmith(__dirname)
 </code></pre>
 <p>Really the only thing going against coffeescript is that it needs to be compiled. But using <a href="/post/easily-build-assets-with-gulpjs">a build tool like gulpjs</a> solves that. Indeed, compiling to javascript is one of it&#39;s greatest strengths. You get the benefit of a nicer, cleaner language and complete compatibility with all browsers.</p>
 <p>There&#39;s far more to coffeescript as well, things like looping over array comprehensions:</p>
-<pre><code class="lang-coffeescript"><span class="hljs-built_in">console</span>.log fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
+<pre><code class="lang-coffeescript">console<span class="hljs-class">.log</span> fruit <span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> [<span class="hljs-string">'apple'</span>, <span class="hljs-string">'banana'</span>, <span class="hljs-string">'grape'</span>]
 </code></pre>
 <p>Block regular expressions:</p>
 <pre><code class="lang-coffeescript">OPERATOR = <span class="hljs-comment">/// ^ (</span>
   ?: [-=]&gt;             <span class="hljs-preprocessor"># function</span>
-   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="hljs-preprocessor"># compound assign / compare</span>
-   | &gt;&gt;&gt;=?             <span class="hljs-preprocessor"># zero-fill right shift</span>
-   | ([-+:])\<span class="hljs-number">1</span>         <span class="hljs-preprocessor"># doubles</span>
-   | ([&amp;|&lt;&gt;])\<span class="hljs-number">2</span>=?      <span class="hljs-preprocessor"># logic / shift</span>
-   | \?\.              <span class="hljs-preprocessor"># soak access</span>
-   | \.{<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}           <span class="hljs-preprocessor"># range or splat</span>
+   <span class="hljs-string">| [-+*/%&lt;&gt;&amp;|^!?=]=  # compound assign / compare</span>
+   <span class="hljs-string">| &gt;&gt;&gt;=?             # zero-fill right shift</span>
+   <span class="hljs-string">| ([-+:])\1         # doubles</span>
+   <span class="hljs-string">| ([&amp;|&lt;&gt;])\2=?      # logic / shift</span>
+   <span class="hljs-string">| \?\.              # soak access</span>
+   <span class="hljs-string">| \.{2,3}           # range or splat</span>
 ) <span class="hljs-comment">///</span>
 </code></pre>
 <p>Function argument splats:</p>
@@ -437,27 +437,27 @@ foo(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, 
 <!-- more -->
 
 <p>It has a wonderfully basic syntax:</p>
-<pre><code class="lang-jade">doctype html
-html
+<pre><code class="lang-jade">doctype <span class="hljs-tag">html</span>
+<span class="hljs-tag">html</span>
     head
         title Hello World
-        link(<span class="hljs-preprocessor">rel</span>=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)
-    body
-        <span class="hljs-keyword">div</span>.container
-            p Hello World
+        <span class="hljs-function"><span class="hljs-title">link</span><span class="hljs-params">(rel=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)</span></span>
+    <span class="hljs-tag">body</span>
+        <span class="hljs-tag">div</span><span class="hljs-class">.container</span>
+            <span class="hljs-tag">p</span> Hello World
 </code></pre>
 <h2 id="layouts-and-blocks">Layouts and blocks</h2>
 <p>Jade allows you to create layouts and extend them for your different views:</p>
 <pre><code class="lang-jade"><span class="hljs-comment">// layouts/master.jade</span>
-body
-    <span class="hljs-keyword">block</span> content
-<span class="hljs-comment">{% endhighlight %}</span>
+<span class="hljs-tag">body</span>
+    <span class="hljs-tag">block</span> <span class="hljs-tag">content</span>
+{% <span class="hljs-attribute">endhighlight</span> %}
 
-<span class="hljs-comment">{% highlight jade %}</span>
+{% <span class="hljs-attribute">highlight</span> jade %}
 <span class="hljs-comment">// index.jade</span>
-extends layouts/master
+<span class="hljs-attribute">extends</span> layouts/master
 
-<span class="hljs-keyword">block</span> content
+block content
     header.hero
         h1 Hello World
 </code></pre>
@@ -479,11 +479,11 @@ extends layouts/master
 </code></pre>
 <pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-<span class="hljs-keyword">include</span> mixins/form
+include mixins/<span class="hljs-tag">form</span>
 
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)
-    +field(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)
++<span class="hljs-function"><span class="hljs-title">form</span><span class="hljs-params">(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)</span></span>
 </code></pre>
 <p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
 <pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
@@ -516,11 +516,11 @@ mixin field(name, <span class="hljs-class"><span class="hljs-keyword">type</span
 </code></pre>
 <pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-<span class="hljs-keyword">include</span> mixins/form
+include mixins/<span class="hljs-tag">form</span>
 
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>)
-    +field(<span class="hljs-string">"password"</span>)
++<span class="hljs-function"><span class="hljs-title">form</span><span class="hljs-params">(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"email"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"password"</span>)</span></span>
 </code></pre>
 <h2 id="lovely">Lovely</h2>
 <p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
@@ -594,20 +594,20 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 });
 </code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
-<pre><code><span class="hljs-keyword">var</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gulp-uglify'</span>)
+<pre><code><span class="hljs-tag">var</span> uglify = <span class="hljs-function"><span class="hljs-title">require</span><span class="hljs-params">(<span class="hljs-string">'gulp-uglify'</span>)</span></span>
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(<span class="hljs-symbol">'watc</span>h', function() {
+<pre><code>gulp.task('watch', function() {
     gulp.watch([
-        <span class="hljs-symbol">'assets</span>/scripts<span class="hljs-javadoc">/**/*.coffee',
-        'assets/scripts/**/</span>*.js'
-    ], [<span class="hljs-symbol">'script</span>s']);
+        'assets/scripts/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.coffee',
+        'assets/scripts/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.js'
+    ], ['scripts']);
 
     gulp.watch([
-        <span class="hljs-symbol">'assets</span>/styles<span class="hljs-javadoc">/**/*.sass',
-        'assets/styles/**/</span>*.css'
-    ], [<span class="hljs-symbol">'style</span>s']);
+        'assets/styles/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.sass',
+        'assets/styles/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.css'
+    ], ['styles']);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 <pre><code><span class="hljs-title">gulp</span> watch
@@ -644,11 +644,11 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 <p>It will allow you to apply a presenter to a collection of models:</p>
 <pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>
 </span>{
-    <span class="hljs-variable">$products</span> = <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;product</span><span class="hljs-variable">-&gt;all</span>()<span class="hljs-variable">-&gt;each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$product</span>)</span> </span>{
-            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;presenter</span><span class="hljs-variable">-&gt;newInstance</span>(<span class="hljs-variable">$product</span>);
+    <span class="hljs-variable">$products</span> = <span class="hljs-variable">$this</span>-&gt;product-&gt;all()-&gt;each(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$product</span>)</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span>-&gt;presenter-&gt;newInstance(<span class="hljs-variable">$product</span>);
     });
 
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;theme</span><span class="hljs-variable">-&gt;make</span>(<span class="hljs-string">'product.index'</span>)<span class="hljs-variable">-&gt;withProducts</span>(<span class="hljs-variable">$products</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span>-&gt;theme-&gt;make(<span class="hljs-string">'product.index'</span>)-&gt;withProducts(<span class="hljs-variable">$products</span>);
 }
 </code></pre>
 <p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>

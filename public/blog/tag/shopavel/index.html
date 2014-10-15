@@ -56,11 +56,11 @@
 <p>It will allow you to apply a presenter to a collection of models:</p>
 <pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>
 </span>{
-    <span class="hljs-variable">$products</span> = <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;product</span><span class="hljs-variable">-&gt;all</span>()<span class="hljs-variable">-&gt;each</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$product</span>)</span> </span>{
-            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;presenter</span><span class="hljs-variable">-&gt;newInstance</span>(<span class="hljs-variable">$product</span>);
+    <span class="hljs-variable">$products</span> = <span class="hljs-variable">$this</span>-&gt;product-&gt;all()-&gt;each(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$product</span>)</span> </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span>-&gt;presenter-&gt;newInstance(<span class="hljs-variable">$product</span>);
     });
 
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;theme</span><span class="hljs-variable">-&gt;make</span>(<span class="hljs-string">'product.index'</span>)<span class="hljs-variable">-&gt;withProducts</span>(<span class="hljs-variable">$products</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span>-&gt;theme-&gt;make(<span class="hljs-string">'product.index'</span>)-&gt;withProducts(<span class="hljs-variable">$products</span>);
 }
 </code></pre>
 <p>I have set March 31st as the deadline for <a href="https://github.com/shopavel/shopavel/issues?milestone=1&amp;state=open">alpha1</a> of Shopavel, so hopefully I&#39;ll have something good to show for it then. The alpha will include the first versions of the core framework, products, categories and themes.</p>

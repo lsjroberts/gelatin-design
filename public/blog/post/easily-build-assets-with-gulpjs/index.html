@@ -92,20 +92,20 @@ gulp.task(<span class="hljs-string">'scripts'</span>, [<span class="hljs-string"
 });
 </code></pre><p>By passing in <code>[&#39;coffeescripts&#39;]</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
-<pre><code><span class="hljs-keyword">var</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gulp-uglify'</span>)
+<pre><code><span class="hljs-tag">var</span> uglify = <span class="hljs-function"><span class="hljs-title">require</span><span class="hljs-params">(<span class="hljs-string">'gulp-uglify'</span>)</span></span>
 </code></pre><p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 <h2 id="watchers-and-automated-builds">Watchers and automated builds</h2>
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
-<pre><code>gulp.task(<span class="hljs-symbol">'watc</span>h', function() {
+<pre><code>gulp.task('watch', function() {
     gulp.watch([
-        <span class="hljs-symbol">'assets</span>/scripts<span class="hljs-javadoc">/**/*.coffee',
-        'assets/scripts/**/</span>*.js'
-    ], [<span class="hljs-symbol">'script</span>s']);
+        'assets/scripts/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.coffee',
+        'assets/scripts/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.js'
+    ], ['scripts']);
 
     gulp.watch([
-        <span class="hljs-symbol">'assets</span>/styles<span class="hljs-javadoc">/**/*.sass',
-        'assets/styles/**/</span>*.css'
-    ], [<span class="hljs-symbol">'style</span>s']);
+        'assets/styles/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.sass',
+        'assets/styles/<span class="hljs-keyword">*</span><span class="hljs-keyword">*</span>/<span class="hljs-keyword">*</span>.css'
+    ], ['styles']);
 });
 </code></pre><p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 <pre><code><span class="hljs-title">gulp</span> watch

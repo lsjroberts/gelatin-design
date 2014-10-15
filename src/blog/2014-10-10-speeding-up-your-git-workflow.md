@@ -65,7 +65,7 @@ Here we stash any local changes, pull the remote, pop our local changes, add the
 $ gqc "Updated foo"
 ```
 
-What would have required 80 keystrokes can now be done in 18. At 60 wpm that's a saving of about 13 seconds each time (not counting waiting) which could be 5 to 10 minutes a day. That's around 30 hours a year. Or 50 days in a 40 year career! 50 days saved, from what is a 5 minute job!
+What would have required 80 keystrokes can now be done in 18. At 60 wpm that's a saving of about 4.5 seconds each time (not counting waiting) which could be up to 3 minutes a day. That's around 12 hours a year. Or 20 days in a 40 year career! 20 days saved, from what is a 5 minute job!
 
 Amazing.
 

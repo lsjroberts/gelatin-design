@@ -54,27 +54,27 @@
 <!-- more -->
 
 <p>It has a wonderfully basic syntax:</p>
-<pre><code class="lang-jade">doctype html
-html
+<pre><code class="lang-jade">doctype <span class="hljs-tag">html</span>
+<span class="hljs-tag">html</span>
     head
         title Hello World
-        link(<span class="hljs-preprocessor">rel</span>=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)
-    body
-        <span class="hljs-keyword">div</span>.container
-            p Hello World
+        <span class="hljs-function"><span class="hljs-title">link</span><span class="hljs-params">(rel=<span class="hljs-string">"stylesheet"</span>, href=<span class="hljs-string">"build/styles/combined.css"</span>)</span></span>
+    <span class="hljs-tag">body</span>
+        <span class="hljs-tag">div</span><span class="hljs-class">.container</span>
+            <span class="hljs-tag">p</span> Hello World
 </code></pre>
 <h2 id="layouts-and-blocks">Layouts and blocks</h2>
 <p>Jade allows you to create layouts and extend them for your different views:</p>
 <pre><code class="lang-jade"><span class="hljs-comment">// layouts/master.jade</span>
-body
-    <span class="hljs-keyword">block</span> content
-<span class="hljs-comment">{% endhighlight %}</span>
+<span class="hljs-tag">body</span>
+    <span class="hljs-tag">block</span> <span class="hljs-tag">content</span>
+{% <span class="hljs-attribute">endhighlight</span> %}
 
-<span class="hljs-comment">{% highlight jade %}</span>
+{% <span class="hljs-attribute">highlight</span> jade %}
 <span class="hljs-comment">// index.jade</span>
-extends layouts/master
+<span class="hljs-attribute">extends</span> layouts/master
 
-<span class="hljs-keyword">block</span> content
+block content
     header.hero
         h1 Hello World
 </code></pre>
@@ -96,11 +96,11 @@ extends layouts/master
 </code></pre>
 <pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-<span class="hljs-keyword">include</span> mixins/form
+include mixins/<span class="hljs-tag">form</span>
 
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)
-    +field(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)
++<span class="hljs-function"><span class="hljs-title">form</span><span class="hljs-params">(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"email"</span>, <span class="hljs-string">"text"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"password"</span>, <span class="hljs-string">"password"</span>)</span></span>
 </code></pre>
 <p>So that&#39;s pretty cool, but there&#39;s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert &quot;email_address&quot; to &quot;Email Address&quot;. Then add in some input type guessing and we&#39;ve got something pretty useful really quickly.</p>
 <pre><code class="lang-jade"><span class="hljs-comment">// mixins/form.jade</span>
@@ -133,11 +133,11 @@ mixin field(name, <span class="hljs-class"><span class="hljs-keyword">type</span
 </code></pre>
 <pre><code class="lang-jade"><span class="hljs-comment">// login.jade</span>
 
-<span class="hljs-keyword">include</span> mixins/form
+include mixins/<span class="hljs-tag">form</span>
 
-+form(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)
-    +field(<span class="hljs-string">"email"</span>)
-    +field(<span class="hljs-string">"password"</span>)
++<span class="hljs-function"><span class="hljs-title">form</span><span class="hljs-params">(<span class="hljs-string">"auth/login"</span>, <span class="hljs-string">"post"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"email"</span>)</span></span>
+    +<span class="hljs-function"><span class="hljs-title">field</span><span class="hljs-params">(<span class="hljs-string">"password"</span>)</span></span>
 </code></pre>
 <h2 id="lovely">Lovely</h2>
 <p>There&#39;s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>

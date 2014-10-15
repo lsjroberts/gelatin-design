@@ -57,7 +57,7 @@ function formatDate(files, metalsmith, done) {
 
 function blogIndexList(files, metalsmith, done) {
     var index = files['index.md']
-        posts = metalsmith.data.posts,
+        posts = metalsmith.metadata().posts,
         perPage = 2;
 
     index.posts = posts.slice(0,perPage);
@@ -91,14 +91,15 @@ function blogIndexList(files, metalsmith, done) {
 function blogTagLists(files, metalsmith, done) {
     var tags = {};
 
-    for (p in metalsmith.data.posts) {
-        for (t in metalsmith.data.posts[p].tags) {
-            tag = metalsmith.data.posts[p].tags[t];
+    for (p in metalsmith.metadata().posts) {
+        if (!metalsmith.metadata().posts[p]) continue;
+        for (t in metalsmith.metadata().posts[p].tags) {
+            tag = metalsmith.metadata().posts[p].tags[t];
             if (! tags[tag]) {
                 tags[tag] = [];
             }
 
-            tags[tag].push(metalsmith.data.posts[p]);
+            tags[tag].push(metalsmith.metadata().posts[p]);
         }
     }
 

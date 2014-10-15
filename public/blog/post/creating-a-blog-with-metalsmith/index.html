@@ -54,13 +54,13 @@
 <p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it&#39;s all done.</p>
 <p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
 <p>Fortunately it&#39;s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith'</span>),
-    collections = <span class="hljs-built_in">require</span>(<span class="hljs-string">'metalsmith-collections'</span>);
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> metalsmith  = require(<span class="hljs-string">'metalsmith'</span>),
+    collections = require(<span class="hljs-string">'metalsmith-collections'</span>);
 
 metalsmith(__dirname)
 
     <span class="hljs-comment">// group together all files in the `/blog/` directory as posts</span>
-    .use(collections({
+    .<span class="hljs-keyword">use</span>(collections({
         posts: {
             pattern: <span class="hljs-string">'blog/*'</span>,
             sortBy: <span class="hljs-string">'date'</span>,
@@ -69,7 +69,7 @@ metalsmith(__dirname)
     }))
 
     <span class="hljs-comment">// generate the tag listing pages</span>
-    .use(blogTagLists)
+    .<span class="hljs-keyword">use</span>(blogTagLists)
 
     <span class="hljs-comment">// build</span>
     .build(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
