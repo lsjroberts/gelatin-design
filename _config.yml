@@ -2,7 +2,7 @@
 title: gelatindesign
 
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://gelatindesign.co.uk" # the base hostname & protocol for your site
 permalink: :categories/:title
 
 highlighter: pygments

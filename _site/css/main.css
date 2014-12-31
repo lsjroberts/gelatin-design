@@ -18,14 +18,14 @@ body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
 dl, dd, ol, ul, figure {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-size: 1em; }
 
 /**
  * Basic styling
  */
 body {
   font-family: "latolight", Helvetica, Arial, sans-serif;
-  font-size: 1em;
   line-height: 1.618;
   font-weight: 300;
   color: #333333;
@@ -125,8 +125,8 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(900px - (4.854rem * 2));
-  max-width: calc(900px - (4.854rem * 2));
+  max-width: -webkit-calc(900px - (4.854rem*2));
+  max-width: calc(900px - (4.854rem*2));
   margin-right: auto;
   margin-left: auto;
   padding: 9.708rem 4.854rem; }
@@ -135,6 +135,9 @@ pre {
       max-width: -webkit-calc(900px - (4.854rem));
       max-width: calc(900px - (4.854rem));
       padding: 2.427rem; } }
+  @media screen and (max-width: 600px) {
+    .wrapper {
+      padding: 2.427rem 1.2135rem; } }
 
 /**
  * Clearfix
@@ -163,6 +166,9 @@ pre {
   line-height: 1.2;
   text-align: center;
   text-transform: capitalize; }
+  @media screen and (max-width: 800px) {
+    .page h1, .post-title {
+      font-size: 1.3em; } }
 
 .post-title-icon {
   display: block;
@@ -178,6 +184,12 @@ pre {
   line-height: 1;
   text-align: center;
   color: #d76a6c; }
+  @media screen and (max-width: 800px) {
+    .page h1 strong, .post-title strong {
+      font-size: 4.2358rem; } }
+  @media screen and (max-width: 600px) {
+    .page h1 strong, .post-title strong {
+      font-size: 2.61792rem; } }
 
 .post-content h2 {
   font-size: 1.618rem;
@@ -219,6 +231,11 @@ pre {
 
 .page h1.lowercase {
   text-transform: lowercase; }
+.page h2 {
+  font-size: 1.618rem; }
+  @media screen and (max-width: 800px) {
+    .page h2 {
+      font-size: 1rem; } }
 
 .post-meta {
   font-size: 1rem;

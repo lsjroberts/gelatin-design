@@ -3,10 +3,10 @@
   <channel>
     <title>gelatindesign</title>
     <description></description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 31 Dec 2014 03:58:57 +0000</pubDate>
-    <lastBuildDate>Wed, 31 Dec 2014 03:58:57 +0000</lastBuildDate>
+    <link>http://gelatindesign.co.uk/</link>
+    <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 31 Dec 2014 19:44:11 +0000</pubDate>
+    <lastBuildDate>Wed, 31 Dec 2014 19:44:11 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -68,8 +68,8 @@ $ g ps
 &lt;p&gt;&lt;em&gt;totally accurate numbers…&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Oct 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/coding/speeding-up-your-git-workflow</link>
-        <guid isPermaLink="true">http://yourdomain.com/coding/speeding-up-your-git-workflow</guid>
+        <link>http://gelatindesign.co.uk/coding/speeding-up-your-git-workflow</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/speeding-up-your-git-workflow</guid>
         
         <category>git</category>
         
@@ -138,8 +138,8 @@ $ g ps
 &lt;p&gt;It takes time, is often difficult, and you may not see the results until several weeks later. But who ever learnt to code perfectly in a matter of weeks? Take heart in the kids returning each week to an optional after school class. We get to influence the future of these people into the fantastic career and hobby of coding. Yeah!&lt;/p&gt;
 </description>
         <pubDate>Mon, 16 Jun 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/codeclub/the-variables-of-codeclub</link>
-        <guid isPermaLink="true">http://yourdomain.com/codeclub/the-variables-of-codeclub</guid>
+        <link>http://gelatindesign.co.uk/codeclub/the-variables-of-codeclub</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/codeclub/the-variables-of-codeclub</guid>
         
         
         <category>codeclub</category>
@@ -195,8 +195,8 @@ $ g ps
 &lt;p&gt;Please do the same.&lt;/p&gt;
 </description>
         <pubDate>Sat, 31 May 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/opinion/isolationism-division-and-hate</link>
-        <guid isPermaLink="true">http://yourdomain.com/opinion/isolationism-division-and-hate</guid>
+        <link>http://gelatindesign.co.uk/opinion/isolationism-division-and-hate</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/opinion/isolationism-division-and-hate</guid>
         
         
         <category>opinion</category>
@@ -276,8 +276,8 @@ function blogTagLists(files, metalsmith, done) {
 &lt;p&gt;If you’re looking for a static-site generator which gives you a lot of control then I really recommend &lt;a href=&quot;http://metalsmith.io&quot;&gt;Metalsmith&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Sat, 24 May 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/coding/creating-a-blog-with-metalsmith</link>
-        <guid isPermaLink="true">http://yourdomain.com/coding/creating-a-blog-with-metalsmith</guid>
+        <link>http://gelatindesign.co.uk/coding/creating-a-blog-with-metalsmith</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/creating-a-blog-with-metalsmith</guid>
         
         <category>javascript</category>
         
@@ -354,8 +354,8 @@ function blogTagLists(files, metalsmith, done) {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Thu, 15 May 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/coding/improve-your-terminal</link>
-        <guid isPermaLink="true">http://yourdomain.com/coding/improve-your-terminal</guid>
+        <link>http://gelatindesign.co.uk/coding/improve-your-terminal</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/improve-your-terminal</guid>
         
         <category>terminal</category>
         
@@ -381,8 +381,8 @@ function blogTagLists(files, metalsmith, done) {
 &lt;iframe width=&quot;745&quot; height=&quot;419&quot; src=&quot;//www.youtube.com/embed/WC75-nAJylo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
         <pubDate>Wed, 30 Apr 2014 00:00:00 +0100</pubDate>
-        <link>http://yourdomain.com/codeclub/playing-with-pythons-and-turtles</link>
-        <guid isPermaLink="true">http://yourdomain.com/codeclub/playing-with-pythons-and-turtles</guid>
+        <link>http://gelatindesign.co.uk/codeclub/playing-with-pythons-and-turtles</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/codeclub/playing-with-pythons-and-turtles</guid>
         
         <category>python</category>
         
@@ -504,8 +504,8 @@ include mixins/form
 &lt;p&gt;Coding should be fun and jade brings that enjoyment back to html.&lt;/p&gt;
 </description>
         <pubDate>Sun, 16 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://yourdomain.com/coding/clean-your-html-with-jade</link>
-        <guid isPermaLink="true">http://yourdomain.com/coding/clean-your-html-with-jade</guid>
+        <link>http://gelatindesign.co.uk/coding/clean-your-html-with-jade</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/clean-your-html-with-jade</guid>
         
         <category>javascript</category>
         
@@ -622,8 +622,8 @@ gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
 &lt;p&gt;You may wish to install your dependancies through a &lt;code&gt;package.json&lt;/code&gt; file and running &lt;code&gt;npm install&lt;/code&gt; to ensure all your developers are working with the same node modules.&lt;/p&gt;
 </description>
         <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://yourdomain.com/coding/easily-build-assets-with-gulpjs</link>
-        <guid isPermaLink="true">http://yourdomain.com/coding/easily-build-assets-with-gulpjs</guid>
+        <link>http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</guid>
         
         <category>javascript</category>
         
@@ -671,8 +671,8 @@ gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
 &lt;p&gt;Every coder should teach Code Club.&lt;/p&gt;
 </description>
         <pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://yourdomain.com/codeclub/every-coder-should-teach-codeclub</link>
-        <guid isPermaLink="true">http://yourdomain.com/codeclub/every-coder-should-teach-codeclub</guid>
+        <link>http://gelatindesign.co.uk/codeclub/every-coder-should-teach-codeclub</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/codeclub/every-coder-should-teach-codeclub</guid>
         
         
         <category>codeclub</category>
