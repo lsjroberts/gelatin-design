@@ -12,3 +12,4 @@ markdown: kramdown
 kramdown:
   input: GFM
 future: false
+exclude: [node_modules/]

@@ -1,4 +1,16 @@
 @charset "UTF-8";
+@font-face {
+  font-family: 'latolight';
+  src: url("/fonts/lato-lig-webfont-webfont.eot");
+  src: url("/fonts/lato-lig-webfont-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/lato-lig-webfont-webfont.woff2") format("woff2"), url("/fonts/lato-lig-webfont-webfont.woff") format("woff"), url("/fonts/lato-lig-webfont-webfont.ttf") format("truetype"), url("/fonts/lato-lig-webfont-webfont.svg#latolight") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'josefin_slabregular';
+  src: url("/fonts/josefinslab-regular-webfont.eot");
+  src: url("/fonts/josefinslab-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/josefinslab-regular-webfont.woff2") format("woff2"), url("/fonts/josefinslab-regular-webfont.woff") format("woff"), url("/fonts/josefinslab-regular-webfont.ttf") format("truetype"), url("/fonts/josefinslab-regular-webfont.svg#josefin_slabregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 /**
  * Reset some basic elements
  */
@@ -12,7 +24,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "latolight", Helvetica, Arial, sans-serif;
   font-size: 1em;
   line-height: 1.618;
   font-weight: 300;
@@ -145,7 +157,7 @@ pre {
 
 .page h1, .post-title {
   font-size: 1.618rem;
-  font-family: "JosefinSlab", Georgia, serif;
+  font-family: "josefin_slabregular", Georgia, serif;
   font-style: italic;
   font-weight: 600;
   line-height: 1.2;
@@ -161,7 +173,7 @@ pre {
 .page h1 strong, .post-title strong {
   font-size: 6.85353rem;
   display: block;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "latolight", Helvetica, Arial, sans-serif;
   font-style: normal;
   line-height: 1;
   text-align: center;
@@ -170,7 +182,7 @@ pre {
 .post-content h2 {
   font-size: 1.618rem;
   margin-top: 4.854rem;
-  font-family: "JosefinSlab", Georgia, serif;
+  font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase; }
@@ -178,7 +190,7 @@ pre {
 .post-content h3 {
   font-size: 1rem;
   margin-top: 4.854rem;
-  font-family: "JosefinSlab", Georgia, serif;
+  font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase; }
@@ -210,7 +222,7 @@ pre {
 
 .post-meta {
   font-size: 1rem;
-  font-family: "JosefinSlab", Georgia, serif;
+  font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase; }
