@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Variables of CodeClub"
+title: "The variables of CodeClub"
 titleSmall: The variables of
 titleStrong: CodeClub
 date: 2014-06-16
