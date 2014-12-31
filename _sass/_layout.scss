@@ -164,5 +164,11 @@
         margin-left: -$spacing-unit;
         margin-right: -$spacing-unit;
         padding: $spacing-unit/2 $spacing-unit;
+
+        @include media-query($on-laptop) {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 8px 12px;
+        }
     }
 }

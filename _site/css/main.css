@@ -250,6 +250,11 @@ pre {
     margin-left: -4.854rem;
     margin-right: -4.854rem;
     padding: 2.427rem 4.854rem; }
+    @media screen and (max-width: 800px) {
+      .post-content pre {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 8px 12px; } }
 
 /**
  * Syntax highlighting styles
