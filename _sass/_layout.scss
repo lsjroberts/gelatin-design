@@ -1,0 +1,148 @@
+// http://modularscale.com/scale/?px1=16&px2=&ra1=1.618&ra2=0
+@mixin font-size($n) {
+    @if $n == 1 {
+        font-size: 1rem;
+    } @else {
+        font-size: #{power(1.618, $n - 1)}rem;
+    }
+}
+
+%title {
+    @include font-size(2);
+    font-family: $secondary-font-family;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+%title-icon {
+    display: block;
+    width: 60px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+%title-strong {
+    @include font-size(5);
+    display: block;
+    font-family: $base-font-family;
+    font-style: normal;
+    line-height: 1;
+    text-align: center;
+    color: $brand-color;
+}
+
+%subtitle {
+    @include font-size(2);
+    margin-top: $spacing-unit;
+    font-family: $secondary-font-family;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+%heading {
+    @include font-size(1);
+    margin-top: $spacing-unit;
+    font-family: $secondary-font-family;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.home {
+    img {
+        @extend %vertical-rhythm;
+        display: block;
+        width: 6.85em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.post-list {
+    margin-left: auto;
+    margin-right: auto;
+
+    li {
+        display: block;
+        list-style: none;
+        text-align: center;
+
+        &:after {
+            display: block;
+            content: " • "
+        }
+
+        &:last-child:after {
+            display: none;
+        }
+    }
+
+    .post-meta {
+        display: block;
+        font-size: 0.61rem;
+    }
+}
+
+.page {
+    h1 {
+        @extend %title;
+
+        &.lowercase {
+            text-transform: lowercase;
+        }
+
+        & strong {
+            @extend %title-strong;
+        }
+    }
+}
+
+.post {
+
+}
+
+.post-header {
+
+}
+
+.post-title {
+    @extend %title;
+
+    & strong {
+        @extend %title-strong;
+    }
+}
+
+.post-title-icon {
+    @extend %title-icon;
+}
+
+.post-meta {
+    @include font-size(1);
+    font-family: $secondary-font-family;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.post-content {
+    text-align: justify;
+
+    h2 {
+        @extend %subtitle;
+    }
+
+    h3 {
+        @extend %heading;
+    }
+
+    pre {
+        margin-left: -$spacing-unit;
+        margin-right: -$spacing-unit;
+        padding: $spacing-unit/2 $spacing-unit;
+    }
+}

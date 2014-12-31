@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Speeding up your git workflow</title>
+    <meta name="description" content="If you are doing a small task frequently then spending a little time to speed up that task really can pay off in a significant way (relevant xkcd). As a deve...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://yourdomain.com/coding/speeding-up-your-git-workflow">
+    <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://yourdomain.com/feed.xml" />
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-18813637-1', 'gelatindesign.co.uk');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+
+    <body>
+
+        <header class="site-header">
+
+</header>
+
+        <div class="page-content">
+            <div class="wrapper">
+                <div class="post">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">Speeding up your <strong>git workflow</strong></h1>
+        <p class="post-meta">10 Oct, 2014</p>
+        <p class="post-meta post-categories">
+            coding
+            
+                 • git
+            
+                 • terminal
+            
+        </p>
+    </header>
+
+    <article class="post-content">
+        <p>If you are doing a small task frequently then spending a little time to speed up that task really can pay off in a significant way (<a href="https://xkcd.com/1205/">relevant xkcd</a>). As a developer there are few tools you will be interacting with more times a day than git, so lets speed it up!</p>
+
+<h2 id="alias-git">Alias git</h2>
+
+<p>First things first, you are going to want to alias <code>git</code> to something even shorter. Open up your <code>.bash_profile</code> (or <code>.zshrc</code> <a href="/blog/post/improve-your-terminal">if you are using that</a>) in nano or whatever and append:</p>
+
+<pre><code>alias g="git"
+</code></pre>
+
+<p>Now you will be able to reference commands like <code>git checkout master</code> using just <code>g checkout master</code>.</p>
+
+<h2 id="alias-gits-commands">Alias git’s commands</h2>
+
+<p>That’s a good start but <code>checkout</code> is a lot of characters, let’s bring that down along with all the other git commands. Git comes with it’s own aliasing which you can configure by running this in your terminal:</p>
+
+<pre><code>g config --global alias.a add
+g config --global alias.b branch
+g config --global alias.c commit
+g config --global alias.cf config
+g config --global alias.co checkout
+g config --global alias.s status
+g config --global alias.sh stash
+g config --global alias.pl pull
+g config --global alias.ps push
+</code></pre>
+
+<p>Now your typical workflow can be reduced to:</p>
+
+<pre><code>$ g co -b "feature/foo"
+$ g a .
+$ g c -m "Added foo"
+$ g ps
+</code></pre>
+
+<p>This is pretty great, it may seem like only a few characters but if you are typing those characters dozens of times a day it can add up quickly.</p>
+
+<h2 id="alias-your-workflow">Alias your workflow</h2>
+
+<p>And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your <code>.bash_profile</code> or <code>.zshrc</code> file and append it with a custom method:</p>
+
+<pre><code>gqc() {
+    g sh &amp;&amp; g pl &amp;&amp; g sh pop &amp;&amp; g a -A &amp;&amp; g c -m $1 &amp;&amp; g ps
+}
+</code></pre>
+
+<p>Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:</p>
+
+<pre><code>$ gqc "Updated foo"
+</code></pre>
+
+<p>What would have required 80 keystrokes can now be done in 18. At 60 wpm that’s a saving of about 4.5 seconds each time (not counting waiting) which could be up to 3 minutes a day. That’s around 12 hours a year. Or 20 days in a 40 year career! 20 days saved, from what is a 5 minute job!</p>
+
+<p>Amazing.</p>
+
+<p><em>totally accurate numbers…</em></p>
+
+    </article>
+
+</div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+
+</footer>
+
+    </body>
+
+</html>

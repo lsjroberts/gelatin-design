@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Creating a blog with Metalsmith</title>
+    <meta name="description" content="  Update: Since writing this article I’ve actually updated the site to use Jekyll. Various packages kept breaking due to version compatibility issues etc. I ...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://yourdomain.com/coding/creating-a-blog-with-metalsmith">
+    <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://yourdomain.com/feed.xml" />
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-18813637-1', 'gelatindesign.co.uk');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+
+    <body>
+
+        <header class="site-header">
+
+</header>
+
+        <div class="page-content">
+            <div class="wrapper">
+                <div class="post">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">Creating a blog with <strong>Metalsmith</strong></h1>
+        <p class="post-meta">24 May, 2014</p>
+        <p class="post-meta post-categories">
+            coding
+            
+                 • javascript
+            
+                 • nodejs
+            
+                 • metalsmith
+            
+                 • jekyll
+            
+        </p>
+    </header>
+
+    <article class="post-content">
+        <blockquote>
+  <p>Update: Since writing this article I’ve actually updated the site to use Jekyll. Various packages kept breaking due to version compatibility issues etc. I got bored and just switched over to a more stable solution.</p>
+</blockquote>
+
+<p>I’ve been looking at converting this site to use a static-site generator. Prior to this I’ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn’t particuarly sold, not sure why I just didn’t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it’s all done.</p>
+
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+
+<p>Fortunately it’s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+
+<pre><code class="language-js">var metalsmith  = require('metalsmith'),
+    collections = require('metalsmith-collections');
+
+metalsmith(__dirname)
+
+    // group together all files in the `/blog/` directory as posts
+    .use(collections({
+        posts: {
+            pattern: 'blog/*',
+            sortBy: 'date',
+            reverse: true,
+        }
+    }))
+
+    // generate the tag listing pages
+    .use(blogTagLists)
+
+    // build
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
+
+    // loop the posts collection, creating new groups on the tags
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    // loop the tags and create a new index file for each tag
+    for (tag in tags) {
+        files['blog/tag/' + tag + '/index.md'] = {
+            template: 'list.html',
+            mode: '0644',
+            contents: '',
+            title: "Posts tagged '" + tag + "'",
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+</code></pre>
+
+<p>You can see my full <a href="http://github.com/lsjroberts/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
+
+<p>If you’re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
+
+    </article>
+
+</div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+
+</footer>
+
+    </body>
+
+</html>

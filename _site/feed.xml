@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gelatindesign</title>
+    <description></description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 31 Dec 2014 03:38:01 +0000</pubDate>
+    <lastBuildDate>Wed, 31 Dec 2014 03:38:01 +0000</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Speeding up your git workflow</title>
+        <description>&lt;p&gt;If you are doing a small task frequently then spending a little time to speed up that task really can pay off in a significant way (&lt;a href=&quot;https://xkcd.com/1205/&quot;&gt;relevant xkcd&lt;/a&gt;). As a developer there are few tools you will be interacting with more times a day than git, so lets speed it up!&lt;/p&gt;
+
+&lt;h2 id=&quot;alias-git&quot;&gt;Alias git&lt;/h2&gt;
+
+&lt;p&gt;First things first, you are going to want to alias &lt;code&gt;git&lt;/code&gt; to something even shorter. Open up your &lt;code&gt;.bash_profile&lt;/code&gt; (or &lt;code&gt;.zshrc&lt;/code&gt; &lt;a href=&quot;/blog/post/improve-your-terminal&quot;&gt;if you are using that&lt;/a&gt;) in nano or whatever and append:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias g=&quot;git&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you will be able to reference commands like &lt;code&gt;git checkout master&lt;/code&gt; using just &lt;code&gt;g checkout master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;alias-gits-commands&quot;&gt;Alias git’s commands&lt;/h2&gt;
+
+&lt;p&gt;That’s a good start but &lt;code&gt;checkout&lt;/code&gt; is a lot of characters, let’s bring that down along with all the other git commands. Git comes with it’s own aliasing which you can configure by running this in your terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;g config --global alias.a add
+g config --global alias.b branch
+g config --global alias.c commit
+g config --global alias.cf config
+g config --global alias.co checkout
+g config --global alias.s status
+g config --global alias.sh stash
+g config --global alias.pl pull
+g config --global alias.ps push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now your typical workflow can be reduced to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ g co -b &quot;feature/foo&quot;
+$ g a .
+$ g c -m &quot;Added foo&quot;
+$ g ps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is pretty great, it may seem like only a few characters but if you are typing those characters dozens of times a day it can add up quickly.&lt;/p&gt;
+
+&lt;h2 id=&quot;alias-your-workflow&quot;&gt;Alias your workflow&lt;/h2&gt;
+
+&lt;p&gt;And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your &lt;code&gt;.bash_profile&lt;/code&gt; or &lt;code&gt;.zshrc&lt;/code&gt; file and append it with a custom method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gqc() {
+    g sh &amp;amp;&amp;amp; g pl &amp;amp;&amp;amp; g sh pop &amp;amp;&amp;amp; g a -A &amp;amp;&amp;amp; g c -m $1 &amp;amp;&amp;amp; g ps
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gqc &quot;Updated foo&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What would have required 80 keystrokes can now be done in 18. At 60 wpm that’s a saving of about 4.5 seconds each time (not counting waiting) which could be up to 3 minutes a day. That’s around 12 hours a year. Or 20 days in a 40 year career! 20 days saved, from what is a 5 minute job!&lt;/p&gt;
+
+&lt;p&gt;Amazing.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;totally accurate numbers…&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 10 Oct 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/coding/speeding-up-your-git-workflow</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/speeding-up-your-git-workflow</guid>
+        
+        <category>git</category>
+        
+        <category>terminal</category>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
+        <title>The Variables of CodeClub</title>
+        <description>&lt;p&gt;&lt;em&gt;Originally posted on &lt;a href=&quot;http://www.message.co.uk/the-variables-of-code-club&quot;&gt;the Message blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2014-06-16/codeclub.png&quot; alt=&quot;Codeclub lesson&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve been running a &lt;a href=&quot;&quot;&gt;Code Club&lt;/a&gt; class since January and the thing I’ve most come to realise is that teaching is hard. There is a group of variables that constantly challenge your approach to a subject, and those variables are the students.&lt;/p&gt;
+
+&lt;p&gt;These are some of the difficulties I’ve had teaching the class. I’m sure qualified teachers are well aware of them, but as a developer there’s many an unexpected occurrence.&lt;/p&gt;
+
+&lt;h2 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h2&gt;
+
+&lt;p&gt;Discard any assumptions you might have. What you call a file the students may call a page. They likely won’t know where all the special characters are on the keyboard. They probably haven’t done modulus in maths yet. Programming loops aren’t a particularly obvious concept. And why doesn’t it always just run from top to bottom?&lt;/p&gt;
+
+&lt;p&gt;The last one of those seems to be a more difficult idea to understand, calling functions in one place and defining them elsewhere. It’s hard to guage how well each student gets this, but it’s one of those thing that will gradually improve as you progress through the lessons.&lt;/p&gt;
+
+&lt;h2 id=&quot;silence&quot;&gt;Silence&lt;/h2&gt;
+
+&lt;p&gt;“Did everyone understand that?”&lt;br /&gt;
+“…”&lt;br /&gt;
+“Did anyone not follow?”&lt;br /&gt;
+“…”&lt;br /&gt;
+“Does anyone want me to go over it again?”&lt;br /&gt;
+“…”&lt;/p&gt;
+
+&lt;p&gt;It’s quite a surprise to go from an environment where you have constant dialogue about code to one where what you say is accepted as gospel. I haven’t yet worked out the trick to get students to actually respond to questions asked from the front. But the method that seems to more or less work is going through small logical code changes from the front and then get them to write it. Followed by a quick run around between students helping them fix issues. If you can, get a second developer to act as a classroom assistant to help with this.&lt;/p&gt;
+
+&lt;p&gt;It’s possible that having the students read directly from the lesson sheets could work better, but that does seem to generate the same questions over and over.&lt;/p&gt;
+
+&lt;p&gt;Just keep in mind, if the kids are looking at you in silence it’s most likely because they are paying attention. It’s when they are making a noise that you should be concerned.&lt;/p&gt;
+
+&lt;h2 id=&quot;typos-tpoys-tiepose-everyware&quot;&gt;Typos, tpoys, tiepose everyware&lt;/h2&gt;
+
+&lt;p&gt;You know how often your own bugs are caused by typos? Yeah, multiply that by a bajillion.&lt;/p&gt;
+
+&lt;p&gt;It’s one of those things you forget you did as a child, learning to type. But try writing silly coding terms correctly like def instead of define, mixing words and numbers in odd ways, plus some completely non-standard punctuation all over the place and you’ll end up with constant bugs.Then there’s indentation…&lt;/p&gt;
+
+&lt;p&gt;“Why is my code not working?”&lt;br /&gt;
+“You’ve missed a tab on that line, you need to make sure it is tabbed in once after your if statement.”&lt;br /&gt;
+&lt;em&gt;Student presses spacebar once&lt;/em&gt;&lt;br /&gt;
+“No, you need to make sure you use the tab key so it all lines up correctly”&lt;br /&gt;
+&lt;em&gt;Student presses tab once leaving the space in there as well&lt;/em&gt;&lt;br /&gt;
+“Umm, you need to remove that extra space you added”&lt;br /&gt;
+&lt;em&gt;Student presses backspace twice&lt;/em&gt;&lt;br /&gt;
+“And… add the tab back in”&lt;br /&gt;
+&lt;em&gt;Student presses tab key&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;That happens several times a lesson. The students are getting better at it as they become more comfortable with the syntax, you just need to be patient and it will all compile and run in the end.&lt;/p&gt;
+
+&lt;h2 id=&quot;repetition&quot;&gt;Repetition&lt;/h2&gt;
+
+&lt;p&gt;The most important point to be made is that saying something once is not at all enough. Repetition is the key to learning. Repeat yourself within each lesson. Repeat last weeks concepts in the next lesson. Repeat things on an individual student basis. Repeat what you did last lesson. And repeat things to each student.&lt;/p&gt;
+
+&lt;h2 id=&quot;coding-woo&quot;&gt;Coding, woo!&lt;/h2&gt;
+
+&lt;p&gt;It takes time, is often difficult, and you may not see the results until several weeks later. But who ever learnt to code perfectly in a matter of weeks? Take heart in the kids returning each week to an optional after school class. We get to influence the future of these people into the fantastic career and hobby of coding. Yeah!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 Jun 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/codeclub/the-variables-of-codeclub</link>
+        <guid isPermaLink="true">http://yourdomain.com/codeclub/the-variables-of-codeclub</guid>
+        
+        
+        <category>codeclub</category>
+        
+      </item>
+    
+      <item>
+        <title>Isolationism, Division and Hate</title>
+        <description>&lt;h2 id=&quot;cause&quot;&gt;Cause&lt;/h2&gt;
+
+&lt;p&gt;I grew up being taught that I was in a special group of people that had been chosen to live in an eternal utopia and everyone else would burn. It came from a place of love and desire to help me, but it created a division between me and others. It isolated me and some of my friends from others around. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
+
+&lt;p&gt;I grew up being taught that I was in a special group of people who had been born in the greatest country, the one with the most history, the largest empire that has existed. Because I am English it is my destiny to conquer the world. I wasn’t directly taught that people of other countries were lesser, but that my English blood makes me stronger. I wasn’t taught to be racist, none of my friends or family were racist, but it created a division between me and others. It isolated me from others in the world. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
+
+&lt;p&gt;I grew up being taught that I was in a special group of people of my gender, and that as a male it was my role to grow up and lead my family, to be the breadwinner, to be the head of the family. I wasn’t taught women were lesser, indeed I was specifically taught that we are equal but the man is in charge. I wasn’t taught to be sexist, none of my friends or family were sexist, but it created a division between me and others. It isolated me from women and other genders in the world. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
+
+&lt;p&gt;I grew up being taught I was in a special group of people who were not broken, who were allowed to love since we were the ones who loved in the correct way. Because I am straight I am allowed my own family, I am allowed to declare my love for another and bind to them for life. I wasn’t taught to be homophobic, I was taught to “hate the sin not the sinner”,  to despise the act not the person. But this created a division between me and others. It isolated me from the full scope of love that exists. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
+
+&lt;p&gt;No one intended to teach me to be isolationist, no one intended to teach me to be divisive, no one intended to teach me to hate. But I learnt isolationism, I learnt to be divisive and I learnt hate.&lt;/p&gt;
+
+&lt;p&gt;Let me clarify, hate doesn’t have to mean violence, it doesn’t have to mean bullying, it doesn’t have to mean directed aggression. Hate comes from the heart, it comes from deeply held beliefs that seperate you from others, it can be an entirely internal thought process.&lt;/p&gt;
+
+&lt;h2 id=&quot;effect&quot;&gt;Effect&lt;/h2&gt;
+
+&lt;p&gt;What is the result of this hate?&lt;/p&gt;
+
+&lt;p&gt;For society it’s an ongoing disaster. As political parties such as UKIP and the Scottish National Party continue to preach isolationism from international entities they are generating a society that fears and hates those of different nationality.&lt;/p&gt;
+
+&lt;p&gt;UKIP tell us to beware the dirty Bulgarians who might come to our country and steal our jobs, our money, our NHS, our land. As if we are any different. As if we don’t have our money and land as a direct result of going to other’s countries and stealing it from them.&lt;/p&gt;
+
+&lt;p&gt;A Bulgarian father is your father, a Syrian mother is your mother, an Israeli son is your son, a Palestinian daughter is your daughter, an Iranian cousin is your cousin and a North Korean grandmother is your grandmother. Your money is their money, your land is their land, your life is their life, your love is their love and this world is our world.&lt;/p&gt;
+
+&lt;p&gt;Have no judgement in your heart for those who act in the way their society has taught them to act, for you act with all the prejudices and inequalities of your society. Instead come together to create a single society that consists of all humanity, accepts all humanity and preaches humanity.&lt;/p&gt;
+
+&lt;p&gt;Does that sound like some unattainable utopia? Just let me say this, there is nothing that dictates what happens to us beyond ourselves. If we want to achieve something we can. We can achieve utopia through peace and abundance, a post-scarcity society built on freely available resources generated through technology. technology that comes from knowledge, knowledge that comes from education. You think that sounds like the silly statement of someone who hasn’t seen the world? Then you have been defeated by the world, stand up and try again.&lt;/p&gt;
+
+&lt;p&gt;Still don’t think it’s possible? Go read about &lt;a href=&quot;http://www.sesame.org.jo/sesame/about-us/what-is-sesame.html&quot;&gt;SESAME, Synchrotron-light for Experimental Science and Applications in the Middle East&lt;/a&gt;. It’s a joint effort of various Israeli, Palestinian, Iranian and other scientists building a particle accelerator in Jordan.&lt;/p&gt;
+
+&lt;p&gt;Without hate there is no limit to what humanity can achieve.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;So what is the solution for hate on a personal level? What solved it for me?&lt;/p&gt;
+
+&lt;p&gt;If conflicts are caused by ignorance, fear and hate then peace is found through education, acceptance and equality.&lt;/p&gt;
+
+&lt;p&gt;Two years ago I was becoming disenchanted with my religious beliefs, I was beginning to see the cracks in the dogma. A religion of peace that has a god of war, a religion of life that condemns the ignorant to death. I took a step back and decided to look at both sides of the coin with as little emotion and bias as possible. It didn’t take long to realise the truth of hate behind the facade of love. I was educated through online discussion, books and videos that taught me to accept others as equally deserving of a future.&lt;/p&gt;
+
+&lt;p&gt;A bit less than a year ago I started a new job and made some new friends. One guy in particular struck me with a simple statement - “I’m a feminist”. I didn’t really understand, how can a man be a feminist? I had always been taught by society that feminists were this extreme group of women who hate men. Through conversation and discussion he and others educated me, I changed my opinion and accepted their viewpoint.&lt;/p&gt;
+
+&lt;p&gt;Today I continue to internally fight the thoughts and prejudices that occassionaly attempt to resurface. But through continued self-education and conversation I try to accept all who cross my path and strive for equality in all I do and where I go.&lt;/p&gt;
+
+&lt;p&gt;Please do the same.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 May 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/opinion/isolationism-division-and-hate</link>
+        <guid isPermaLink="true">http://yourdomain.com/opinion/isolationism-division-and-hate</guid>
+        
+        
+        <category>opinion</category>
+        
+      </item>
+    
+      <item>
+        <title>Creating a blog with Metalsmith</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Update: Since writing this article I’ve actually updated the site to use Jekyll. Various packages kept breaking due to version compatibility issues etc. I got bored and just switched over to a more stable solution.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I’ve been looking at converting this site to use a static-site generator. Prior to this I’ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.&lt;/p&gt;
+
+&lt;p&gt;With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn’t particuarly sold, not sure why I just didn’t feel happy using it. I wanted more control and to organise my files how I wanted.&lt;/p&gt;
+
+&lt;p&gt;Yesterday I saw a retweet about &lt;a href=&quot;http://metalsmith.io&quot;&gt;Metalsmith&lt;/a&gt; which looked very similar to &lt;a href=&quot;/blog/post/easily-build-assets-with-gulpjs&quot;&gt;Gulpjs which I am already a big fan of&lt;/a&gt;. I started a few hours ago writing my build script and porting my content and now not long later it’s all done.&lt;/p&gt;
+
+&lt;p&gt;I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.&lt;/p&gt;
+
+&lt;p&gt;Fortunately it’s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;var metalsmith  = require(&#39;metalsmith&#39;),
+    collections = require(&#39;metalsmith-collections&#39;);
+
+metalsmith(__dirname)
+
+    // group together all files in the `/blog/` directory as posts
+    .use(collections({
+        posts: {
+            pattern: &#39;blog/*&#39;,
+            sortBy: &#39;date&#39;,
+            reverse: true,
+        }
+    }))
+
+    // generate the tag listing pages
+    .use(blogTagLists)
+
+    // build
+    .build(function(err) {
+        if (err) throw err;
+    });
+
+function blogTagLists(files, metalsmith, done) {
+    var tags = {};
+
+    // loop the posts collection, creating new groups on the tags
+    for (p in metalsmith.data.posts) {
+        for (t in metalsmith.data.posts[p].tags) {
+            tag = metalsmith.data.posts[p].tags[t];
+            if (! tags[tag]) {
+                tags[tag] = [];
+            }
+
+            tags[tag].push(metalsmith.data.posts[p]);
+        }
+    }
+
+    // loop the tags and create a new index file for each tag
+    for (tag in tags) {
+        files[&#39;blog/tag/&#39; + tag + &#39;/index.md&#39;] = {
+            template: &#39;list.html&#39;,
+            mode: &#39;0644&#39;,
+            contents: &#39;&#39;,
+            title: &quot;Posts tagged &#39;&quot; + tag + &quot;&#39;&quot;,
+            posts: tags[tag],
+        }
+    }
+
+    done();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see my full &lt;a href=&quot;http://github.com/lsjroberts/gelatin-design/tree/master/build.js&quot;&gt;build.js file here&lt;/a&gt; along with the rest of the code for this site.&lt;/p&gt;
+
+&lt;p&gt;If you’re looking for a static-site generator which gives you a lot of control then I really recommend &lt;a href=&quot;http://metalsmith.io&quot;&gt;Metalsmith&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 24 May 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/coding/creating-a-blog-with-metalsmith</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/creating-a-blog-with-metalsmith</guid>
+        
+        <category>javascript</category>
+        
+        <category>nodejs</category>
+        
+        <category>metalsmith</category>
+        
+        <category>jekyll</category>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
+        <title>Improve your terminal</title>
+        <description>&lt;p&gt;I believe one of the main contributing factors to people being wary of using the terminal is the terrible defaults for text and colours. The good news is that these are pretty easy to fix.&lt;/p&gt;
+
+&lt;p&gt;After going through the following changes you’ll end up with a lovely terminal like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2014-05-15/lovely-terminal.png&quot; alt=&quot;lovely terminal&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;oh-my-zshell&quot;&gt;Oh my zshell!&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh&quot;&gt;on-my-zsh&lt;/a&gt; is a must-have tool for frequent terminal users. It makes it easy to use themes for styling, but provides so much more functionality than that.&lt;/p&gt;
+
+&lt;p&gt;If you trust the author of that tool then you can install it by just running&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L http://install.ohmyz.sh | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That’ll set up the default config at &lt;code&gt;~/.zshrc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to you can install it manually, check that out at the &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh&quot;&gt;github repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;pick-a-theme&quot;&gt;Pick a theme&lt;/h3&gt;
+
+&lt;p&gt;I personally use the &lt;code&gt;ys&lt;/code&gt; theme, it presents your current directory, git branch and status and the current type before each command you type. This lets you see at a glance what’s going on and when you fired a long running command allowing you to see how long it’s taking.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2014-05-15/ys-line-header.png&quot; alt=&quot;ys line header&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To install your theme of choice, change your &lt;code&gt;~/.zshrc&lt;/code&gt; to include&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=ys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;fonts-and-colours&quot;&gt;Fonts and colours&lt;/h2&gt;
+
+&lt;p&gt;In addition to your theme you should set your default text font and colour and your terminal background colour. On a Mac you can do this quite easily within the terminal preferences by going to &lt;code&gt;Terminal &amp;gt; Preferences...&lt;/code&gt; and change the options under &lt;code&gt;Text&lt;/code&gt; and &lt;code&gt;Window&lt;/code&gt;. On Linux you can do this under &lt;code&gt;Edit &amp;gt; Profile Preferences&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Picking a font is pretty important, it has to be monospaced and some good choices are Monaco, Source Code Pro, Inconsolata. I personally use Iconsolata.&lt;/p&gt;
+
+&lt;p&gt;Secondly you really should think about setting the font size to something nice and large, I go with 18px. You will be staring at your terminal for a long time, don’t break your eyes to do it.&lt;/p&gt;
+
+&lt;p&gt;It’s worth nothing, that while background transparency might look cool, it will definitely hinder your ability to focus and work, so please just set it to 100% opacity.&lt;/p&gt;
+
+&lt;p&gt;Finally, I personally like to add extra space between lines, I find it really helps reading, so I set line spacing to &lt;code&gt;1.5&lt;/code&gt; and character spacing to &lt;code&gt;1.05&lt;/code&gt;. But this will depend on your personal tastes and the font you chose.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-terminal-is-the-best-place-for-a-developer-to-develop&quot;&gt;The terminal is the best place for a developer to develop&lt;/h2&gt;
+
+&lt;p&gt;So much of development requires running a command-line tool here and there that you may as well just stay in the terminal the whole time. Don’t use a gui program to manage your git repos, they are all slower than just running the git commands yourself. It takes time to learn but once you’ve learnt it you’ll gain that back in time saved getting things done.&lt;/p&gt;
+
+&lt;p&gt;With that in mind I’ve been looking to get away from my final non-terminal based development tool, the text editor (Sublime Text 2 in my case). I’ve been learning vim, indeed I wrote this article with vim. It’s fantastic. If you are interested in learning vim, run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vimtutor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and go through it’s lessons every day and you’ll soon get the hang of this powerful tool.&lt;/p&gt;
+
+&lt;p&gt;Once I’m comfortable using vim I’ll write up a tutorial on customising it, though it might take a few weeks to get to that stage.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Update: I never got comfortable with vim. It may be powerful, but good grief it’s just way too frustrating to get there.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 15 May 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/coding/improve-your-terminal</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/improve-your-terminal</guid>
+        
+        <category>terminal</category>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
+        <title>Playing with pythons and turtles</title>
+        <description>&lt;p&gt;For this week’s CodeClub lesson we looked at the python library &lt;a href=&quot;https://docs.python.org/3.4/library/turtle.html&quot;&gt;turtle&lt;/a&gt;. It’s a easy and fun little graphics library based around moving a “turtle” cursor around the screen, drawing lines and filling in shapes.&lt;/p&gt;
+
+&lt;p&gt;For something that is so basic in functionality it’s surprising how the results can be so satisfying.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/lsjroberts/codeclub/tree/master/python/lesson01-02&quot;&gt;You can check out the code at github.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/blog/2014-04-30/turtle-1.png&quot;&gt;&lt;img src=&quot;/images/blog/2014-04-30/turtle-1.png&quot; alt=&quot;Python Turtle Screenshot 1&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/blog/2014-04-30/turtle-2.png&quot;&gt;&lt;img src=&quot;/images/blog/2014-04-30/turtle-2.png&quot; alt=&quot;Python Turtle Screenshot 1&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;iframe width=&quot;745&quot; height=&quot;419&quot; src=&quot;//www.youtube.com/embed/WC75-nAJylo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Wed, 30 Apr 2014 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/codeclub/playing-with-pythons-and-turtles</link>
+        <guid isPermaLink="true">http://yourdomain.com/codeclub/playing-with-pythons-and-turtles</guid>
+        
+        <category>python</category>
+        
+        <category>turtle</category>
+        
+        
+        <category>codeclub</category>
+        
+      </item>
+    
+      <item>
+        <title>Clean your HTML with Jade</title>
+        <description>&lt;p&gt;As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://jade-lang.com&quot;&gt;Jade&lt;/a&gt; is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for &lt;a href=&quot;http://stackoverflow.com/questions/13355137/php-jade-template-parser&quot;&gt;PHP&lt;/a&gt; and other languages as well.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;It has a wonderfully basic syntax:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;doctype html
+html
+    head
+        title Hello World
+        link(rel=&quot;stylesheet&quot;, href=&quot;build/styles/combined.css&quot;)
+    body
+        div.container
+            p Hello World
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;layouts-and-blocks&quot;&gt;Layouts and blocks&lt;/h2&gt;
+
+&lt;p&gt;Jade allows you to create layouts and extend them for your different views:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// layouts/master.jade
+body
+    block content
+
+// index.jade
+extends layouts/master
+
+block content
+    header.hero
+        h1 Hello World
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;use-mixins-to-power-your-views&quot;&gt;Use mixins to power your views&lt;/h2&gt;
+
+&lt;p&gt;Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// mixins/form.jade
+mixin form(action, method)
+    unless method
+        - method= &quot;get&quot;
+    form(action= action, method= method)
+        if block
+            block
+        else
+            p Looks like you forgot to add any inputs to your form
+
+mixin field(name, type)
+    label= name
+    input(type= type, name= name)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;, &quot;text&quot;)
+    +field(&quot;password&quot;, &quot;password&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So that’s pretty cool, but there’s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an &lt;code&gt;unslugify&lt;/code&gt; function to convert “email_address” to “Email Address”. Then add in some input type guessing and we’ve got something pretty useful really quickly.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// mixins/form.jade
+
+//- ...
+
+mixin field(name, type)
+    //- Convert &quot;foo_bar&quot; to &quot;Foo Bar&quot;
+    -var unslugify = function(input) {
+    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
+    -       return &#39; &#39; + group1.toUpperCase();
+    -   });
+    -}
+
+    //- If no type has been set, try to pick an appropriate one
+    unless type
+        case name
+            when &quot;password&quot;
+                - type= &quot;password&quot;
+            when &quot;password_confirmation&quot;
+                - type= &quot;password&quot;
+            when &quot;email&quot;
+                - type= &quot;email&quot;
+            default
+                - type= &quot;text&quot;
+
+    div.field
+        label= unslugify(name)
+        input(type= type, name= name)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// login.jade
+
+include mixins/form
+
++form(&quot;auth/login&quot;, &quot;post&quot;)
+    +field(&quot;email&quot;)
+    +field(&quot;password&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;lovely&quot;&gt;Lovely&lt;/h2&gt;
+
+&lt;p&gt;There’s a few more things you can do in jade, &lt;a href=&quot;http://jade-lang.com/reference/&quot;&gt;check out the reference&lt;/a&gt; to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.&lt;/p&gt;
+
+&lt;p&gt;Coding should be fun and jade brings that enjoyment back to html.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 16 Feb 2014 00:00:00 +0000</pubDate>
+        <link>http://yourdomain.com/coding/clean-your-html-with-jade</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/clean-your-html-with-jade</guid>
+        
+        <category>javascript</category>
+        
+        <category>node</category>
+        
+        <category>jade</category>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
+        <title>Easily build assets with GulpJS</title>
+        <description>&lt;p&gt;I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I’ve never been too happy with them and they often seem to fail for various and difficult to debug reasons.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gulpjs.com&quot;&gt;Gulpjs&lt;/a&gt; is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&quot;getting-started-with-gulp&quot;&gt;Getting started with gulp&lt;/h2&gt;
+
+&lt;p&gt;Follow &lt;a href=&quot;https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started&quot;&gt;these instructions&lt;/a&gt; to get gulp installed and running.&lt;/p&gt;
+
+&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
+
+&lt;p&gt;There are numerous plugins available for gulp which provide all the functionality you could want.&lt;/p&gt;
+
+&lt;p&gt;You can install plugins through npm:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install gulp-concat gulp-coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then require them at the top of your &lt;code&gt;gulpfile.js&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;var concat = require(&#39;gulp-concat&#39;);
+var coffee = require(&#39;gulp-coffee&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;writing-tasks&quot;&gt;Writing tasks&lt;/h3&gt;
+
+&lt;p&gt;A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This task finds all &lt;code&gt;.coffee&lt;/code&gt; files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.&lt;/p&gt;
+
+&lt;p&gt;It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single &lt;code&gt;(function() { ... })();&lt;/code&gt; block and can easily reference each other without having to resort to the global &lt;code&gt;window&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;p&gt;You can run this task with &lt;code&gt;gulp coffeescripts&lt;/code&gt; in your terminal.&lt;/p&gt;
+
+&lt;h2 id=&quot;task-dependancies&quot;&gt;Task dependancies&lt;/h2&gt;
+
+&lt;p&gt;So now you’ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the &lt;code&gt;combined.js&lt;/code&gt; file. If you pipe these into your &lt;code&gt;coffee()&lt;/code&gt; plugin you’ll get a bunch of errors. Instead it is best to have a separate task that only runs on &lt;code&gt;.js&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gulp.task(&#39;coffeescripts&#39;, function() {
+    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
+        .pipe(concat(&#39;combined-coffee.coffee&#39;))
+        .pipe(coffee())
+        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
+});
+
+gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
+    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
+        .pipe(concat(&#39;combined.js&#39;))
+        .pipe(uglify())
+        .pipe(gulp.dest(&#39;build/scripts&#39;));
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By passing in &lt;code&gt;[&#39;coffeescripts&#39;]&lt;/code&gt; to the &lt;code&gt;scripts&lt;/code&gt; task you ensure it is run first. This compiles the coffeescripts into &lt;code&gt;combined-coffee.js&lt;/code&gt; which is then combined with normal javascript files.&lt;/p&gt;
+
+&lt;p&gt;The uglify plugin minifies the scripts before they are piped into the build directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var uglify = require(&#39;gulp-uglify&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;gulp scripts&lt;/code&gt; will now run the coffeescripts and scripts tasks.&lt;/p&gt;
+
+&lt;h2 id=&quot;watchers-and-automated-builds&quot;&gt;Watchers and automated builds&lt;/h2&gt;
+
+&lt;p&gt;Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gulp.task(&#39;watch&#39;, function() {
+    gulp.watch([
+        &#39;assets/scripts/**/*.coffee&#39;,
+        &#39;assets/scripts/**/*.js&#39;
+    ], [&#39;scripts&#39;]);
+
+    gulp.watch([
+        &#39;assets/styles/**/*.sass&#39;,
+        &#39;assets/styles/**/*.css&#39;
+    ], [&#39;styles&#39;]);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gulp watch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;taking-it-further&quot;&gt;Taking it further&lt;/h2&gt;
+
+&lt;p&gt;There are &lt;a href=&quot;http://gulpjs.com/plugins/&quot;&gt;lot of existing plugins for gulp&lt;/a&gt; and I’d suggest taking some time to look through and see which ones might prove useful in your code environment.&lt;/p&gt;
+
+&lt;p&gt;This &lt;a href=&quot;https://gist.github.com/lsjroberts/8810740&quot;&gt;example build script&lt;/a&gt; shows how I run my usual full build process, feel free it use it as you wish.&lt;/p&gt;
+
+&lt;p&gt;You may wish to install your dependancies through a &lt;code&gt;package.json&lt;/code&gt; file and running &lt;code&gt;npm install&lt;/code&gt; to ensure all your developers are working with the same node modules.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
+        <link>http://yourdomain.com/coding/easily-build-assets-with-gulpjs</link>
+        <guid isPermaLink="true">http://yourdomain.com/coding/easily-build-assets-with-gulpjs</guid>
+        
+        <category>javascript</category>
+        
+        <category>gulpjs</category>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
+        <title>Every coder should teach CodeClub</title>
+        <description>&lt;p&gt;&lt;em&gt;Originally posted on &lt;a href=&quot;http://www.message.co.uk/every-coder-should-teach-code-club&quot;&gt;the Message blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;“So, do you want to lead the lesson?” It’s two minutes before any of the kids arrive, I have exactly zero hours experience or training, but yeah sure why not? Sometimes you just have to wing it. The kids start streaming in and the teacher herds them to their computers.&lt;/p&gt;
+
+&lt;p&gt;“Say hello to Mr. Roberts, he is going to be teaching us to code.” I feel a bit odd to be on this side of the classroom, it’s been eight years since I’ve been in a school and I skived off my final lesson. I take another glance at my notes, look up at 15 pairs of eyes eagerly staring back, and begin.&lt;/p&gt;
+
+&lt;p&gt;Three weeks into it and I can honestly say this is the most rewarding thing I’ve ever done. There is a great amount of joy to be had in seeing someone learn, in seeing that moment they twig and start writing on their own.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Can you show us how to hack websites?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you haven’t heard of it before, &lt;a href=&quot;&quot;&gt;Code Club&lt;/a&gt; is a volunteer-led after school class for 9-11 year olds. A teacher pairs up with a programmer and together run through a course outlined by the CodeClub organisation.&lt;/p&gt;
+
+&lt;p&gt;It has grown rapidly, from starting in the UK in April 2012 to now 1,895 clubs worldwide. That’s roughly 25,000 kids learning to code. Just think of how much benefit that is going to provide to the tech community when these kids are grown up with a decade of experience before they even get their first job.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How do I link to Minecraft?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Perhaps surprisingly the HTML concepts aren’t the hardest things for the kids. Sometimes you forget they haven’t had 20 years using computers and aren’t always au fait with using the filesystem and browsers. There are a few other recurring niggly points such as spelling and spacing, but it’s pretty easy to work through them.&lt;/p&gt;
+
+&lt;p&gt;A few in the class storm ahead with making fan pages for Minecraft and their favourite Youtuber, then start helping their friends progress. Often resulting in oddly funny sites, kid’s minds are crazy weird.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How do I make my site rainbow coloured?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I had a spare 10 minutes left at the end of the lesson this week, so we took a quick sneak peek ahead to the start of CSS. It was fantastic fun to see the kids begin to realise the possibilities as they changed the text and background colours following my example of a garish orange and red combo.&lt;/p&gt;
+
+&lt;p&gt;I am very fortunate to work at a company that sees how important this is, giving me the time to take part and I can’t wait for next week. Give them some guidance and a few pointers and let them express their creativity and imagination.&lt;/p&gt;
+
+&lt;p&gt;Every coder should teach Code Club.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate>
+        <link>http://yourdomain.com/codeclub/every-coder-should-teach-codeclub</link>
+        <guid isPermaLink="true">http://yourdomain.com/codeclub/every-coder-should-teach-codeclub</guid>
+        
+        
+        <category>codeclub</category>
+        
+      </item>
+    
+  </channel>
+</rss>

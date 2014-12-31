@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Clean your HTML with Jade</title>
+    <meta name="description" content="As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://yourdomain.com/coding/clean-your-html-with-jade">
+    <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://yourdomain.com/feed.xml" />
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-18813637-1', 'gelatindesign.co.uk');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+
+    <body>
+
+        <header class="site-header">
+
+</header>
+
+        <div class="page-content">
+            <div class="wrapper">
+                <div class="post">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">Clean your HTML with <strong>Jade</strong></h1>
+        <p class="post-meta">16 Feb, 2014</p>
+        <p class="post-meta post-categories">
+            coding
+            
+                 • javascript
+            
+                 • node
+            
+                 • jade
+            
+        </p>
+    </header>
+
+    <article class="post-content">
+        <p>As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.</p>
+
+<p><a href="http://jade-lang.com">Jade</a> is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for <a href="http://stackoverflow.com/questions/13355137/php-jade-template-parser">PHP</a> and other languages as well.</p>
+
+<!-- more -->
+
+<p>It has a wonderfully basic syntax:</p>
+
+<pre><code class="language-jade">doctype html
+html
+    head
+        title Hello World
+        link(rel="stylesheet", href="build/styles/combined.css")
+    body
+        div.container
+            p Hello World
+</code></pre>
+
+<h2 id="layouts-and-blocks">Layouts and blocks</h2>
+
+<p>Jade allows you to create layouts and extend them for your different views:</p>
+
+<pre><code class="language-jade">// layouts/master.jade
+body
+    block content
+
+// index.jade
+extends layouts/master
+
+block content
+    header.hero
+        h1 Hello World
+</code></pre>
+
+<h2 id="use-mixins-to-power-your-views">Use mixins to power your views</h2>
+
+<p>Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.</p>
+
+<pre><code class="language-jade">// mixins/form.jade
+mixin form(action, method)
+    unless method
+        - method= "get"
+    form(action= action, method= method)
+        if block
+            block
+        else
+            p Looks like you forgot to add any inputs to your form
+
+mixin field(name, type)
+    label= name
+    input(type= type, name= name)
+</code></pre>
+
+<pre><code class="language-jade">// login.jade
+
+include mixins/form
+
++form("auth/login", "post")
+    +field("email", "text")
+    +field("password", "password")
+</code></pre>
+
+<p>So that’s pretty cool, but there’s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an <code>unslugify</code> function to convert “email_address” to “Email Address”. Then add in some input type guessing and we’ve got something pretty useful really quickly.</p>
+
+<pre><code class="language-jade">// mixins/form.jade
+
+//- ...
+
+mixin field(name, type)
+    //- Convert "foo_bar" to "Foo Bar"
+    -var unslugify = function(input) {
+    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
+    -       return ' ' + group1.toUpperCase();
+    -   });
+    -}
+
+    //- If no type has been set, try to pick an appropriate one
+    unless type
+        case name
+            when "password"
+                - type= "password"
+            when "password_confirmation"
+                - type= "password"
+            when "email"
+                - type= "email"
+            default
+                - type= "text"
+
+    div.field
+        label= unslugify(name)
+        input(type= type, name= name)
+</code></pre>
+
+<pre><code class="language-jade">// login.jade
+
+include mixins/form
+
++form("auth/login", "post")
+    +field("email")
+    +field("password")
+</code></pre>
+
+<h2 id="lovely">Lovely</h2>
+
+<p>There’s a few more things you can do in jade, <a href="http://jade-lang.com/reference/">check out the reference</a> to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.</p>
+
+<p>Coding should be fun and jade brings that enjoyment back to html.</p>
+
+    </article>
+
+</div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+
+</footer>
+
+    </body>
+
+</html>

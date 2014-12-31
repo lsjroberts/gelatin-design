@@ -1,3 +1,3 @@
 var connect = require('connect');
-connect.createServer(connect.static(__dirname + '/public')).listen(3001);
+connect.createServer(connect.static(__dirname + '/_site')).listen(3001);
 console.log('Started on port 3001...');
