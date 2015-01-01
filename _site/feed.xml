@@ -5,9 +5,74 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 31 Dec 2014 19:49:43 +0000</pubDate>
-    <lastBuildDate>Wed, 31 Dec 2014 19:49:43 +0000</lastBuildDate>
+    <pubDate>Thu, 01 Jan 2015 20:58:56 +0000</pubDate>
+    <lastBuildDate>Thu, 01 Jan 2015 20:58:56 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>A road to creating indie games</title>
+        <description>&lt;p&gt;I’ve been learning about and experimenting with making computer games for a number of years now. During school I started out making some browser-based text and input games about running nation states and their military and economy. After going to university and a few years working as a web dev I then entered the fantastic &lt;a href=&quot;http://ludumdare.com&quot;&gt;Ludum Dare&lt;/a&gt; game jam. I really can’t remember what got me to enter that, but making my first actual game for it was an incredible experience. I was hooked on game development.&lt;/p&gt;
+
+&lt;p&gt;The following is part a stream of thought that’s led me to game development and part a design concept for the game I’ll be making this year and hopefully releasing early 2016.&lt;/p&gt;
+
+&lt;h2 id=&quot;why&quot;&gt;Why&lt;/h2&gt;
+
+&lt;p&gt;When I first starting programming I began with C++ but soon moved to the web with HTML. The impetus for that move was a desire to see something more interesting than a dull terminal output. I wanted something that people could interact with, that I could show off to my friends and family. The web is a great option for that and the feedback is what drove me to pursue it as a career.&lt;/p&gt;
+
+&lt;p&gt;And, as a career, it is great. I love it. But I find the story you can tell via the web is limited, though as much by clients’ requirements as technology and strict user experience issues. Experimentation on the web rarely leads to an increase in profits or happier customers.&lt;/p&gt;
+
+&lt;p&gt;This leads me to another interactive medium - games. Games hold a unique space in media and art, the relationship between the creator and viewer is what makes the game. As a piece of art it does not exist without both the designer and the player. A game entirely hinges on it’s interactions, otherwise it is just a film. Even games which take this to it’s extreme where the only interaction is merely to move around afford the player the choice to observe the world from their own preferred point of view.&lt;/p&gt;
+
+&lt;p&gt;While most art is made to be seen by other people, only in games can the interpretation be fundamentally changed by the observers choices. Taking them from observer to artist within the game’s world.&lt;/p&gt;
+
+&lt;h2 id=&quot;what&quot;&gt;What&lt;/h2&gt;
+
+&lt;p&gt;Having made a bunch of small games for various Ludum Dare jams or just for fun, I don’t feel the need to make something with a tiny scope this time. I’m not looking to design a 5 minute experience, I want to engage the player and get them to stop and consider. Though obviously I’ll still need to keep it within the realms of feasability for a solo developer.&lt;/p&gt;
+
+&lt;p&gt;Two tropes of modern games that I feel have been inadequately addressed are war and morality. To be fair, those are two massive topics and it would be arrogant and foolish of me to suggest I can address both of them perfectly and succinctly where all others have failed. Though without any need to recoup development costs I do feel I can address them from a less constrained angle.&lt;/p&gt;
+
+&lt;p&gt;The well discussed failure of many modern games’ take on morality is the idea that it can be boiled down to some simple binary linear scale. While you may be able to do a mixture of “good” and “evil” actions, the mechanics often punish you for not sticking solely to one. This clearly does not reflect reality in any way missing out on all the nuances. Indeed in the real world there is often some dissonance between the actions taken and morality proclamined by an individual or group.&lt;/p&gt;
+
+&lt;p&gt;A recent game that has addressed morality in a more realistic manner is Telltale’s &lt;em&gt;The Walking Dead&lt;/em&gt;. It present’s you with choices that have to be made in a limited amount of time. These choices have no “right” answer, and often times the choice taken has no ultimate bearing on what happens. However, you are made to feel you’ve made the right or wrong choice by different characters. They will comment, approve or get angry at you. Causing you to feel an emotion as a reaction to both having to make the choice and it’s subsequent consequences, that is the root of a good morality system.&lt;/p&gt;
+
+&lt;p&gt;War is usually presented in one of two ways; completely coldly with no discussion on the reason or against a clearly defined “bad guy”. The former is perfectly fine if it’s simply a context for the gameplay, and the latter is sometimes messed with by having the “bad guy” change in some revelation story plot point.&lt;/p&gt;
+
+&lt;p&gt;But war in the real world is clearly infinitely more complex that that. Consider the &lt;a href=&quot;http://en.wikipedia.org/wiki/European_wars_of_religion&quot;&gt;european wars of religion&lt;/a&gt; of the 16th and 17th centuries. Even with hindsight it is essentially impossible to label any side as in the right, aggressor or not. The sheer brutality and inescapable unending destruction of the period is a feeling that should be represented.&lt;/p&gt;
+
+&lt;p&gt;To address this better a game should either in some way consider the war from both sides or acknowledge it is presented from a biased point of view. This could be done through something as simple as a character questioning orders and decisions the player makes, or through a satirical over-the-top glorification of the cause as done in &lt;em&gt;&lt;a href=&quot;http://www.imdb.com/title/tt0120201/&quot;&gt;Starship Troopers&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;For my game I’m going to try to ensure the player always has at least a nagging feeling they’ve made a mistake. You may have won a battle, but at what cost to the enemy’s civilians? Was it justified to protect a smaller number of your own? Does that even matter? I won’t present a explicit “right” answer, but various characters will react to your choices in different ways.&lt;/p&gt;
+
+&lt;p&gt;So if you take those points, throw in a bit of the tone of &lt;em&gt;&lt;a href=&quot;http://papersplea.se/&quot;&gt;Papers, Please&lt;/a&gt;&lt;/em&gt; and all in a Cold War-esque context you’ll have what I’m aiming for.&lt;/p&gt;
+
+&lt;h2 id=&quot;how&quot;&gt;How&lt;/h2&gt;
+
+&lt;p&gt;To keep the project realistically feasible I am going to take a well defined and iterated gameplay model in the style of the &lt;em&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Advance_Wars&quot;&gt;Advanced Wars&lt;/a&gt;&lt;/em&gt; series and apply my desired tone and theme on top. The mechanics won’t be straight up the same, but it provides a starting point from which I can expand as time allows.&lt;/p&gt;
+
+&lt;p&gt;This is not to say the mechanics are secondary. Certainly not. A game that is boring to play will be boring irregardless of how compelling it’s story telling is. But the mechanics of combat will not be a priority but more a way to frame, drive and make choices. By keeping these mechanics fairly straightforward hopefully the player’s focus won’t stray too far from why they are choosing to bomb a city beyond just strategic concerns. Or indeed to let the player knowingly disregard all moral reasoning and place success above all else.&lt;/p&gt;
+
+&lt;p&gt;On the technical side, I’ll be developing the game in &lt;a href=&quot;http://elm-lang.org/&quot;&gt;Elm&lt;/a&gt;, a functional reactive language that compiles to HTML &amp;amp; javascript. The final game will be packaged and downloadable and not playable through a browser to help take out another variable for testing since there is a lot of inconsistency across browsers in animation speed. Additionally players tend to expect different things of browser games. I’ll go into my reasons for using a functional language over more traditional options in a future post.&lt;/p&gt;
+
+&lt;p&gt;Since I am no great artist, I’m going to use assets by &lt;a href=&quot;http://kenney.nl/assets&quot;&gt;Kenney&lt;/a&gt; as a base for the isometric terrain and cities and modify them for my aethestic as needed. Once I’m further into the project I may look into hiring better artists for specifics such as character design.&lt;/p&gt;
+
+&lt;p&gt;Probably the biggest killer of personal projects is a loss of motivation. To combat this I am working on a 4-weekly sprint cycle with key targets for each sprint with the aim to producing something playable and different by the end of it. If I get ahead of schedule (as I did with my first sprint!) I’ll just start the next sprint sooner. If it looks like I’ll be ahead of schedule overall for the year I’ll start expanding features.&lt;/p&gt;
+
+&lt;p&gt;Ideally I’ll have gameplay finalised during the summer and will spent the latter part of the year writing in story specifics, embellishing characters and final art.&lt;/p&gt;
+
+&lt;h2 id=&quot;where&quot;&gt;Where&lt;/h2&gt;
+
+&lt;p&gt;So this is the start of the road I’m taking. Where it’ll take me this year and beyond I’m not sure. All I can hope is that I am able to reach the end of it and have something that people will enjoy. If I release it and even one stranger is a satisfied customer I’ll consider this a success.&lt;/p&gt;
+
+&lt;p&gt;But there’s always the dream…&lt;/p&gt;
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+        <link>http://gelatindesign.co.uk/games/a-road-to-creating-indie-games</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/games/a-road-to-creating-indie-games</guid>
+        
+        
+        <category>games</category>
+        
+      </item>
     
       <item>
         <title>Speeding up your git workflow</title>
