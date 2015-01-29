@@ -147,7 +147,7 @@ pre {
 /**
  * Clearfix
  */
-.wrapper:after, .posts-banner:after {
+.wrapper:after, .project-banner:after {
   content: "";
   display: table;
   clear: both; }
@@ -239,27 +239,27 @@ pre {
     display: block;
     font-size: 0.61rem; }
 
-.posts-banner {
+.project-banner {
   margin: 3rem 0;
   padding: 1rem 2rem;
   border: 1px solid #e8e8e8; }
-  .posts-banner h3 {
+  .project-banner h3 {
     font-size: 2.61792rem; }
-  .posts-banner .post-list {
+  .project-banner .post-list {
     float: left;
     width: 50%;
     margin: 0; }
-    .posts-banner .post-list h4 {
+    .project-banner .post-list h4 {
       font-size: 1.618rem;
       margin-bottom: 1rem;
       text-align: left; }
-    .posts-banner .post-list li {
+    .project-banner .post-list li {
       text-align: left; }
-      .posts-banner .post-list li:after {
+      .project-banner .post-list li:after {
         display: none; }
-    .posts-banner .post-list .post-meta {
+    .project-banner .post-list .post-meta {
       display: inline; }
-  .posts-banner .streak-club {
+  .project-banner .streak-club {
     float: right; }
 
 .page h1.lowercase {

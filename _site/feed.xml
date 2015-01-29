@@ -5,9 +5,95 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 29 Jan 2015 00:47:53 +0000</pubDate>
-    <lastBuildDate>Thu, 29 Jan 2015 00:47:53 +0000</lastBuildDate>
+    <pubDate>Thu, 29 Jan 2015 13:14:46 +0000</pubDate>
+    <lastBuildDate>Thu, 29 Jan 2015 13:14:46 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Why develop games in Elm?</title>
+        <description>&lt;p&gt;I don’t think I could count the time I have spent considering design patterns. Learning new patterns, comparing them with ones I already know, analysing use cases and experimenting. At a certain point I realised I just don’t enjoy it. That side of programming is something I have grown tired of. I want to describe what should happen and it should just happen, and I want one best way to do it.&lt;/p&gt;
+
+&lt;h2 id=&quot;functional&quot;&gt;Functional&lt;/h2&gt;
+
+&lt;p&gt;It must be said straight away, functional programming is not an opposite to object-orientated programming. It is not the opposite of the standard gang-of-four design patterns. It is simply the alternative to imperative. The imperative coder lists the details of process, the functional coder describes the desired result.&lt;/p&gt;
+
+&lt;p&gt;However, the key brilliance of the functional style is the far lowered requirement for depending on design patterns. Functional is all about writing short descriptions of how an input should be mapped to an output, and composing these together to create the full description of your game.&lt;/p&gt;
+
+&lt;p&gt;Sure, you will be dealing with given patterns, but there’s often just a singular way to approach a task. I guess this stems from the mathematical origins of functional programming. There’s no “different way to sum a number”, there’s just sum. And multiply is just a map of sum &lt;em&gt;n&lt;/em&gt; times. I’m sure this is a point that could be argued but I’ve so far found getting stuff done takes far less cognitive effort due to being able to simply write for the output I want.&lt;/p&gt;
+
+&lt;p&gt;Elm is a functional language that takes this philosophy to a brilliant conclusion and compiles into the web stack of HTML and javascript. Primarily intended as a reactive UI language, Elm maps well to games.&lt;/p&gt;
+
+&lt;p&gt;With Elm, instead of approaching your game with an intial thought of “how should I construct my program”, you can jump straight in to writing your input data, mapping that to an ouptut and rendering it to the screen. And most importantly, you will not be punished in the future for taking this approach. In an imperative (and object-orientated) style you will be forced to refactor and restructure until it’s cleaned away into a correct corner. The vast majority of refactoring with Elm is to generalise a function and extract specifics so it can be composed in new ways.&lt;/p&gt;
+
+&lt;p&gt;I recently did a refactor to create some better seperation of concerns. This took very little effort as I just moved the functions into better groups / files and after a couple of renames it all worked again. The same work on an imperitive and object-orientated codebase would have been a headache. Relationships would have to be redefined and data reorganised.&lt;/p&gt;
+
+&lt;p&gt;Please don’t get me wrong, I’m not saying the entire games industry is wrong for not taking this approach, that would be &lt;em&gt;hugely&lt;/em&gt; naive of me. The functional style simply appeals to how I work and think. And as a solo indie developer with a separate income stream I have the luxury of experimenting a little.&lt;/p&gt;
+
+&lt;h2 id=&quot;reactive&quot;&gt;Reactive&lt;/h2&gt;
+
+&lt;p&gt;There’s been a lot of hype recently in the web community around reactive UIs, notably Facebook released their &lt;a href=&quot;http://facebook.github.io/react/&quot;&gt;React.js&lt;/a&gt; library. And to simplify it to the minimum a game is data applied to a reactive UI (with some other vague definitions applied).&lt;/p&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+
+&lt;h2 id=&quot;games&quot;&gt;Games&lt;/h2&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+</description>
+        <pubDate>Sun, 26 Apr 2015 00:00:00 +0100</pubDate>
+        <link>http://gelatindesign.co.uk/games/why-develop-games-in-elm</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/games/why-develop-games-in-elm</guid>
+        
+        <category>project-iso</category>
+        
+        <category>elm</category>
+        
+        
+        <category>games</category>
+        
+      </item>
+    
+      <item>
+        <title>Creating the world editor</title>
+        <description>&lt;p&gt;I’m splitting development into sprints with set objectives. The primary target is to develop the game to a playable state at the end of each sprint. This is to ensure motivation is maintained and the progress can be tested and feedback can be received on the current state.&lt;/p&gt;
+
+&lt;p&gt;For this, the second sprint, I focused on refactoring my original ideas and developing the initial world editor with river and elevation brushes.&lt;/p&gt;
+
+&lt;h2 id=&quot;refactor&quot;&gt;Refactor&lt;/h2&gt;
+
+&lt;p&gt;A few weeks ago &lt;a href=&quot;https://twitter.com/czaplic&quot;&gt;Evan&lt;/a&gt; (the author of Elm) wrote a tutorial on &lt;a href=&quot;https://github.com/evancz/elm-architecture-tutorial&quot;&gt;architecture in Elm&lt;/a&gt;. This is a fantastic resource that you should definitely read if you are already or are interested in using Elm.&lt;/p&gt;
+
+&lt;p&gt;I used this as a guide to refactoring my initial ideas and experiments on rendering an isometric map.&lt;/p&gt;
+
+&lt;h2 id=&quot;render&quot;&gt;Render&lt;/h2&gt;
+
+&lt;p&gt;Before I could start on editing a map I needed to render it out to the screen. Admittedly a simpler route would have been to just use text files or one of the existing isometric tile layout tools. However I fully intend to release the world editor as part of the game, and honestly it felt like a good place to start with learning a few techniques in elm.&lt;/p&gt;
+
+&lt;p&gt;So now in &lt;code&gt;World&lt;/code&gt; I have defined a default world as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-haskell&quot;&gt;default : Model
+default =
+    { tileList = World.TileList.update
+        (World.TileList.Fill World.Tile.GrassTile (10,10))
+        World.TileList.default
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This fires off an update action to the &lt;code&gt;TileList&lt;/code&gt; model (which defaults to a single grass tile). The update fills a 10 by 10 grid with grass tiles.&lt;/p&gt;
+
+&lt;h2 id=&quot;editor&quot;&gt;Editor&lt;/h2&gt;
+</description>
+        <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://gelatindesign.co.uk/games/creating-the-world-editor</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/games/creating-the-world-editor</guid>
+        
+        <category>project-iso</category>
+        
+        <category>elm</category>
+        
+        
+        <category>games</category>
+        
+      </item>
     
       <item>
         <title>A road to creating indie games</title>
@@ -582,167 +668,6 @@ include mixins/form
         
         
         <category>coding</category>
-        
-      </item>
-    
-      <item>
-        <title>Easily build assets with GulpJS</title>
-        <description>&lt;p&gt;I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I’ve never been too happy with them and they often seem to fail for various and difficult to debug reasons.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://gulpjs.com&quot;&gt;Gulpjs&lt;/a&gt; is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;h2 id=&quot;getting-started-with-gulp&quot;&gt;Getting started with gulp&lt;/h2&gt;
-
-&lt;p&gt;Follow &lt;a href=&quot;https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started&quot;&gt;these instructions&lt;/a&gt; to get gulp installed and running.&lt;/p&gt;
-
-&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
-
-&lt;p&gt;There are numerous plugins available for gulp which provide all the functionality you could want.&lt;/p&gt;
-
-&lt;p&gt;You can install plugins through npm:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;npm install gulp-concat gulp-coffee
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then require them at the top of your &lt;code&gt;gulpfile.js&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;var concat = require(&#39;gulp-concat&#39;);
-var coffee = require(&#39;gulp-coffee&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;writing-tasks&quot;&gt;Writing tasks&lt;/h3&gt;
-
-&lt;p&gt;A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined.coffee&#39;))
-        .pipe(coffee())
-        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This task finds all &lt;code&gt;.coffee&lt;/code&gt; files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.&lt;/p&gt;
-
-&lt;p&gt;It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single &lt;code&gt;(function() { ... })();&lt;/code&gt; block and can easily reference each other without having to resort to the global &lt;code&gt;window&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;p&gt;You can run this task with &lt;code&gt;gulp coffeescripts&lt;/code&gt; in your terminal.&lt;/p&gt;
-
-&lt;h2 id=&quot;task-dependancies&quot;&gt;Task dependancies&lt;/h2&gt;
-
-&lt;p&gt;So now you’ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the &lt;code&gt;combined.js&lt;/code&gt; file. If you pipe these into your &lt;code&gt;coffee()&lt;/code&gt; plugin you’ll get a bunch of errors. Instead it is best to have a separate task that only runs on &lt;code&gt;.js&lt;/code&gt; files.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined-coffee.coffee&#39;))
-        .pipe(coffee())
-        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
-});
-
-gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
-    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
-        .pipe(concat(&#39;combined.js&#39;))
-        .pipe(uglify())
-        .pipe(gulp.dest(&#39;build/scripts&#39;));
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By passing in &lt;code&gt;[&#39;coffeescripts&#39;]&lt;/code&gt; to the &lt;code&gt;scripts&lt;/code&gt; task you ensure it is run first. This compiles the coffeescripts into &lt;code&gt;combined-coffee.js&lt;/code&gt; which is then combined with normal javascript files.&lt;/p&gt;
-
-&lt;p&gt;The uglify plugin minifies the scripts before they are piped into the build directory:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var uglify = require(&#39;gulp-uglify&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Running &lt;code&gt;gulp scripts&lt;/code&gt; will now run the coffeescripts and scripts tasks.&lt;/p&gt;
-
-&lt;h2 id=&quot;watchers-and-automated-builds&quot;&gt;Watchers and automated builds&lt;/h2&gt;
-
-&lt;p&gt;Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp.task(&#39;watch&#39;, function() {
-    gulp.watch([
-        &#39;assets/scripts/**/*.coffee&#39;,
-        &#39;assets/scripts/**/*.js&#39;
-    ], [&#39;scripts&#39;]);
-
-    gulp.watch([
-        &#39;assets/styles/**/*.sass&#39;,
-        &#39;assets/styles/**/*.css&#39;
-    ], [&#39;styles&#39;]);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;taking-it-further&quot;&gt;Taking it further&lt;/h2&gt;
-
-&lt;p&gt;There are &lt;a href=&quot;http://gulpjs.com/plugins/&quot;&gt;lot of existing plugins for gulp&lt;/a&gt; and I’d suggest taking some time to look through and see which ones might prove useful in your code environment.&lt;/p&gt;
-
-&lt;p&gt;This &lt;a href=&quot;https://gist.github.com/lsjroberts/8810740&quot;&gt;example build script&lt;/a&gt; shows how I run my usual full build process, feel free it use it as you wish.&lt;/p&gt;
-
-&lt;p&gt;You may wish to install your dependancies through a &lt;code&gt;package.json&lt;/code&gt; file and running &lt;code&gt;npm install&lt;/code&gt; to ensure all your developers are working with the same node modules.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</guid>
-        
-        <category>javascript</category>
-        
-        <category>gulpjs</category>
-        
-        
-        <category>coding</category>
-        
-      </item>
-    
-      <item>
-        <title>Every coder should teach CodeClub</title>
-        <description>&lt;p&gt;&lt;em&gt;Originally posted on &lt;a href=&quot;http://www.message.co.uk/every-coder-should-teach-code-club&quot;&gt;the Message blog&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;“So, do you want to lead the lesson?” It’s two minutes before any of the kids arrive, I have exactly zero hours experience or training, but yeah sure why not? Sometimes you just have to wing it. The kids start streaming in and the teacher herds them to their computers.&lt;/p&gt;
-
-&lt;p&gt;“Say hello to Mr. Roberts, he is going to be teaching us to code.” I feel a bit odd to be on this side of the classroom, it’s been eight years since I’ve been in a school and I skived off my final lesson. I take another glance at my notes, look up at 15 pairs of eyes eagerly staring back, and begin.&lt;/p&gt;
-
-&lt;p&gt;Three weeks into it and I can honestly say this is the most rewarding thing I’ve ever done. There is a great amount of joy to be had in seeing someone learn, in seeing that moment they twig and start writing on their own.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Can you show us how to hack websites?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;If you haven’t heard of it before, &lt;a href=&quot;&quot;&gt;Code Club&lt;/a&gt; is a volunteer-led after school class for 9-11 year olds. A teacher pairs up with a programmer and together run through a course outlined by the CodeClub organisation.&lt;/p&gt;
-
-&lt;p&gt;It has grown rapidly, from starting in the UK in April 2012 to now 1,895 clubs worldwide. That’s roughly 25,000 kids learning to code. Just think of how much benefit that is going to provide to the tech community when these kids are grown up with a decade of experience before they even get their first job.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;How do I link to Minecraft?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Perhaps surprisingly the HTML concepts aren’t the hardest things for the kids. Sometimes you forget they haven’t had 20 years using computers and aren’t always au fait with using the filesystem and browsers. There are a few other recurring niggly points such as spelling and spacing, but it’s pretty easy to work through them.&lt;/p&gt;
-
-&lt;p&gt;A few in the class storm ahead with making fan pages for Minecraft and their favourite Youtuber, then start helping their friends progress. Often resulting in oddly funny sites, kid’s minds are crazy weird.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;How do I make my site rainbow coloured?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I had a spare 10 minutes left at the end of the lesson this week, so we took a quick sneak peek ahead to the start of CSS. It was fantastic fun to see the kids begin to realise the possibilities as they changed the text and background colours following my example of a garish orange and red combo.&lt;/p&gt;
-
-&lt;p&gt;I am very fortunate to work at a company that sees how important this is, giving me the time to take part and I can’t wait for next week. Give them some guidance and a few pointers and let them express their creativity and imagination.&lt;/p&gt;
-
-&lt;p&gt;Every coder should teach Code Club.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://gelatindesign.co.uk/codeclub/every-coder-should-teach-codeclub</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/codeclub/every-coder-should-teach-codeclub</guid>
-        
-        
-        <category>codeclub</category>
         
       </item>
     
