@@ -1,0 +1,44 @@
+<div class="posts-banner">
+    <h3>Project ISO</h3>
+
+    <p>
+        My main project for this year is a game that aims to break a few
+        expectations a player may have towards games - winning is not always
+        possible.
+    </p>
+
+    <p>
+        It is a dynamic story-driven game with isometric turn-based strategy.
+    </p>
+
+    <p>
+        It doesn't currently have a name, so I'm going with <em>Project ISO</em>
+        because that's short for isometric...
+    </p>
+
+    <div class="post-list">
+        <h4>Latest Articles</h4>
+
+        <ul>
+            {% for post in site.posts %}
+                {% if post.tags contains "project-iso" %}
+                    <li>
+                        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                        <span class="post-meta">{{ post.date | date: "%d %b, %Y" }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="streak-club post-list">
+        <h4>Latest Streak Club Entries</h4>
+
+        <ul>
+            <li>
+                <a class="post-link external" href="http://streak.club/submission/138">Refactor, isometric tiled map</a>
+                <span class="post-meta">29 Jan, 2015</span>
+            </li>
+        </ul>
+    </div>
+</div>

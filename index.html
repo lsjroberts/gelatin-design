@@ -10,18 +10,32 @@ layout: default
 
     <h2>Hi, my name is Laurence Roberts, I'm a developer who makes games and web stuff.</h2>
 
-    <p>You can find all my open-sourced code at <a href="https://github.com/lsjroberts" rel="me">github</a>.</p>
+    <p>
+        You can find all my open-sourced code at
+        <a href="https://github.com/lsjroberts" rel="me">github</a>.
+        <br>
+        And follow my various ramblings and thoughts while coding on
+        <a href="https://twitter.com/gelatindesign" rel="me">twitter</a>.
+    </p>
 
-    <p>And follow my various ramblings and thoughts while coding on <a href="https://twitter.com/gelatindesign" rel="me">twitter</a>.</p>
+    {% include banners/project-iso.html %}
 
-    <ul class="post-list">
-        {% for post in site.posts %}
-            <li>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                <span class="post-meta">{{ post.category }} | {{ post.date | date: "%d %b, %Y" }}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="post-list">
+        <h4>Other Articles</h4>
+
+        <ul>
+            {% for post in site.posts %}
+                {% if post.tags contains "project-iso" %}
+
+                {% else %}
+                    <li>
+                        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                        <span class="post-meta">{{ post.category }} | {{ post.date | date: "%d %b, %Y" }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 
     <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 

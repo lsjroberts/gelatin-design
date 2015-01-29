@@ -16,4 +16,8 @@
         {{ content }}
     </article>
 
+    {% if page.tags contains "project-iso" %}
+        {% include banners/project-iso.html %}
+    {% endif %}
+
 </div>

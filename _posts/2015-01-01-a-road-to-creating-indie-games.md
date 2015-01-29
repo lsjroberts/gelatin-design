@@ -5,6 +5,7 @@ titleSmall: A road to creating
 titleStrong: indie games
 date: 2015-01-01
 category: games
+tags: project-iso
 ---
 
 I've been learning about and experimenting with making computer games for a number of years now. During school I started out making some browser-based text and input games about running nation states and their military and economy. After going to university and a few years working as a web dev I then entered the fantastic [Ludum Dare](http://ludumdare.com) game jam. I really can't remember what got me to enter that, but making my first actual game for it was an incredible experience. I was hooked on game development.

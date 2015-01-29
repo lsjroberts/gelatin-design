@@ -7,6 +7,13 @@ permalink: :categories/:title
 
 highlighter: pygments
 
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "post"
+
 # Build settings
 markdown: kramdown
 kramdown:

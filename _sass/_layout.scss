@@ -78,6 +78,24 @@
     margin-left: auto;
     margin-right: auto;
 
+    // &:before {
+    //     display: block;
+    //     content: " ";
+    //     background: $grey-color-light;
+    //     margin: 1rem auto;
+    //     width: 5%;
+    //     height: 1px;
+    // }
+
+    h4 {
+        @include font-size(2);
+        text-align: center;
+    }
+
+    ul {
+        margin: 0;
+    }
+
     li {
         display: block;
         list-style: none;
@@ -96,6 +114,45 @@
     .post-meta {
         display: block;
         font-size: 0.61rem;
+    }
+}
+
+.posts-banner {
+    @extend %clearfix;
+    margin: 3rem 0;
+    padding: 1rem 2rem;
+    border: 1px solid $grey-color-light;
+
+    h3 {
+        @include font-size(3);
+    }
+
+    .post-list {
+        float: left;
+        width: 50%;
+        margin: 0;
+
+        h4 {
+            @include font-size(2);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        li {
+            text-align: left;
+
+            &:after {
+                display: none;
+            }
+        }
+
+        .post-meta {
+            display: inline;
+        }
+    }
+
+    .streak-club {
+        float: right;
     }
 }
 
