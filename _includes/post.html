@@ -16,7 +16,7 @@
         {{ content }}
     </article>
 
-    {% if page.tags contains "project-iso" %}
+    {% if page.tags contains "project-iso" or page.categories contains "project-iso" %}
         {% include banners/project-iso.html %}
     {% endif %}
 
