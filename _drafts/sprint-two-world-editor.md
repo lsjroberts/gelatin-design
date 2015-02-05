@@ -1,13 +1,10 @@
 ---
-title: Creating the world editor
-titleSmall: Sprint Two - Creating the
+title: Sprint Two - World Editor
+titleSmall: Sprint Two
 titleStrong: World Editor
 date: 2015-02-08
-category: games
-tags: project-iso elm
+category: project-iso
 ---
-
-I'm splitting development into sprints with set objectives. The primary target is to develop the game to a playable state at the end of each sprint. This is to ensure motivation is maintained and the progress can be tested and feedback can be received on the current state.
 
 For this, the second sprint, I focused on refactoring my original ideas and developing the initial world editor with river and elevation brushes.
 
