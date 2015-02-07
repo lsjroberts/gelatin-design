@@ -5,9 +5,229 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Feb 2015 02:20:45 +0000</pubDate>
-    <lastBuildDate>Sat, 07 Feb 2015 02:20:45 +0000</lastBuildDate>
+    <pubDate>Sat, 07 Feb 2015 17:11:53 +0000</pubDate>
+    <lastBuildDate>Sat, 07 Feb 2015 17:11:53 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Functional Programming</title>
+        <description>&lt;p&gt;This is the first in a series of articles I will be writing about game development in &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt;. It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in &lt;a href=&quot;https://github.com/nwjs/nw.js&quot;&gt;nw.js&lt;/a&gt; to create a standalone app or game. These are not so much tutorials but more things I’ve had to learn as I progress. Since elm is in active development I’ll be updating the articles if and when they become out of date. And also for any mistakes I make…&lt;/p&gt;
+
+&lt;p&gt;Functional programming (FP) is a suprisingly ill-defined paradigm. It is many things to many people, but what it represents to me is a community who desire to write simpler composable code, to avoid strong &lt;a href=&quot;http://www.infoq.com/presentations/Simple-Made-Easy&quot;&gt;complecting&lt;/a&gt; and to create easy to debug software.&lt;/p&gt;
+
+&lt;h2 id=&quot;games&quot;&gt;Games&lt;/h2&gt;
+
+&lt;p&gt;Probably more so than many areas of programming, game development is strongly object-orientated and full of state. On the face of it, it lends itself very well to that methodology. A frequent response I receive when mentioning I use an FP language is surprise that it’s feasible to make games this way and interest in how it may be done.&lt;/p&gt;
+
+&lt;p&gt;So why have I chosen to build a game with FP? To put it simply; I’ve grown tired of the traditional ways of architecting software. Imperative object-orientated code inevitably leads to frustrating issues like &lt;a href=&quot;http://en.wikipedia.org/wiki/Side_effect_(computer_science)&quot;&gt;side effects&lt;/a&gt; and over engineering, and to my eyes it looks ugly.&lt;/p&gt;
+
+&lt;p&gt;This is just an opinion, so feel free to stick with what you know, but if you yearn for something different why not take a stroll down the functional path.&lt;/p&gt;
+
+&lt;h2 id=&quot;iteration&quot;&gt;Iteration&lt;/h2&gt;
+
+&lt;p&gt;Consider this basic example in javascript, squaring a list of numbers. With imperative code you describe how something will happen, with functional code (a subset of &lt;a href=&quot;https://en.wikipedia.org/wiki/Declarative_programming&quot;&gt;declarative&lt;/a&gt;) you describe what you want to happen. So in the imperative style we have to define a temporary index variable and construct a loop to iterate through the list updating each value in turn:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Compare this to the functional approach. If you are writing in javascript you can use the great &lt;a href=&quot;https://lodash.com&quot;&gt;lodash&lt;/a&gt; library. However using a language specifically designed for FP is highly beneficial, so lets do it in &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With &lt;code&gt;map&lt;/code&gt; we apply &lt;code&gt;square&lt;/code&gt; onto each number in the list and return the new list.&lt;/p&gt;
+
+&lt;p&gt;As you can see, functions are type-hinted with the list of parameters with the final type referring to the output. The &lt;code&gt;import List (..)&lt;/code&gt; line simply brings in all the core list functions that elm provides such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;filtering&quot;&gt;Filtering&lt;/h2&gt;
+
+&lt;p&gt;Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this naïvely we may write:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;squaredNumbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;squaredNumbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;squaredNumbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Sure, it works, but having to define a second array is messy and we’ve had to write the &lt;code&gt;for&lt;/code&gt; loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.&lt;/p&gt;
+
+&lt;p&gt;Let’s try this functionally:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We apply the filter to the list of numbers and can reuse our &lt;code&gt;square&lt;/code&gt; function from before so we don’t need to repeat ourselves for a slightly different behaviour.&lt;/p&gt;
+
+&lt;p&gt;And here’s the brilliant thing about FP, you spend less time working out what the author intended. You can simply read it. And this improves further with chaining.&lt;/p&gt;
+
+&lt;h2 id=&quot;chaining&quot;&gt;Chaining&lt;/h2&gt;
+
+&lt;p&gt;If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use &lt;code&gt;|&amp;gt;&lt;/code&gt; operator to help us chain function calls.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;|&amp;gt;&lt;/code&gt; operator takes the value to it’s left and passes this as the tail argument to the function on it’s right.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;c1&quot;&gt;-- this&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;-- is equivalent to this&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;When we have multiple functions to call it’s easy to see the benefit:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;c1&quot;&gt;-- this&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;-- is equivalent to this&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This helps you reduce the number of brackets you have to write, and makes your code easier to read. It becomes more like a sentence:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt;
+           &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;composition&quot;&gt;Composition&lt;/h2&gt;
+
+&lt;p&gt;An often better alternative to chaining is composition, &lt;a href=&quot;https://en.wikipedia.org/wiki/Function_composition_(computer_science)&quot;&gt;combining simple functions to build more complicated ones&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In elm we can compose functions together using the &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; operator. In this example we are checking to see if the square of a given number is odd:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- `not` is a built-in function&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;False&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;state&quot;&gt;State&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/State_(computer_science)&quot;&gt;State&lt;/a&gt; is the data that the program stores in variables and as properties on objects. The problem with state stored in this way is that it allows the developer to modify a variable that is outside the scope of the current block, creating a side effect. For example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;baz&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;setBaz&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qux&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// yuck!&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;qux&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setBaz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There may be a valid reason for changing the value of &lt;code&gt;bar.qux&lt;/code&gt;, if it should always be double &lt;code&gt;foo.baz&lt;/code&gt;. But unless a developer knows or reads the definition of &lt;code&gt;setBaz&lt;/code&gt; they won’t know that it changes &lt;code&gt;bar.qux&lt;/code&gt;. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I’ve seen and done it a great deal.&lt;/p&gt;
+
+&lt;p&gt;So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data. Even if the function performs no operation and immediately returns the input, the output is a new piece of data that looks identical.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;noop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;noop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;b&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;b&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;While these two are equivalent they are not the same piece of data. The value of &lt;code&gt;a&lt;/code&gt; has been copied into a new object with an &lt;code&gt;a&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;p&gt;So taking this to our &lt;code&gt;setBaz&lt;/code&gt; example in elm:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qux&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bar&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qux&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&amp;#39;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see that there is no way for &lt;code&gt;setFooBaz&lt;/code&gt; to modify &lt;code&gt;bar.qux&lt;/code&gt;. The function can not access data outside it’s scope and can only return the new version of &lt;code&gt;foo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To clarify, you may be thinking that &lt;code&gt;foo : Foo&lt;/code&gt; is a variable of type &lt;code&gt;Foo&lt;/code&gt;, but it is not. It is a function that takes no input and outputs a data object. We could easily change it to &lt;code&gt;foo : Int -&amp;gt; Foo&lt;/code&gt;, to allow &lt;code&gt;baz&lt;/code&gt; to be initialised to some value.&lt;/p&gt;
+
+&lt;p&gt;If we still want to ensure &lt;code&gt;bar.qux&lt;/code&gt; is updated to be double &lt;code&gt;foo.baz&lt;/code&gt;, we can create a function which takes a data object comprising of both, calls the two update functions and returns the modified parent:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bar&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setBarQux&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We are able to update the values as desired, but without side effects. The output of &lt;code&gt;update&lt;/code&gt; contains all the effects of it’s operations.&lt;/p&gt;
+
+&lt;h2 id=&quot;elm&quot;&gt;Elm&lt;/h2&gt;
+
+&lt;p&gt;In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Why not give it a go for your next game jam project?&lt;/p&gt;
+
+&lt;p&gt;Coming next: Signals. To hear when this is published and for news about the game I’m creating &lt;a href=&quot;https://twitter.com/gelatindesign&quot;&gt;follow me on twitter&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 07 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://gelatindesign.co.uk/developing-games-in-elm/functional-programming</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/developing-games-in-elm/functional-programming</guid>
+        
+        <category>project-iso</category>
+        
+        <category>elm</category>
+        
+        
+        <category>developing-games-in-elm</category>
+        
+      </item>
     
       <item>
         <title>Sprint One - Experiments</title>
@@ -614,122 +834,6 @@ include mixins/form
         <category>node</category>
         
         <category>jade</category>
-        
-        
-        <category>coding</category>
-        
-      </item>
-    
-      <item>
-        <title>Easily build assets with GulpJS</title>
-        <description>&lt;p&gt;I have spent so many hours trying to find the perfect build process for my less/sass stylesheets and coffeescripts. There are several php packages for this but I’ve never been too happy with them and they often seem to fail for various and difficult to debug reasons.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://gulpjs.com&quot;&gt;Gulpjs&lt;/a&gt; is the answer to all your woes. It is a command-line tool that simply allows you to run build tasks.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;h2 id=&quot;getting-started-with-gulp&quot;&gt;Getting started with gulp&lt;/h2&gt;
-
-&lt;p&gt;Follow &lt;a href=&quot;https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started&quot;&gt;these instructions&lt;/a&gt; to get gulp installed and running.&lt;/p&gt;
-
-&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
-
-&lt;p&gt;There are numerous plugins available for gulp which provide all the functionality you could want.&lt;/p&gt;
-
-&lt;p&gt;You can install plugins through npm:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;npm install gulp-concat gulp-coffee
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then require them at the top of your &lt;code&gt;gulpfile.js&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;var concat = require(&#39;gulp-concat&#39;);
-var coffee = require(&#39;gulp-coffee&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;writing-tasks&quot;&gt;Writing tasks&lt;/h3&gt;
-
-&lt;p&gt;A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined.coffee&#39;))
-        .pipe(coffee())
-        .pipe(gulp.dest(&#39;build/scripts/combined.js&#39;));
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This task finds all &lt;code&gt;.coffee&lt;/code&gt; files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.&lt;/p&gt;
-
-&lt;p&gt;It is important to combine your coffeescripts before compiling them. This will ensure that all your classes are defined within a single &lt;code&gt;(function() { ... })();&lt;/code&gt; block and can easily reference each other without having to resort to the global &lt;code&gt;window&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;p&gt;You can run this task with &lt;code&gt;gulp coffeescripts&lt;/code&gt; in your terminal.&lt;/p&gt;
-
-&lt;h2 id=&quot;task-dependancies&quot;&gt;Task dependancies&lt;/h2&gt;
-
-&lt;p&gt;So now you’ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the &lt;code&gt;combined.js&lt;/code&gt; file. If you pipe these into your &lt;code&gt;coffee()&lt;/code&gt; plugin you’ll get a bunch of errors. Instead it is best to have a separate task that only runs on &lt;code&gt;.js&lt;/code&gt; files.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp.task(&#39;coffeescripts&#39;, function() {
-    return gulp.src(&#39;assets/scripts/**/*.coffee&#39;)
-        .pipe(concat(&#39;combined-coffee.coffee&#39;))
-        .pipe(coffee())
-        .pipe(gulp.dest(&#39;assets/scripts/&#39;));
-});
-
-gulp.task(&#39;scripts&#39;, [&#39;coffeescripts&#39;], function() {
-    return gulp.src(&#39;assets/scripts/**/*.js&#39;)
-        .pipe(concat(&#39;combined.js&#39;))
-        .pipe(uglify())
-        .pipe(gulp.dest(&#39;build/scripts&#39;));
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By passing in &lt;code&gt;[&#39;coffeescripts&#39;]&lt;/code&gt; to the &lt;code&gt;scripts&lt;/code&gt; task you ensure it is run first. This compiles the coffeescripts into &lt;code&gt;combined-coffee.js&lt;/code&gt; which is then combined with normal javascript files.&lt;/p&gt;
-
-&lt;p&gt;The uglify plugin minifies the scripts before they are piped into the build directory:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var uglify = require(&#39;gulp-uglify&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Running &lt;code&gt;gulp scripts&lt;/code&gt; will now run the coffeescripts and scripts tasks.&lt;/p&gt;
-
-&lt;h2 id=&quot;watchers-and-automated-builds&quot;&gt;Watchers and automated builds&lt;/h2&gt;
-
-&lt;p&gt;Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp.task(&#39;watch&#39;, function() {
-    gulp.watch([
-        &#39;assets/scripts/**/*.coffee&#39;,
-        &#39;assets/scripts/**/*.js&#39;
-    ], [&#39;scripts&#39;]);
-
-    gulp.watch([
-        &#39;assets/styles/**/*.sass&#39;,
-        &#39;assets/styles/**/*.css&#39;
-    ], [&#39;styles&#39;]);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gulp watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;taking-it-further&quot;&gt;Taking it further&lt;/h2&gt;
-
-&lt;p&gt;There are &lt;a href=&quot;http://gulpjs.com/plugins/&quot;&gt;lot of existing plugins for gulp&lt;/a&gt; and I’d suggest taking some time to look through and see which ones might prove useful in your code environment.&lt;/p&gt;
-
-&lt;p&gt;This &lt;a href=&quot;https://gist.github.com/lsjroberts/8810740&quot;&gt;example build script&lt;/a&gt; shows how I run my usual full build process, feel free it use it as you wish.&lt;/p&gt;
-
-&lt;p&gt;You may wish to install your dependancies through a &lt;code&gt;package.json&lt;/code&gt; file and running &lt;code&gt;npm install&lt;/code&gt; to ensure all your developers are working with the same node modules.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 15 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/easily-build-assets-with-gulpjs</guid>
-        
-        <category>javascript</category>
-        
-        <category>gulpjs</category>
         
         
         <category>coding</category>

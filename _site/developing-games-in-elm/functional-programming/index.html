@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Functional Programming</title>
+    <meta name="description" content="This is the first in a series of articles I will be writing about game development in elm. It is a language that currently compiles into html and javascript ...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://gelatindesign.co.uk/developing-games-in-elm/functional-programming">
+    <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://gelatindesign.co.uk/feed.xml">
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+
+
+    <body>
+
+        <header class="site-header">
+
+</header>
+
+        <div class="page-content">
+            <div class="wrapper">
+                <div class="post">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">Developing games in Elm <strong>Functional Programming</strong></h1>
+        <p class="post-meta">07 Feb, 2015</p>
+        <p class="post-meta post-categories">
+            developing-games-in-elm
+            
+                • project-iso
+            
+                • elm
+            
+        </p>
+    </header>
+
+    <article class="post-content">
+        <p>This is the first in a series of articles I will be writing about game development in <a href="http://elm-lang.org">elm</a>. It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in <a href="https://github.com/nwjs/nw.js">nw.js</a> to create a standalone app or game. These are not so much tutorials but more things I’ve had to learn as I progress. Since elm is in active development I’ll be updating the articles if and when they become out of date. And also for any mistakes I make…</p>
+
+<p>Functional programming (FP) is a suprisingly ill-defined paradigm. It is many things to many people, but what it represents to me is a community who desire to write simpler composable code, to avoid strong <a href="http://www.infoq.com/presentations/Simple-Made-Easy">complecting</a> and to create easy to debug software.</p>
+
+<h2 id="games">Games</h2>
+
+<p>Probably more so than many areas of programming, game development is strongly object-orientated and full of state. On the face of it, it lends itself very well to that methodology. A frequent response I receive when mentioning I use an FP language is surprise that it’s feasible to make games this way and interest in how it may be done.</p>
+
+<p>So why have I chosen to build a game with FP? To put it simply; I’ve grown tired of the traditional ways of architecting software. Imperative object-orientated code inevitably leads to frustrating issues like <a href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effects</a> and over engineering, and to my eyes it looks ugly.</p>
+
+<p>This is just an opinion, so feel free to stick with what you know, but if you yearn for something different why not take a stroll down the functional path.</p>
+
+<h2 id="iteration">Iteration</h2>
+
+<p>Consider this basic example in javascript, squaring a list of numbers. With imperative code you describe how something will happen, with functional code (a subset of <a href="https://en.wikipedia.org/wiki/Declarative_programming">declarative</a>) you describe what you want to happen. So in the imperative style we have to define a temporary index variable and construct a loop to iterate through the list updating each value in turn:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+    <span class="nx">i</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Compare this to the functional approach. If you are writing in javascript you can use the great <a href="https://lodash.com">lodash</a> library. However using a language specifically designed for FP is highly beneficial, so lets do it in <a href="http://elm-lang.org">elm</a>.</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">List</span> <span class="p">(</span><span class="o">..</span><span class="p">)</span>
+
+<span class="nf">square</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+<span class="nf">square</span> <span class="n">n</span> <span class="ow">=</span>
+    <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+
+<span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="nf">numbers</span> <span class="ow">=</span>
+    <span class="n">map</span> <span class="n">square</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span></code></pre></div>
+
+<p>With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With <code>map</code> we apply <code>square</code> onto each number in the list and return the new list.</p>
+
+<p>As you can see, functions are type-hinted with the list of parameters with the final type referring to the output. The <code>import List (..)</code> line simply brings in all the core list functions that elm provides such as <code>map</code> and <code>filter</code>.</p>
+
+<h2 id="filtering">Filtering</h2>
+
+<p>Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this naïvely we may write:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+    <span class="nx">squaredNumbers</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nx">i</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">squaredNumbers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">numbers</span> <span class="o">=</span> <span class="nx">squaredNumbers</span><span class="p">;</span></code></pre></div>
+
+<p>Sure, it works, but having to define a second array is messy and we’ve had to write the <code>for</code> loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.</p>
+
+<p>Let’s try this functionally:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">isEven</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isEven</span> <span class="n">n</span> <span class="ow">=</span>
+    <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="nf">numbers</span> <span class="ow">=</span>
+    <span class="n">map</span> <span class="n">square</span> <span class="p">(</span><span class="n">filter</span> <span class="n">isEven</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">])</span></code></pre></div>
+
+<p>We apply the filter to the list of numbers and can reuse our <code>square</code> function from before so we don’t need to repeat ourselves for a slightly different behaviour.</p>
+
+<p>And here’s the brilliant thing about FP, you spend less time working out what the author intended. You can simply read it. And this improves further with chaining.</p>
+
+<h2 id="chaining">Chaining</h2>
+
+<p>If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use <code>|&gt;</code> operator to help us chain function calls.</p>
+
+<p>The <code>|&gt;</code> operator takes the value to it’s left and passes this as the tail argument to the function on it’s right.</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">2</span>
+
+<span class="c1">-- is equivalent to this</span>
+<span class="nf">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></pre></div>
+
+<p>When we have multiple functions to call it’s easy to see the benefit:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">2</span>
+  <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">3</span>
+  <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">4</span>
+
+<span class="c1">-- is equivalent to this</span>
+<span class="nf">add</span> <span class="mi">4</span> <span class="p">(</span><span class="n">add</span> <span class="mi">3</span> <span class="p">(</span><span class="n">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)))</span></code></pre></div>
+
+<p>This helps you reduce the number of brackets you have to write, and makes your code easier to read. It becomes more like a sentence:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="nf">numbers</span> <span class="ow">=</span>
+    <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span> <span class="o">|&gt;</span> <span class="n">filter</span> <span class="n">isEven</span>
+           <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">square</span></code></pre></div>
+
+<h2 id="composition">Composition</h2>
+
+<p>An often better alternative to chaining is composition, <a href="https://en.wikipedia.org/wiki/Function_composition_(computer_science)">combining simple functions to build more complicated ones</a>.</p>
+
+<p>In elm we can compose functions together using the <code>&gt;&gt;</code> operator. In this example we are checking to see if the square of a given number is odd:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">squareIsOdd</span> <span class="ow">=</span>
+    <span class="n">square</span> <span class="o">&gt;&gt;</span> <span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span> <span class="c1">-- `not` is a built-in function</span>
+
+<span class="nf">squareIsOdd</span> <span class="mi">3</span> <span class="o">==</span> <span class="kt">True</span>
+<span class="nf">squareIsOdd</span> <span class="mi">7</span> <span class="o">==</span> <span class="kt">False</span></code></pre></div>
+
+<h2 id="state">State</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/State_(computer_science)">State</a> is the data that the program stores in variables and as properties on objects. The problem with state stored in this way is that it allows the developer to modify a variable that is outside the scope of the current block, creating a side effect. For example:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">;</span>
+
+<span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;baz&quot;</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="s2">&quot;setBaz&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">baz</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+        <span class="nx">bar</span><span class="p">.</span><span class="nx">qux</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// yuck!</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">bar</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;qux&quot;</span><span class="o">:</span> <span class="mi">2</span>
+<span class="p">};</span>
+
+<span class="nx">foo</span><span class="p">.</span><span class="nx">setBaz</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></code></pre></div>
+
+<p>There may be a valid reason for changing the value of <code>bar.qux</code>, if it should always be double <code>foo.baz</code>. But unless a developer knows or reads the definition of <code>setBaz</code> they won’t know that it changes <code>bar.qux</code>. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I’ve seen and done it a great deal.</p>
+
+<p>So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data. Even if the function performs no operation and immediately returns the input, the output is a new piece of data that looks identical.</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">noop</span> <span class="n">input</span> <span class="ow">=</span>
+    <span class="n">input</span>
+
+<span class="nf">noop</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span> <span class="o">==</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span></code></pre></div>
+
+<p>While these two are equivalent they are not the same piece of data. The value of <code>a</code> has been copied into a new object with an <code>a</code> parameter.</p>
+
+<p>So taking this to our <code>setBaz</code> example in elm:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">Foo</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">baz</span> <span class="kt">:</span> <span class="kt">Int</span>
+    <span class="p">}</span>
+
+<span class="kr">type</span> <span class="n">alias</span> <span class="kt">Bar</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">qux</span> <span class="kt">:</span> <span class="kt">Int</span>
+    <span class="p">}</span>
+
+<span class="nf">foo</span> <span class="kt">:</span> <span class="kt">Foo</span>
+<span class="nf">foo</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">baz</span> <span class="ow">=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+
+<span class="nf">bar</span> <span class="kt">:</span> <span class="kt">Bar</span>
+<span class="nf">bar</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">qux</span> <span class="ow">=</span> <span class="mi">2</span>
+    <span class="p">}</span>
+
+<span class="nf">setFooBaz</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Foo</span> <span class="ow">-&gt;</span> <span class="kt">Foo</span>
+<span class="nf">setFooBaz</span> <span class="n">baz&#39;</span> <span class="n">foo</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">foo</span>
+        <span class="o">|</span> <span class="n">baz</span> <span class="ow">&lt;-</span> <span class="n">baz&#39;</span>
+    <span class="p">}</span>
+
+<span class="nf">foo</span> <span class="ow">=</span> <span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="mi">2</span></code></pre></div>
+
+<p>We can see that there is no way for <code>setFooBaz</code> to modify <code>bar.qux</code>. The function can not access data outside it’s scope and can only return the new version of <code>foo</code>.</p>
+
+<p>To clarify, you may be thinking that <code>foo : Foo</code> is a variable of type <code>Foo</code>, but it is not. It is a function that takes no input and outputs a data object. We could easily change it to <code>foo : Int -&gt; Foo</code>, to allow <code>baz</code> to be initialised to some value.</p>
+
+<p>If we still want to ensure <code>bar.qux</code> is updated to be double <code>foo.baz</code>, we can create a function which takes a data object comprising of both, calls the two update functions and returns the modified parent:</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">FooBar</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">foo</span> <span class="kt">:</span> <span class="kt">Foo</span>
+    <span class="p">,</span> <span class="n">bar</span> <span class="kt">:</span> <span class="kt">Bar</span>
+    <span class="p">}</span>
+
+<span class="nf">fooBar</span> <span class="kt">:</span> <span class="kt">FooBar</span>
+<span class="nf">fooBar</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">foo</span> <span class="ow">=</span> <span class="n">foo</span>
+    <span class="p">,</span> <span class="n">bar</span> <span class="ow">=</span> <span class="n">bar</span>
+    <span class="p">}</span>
+
+<span class="nf">update</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span>
+<span class="nf">update</span> <span class="n">baz</span> <span class="n">fooBar</span> <span class="ow">=</span>
+    <span class="p">{</span> <span class="n">fooBar</span>
+        <span class="o">|</span> <span class="n">foo</span> <span class="ow">&lt;-</span> <span class="n">setFooBaz</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">foo</span> <span class="n">baz</span>
+        <span class="p">,</span> <span class="n">bar</span> <span class="ow">&lt;-</span> <span class="n">setBarQux</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">bar</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="p">}</span>
+
+<span class="nf">fooBar</span> <span class="ow">=</span> <span class="n">fooBar</span> <span class="o">|&gt;</span> <span class="n">update</span> <span class="mi">2</span></code></pre></div>
+
+<p>We are able to update the values as desired, but without side effects. The output of <code>update</code> contains all the effects of it’s operations.</p>
+
+<h2 id="elm">Elm</h2>
+
+<p>In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Why not give it a go for your next game jam project?</p>
+
+<p>Coming next: Signals. To hear when this is published and for news about the game I’m creating <a href="https://twitter.com/gelatindesign">follow me on twitter</a>.</p>
+
+    </article>
+
+    
+        <div class="project-banner">
+    <h3>Project ISO</h3>
+
+    <p>
+        A dynamic story-driven game with isometic turn-based strategy that aims
+        to break a few expectations a player may have towards games - winning is
+        not always possible or clear cut.
+    </p>
+
+    <p>
+        It doesn't currently have a name, so I'm going with <em>Project ISO</em>
+        because that's short for isometric...
+    </p>
+
+    <div class="post-list">
+        <h4>Dev Blog</h4>
+
+        <ul>
+            
+                
+                    
+
+                    
+                
+            
+                
+                    
+                        <li>
+                            <a class="post-link" href="/project-iso/sprint-one-experiments">Sprint One - Experiments</a>
+                            <span class="post-meta">05 Feb, 2015</span>
+                        </li>
+                    
+                
+            
+                
+                    
+                        <li>
+                            <a class="post-link" href="/games/a-road-to-creating-indie-games">A road to creating indie games</a>
+                            <span class="post-meta">01 Jan, 2015</span>
+                        </li>
+                    
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="streak-club post-list">
+        <h4>Technical Articles</h4>
+
+        <ul>
+            
+                
+                    
+                        <li>
+                            <a class="post-link" href="/developing-games-in-elm/functional-programming">Functional Programming</a>
+                            <span class="post-meta">07 Feb, 2015</span>
+                        </li>
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+</div>
+    
+
+</div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+    <a href="https://weheart.github.io/"><img src="/images/heart.png"></a>
+</footer>
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.gelatindesign.co.uk/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.gelatindesign.co.uk/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+    </body>
+
+</html>

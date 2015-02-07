@@ -5,6 +5,7 @@
 .highlight {
     $plain: #ffffff;
     $number: #f6d298;
+    $string: #f0c193;
     $keyword: #d76a6c;
     $operator: #d76a6c;
     $name: #e6e6e6;
@@ -44,7 +45,7 @@
     .kr    { color: $keyword } // Keyword.Reserved
     .kt    { color: $keyword } // Keyword.Type
     .m     { color: $number } // Literal.Number
-    .s     { color: #d14 } // Literal.String
+    .s     { color: $string } // Literal.String
     .na    { color: $name } // Name.Attribute
     .nb    { color: $name } // Name.Builtin
     .nc    { color: $name } // Name.Class
@@ -62,17 +63,17 @@
     .mh    { color: $number } // Literal.Number.Hex
     .mi    { color: $number } // Literal.Number.Integer
     .mo    { color: $number } // Literal.Number.Oct
-    .sb    { color: #d14 } // Literal.String.Backtick
-    .sc    { color: #d14 } // Literal.String.Char
-    .sd    { color: #d14 } // Literal.String.Doc
-    .s2    { color: #d14 } // Literal.String.Double
-    .se    { color: #d14 } // Literal.String.Escape
-    .sh    { color: #d14 } // Literal.String.Heredoc
-    .si    { color: #d14 } // Literal.String.Interpol
-    .sx    { color: #d14 } // Literal.String.Other
-    .sr    { color: #009926 } // Literal.String.Regex
-    .s1    { color: #d14 } // Literal.String.Single
-    .ss    { color: #990073 } // Literal.String.Symbol
+    .sb    { color: $string } // Literal.String.Backtick
+    .sc    { color: $string } // Literal.String.Char
+    .sd    { color: $string } // Literal.String.Doc
+    .s2    { color: $string } // Literal.String.Double
+    .se    { color: $string } // Literal.String.Escape
+    .sh    { color: $string } // Literal.String.Heredoc
+    .si    { color: $string } // Literal.String.Interpol
+    .sx    { color: $string } // Literal.String.Other
+    .sr    { color: $string } // Literal.String.Regex
+    .s1    { color: $string } // Literal.String.Single
+    .ss    { color: $string } // Literal.String.Symbol
     .bp    { color: #999 } // Name.Builtin.Pseudo
     .vc    { color: #008080 } // Name.Variable.Class
     .vg    { color: #008080 } // Name.Variable.Global
