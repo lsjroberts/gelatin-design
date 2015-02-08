@@ -288,6 +288,17 @@ pre {
         margin-left: 0;
         margin-right: 0;
         padding: 8px 12px; } }
+  .post-content .aside {
+    background: rgba(215, 106, 108, 0.3);
+    padding: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem; }
+    .post-content .aside:before {
+      display: block;
+      margin-bottom: 1rem;
+      content: "Aside";
+      font-size: .8rem;
+      font-style: italic; }
 
 .site-footer {
   padding: 0 0 4rem 0;

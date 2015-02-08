@@ -5,8 +5,8 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Feb 2015 17:11:53 +0000</pubDate>
-    <lastBuildDate>Sat, 07 Feb 2015 17:11:53 +0000</lastBuildDate>
+    <pubDate>Sun, 08 Feb 2015 11:54:54 +0000</pubDate>
+    <lastBuildDate>Sun, 08 Feb 2015 11:54:54 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -48,11 +48,11 @@
 
 &lt;p&gt;With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With &lt;code&gt;map&lt;/code&gt; we apply &lt;code&gt;square&lt;/code&gt; onto each number in the list and return the new list.&lt;/p&gt;
 
-&lt;p&gt;As you can see, functions are type-hinted with the list of parameters with the final type referring to the output. The &lt;code&gt;import List (..)&lt;/code&gt; line simply brings in all the core list functions that elm provides such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As you can see, functions are type-hinted for each of the parameters with the final type referring to the output. The &lt;code&gt;import List (..)&lt;/code&gt; line simply brings in all the core list functions that elm provides such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;filtering&quot;&gt;Filtering&lt;/h2&gt;
 
-&lt;p&gt;Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this naïvely we may write:&lt;/p&gt;
+&lt;p&gt;Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this imperatively we may write:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;squaredNumbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
@@ -68,7 +68,7 @@
 
 &lt;p&gt;Sure, it works, but having to define a second array is messy and we’ve had to write the &lt;code&gt;for&lt;/code&gt; loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.&lt;/p&gt;
 
-&lt;p&gt;Let’s try this functionally:&lt;/p&gt;
+&lt;p&gt;Let’s try it functionally:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
@@ -80,13 +80,13 @@
 
 &lt;p&gt;We apply the filter to the list of numbers and can reuse our &lt;code&gt;square&lt;/code&gt; function from before so we don’t need to repeat ourselves for a slightly different behaviour.&lt;/p&gt;
 
-&lt;p&gt;And here’s the brilliant thing about FP, you spend less time working out what the author intended. You can simply read it. And this improves further with chaining.&lt;/p&gt;
+&lt;p&gt;And here’s the brilliant thing about FP, you spend less time working out what the author intended; you can simply read it. And this improves further with chaining.&lt;/p&gt;
 
 &lt;h2 id=&quot;chaining&quot;&gt;Chaining&lt;/h2&gt;
 
-&lt;p&gt;If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use &lt;code&gt;|&amp;gt;&lt;/code&gt; operator to help us chain function calls.&lt;/p&gt;
+&lt;p&gt;If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use the &lt;code&gt;|&amp;gt;&lt;/code&gt; operator to help us chain function calls.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code&gt;|&amp;gt;&lt;/code&gt; operator takes the value to it’s left and passes this as the tail argument to the function on it’s right.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;|&amp;gt;&lt;/code&gt; operator is an alias for function application. It takes the value to it’s left and passes this as the tail argument to the function on it’s right. There is also &lt;code&gt;&amp;lt;|&lt;/code&gt; which does this in the reverse direction.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;c1&quot;&gt;-- this&lt;/span&gt;
 &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
@@ -115,13 +115,25 @@
 
 &lt;p&gt;An often better alternative to chaining is composition, &lt;a href=&quot;https://en.wikipedia.org/wiki/Function_composition_(computer_science)&quot;&gt;combining simple functions to build more complicated ones&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;In elm we can compose functions together using the &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; operator. In this example we are checking to see if the square of a given number is odd:&lt;/p&gt;
+&lt;p&gt;In elm we can compose functions together using the &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; operator. This composes two functions together without us needing to specify the way inputs are passed.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;c1&quot;&gt;-- this&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;-- is equivalent to&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To get a bit logical, if we know that &lt;code&gt;g : A -&amp;gt; B&lt;/code&gt; and &lt;code&gt;f : B -&amp;gt; C&lt;/code&gt; we can then compose them together to create &lt;code&gt;g &amp;gt;&amp;gt; f : A -&amp;gt; C&lt;/code&gt; (and the order can be reversed as &lt;code&gt;f &amp;lt;&amp;lt; g : A -&amp;gt; C&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;In this example we are checking to see if the square of a given number is odd:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- `not` is a built-in function&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- `not` is a built-in function that inverts booleans&lt;/span&gt;
 
 &lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;True&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;squareIsOdd&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;False&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The inputs given to &lt;code&gt;squareIsOdd&lt;/code&gt; are implicitly passed through to the composed functions, each one in turn passing it’s output on to the next.&lt;/p&gt;
 
 &lt;h2 id=&quot;state&quot;&gt;State&lt;/h2&gt;
 
@@ -195,15 +207,15 @@
 
 &lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- our previously created `foo` function&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FooBar&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setBarQux&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setFooBaz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setBarQux&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nf&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooBar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -212,11 +224,11 @@
 
 &lt;h2 id=&quot;elm&quot;&gt;Elm&lt;/h2&gt;
 
-&lt;p&gt;In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Why not give it a go for your next game jam project?&lt;/p&gt;
+&lt;p&gt;In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Easy to read, easy to debug, resuable code without confusing side-effects. Why not give it a go for your next game jam project?&lt;/p&gt;
 
 &lt;p&gt;Coming next: Signals. To hear when this is published and for news about the game I’m creating &lt;a href=&quot;https://twitter.com/gelatindesign&quot;&gt;follow me on twitter&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 07 Feb 2015 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
         <link>http://gelatindesign.co.uk/developing-games-in-elm/functional-programming</link>
         <guid isPermaLink="true">http://gelatindesign.co.uk/developing-games-in-elm/functional-programming</guid>
         

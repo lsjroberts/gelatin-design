@@ -30,7 +30,7 @@
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
         <h1 class="post-title">Developing games in Elm <strong>Functional Programming</strong></h1>
-        <p class="post-meta">07 Feb, 2015</p>
+        <p class="post-meta">08 Feb, 2015</p>
         <p class="post-meta post-categories">
             developing-games-in-elm
             
@@ -79,11 +79,11 @@
 
 <p>With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With <code>map</code> we apply <code>square</code> onto each number in the list and return the new list.</p>
 
-<p>As you can see, functions are type-hinted with the list of parameters with the final type referring to the output. The <code>import List (..)</code> line simply brings in all the core list functions that elm provides such as <code>map</code> and <code>filter</code>.</p>
+<p>As you can see, functions are type-hinted for each of the parameters with the final type referring to the output. The <code>import List (..)</code> line simply brings in all the core list functions that elm provides such as <code>map</code> and <code>filter</code>.</p>
 
 <h2 id="filtering">Filtering</h2>
 
-<p>Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this naïvely we may write:</p>
+<p>Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this imperatively we may write:</p>
 
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
     <span class="nx">squaredNumbers</span> <span class="o">=</span> <span class="p">[],</span>
@@ -99,7 +99,7 @@
 
 <p>Sure, it works, but having to define a second array is messy and we’ve had to write the <code>for</code> loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.</p>
 
-<p>Let’s try this functionally:</p>
+<p>Let’s try it functionally:</p>
 
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">isEven</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
 <span class="nf">isEven</span> <span class="n">n</span> <span class="ow">=</span>
@@ -111,13 +111,13 @@
 
 <p>We apply the filter to the list of numbers and can reuse our <code>square</code> function from before so we don’t need to repeat ourselves for a slightly different behaviour.</p>
 
-<p>And here’s the brilliant thing about FP, you spend less time working out what the author intended. You can simply read it. And this improves further with chaining.</p>
+<p>And here’s the brilliant thing about FP, you spend less time working out what the author intended; you can simply read it. And this improves further with chaining.</p>
 
 <h2 id="chaining">Chaining</h2>
 
-<p>If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use <code>|&gt;</code> operator to help us chain function calls.</p>
+<p>If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use the <code>|&gt;</code> operator to help us chain function calls.</p>
 
-<p>The <code>|&gt;</code> operator takes the value to it’s left and passes this as the tail argument to the function on it’s right.</p>
+<p>The <code>|&gt;</code> operator is an alias for function application. It takes the value to it’s left and passes this as the tail argument to the function on it’s right. There is also <code>&lt;|</code> which does this in the reverse direction.</p>
 
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
 <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">2</span>
@@ -146,13 +146,25 @@
 
 <p>An often better alternative to chaining is composition, <a href="https://en.wikipedia.org/wiki/Function_composition_(computer_science)">combining simple functions to build more complicated ones</a>.</p>
 
-<p>In elm we can compose functions together using the <code>&gt;&gt;</code> operator. In this example we are checking to see if the square of a given number is odd:</p>
+<p>In elm we can compose functions together using the <code>&gt;&gt;</code> operator. This composes two functions together without us needing to specify the way inputs are passed.</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<span class="p">(</span><span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span><span class="p">)</span>
+
+<span class="c1">-- is equivalent to</span>
+<span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="n">not</span> <span class="p">(</span><span class="n">isEven</span> <span class="n">n</span><span class="p">))</span></code></pre></div>
+
+<p>To get a bit logical, if we know that <code>g : A -&gt; B</code> and <code>f : B -&gt; C</code> we can then compose them together to create <code>g &gt;&gt; f : A -&gt; C</code> (and the order can be reversed as <code>f &lt;&lt; g : A -&gt; C</code>).</p>
+
+<p>In this example we are checking to see if the square of a given number is odd:</p>
 
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">squareIsOdd</span> <span class="ow">=</span>
-    <span class="n">square</span> <span class="o">&gt;&gt;</span> <span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span> <span class="c1">-- `not` is a built-in function</span>
+    <span class="n">square</span> <span class="o">&gt;&gt;</span> <span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span> <span class="c1">-- `not` is a built-in function that inverts booleans</span>
 
 <span class="nf">squareIsOdd</span> <span class="mi">3</span> <span class="o">==</span> <span class="kt">True</span>
 <span class="nf">squareIsOdd</span> <span class="mi">7</span> <span class="o">==</span> <span class="kt">False</span></code></pre></div>
+
+<p>The inputs given to <code>squareIsOdd</code> are implicitly passed through to the composed functions, each one in turn passing it’s output on to the next.</p>
 
 <h2 id="state">State</h2>
 
@@ -226,15 +238,15 @@
 
 <span class="nf">fooBar</span> <span class="kt">:</span> <span class="kt">FooBar</span>
 <span class="nf">fooBar</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">foo</span> <span class="ow">=</span> <span class="n">foo</span>
+    <span class="p">{</span> <span class="n">foo</span> <span class="ow">=</span> <span class="n">foo</span> <span class="c1">-- our previously created `foo` function</span>
     <span class="p">,</span> <span class="n">bar</span> <span class="ow">=</span> <span class="n">bar</span>
     <span class="p">}</span>
 
 <span class="nf">update</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span>
 <span class="nf">update</span> <span class="n">baz</span> <span class="n">fooBar</span> <span class="ow">=</span>
     <span class="p">{</span> <span class="n">fooBar</span>
-        <span class="o">|</span> <span class="n">foo</span> <span class="ow">&lt;-</span> <span class="n">setFooBaz</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">foo</span> <span class="n">baz</span>
-        <span class="p">,</span> <span class="n">bar</span> <span class="ow">&lt;-</span> <span class="n">setBarQux</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">bar</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="o">|</span> <span class="n">foo</span> <span class="ow">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="n">baz</span>
+        <span class="p">,</span> <span class="n">bar</span> <span class="ow">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">bar</span> <span class="o">|&gt;</span> <span class="n">setBarQux</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">2</span>
     <span class="p">}</span>
 
 <span class="nf">fooBar</span> <span class="ow">=</span> <span class="n">fooBar</span> <span class="o">|&gt;</span> <span class="n">update</span> <span class="mi">2</span></code></pre></div>
@@ -243,7 +255,7 @@
 
 <h2 id="elm">Elm</h2>
 
-<p>In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Why not give it a go for your next game jam project?</p>
+<p>In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Easy to read, easy to debug, resuable code without confusing side-effects. Why not give it a go for your next game jam project?</p>
 
 <p>Coming next: Signals. To hear when this is published and for news about the game I’m creating <a href="https://twitter.com/gelatindesign">follow me on twitter</a>.</p>
 
@@ -323,7 +335,7 @@
                     
                         <li>
                             <a class="post-link" href="/developing-games-in-elm/functional-programming">Functional Programming</a>
-                            <span class="post-meta">07 Feb, 2015</span>
+                            <span class="post-meta">08 Feb, 2015</span>
                         </li>
                     
                 

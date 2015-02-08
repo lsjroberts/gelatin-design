@@ -2,7 +2,7 @@
 title: Functional Programming
 titleSmall: Developing games in Elm
 titleStrong: Functional Programming
-date: 2015-02-07
+date: 2015-02-08
 category: developing-games-in-elm
 tags: project-iso elm
 ---
@@ -50,11 +50,11 @@ numbers =
 
 With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With `map` we apply `square` onto each number in the list and return the new list.
 
-As you can see, functions are type-hinted with the list of parameters with the final type referring to the output. The `import List (..)` line simply brings in all the core list functions that elm provides such as `map` and `filter`.
+As you can see, functions are type-hinted for each of the parameters with the final type referring to the output. The `import List (..)` line simply brings in all the core list functions that elm provides such as `map` and `filter`.
 
 ## Filtering
 
-Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this naïvely we may write:
+Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this imperatively we may write:
 
 {% highlight js %}
 var numbers = [1,2,3,4,5,6,7,8,9],
@@ -72,7 +72,7 @@ numbers = squaredNumbers;
 
 Sure, it works, but having to define a second array is messy and we've had to write the `for` loop definition again. This is one of my least favourite things about the imperative style; you'll write the same 35 boilerplate characters a thousand times throughout your codebase.
 
-Let's try this functionally:
+Let's try it functionally:
 
 {% highlight haskell %}
 isEven : Int -> Bool
@@ -86,14 +86,14 @@ numbers =
 
 We apply the filter to the list of numbers and can reuse our `square` function from before so we don't need to repeat ourselves for a slightly different behaviour.
 
-And here's the brilliant thing about FP, you spend less time working out what the author intended. You can simply read it. And this improves further with chaining.
+And here's the brilliant thing about FP, you spend less time working out what the author intended; you can simply read it. And this improves further with chaining.
 
 
 ## Chaining
 
-If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use `|>` operator to help us chain function calls.
+If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use the `|>` operator to help us chain function calls.
 
-The `|>` operator takes the value to it's left and passes this as the tail argument to the function on it's right.
+The `|>` operator is an alias for function application. It takes the value to it's left and passes this as the tail argument to the function on it's right. There is also `<|` which does this in the reverse direction.
 
 {% highlight haskell %}
 -- this
@@ -128,15 +128,29 @@ numbers =
 
 An often better alternative to chaining is composition, [combining simple functions to build more complicated ones](https://en.wikipedia.org/wiki/Function_composition_(computer_science)).
 
-In elm we can compose functions together using the `>>` operator. In this example we are checking to see if the square of a given number is odd:
+In elm we can compose functions together using the `>>` operator. This composes two functions together without us needing to specify the way inputs are passed.
+
+{% highlight haskell %}
+-- this
+(isEven >> not)
+
+-- is equivalent to
+(\n -> not (isEven n))
+{% endhighlight %}
+
+To get a bit logical, if we know that `g : A -> B` and `f : B -> C` we can then compose them together to create `g >> f : A -> C` (and the order can be reversed as `f << g : A -> C`).
+
+In this example we are checking to see if the square of a given number is odd:
 
 {% highlight haskell %}
 squareIsOdd =
-    square >> isEven >> not -- `not` is a built-in function
+    square >> isEven >> not -- `not` is a built-in function that inverts booleans
 
 squareIsOdd 3 == True
 squareIsOdd 7 == False
 {% endhighlight %}
+
+The inputs given to `squareIsOdd` are implicitly passed through to the composed functions, each one in turn passing it's output on to the next.
 
 
 ## State
@@ -218,15 +232,15 @@ type alias FooBar =
 
 fooBar : FooBar
 fooBar =
-    { foo = foo
+    { foo = foo -- our previously created `foo` function
     , bar = bar
     }
 
 update : Int -> FooBar -> FooBar
 update baz fooBar =
     { fooBar
-        | foo <- setFooBaz fooBar.foo baz
-        , bar <- setBarQux fooBar.bar baz * 2
+        | foo <- fooBar.foo |> setFooBaz baz
+        , bar <- fooBar.bar |> setBarQux baz * 2
     }
 
 fooBar = fooBar |> update 2
@@ -237,6 +251,6 @@ We are able to update the values as desired, but without side effects. The outpu
 
 ## Elm
 
-In my opinion there's a multitude of advantages to using a functional language and Elm is a fine example. Why not give it a go for your next game jam project?
+In my opinion there's a multitude of advantages to using a functional language and Elm is a fine example. Easy to read, easy to debug, resuable code without confusing side-effects. Why not give it a go for your next game jam project?
 
 Coming next: Signals. To hear when this is published and for news about the game I'm creating [follow me on twitter](https://twitter.com/gelatindesign).
