@@ -188,14 +188,14 @@
 
 <p>There may be a valid reason for changing the value of <code>bar.qux</code>, if it should always be double <code>foo.baz</code>. But unless a developer knows or reads the definition of <code>setBaz</code> they won’t know that it changes <code>bar.qux</code>. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I’ve seen and done it a great deal.</p>
 
-<p>So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data. Even if the function performs no operation and immediately returns the input, the output is a new piece of data that looks identical.</p>
+<p>So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data.</p>
+
+<p>However if the function performs no update operation and only returns the input, the output is the same piece of data to prevent unnecessary copies.</p>
 
 <div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">noop</span> <span class="n">input</span> <span class="ow">=</span>
     <span class="n">input</span>
 
-<span class="nf">noop</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span> <span class="o">==</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span></code></pre></div>
-
-<p>While these two are equivalent they are not the same piece of data. The value of <code>a</code> has been copied into a new object with an <code>a</code> parameter.</p>
+<span class="nf">sameAsInput</span> <span class="ow">=</span> <span class="n">noop</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span></code></pre></div>
 
 <p>So taking this to our <code>setBaz</code> example in elm:</p>
 
@@ -258,6 +258,8 @@
 <p>In my opinion there’s a multitude of advantages to using a functional language and Elm is a fine example. Easy to read, easy to debug, resuable code without confusing side-effects. Why not give it a go for your next game jam project?</p>
 
 <p>Coming next: Signals. To hear when this is published and for news about the game I’m creating <a href="https://twitter.com/gelatindesign">follow me on twitter</a>.</p>
+
+<p class="update-note">Updated [08 Feb, 2015]: Corrected a section regarding a <code>noop</code> function, only record updates produce a new value.</p>
 
     </article>
 

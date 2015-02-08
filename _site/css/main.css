@@ -11,6 +11,12 @@
   src: url("/fonts/josefinslab-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/josefinslab-regular-webfont.woff2") format("woff2"), url("/fonts/josefinslab-regular-webfont.woff") format("woff"), url("/fonts/josefinslab-regular-webfont.ttf") format("truetype"), url("/fonts/josefinslab-regular-webfont.svg#josefin_slabregular") format("svg");
   font-weight: normal;
   font-style: normal; }
+@font-face {
+  font-family: 'pt_monoregular';
+  src: url("/fonts/ptm55ft-webfont.eot");
+  src: url("/fonts/ptm55ft-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/ptm55ft-webfont.woff2") format("woff2"), url("/fonts/ptm55ft-webfont.woff") format("woff"), url("/fonts/ptm55ft-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 /**
  * Reset some basic elements
  */
@@ -109,7 +115,7 @@ blockquote {
  */
 pre,
 code {
-  font-family: "PT Mono", Courier, monospace;
+  font-family: "pt_monoregular", Courier, monospace;
   font-size: 15px;
   color: #fff;
   border-radius: 3px;
@@ -299,6 +305,11 @@ pre {
       content: "Aside";
       font-size: .8rem;
       font-style: italic; }
+  .post-content .update-note {
+    background: #ccc;
+    padding: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem; }
 
 .site-footer {
   padding: 0 0 4rem 0;

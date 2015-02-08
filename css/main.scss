@@ -46,11 +46,23 @@
 
 }
 
+@font-face {
+    font-family: 'pt_monoregular';
+    src: url('/fonts/ptm55ft-webfont.eot');
+    src: url('/fonts/ptm55ft-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/ptm55ft-webfont.woff2') format('woff2'),
+         url('/fonts/ptm55ft-webfont.woff') format('woff'),
+         url('/fonts/ptm55ft-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 
 // Our variables
 $base-font-family: "latolight", Helvetica, Arial, sans-serif;
 $secondary-font-family: "josefin_slabregular", Georgia, serif;
-$mono-font-family: "PT Mono", Courier, monospace;
+$mono-font-family: "pt_monoregular", Courier, monospace;
 $base-font-size:   1em;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.618;

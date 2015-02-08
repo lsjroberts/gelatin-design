@@ -177,16 +177,16 @@ foo.setBaz(2);
 
 There may be a valid reason for changing the value of `bar.qux`, if it should always be double `foo.baz`. But unless a developer knows or reads the definition of `setBaz` they won't know that it changes `bar.qux`. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I've seen and done it a great deal.
 
-So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data. Even if the function performs no operation and immediately returns the input, the output is a new piece of data that looks identical.
+So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data.
+
+However if the function performs no update operation and only returns the input, the output is the same piece of data to prevent unnecessary copies.
 
 {% highlight haskell %}
 noop input =
     input
 
-noop { a = "b" } == { a = "b" }
+sameAsInput = noop { a = "b" }
 {% endhighlight %}
-
-While these two are equivalent they are not the same piece of data. The value of `a` has been copied into a new object with an `a` parameter.
 
 So taking this to our `setBaz` example in elm:
 
@@ -254,3 +254,6 @@ We are able to update the values as desired, but without side effects. The outpu
 In my opinion there's a multitude of advantages to using a functional language and Elm is a fine example. Easy to read, easy to debug, resuable code without confusing side-effects. Why not give it a go for your next game jam project?
 
 Coming next: Signals. To hear when this is published and for news about the game I'm creating [follow me on twitter](https://twitter.com/gelatindesign).
+
+{:.update-note}
+Updated [08 Feb, 2015]: Corrected a section regarding a `noop` function, only record updates produce a new value.
