@@ -5,9 +5,48 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 08 Feb 2015 14:16:19 +0000</pubDate>
-    <lastBuildDate>Sun, 08 Feb 2015 14:16:19 +0000</lastBuildDate>
+    <pubDate>Tue, 10 Feb 2015 19:06:59 +0000</pubDate>
+    <lastBuildDate>Tue, 10 Feb 2015 19:06:59 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Sprint Two - World Editor</title>
+        <description>&lt;p&gt;For this, the second sprint, I focused on refactoring my original ideas and developing the initial world editor with river and elevation brushes.&lt;/p&gt;
+
+&lt;h2 id=&quot;refactor&quot;&gt;Refactor&lt;/h2&gt;
+
+&lt;p&gt;A few weeks ago &lt;a href=&quot;https://twitter.com/czaplic&quot;&gt;Evan&lt;/a&gt; (the author of Elm) wrote a tutorial on &lt;a href=&quot;https://github.com/evancz/elm-architecture-tutorial&quot;&gt;architecture in Elm&lt;/a&gt;. This is a fantastic resource that you should definitely read if you are already using or interested in Elm.&lt;/p&gt;
+
+&lt;p&gt;I used this as a guide to refactoring the code and experiments from &lt;a href=&quot;/project-iso/sprint-one-experiments&quot;&gt;sprint one&lt;/a&gt; rendering an isometric map.&lt;/p&gt;
+
+&lt;h2 id=&quot;render&quot;&gt;Render&lt;/h2&gt;
+
+&lt;p&gt;Before I could start on editing a map I needed to render it out to the screen. The existing code from the previous sprint worked, but was not at all open to dynamically changing the different tiles. Admittedly a simpler route would have been to just use text files or one of the existing isometric tile layout tools. However I fully intend to release the world editor as part of the game, and honestly it felt like a good place to start with learning a few techniques in elm.&lt;/p&gt;
+
+&lt;p&gt;The default world is an 8 by 8 grid of blank tiles. There’s a slight offset rendering issue with the tiles at the moment, but it’s placeholder so that’s something for another day.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2015-02-10/default-world.png&quot; alt=&quot;Default world&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;editor&quot;&gt;Editor&lt;/h2&gt;
+
+&lt;p&gt;Having sorted out the world rendering, I needed to add the ability to edit the map through an interface. There were a few tricky technical problems I had to overcome but once I understood how to get it done, building it was fairly straightforward.&lt;/p&gt;
+
+&lt;p&gt;There remains many issues but I’ve got the basic principle down. I’ll need to add intelligent painting of elevation and rivers that adds slopes around hills and curves rivers.&lt;/p&gt;
+
+&lt;p&gt;I haven’t yet implemented saving and loading since there is some discussion on the elm mailing list about coming future changes which will have an impact here. So I’ll leave this to a future sprint.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2015-02-10/editor-interface.gif&quot; alt=&quot;Default world&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s not a terribly exciting game so far (since there’s no actual gameplay…), but I need to develop an &lt;a href=&quot;http://en.wikipedia.org/wiki/Minimum_viable_product&quot;&gt;MVP&lt;/a&gt; for the upcoming &lt;a href=&quot;http://www.egx.net/rezzed&quot;&gt;Rezzed&lt;/a&gt; conference in case anyone cares to ask. So the next couple of sprints will focus on actual combat gameplay, and perhaps initial conversation mechanics if I have time.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 10 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://gelatindesign.co.uk/project-iso/sprint-two-world-editor</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/project-iso/sprint-two-world-editor</guid>
+        
+        
+        <category>project-iso</category>
+        
+      </item>
     
       <item>
         <title>Functional Programming</title>
@@ -726,131 +765,6 @@ function blogTagLists(files, metalsmith, done) {
         
         
         <category>codeclub</category>
-        
-      </item>
-    
-      <item>
-        <title>Clean your HTML with Jade</title>
-        <description>&lt;p&gt;As fundamental as html is to the web it is a bit of an ugly character. Angular brackets are a particular eyesore.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://jade-lang.com&quot;&gt;Jade&lt;/a&gt; is a terse almost python-like html templating language. It is primarily a nodejs package, but there are compilers for &lt;a href=&quot;http://stackoverflow.com/questions/13355137/php-jade-template-parser&quot;&gt;PHP&lt;/a&gt; and other languages as well.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;It has a wonderfully basic syntax:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;doctype html
-html
-    head
-        title Hello World
-        link(rel=&quot;stylesheet&quot;, href=&quot;build/styles/combined.css&quot;)
-    body
-        div.container
-            p Hello World
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;layouts-and-blocks&quot;&gt;Layouts and blocks&lt;/h2&gt;
-
-&lt;p&gt;Jade allows you to create layouts and extend them for your different views:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// layouts/master.jade
-body
-    block content
-
-// index.jade
-extends layouts/master
-
-block content
-    header.hero
-        h1 Hello World
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;use-mixins-to-power-your-views&quot;&gt;Use mixins to power your views&lt;/h2&gt;
-
-&lt;p&gt;Forms are probably the lamest thing to write in HTML, it can become a bore rather quickly. Using jade mixins you can speed this process up and cleanly define your form without all the verbosity.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// mixins/form.jade
-mixin form(action, method)
-    unless method
-        - method= &quot;get&quot;
-    form(action= action, method= method)
-        if block
-            block
-        else
-            p Looks like you forgot to add any inputs to your form
-
-mixin field(name, type)
-    label= name
-    input(type= type, name= name)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// login.jade
-
-include mixins/form
-
-+form(&quot;auth/login&quot;, &quot;post&quot;)
-    +field(&quot;email&quot;, &quot;text&quot;)
-    +field(&quot;password&quot;, &quot;password&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So that’s pretty cool, but there’s a lot more you can do with the field mixin. You can run any javascript inside jade, so we can add an &lt;code&gt;unslugify&lt;/code&gt; function to convert “email_address” to “Email Address”. Then add in some input type guessing and we’ve got something pretty useful really quickly.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// mixins/form.jade
-
-//- ...
-
-mixin field(name, type)
-    //- Convert &quot;foo_bar&quot; to &quot;Foo Bar&quot;
-    -var unslugify = function(input) {
-    -   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase().replace(/[-|_](.)/g, function(match, group1) {
-    -       return &#39; &#39; + group1.toUpperCase();
-    -   });
-    -}
-
-    //- If no type has been set, try to pick an appropriate one
-    unless type
-        case name
-            when &quot;password&quot;
-                - type= &quot;password&quot;
-            when &quot;password_confirmation&quot;
-                - type= &quot;password&quot;
-            when &quot;email&quot;
-                - type= &quot;email&quot;
-            default
-                - type= &quot;text&quot;
-
-    div.field
-        label= unslugify(name)
-        input(type= type, name= name)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-jade&quot;&gt;// login.jade
-
-include mixins/form
-
-+form(&quot;auth/login&quot;, &quot;post&quot;)
-    +field(&quot;email&quot;)
-    +field(&quot;password&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;lovely&quot;&gt;Lovely&lt;/h2&gt;
-
-&lt;p&gt;There’s a few more things you can do in jade, &lt;a href=&quot;http://jade-lang.com/reference/&quot;&gt;check out the reference&lt;/a&gt; to see all your options. But hopefully you can see from this quick rundown how much cleaner you can make your views.&lt;/p&gt;
-
-&lt;p&gt;Coding should be fun and jade brings that enjoyment back to html.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 16 Feb 2014 00:00:00 +0000</pubDate>
-        <link>http://gelatindesign.co.uk/coding/clean-your-html-with-jade</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/clean-your-html-with-jade</guid>
-        
-        <category>javascript</category>
-        
-        <category>node</category>
-        
-        <category>jade</category>
-        
-        
-        <category>coding</category>
         
       </item>
     

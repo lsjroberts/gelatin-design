@@ -217,6 +217,15 @@
         @extend %heading;
     }
 
+    p {
+
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+
     pre {
         margin-left: -$spacing-unit;
         margin-right: -$spacing-unit;

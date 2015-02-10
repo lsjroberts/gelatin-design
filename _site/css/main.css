@@ -285,6 +285,9 @@ pre {
 
 .post-content {
   text-align: justify; }
+  .post-content img {
+    display: block;
+    margin: 0 auto; }
   .post-content pre {
     margin-left: -4.854rem;
     margin-right: -4.854rem;

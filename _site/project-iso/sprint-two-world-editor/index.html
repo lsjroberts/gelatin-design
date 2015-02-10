@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Sprint One - Experiments</title>
-    <meta name="description" content="">
+    <title>Sprint Two - World Editor</title>
+    <meta name="description" content="For this, the second sprint, I focused on refactoring my original ideas and developing the initial world editor with river and elevation brushes.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://gelatindesign.co.uk/project-iso/sprint-one-experiments">
+    <link rel="canonical" href="http://gelatindesign.co.uk/project-iso/sprint-two-world-editor">
     <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://gelatindesign.co.uk/feed.xml">
 
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -29,38 +29,42 @@
 
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
-        <h1 class="post-title">Sprint One <strong>Experiments</strong></h1>
-        <p class="post-meta">05 Feb, 2015</p>
+        <h1 class="post-title">Sprint Two <strong>World Editor</strong></h1>
+        <p class="post-meta">10 Feb, 2015</p>
         <p class="post-meta post-categories">
             project-iso
-            
-                • devblog
             
         </p>
     </header>
 
     <article class="post-content">
-        <p><img src="/images/blog/2015-02-05/iso-map.jpg" alt="Project ISO map" /></p>
+        <p>For this, the second sprint, I focused on refactoring my original ideas and developing the initial world editor with river and elevation brushes.</p>
 
-<h2 id="sprints">Sprints</h2>
+<h2 id="refactor">Refactor</h2>
 
-<p>I’m splitting development into sprints with set objectives. The primary target is to develop the game to a playable state at the end of each sprint. This is to ensure motivation is maintained, progress can be tested and feedback can be received on the current state.</p>
+<p>A few weeks ago <a href="https://twitter.com/czaplic">Evan</a> (the author of Elm) wrote a tutorial on <a href="https://github.com/evancz/elm-architecture-tutorial">architecture in Elm</a>. This is a fantastic resource that you should definitely read if you are already using or interested in Elm.</p>
 
-<p>Strictly speaking, the first sprint was completed a few weeks ago but I’ve continued to experiment and learn. So it’s run over a bit and I want to get some thoughts written down as I come up to my final few days on sprint two.</p>
+<p>I used this as a guide to refactoring the code and experiments from <a href="/project-iso/sprint-one-experiments">sprint one</a> rendering an isometric map.</p>
 
-<h2 id="isometric">Isometric</h2>
+<h2 id="render">Render</h2>
 
-<p>So, the first actual task I had to look into was rendering an isometric tiled map. There’s plenty of resources regarding this on the web. Though they weren’t entirely applicable due to some technical choices I’ve made, I got going pretty quickly on it.</p>
+<p>Before I could start on editing a map I needed to render it out to the screen. The existing code from the previous sprint worked, but was not at all open to dynamically changing the different tiles. Admittedly a simpler route would have been to just use text files or one of the existing isometric tile layout tools. However I fully intend to release the world editor as part of the game, and honestly it felt like a good place to start with learning a few techniques in elm.</p>
 
-<p>After some messing around and learning I eventually arrived at a dynamically built map which could be resized and filled with a bunch of different tile types.</p>
+<p>The default world is an 8 by 8 grid of blank tiles. There’s a slight offset rendering issue with the tiles at the moment, but it’s placeholder so that’s something for another day.</p>
 
-<p><img src="/images/blog/2015-02-05/iso-map-size.jpg" alt="Project ISO map size" /></p>
+<p><img src="/images/blog/2015-02-10/default-world.png" alt="Default world" /></p>
 
-<h2 id="artwork">Artwork</h2>
+<h2 id="editor">Editor</h2>
 
-<p>So this initial artwork is not my own, I am using the excellent asset packs by <a href="http://kenney.nl">Kenney</a>. I’m not 100% sure how much if any of this stuff will be in the final game since it’s cheery aesthetic doesn’t match the ideas in my head, but it certainly helps to have such high quality placeholder for now!</p>
+<p>Having sorted out the world rendering, I needed to add the ability to edit the map through an interface. There were a few tricky technical problems I had to overcome but once I understood how to get it done, building it was fairly straightforward.</p>
 
-<p>To hear more about this game’s development you can <a href="https://twitter.com/gelatindesign">follow it on twitter</a> or <a href="/feed.xml">subscribe to the rss feed</a> if that’s your thing.</p>
+<p>There remains many issues but I’ve got the basic principle down. I’ll need to add intelligent painting of elevation and rivers that adds slopes around hills and curves rivers.</p>
+
+<p>I haven’t yet implemented saving and loading since there is some discussion on the elm mailing list about coming future changes which will have an impact here. So I’ll leave this to a future sprint.</p>
+
+<p><img src="/images/blog/2015-02-10/editor-interface.gif" alt="Default world" /></p>
+
+<p>It’s not a terribly exciting game so far (since there’s no actual gameplay…), but I need to develop an <a href="http://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a> for the upcoming <a href="http://www.egx.net/rezzed">Rezzed</a> conference in case anyone cares to ask. So the next couple of sprints will focus on actual combat gameplay, and perhaps initial conversation mechanics if I have time.</p>
 
     </article>
 
