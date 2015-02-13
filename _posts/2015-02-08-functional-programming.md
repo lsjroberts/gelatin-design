@@ -147,7 +147,7 @@ squareIsOdd =
     square >> isEven >> not -- `not` is a built-in function that inverts booleans
 
 squareIsOdd 3 == True
-squareIsOdd 7 == False
+squareIsOdd 6 == False
 {% endhighlight %}
 
 The inputs given to `squareIsOdd` are implicitly passed through to the composed functions, each one in turn passing it's output on to the next.
@@ -257,3 +257,6 @@ Coming next: Signals. To hear when this is published and for news about the game
 
 {:.update-note}
 Updated [08 Feb, 2015]: Corrected a section regarding a `noop` function, only record updates produce a new value.
+
+{:.update-note}
+Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even number... changed to `squareIsOdd 6 == False`
