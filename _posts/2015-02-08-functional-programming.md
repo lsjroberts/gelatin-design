@@ -138,7 +138,7 @@ In elm we can compose functions together using the `>>` operator. This composes 
 (\n -> not (isEven n))
 {% endhighlight %}
 
-To get a bit logical, if we know that `g : A -> B` and `f : B -> C` we can then compose them together to create `g >> f : A -> C`. The call order can be reversed as using `<<`.
+To get a bit logical, if we know that `g : A -> B` and `f : B -> C` we can then compose them together to create `g >> f : A -> C`. The call order can be reversed using `<<`.
 
 In this example we are checking to see if the square of a given number is odd:
 

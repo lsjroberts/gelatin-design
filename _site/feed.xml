@@ -5,8 +5,8 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Feb 2015 14:49:10 +0000</pubDate>
-    <lastBuildDate>Mon, 16 Feb 2015 14:49:10 +0000</lastBuildDate>
+    <pubDate>Mon, 16 Feb 2015 14:49:58 +0000</pubDate>
+    <lastBuildDate>Mon, 16 Feb 2015 14:49:58 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -162,7 +162,7 @@
 &lt;span class=&quot;c1&quot;&gt;-- is equivalent to&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEven&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;To get a bit logical, if we know that &lt;code&gt;g : A -&amp;gt; B&lt;/code&gt; and &lt;code&gt;f : B -&amp;gt; C&lt;/code&gt; we can then compose them together to create &lt;code&gt;g &amp;gt;&amp;gt; f : A -&amp;gt; C&lt;/code&gt;. The call order can be reversed as using &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To get a bit logical, if we know that &lt;code&gt;g : A -&amp;gt; B&lt;/code&gt; and &lt;code&gt;f : B -&amp;gt; C&lt;/code&gt; we can then compose them together to create &lt;code&gt;g &amp;gt;&amp;gt; f : A -&amp;gt; C&lt;/code&gt;. The call order can be reversed using &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;In this example we are checking to see if the square of a given number is odd:&lt;/p&gt;
 
