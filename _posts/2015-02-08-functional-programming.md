@@ -115,7 +115,7 @@ When we have multiple functions to call it's easy to see the benefit:
 add 4 (add 3 (add 2 (1)))
 {% endhighlight %}
 
-This helps you reduce the number of brackets you have to write, and makes your code easier to read. It becomes more like a sentence:
+This helps reduce the number of brackets you have to write, and makes your code easier to read. It becomes more like a sentence:
 
 {% highlight haskell %}
 numbers : List Int
@@ -138,7 +138,7 @@ In elm we can compose functions together using the `>>` operator. This composes 
 (\n -> not (isEven n))
 {% endhighlight %}
 
-To get a bit logical, if we know that `g : A -> B` and `f : B -> C` we can then compose them together to create `g >> f : A -> C` (and the order can be reversed as `f << g : A -> C`).
+To get a bit logical, if we know that `g : A -> B` and `f : B -> C` we can then compose them together to create `g >> f : A -> C`. The call order can be reversed as using `<<`.
 
 In this example we are checking to see if the square of a given number is odd:
 
@@ -260,3 +260,6 @@ Updated [08 Feb, 2015]: Corrected a section regarding a `noop` function, only re
 
 {:.update-note}
 Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even number... changed to `squareIsOdd 6 == False`
+
+{:.update-note}
+Updated [16 Feb, 2015]: Improved some sentences to be less confusing and repetitive.
