@@ -89,13 +89,9 @@ a {
   a:visited {
     color: #c13436; }
   a:hover {
-    color: #333333;
     text-decoration: underline; }
-  a.external:after {
-    position: relative;
-    top: .3em;
-    content: "\021AA";
-    padding: 0 .3em; }
+  a.external:after, .post-content .share-elm a:after {
+    position: relative; }
 
 /**
  * Blockquotes
@@ -122,7 +118,7 @@ code {
   background-color: #333; }
 
 code {
-  padding: 4px 8px; }
+  padding: 2px 8px; }
 
 pre {
   padding: 8px 12px;
@@ -136,15 +132,15 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(900px - (4.854rem*2));
-  max-width: calc(900px - (4.854rem*2));
+  max-width: -webkit-calc(800px - (4.854rem*2));
+  max-width: calc(800px - (4.854rem*2));
   margin-right: auto;
   margin-left: auto;
   padding: 9.708rem 4.854rem; }
   @media screen and (max-width: 800px) {
     .wrapper {
-      max-width: -webkit-calc(900px - (4.854rem));
-      max-width: calc(900px - (4.854rem));
+      max-width: -webkit-calc(800px - (4.854rem));
+      max-width: calc(800px - (4.854rem));
       padding: 2.427rem; } }
   @media screen and (max-width: 600px) {
     .wrapper {
@@ -169,7 +165,7 @@ pre {
   .icon > svg path {
     fill: #828282; }
 
-.page h1, .post-title {
+.page h1, .post-header .post-author, .post-title, .post-content h1 {
   font-size: 1.618rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-style: italic;
@@ -178,7 +174,7 @@ pre {
   text-align: center;
   text-transform: capitalize; }
   @media screen and (max-width: 800px) {
-    .page h1, .post-title {
+    .page h1, .post-header .post-author, .post-title, .post-content h1 {
       font-size: 1.3em; } }
 
 .post-title-icon {
@@ -285,6 +281,12 @@ pre {
 
 .post-content {
   text-align: justify; }
+  .post-content .part-header {
+    font-size: 1rem; }
+    .post-content .part-header strong {
+      font-size: 2.61792rem;
+      display: block;
+      color: #d76a6c; }
   .post-content img {
     display: block;
     margin: 0 auto; }
@@ -297,6 +299,16 @@ pre {
         margin-left: 0;
         margin-right: 0;
         padding: 8px 12px; } }
+  .post-content .emphasise {
+    font-weight: bold;
+    font-size: 1.1rem; }
+  .post-content .share-elm a {
+    display: block;
+    margin-top: -2.427rem;
+    padding: 8px 12px;
+    border-radius: 0 0 4px 4px;
+    text-align: right;
+    color: #d76a6c; }
   .post-content .aside {
     background: rgba(215, 106, 108, 0.3);
     padding: 1rem;

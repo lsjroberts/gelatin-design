@@ -183,7 +183,9 @@
 }
 
 .post-header {
-
+    .post-author {
+        @extend %title;
+    }
 }
 
 .post-title {
@@ -209,12 +211,26 @@
 .post-content {
     text-align: justify;
 
+    h1 {
+        @extend %title;
+    }
+
     h2 {
         @extend %subtitle;
     }
 
     h3 {
         @extend %heading;
+    }
+
+    .part-header {
+        @include font-size(1);
+
+        strong {
+            @include font-size(3);
+            display: block;
+            color: $brand-color;
+        }
     }
 
     p {
@@ -236,6 +252,23 @@
             margin-right: 0;
             padding: 8px 12px;
         }
+    }
+
+    .emphasise {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .share-elm a {
+        @extend .external;
+        display: block;
+        // background: $brand-color;
+        margin-top: -$spacing-unit / 2;
+        padding: 8px 12px;
+        border-radius: 0 0 4px 4px;
+        text-align: right;
+        // color: #fff;
+        color: $brand-color;
     }
 
     .aside {

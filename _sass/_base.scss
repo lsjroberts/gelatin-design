@@ -97,15 +97,15 @@ a {
     }
 
     &:hover {
-        color: $text-color;
         text-decoration: underline;
     }
 
     &.external:after {
         position: relative;
-        top: .3em;
-        content: "\021AA";
-        padding: 0 .3em;
+        // top: .2em;
+        // content: "\021AA";
+        // padding: 0 .3em;
+        // font-size: .8em;
     }
 }
 
@@ -142,7 +142,7 @@ code {
 }
 
 code {
-    padding: 4px 8px;
+    padding: 2px 8px;
 }
 
 pre {

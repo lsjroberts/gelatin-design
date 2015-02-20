@@ -3,7 +3,7 @@
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
         <h1 class="post-title">{{ page.titleSmall }} <strong>{{ page.titleStrong }}</strong></h1>
-        <p class="post-meta">{{ page.date | date: "%d %b, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+        <p class="post-meta">{{ page.date | date: "%d %b, %Y" }}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
         <p class="post-meta post-categories">
             {{ page.category }}
             {% for tag in page.tags %}
