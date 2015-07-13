@@ -2,7 +2,7 @@
 title: Dynamic desktop background of Earth
 titleSmall: Dynamic desktop background of 
 titleStrong: Earth
-date: 2015-07-11
+date: 2015-07-13
 category: coding
 ---
 
