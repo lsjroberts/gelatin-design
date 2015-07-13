@@ -18,25 +18,20 @@ layout: default
         <a href="https://twitter.com/gelatindesign" rel="me">twitter</a>.
     </p>
 
-    {% include banners/project-iso.html %}
-
     <div class="post-list">
-        <h4>Other Articles</h4>
+        <h4>Articles</h4>
 
         <ul>
             {% for post in site.posts %}
-                {% if post.tags contains "project-iso" or post.categories contains "project-iso" %}
-
-                {% else %}
-                    <li>
-                        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                        <span class="post-meta">{{ post.category }} | {{ post.date | date: "%d %b, %Y" }}</span>
-                    </li>
-                {% endif %}
+                <li>
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                    <span class="post-meta">
+                        <a href="/{{ post.category }}/">{{ post.category }}</a>
+                        | {{ post.date | date: "%d %b, %Y" }}
+                    </span>
+                </li>
             {% endfor %}
         </ul>
     </div>
-
-    <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 
 </div>

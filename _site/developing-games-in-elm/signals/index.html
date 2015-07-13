@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Signals</title>
-    <meta name="description" content="This is the second primer article in the series “Developing Games in Elm” in which I discuss the two main fundamental differences between elm and more tradit...">
+    <title>Signals - Developing Games In Elm</title>
+    <meta name="description" content="Elm: v0.14Last updated: 03 Mar, 2015">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://gelatindesign.co.uk/developing-games-in-elm/signals">
@@ -32,7 +32,7 @@
         <h1 class="post-title">Developing Games in Elm <strong>Signals</strong></h1>
         <p class="post-meta">20 Feb, 2015</p>
         <p class="post-meta post-categories">
-            developing-games-in-elm
+            <a href="/developing-games-in-elm/">developing-games-in-elm</a>
             
                 • project-iso
             
@@ -42,7 +42,10 @@
     </header>
 
     <article class="post-content">
-        <p>This is the second primer article in the series <em>“Developing Games in Elm”</em> in which I discuss the two main fundamental differences between <a href="http://elm-lang.org">elm</a> and more traditional programming languages. If you haven’t read the <a href="/developing-games-in-elm/functional-programming">previous article yet I recommend you do that first</a>.</p>
+        <p class="note">Elm: v0.14<br />
+Last updated: 03 Mar, 2015</p>
+
+<p>This is the second primer article in the series <em>“Developing Games in Elm”</em> in which I discuss the two main fundamental differences between <a href="http://elm-lang.org">elm</a> and more traditional programming languages. If you haven’t read the <a href="/developing-games-in-elm/functional-programming">previous article yet I recommend you do that first</a>.</p>
 
 <p>Elm is not just a functional language, it is a functional <em>reactive</em> language. It gives your game the ability to react to signals from the outside world; to player inputs and time.</p>
 
@@ -182,6 +185,31 @@
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e69d1fe4b09711f39c2b81">view on share-elm.com</a></p>
 
+<h2 id="channels">Channels</h2>
+
+<p>We are now able to communicate with the outside world, but what about communications between different parts of our game internally? For this we can use custom channels. A channel is what a signal is sent on and can be subscribed to by another piece of the game to receive updates to the value. All the in-built examples we’ve seen so far are channels.</p>
+
+<p>To send our own signals we create a channel that can receive values of a set type and takes a default value. To get the signal from this channel we subscribe to it and can then handle it as before.</p>
+
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="kt">Channel</span><span class="p">,</span> <span class="nf">map</span><span class="p">,</span> <span class="nf">channel</span><span class="p">,</span> <span class="nf">subscribe</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
+
+<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="nf">main</span> <span class="ow">=</span>
+    <span class="n">mySubscriber</span>
+        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span>
+
+<span class="c1">-- create a channel which takes values of type String and has an initial value of &quot;foobar&quot;</span>
+<span class="nf">myChannel</span> <span class="kt">:</span> <span class="kt">Channel</span> <span class="kt">String</span>
+<span class="nf">myChannel</span> <span class="ow">=</span>
+    <span class="n">channel</span> <span class="s">&quot;foobar&quot;</span>
+
+<span class="c1">-- subscribe to the channel creating a signal of string values</span>
+<span class="nf">mySubscriber</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">String</span>
+<span class="nf">mySubscriber</span> <span class="ow">=</span>
+    <span class="n">subscribe</span> <span class="n">myChannel</span></code></pre></div>
+
 <h2 id="next">Next</h2>
 
 <p>So we’ve now looked into the two most important differences between traditional languages and elm. Functional programming provides a more descriptive way to write code, and signals allow your game to react to time and inputs.</p>
@@ -190,66 +218,8 @@
 
 <p>While you wait, why not <a href="https://twitter.com/gelatindesign" class="external">follow me on twitter</a> and <a href="http://streak.club/u/jellyislovely" class="external">streak club</a> to hear updates about my own game’s progress and other development bits and bobs.</p>
 
-<!--
-## Invaders
-
-Lets put all this funky stuff into an actual game. Space Invaders seems like a nice basic one.
-
-
-
-
-
--->
-
-<!--
-
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
-<span class="kr">import</span> <span class="nn">Mouse</span>
-<span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">,</span> <span class="nf">merge</span><span class="p">)</span>
-<span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
-
-<span class="kr">type</span> <span class="n">alias</span> <span class="kt">Points</span> <span class="ow">=</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-
-<span class="nf">draw</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Points</span>
-<span class="nf">draw</span> <span class="ow">=</span>
-    <span class="n">foldp</span> <span class="p">(</span><span class="nf">\</span><span class="n">click</span> <span class="n">points</span> <span class="ow">-&gt;</span>
-        <span class="kr">if</span> <span class="n">click</span>
-            <span class="kr">then</span> <span class="kt">Window</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="p">((</span><span class="ow">::</span><span class="p">)</span> <span class="n">points</span><span class="p">)</span>
-            <span class="kr">else</span> <span class="n">points</span>
-    <span class="p">)</span> <span class="kt">[]</span> <span class="kt">Mouse</span><span class="o">.</span><span class="n">clicks</span>
-
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
-    <span class="n">map</span> <span class="n">asText</span> <span class="n">draw</span></code></pre></div>
-
-
-
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Mouse</span>
-<span class="kr">import</span> <span class="nn">Signal</span>
-<span class="kr">import</span> <span class="nn">Graphics.Collage</span> <span class="p">(</span><span class="o">..</span><span class="p">)</span>
-<span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="o">..</span><span class="p">)</span>
-
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
-    <span class="kt">Signal</span><span class="o">.</span><span class="n">map2</span> <span class="n">reactiveSquare</span> <span class="n">size</span> <span class="n">color</span>
-
-<span class="nf">reactiveSquare</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Color</span><span class="o">.</span><span class="kt">Color</span> <span class="ow">-&gt;</span> <span class="kt">Element</span>
-<span class="nf">reactiveSquare</span> <span class="n">size</span> <span class="n">color</span> <span class="ow">=</span>
-    <span class="n">square</span> <span class="n">size</span> <span class="o">|&gt;</span> <span class="n">filled</span> <span class="n">color</span>
-
-<span class="nf">size</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Int</span>
-<span class="nf">size</span> <span class="ow">=</span>
-    <span class="kt">Signal</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="kt">Mouse</span><span class="o">.</span><span class="n">position</span>
-
-<span class="nf">colour</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Color</span><span class="o">.</span><span class="kt">Color</span>
-<span class="nf">colour</span> <span class="ow">=</span>
-    <span class="kt">Signal</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span>
-        <span class="kr">if</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="ow">-&gt;</span> <span class="kt">Color</span><span class="o">.</span><span class="n">red</span>
-           <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">200</span> <span class="ow">-&gt;</span> <span class="kt">Color</span><span class="o">.</span><span class="n">green</span>
-           <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">-&gt;</span> <span class="kt">Color</span><span class="o">.</span><span class="n">blue</span>
-    <span class="p">)</span></code></pre></div>
-
--->
+<p class="update-note">Updated [02 Mar, 2015]: Added a lead note indicating using elm v0.14.<br />
+Updated [05 Mar, 2015]: Added a section on custom channels.</p>
 
     </article>
 
@@ -272,6 +242,8 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
         <h4>Dev Blog</h4>
 
         <ul>
+            
+                
             
                 
                     
@@ -328,8 +300,6 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
             
                 
             
-                
-            
         </ul>
     </div>
 
@@ -337,6 +307,8 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
         <h4>Technical Articles</h4>
 
         <ul>
+            
+                
             
                 
                     
@@ -384,12 +356,14 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
             
                 
             
-                
-            
         </ul>
     </div>
 </div>
     
+
+    <footer class="post-footer">
+        <a class="back" href="/">&laquo; read more articles</a>
+    </footer>
 
 </div>
             </div>

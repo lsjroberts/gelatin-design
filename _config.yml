@@ -7,6 +7,9 @@ permalink: :categories/:title
 
 highlighter: pygments
 
+category_archive:
+  layout: category
+
 defaults:
   -
     scope:

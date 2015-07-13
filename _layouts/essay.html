@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="post essay">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">{{ page.titleSmall }} <strong>{{ page.titleStrong }}</strong></h1>
+        {{#if page.secondaryTitle}}
+            <h2 class="secondary-title">
+                <span>or</span>
+                {{ page.secondaryTitle }}
+            </h2>
+        {{/if}}
+        <!-- <p class="post-meta">by {{ page.author }}</p> -->
+    </header>
+
+    <article class="post-content">
+        {{ content }}
+    </article>
+
+</div>

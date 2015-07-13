@@ -7,6 +7,10 @@ category: developing-games-in-elm
 tags: project-iso elm
 ---
 
+{:.note}
+Elm: v0.14
+Last updated: 03 Mar, 2015
+
 This is the first in a series of articles I will be writing about game development in [elm](http://elm-lang.org). It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in [nw.js](https://github.com/nwjs/nw.js) to create a standalone app or game. These are not so much tutorials but more things I've had to learn as I progress. Since elm is in active development I'll be updating the articles if and when they become out of date. And also for any mistakes I make...
 
 Functional programming (FP) is a suprisingly ill-defined paradigm. It is many things to many people, but what it represents to me is a community who desire to write simpler composable code, to avoid strong [complecting](http://www.infoq.com/presentations/Simple-Made-Easy) and to create easy to debug software.
@@ -263,3 +267,6 @@ Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even n
 
 {:.update-note}
 Updated [16 Feb, 2015]: Improved some sentences to be less confusing and repetitive.
+
+{:.update-note}
+Updated [03 Mar, 2015]: Added a lead note indicating using elm v0.14.

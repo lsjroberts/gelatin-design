@@ -209,7 +209,7 @@
 }
 
 .post-content {
-    text-align: justify;
+    // text-align: justify;
 
     h1 {
         @extend %title;
@@ -239,7 +239,16 @@
 
     img {
         display: block;
-        margin: 0 auto;
+        margin-left: -$spacing-unit;
+        margin-right: -$spacing-unit;
+        // padding: $spacing-unit/2 $spacing-unit;
+        max-width: calc(100% + #{$spacing-unit*2});
+
+        @include media-query($on-laptop) {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 8px 12px;
+        }
     }
 
     pre {
@@ -271,19 +280,27 @@
         color: $brand-color;
     }
 
-    .aside {
-        background: fade-out($brand-color, .7);
-        padding: 1rem;
-        margin-left: -1rem;
-        margin-right: -1rem;
+    .important {
+        margin-left: -2rem;
+        padding: 1rem 0 1rem 1rem;
+        border-left: 1rem solid fade-out($brand-color, .7);
 
         &:before {
             display: block;
             margin-bottom: 1rem;
-            content: "Aside";
+            content: "Note";
+            font-family: $secondary-font-family;
             font-size: .8rem;
-            font-style: italic;
+            text-transform: uppercase;
+            color: $brand-color;
         }
+    }
+
+    .note {
+        padding: 1rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border: 1px solid $grey-color-light;
     }
 
     .update-note {
@@ -291,6 +308,24 @@
         padding: 1rem;
         margin-left: -1rem;
         margin-right: -1rem;
+    }
+}
+
+.post-footer {
+    margin-top: 4rem;
+    border-top: 1px solid $grey-color-light;
+    padding-top: 1rem;
+}
+
+.essay {
+    .secondary-title {
+        @extend %subtitle;
+
+        span {
+            @extend %title;
+            display: block;
+            margin: 4rem 0;
+        }
     }
 }
 

@@ -34,7 +34,7 @@ body {
   font-family: "latolight", Helvetica, Arial, sans-serif;
   line-height: 1.618;
   font-weight: 300;
-  color: #333333;
+  color: #333;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%; }
 
@@ -101,7 +101,6 @@ blockquote {
   border-left: 4px solid #e8e8e8;
   padding-left: 2.427rem;
   font-size: 18px;
-  letter-spacing: -1px;
   font-style: italic; }
   blockquote > :last-child {
     margin-bottom: 0; }
@@ -122,7 +121,7 @@ code {
 
 pre {
   padding: 8px 12px;
-  overflow-x: scroll; }
+  overflow-x: auto; }
   pre > code {
     border: 0;
     padding-right: 0;
@@ -165,7 +164,7 @@ pre {
   .icon > svg path {
     fill: #828282; }
 
-.page h1, .post-header .post-author, .post-title, .post-content h1 {
+.page h1, .post-header .post-author, .post-title, .post-content h1, .essay .secondary-title span {
   font-size: 1.618rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-style: italic;
@@ -174,7 +173,7 @@ pre {
   text-align: center;
   text-transform: capitalize; }
   @media screen and (max-width: 800px) {
-    .page h1, .post-header .post-author, .post-title, .post-content h1 {
+    .page h1, .post-header .post-author, .post-title, .post-content h1, .essay .secondary-title span {
       font-size: 1.3em; } }
 
 .post-title-icon {
@@ -198,7 +197,7 @@ pre {
     .page h1 strong, .post-title strong {
       font-size: 2.61792rem; } }
 
-.post-content h2 {
+.post-content h2, .essay .secondary-title {
   font-size: 1.618rem;
   margin-top: 4.854rem;
   font-family: "josefin_slabregular", Georgia, serif;
@@ -279,52 +278,72 @@ pre {
   text-align: center;
   text-transform: uppercase; }
 
-.post-content {
-  text-align: justify; }
-  .post-content .part-header {
-    font-size: 1rem; }
-    .post-content .part-header strong {
-      font-size: 2.61792rem;
-      display: block;
-      color: #d76a6c; }
-  .post-content img {
+.post-content .part-header {
+  font-size: 1rem; }
+  .post-content .part-header strong {
+    font-size: 2.61792rem;
     display: block;
-    margin: 0 auto; }
-  .post-content pre {
-    margin-left: -4.854rem;
-    margin-right: -4.854rem;
-    padding: 2.427rem 4.854rem; }
-    @media screen and (max-width: 800px) {
-      .post-content pre {
-        margin-left: 0;
-        margin-right: 0;
-        padding: 8px 12px; } }
-  .post-content .emphasise {
-    font-weight: bold;
-    font-size: 1.1rem; }
-  .post-content .share-elm a {
-    display: block;
-    margin-top: -2.427rem;
-    padding: 8px 12px;
-    border-radius: 0 0 4px 4px;
-    text-align: right;
     color: #d76a6c; }
-  .post-content .aside {
-    background: rgba(215, 106, 108, 0.3);
-    padding: 1rem;
-    margin-left: -1rem;
-    margin-right: -1rem; }
-    .post-content .aside:before {
-      display: block;
-      margin-bottom: 1rem;
-      content: "Aside";
-      font-size: .8rem;
-      font-style: italic; }
-  .post-content .update-note {
-    background: #ccc;
-    padding: 1rem;
-    margin-left: -1rem;
-    margin-right: -1rem; }
+.post-content img {
+  display: block;
+  margin-left: -4.854rem;
+  margin-right: -4.854rem;
+  max-width: calc(100% + 9.708rem); }
+  @media screen and (max-width: 800px) {
+    .post-content img {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 8px 12px; } }
+.post-content pre {
+  margin-left: -4.854rem;
+  margin-right: -4.854rem;
+  padding: 2.427rem 4.854rem; }
+  @media screen and (max-width: 800px) {
+    .post-content pre {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 8px 12px; } }
+.post-content .emphasise {
+  font-weight: bold;
+  font-size: 1.1rem; }
+.post-content .share-elm a {
+  display: block;
+  margin-top: -2.427rem;
+  padding: 8px 12px;
+  border-radius: 0 0 4px 4px;
+  text-align: right;
+  color: #d76a6c; }
+.post-content .important {
+  margin-left: -2rem;
+  padding: 1rem 0 1rem 1rem;
+  border-left: 1rem solid rgba(215, 106, 108, 0.3); }
+  .post-content .important:before {
+    display: block;
+    margin-bottom: 1rem;
+    content: "Note";
+    font-family: "josefin_slabregular", Georgia, serif;
+    font-size: .8rem;
+    text-transform: uppercase;
+    color: #d76a6c; }
+.post-content .note {
+  padding: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border: 1px solid #e8e8e8; }
+.post-content .update-note {
+  background: #ccc;
+  padding: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem; }
+
+.post-footer {
+  margin-top: 4rem;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 1rem; }
+
+.essay .secondary-title span {
+  display: block;
+  margin: 4rem 0; }
 
 .site-footer {
   padding: 0 0 4rem 0;
@@ -336,7 +355,7 @@ pre {
 .highlight pre,
 .highlight code {
   background: #333;
-  color: white; }
+  color: #ffffff; }
 .highlight .c {
   color: #998;
   font-style: italic; }
@@ -360,30 +379,30 @@ pre {
   font-style: italic; }
 .highlight .gd {
   color: #000;
-  background-color: #ffdddd; }
+  background-color: #fdd; }
 .highlight .gd .x {
   color: #000;
-  background-color: #ffaaaa; }
+  background-color: #faa; }
 .highlight .ge {
   font-style: italic; }
 .highlight .gr {
-  color: #aa0000; }
+  color: #a00; }
 .highlight .gh {
-  color: #999999; }
+  color: #999; }
 .highlight .gi {
   color: #000;
-  background-color: #ddffdd; }
+  background-color: #dfd; }
 .highlight .gi .x {
   color: #000;
-  background-color: #aaffaa; }
+  background-color: #afa; }
 .highlight .go {
-  color: #888888; }
+  color: #888; }
 .highlight .gp {
-  color: #555555; }
+  color: #555; }
 .highlight .gu {
-  color: #aaaaaa; }
+  color: #aaa; }
 .highlight .gt {
-  color: #aa0000; }
+  color: #a00; }
 .highlight .kc {
   color: #d76a6c; }
 .highlight .kd {
@@ -421,7 +440,7 @@ pre {
 .highlight .nx {
   color: #e6e6e6; }
 .highlight .w {
-  color: #bbbbbb; }
+  color: #bbb; }
 .highlight .mf {
   color: #f6d298; }
 .highlight .mh {
@@ -453,12 +472,12 @@ pre {
 .highlight .ss {
   color: #f0c193; }
 .highlight .bp {
-  color: #999999; }
+  color: #999; }
 .highlight .vc {
-  color: teal; }
+  color: #008080; }
 .highlight .vg {
-  color: teal; }
+  color: #008080; }
 .highlight .vi {
-  color: teal; }
+  color: #008080; }
 .highlight .il {
   color: #f6d298; }

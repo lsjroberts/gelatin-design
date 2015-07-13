@@ -5,13 +5,148 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Feb 2015 02:36:30 +0000</pubDate>
-    <lastBuildDate>Fri, 20 Feb 2015 02:36:30 +0000</lastBuildDate>
+    <pubDate>Mon, 13 Jul 2015 21:21:42 +0100</pubDate>
+    <lastBuildDate>Mon, 13 Jul 2015 21:21:42 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
+        <title>Dynamic desktop background of Earth</title>
+        <description>&lt;p&gt;Japan have launched a new satellite that takes &lt;a href=&quot;http://www.nytimes.com/interactive/2015/07/10/science/An-Image-of-Earth-Every-Ten-Minutes.html&quot;&gt;super high resolution photos&lt;/a&gt; of the earth every 10 minutes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2015-07-11/earth-top.png&quot; alt=&quot;foo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Awesome. I immediately wanted to get this setup to create an automatically updating desktop background. If you are on OSX you can do this with a couple of scripts.&lt;/p&gt;
+
+&lt;p&gt;Create a directory somewhere to keep these scripts and the downloaded image, e.g. &lt;code&gt;~/earth/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://news.ycombinator.com/item?id=9867655&quot;&gt;helpful dev on Hacker News&lt;/a&gt; posted up &lt;a href=&quot;https://gist.github.com/Syrup-tan/1833ba1671c7017f0d59&quot;&gt;this script to download and combine&lt;/a&gt; the photo tiles together into a single image:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## This script downloads an image of earth from Japan&amp;#39;s Himawari8 satellite.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## It is configurable for 1,100^2, 2,200^2, or 8,800^2 pixel outputs.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## It requires;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;##  montage(1) from imagemagick (http://www.imagemagick.org/)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;##  date(1) from either BSD or GNU utils&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;##  curl(1) from http://curl.haxx.se/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;##  jq(1) from https://stedolan.github.io/jq/&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Configuration&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;OUTPUT_FILENAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/Users/[you]/earth/composite.png&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;URL_BASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;http://himawari8.nict.go.jp/img/D531106&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## The amount of tiles on one side&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## This value should be either 1, 2, 4, or 16&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## Each tile is 550px x 550px, so 4 (default) will produce an image 2,200px x 2,200px&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;TILE_COUNT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Check requirements&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! jq --version &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;jq(1) is not installed, but is required by this script.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Please see installation instructions at https://stedolan.github.io/jq/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! curl --version &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;curl(1) is not installed, but is required by this script.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Please see installation instructions at http://curl.haxx.se/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! montage --version &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;montage(1) from ImageMagick is not installed, but is required by this script.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Please see installation instructions at http://www.imagemagick.org/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! date &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;date(1) is not installed, but is required by this script.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Please get a copy for your OS from either GNU or BSD utils.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Get the latest picture&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LATEST_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$(curl -s &amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;URL_BASE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/latest.json&lt;span class=&quot;s2&quot;&gt;&amp;quot; | jq -r -e .date)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$?&amp;quot;&lt;/span&gt; -ne &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Unable to get latest picture date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Parse the date into the filename&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;DATE_FORMAT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;+%Y/%m/%d/%H%M%S&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;### Check if we&amp;#39;re using GNU or BSD&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; date -j &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;## Get the date for date(1) from BSD utils&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;IMAGE_URL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$(date -jf &amp;#39;%Y-%m-%d %H:%M:%S&amp;#39; &amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LATEST_FILE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DATE_FORMAT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;## Get the date for date(1) from GNU utils&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;IMAGE_URL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$(date -d &amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LATEST_FILE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DATE_FORMAT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Make the directory for the images&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;TMP_IMAGE_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$(mktemp -d /tmp/himawari8.XXXXXXXX)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Download each of the files&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Downloading tiles...&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;${X}&amp;quot;&lt;/span&gt; -lt &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TILE_COUNT}&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;${Y}&amp;quot;&lt;/span&gt; -lt &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TILE_COUNT}&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        curl -so &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}/${Y}_${X}.png&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;${URL_BASE}/${TILE_COUNT}d/550/${IMAGE_URL}_${X}_${Y}.png&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;\rDownloaded ${X}, ${Y} ($((X * TILE_COUNT + Y + 1)) / $((TILE_COUNT * TILE_COUNT)))&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; %0.s&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;0..9&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$((Y+1))&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$((X+1))&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Beautiful code&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;\rTiles downloaded.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; %0.s&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;0..9&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;\n\n&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Create the image&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Creating image...&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+montage &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}/&amp;quot;&lt;/span&gt;*.png -geometry 550x550 &lt;span class=&quot;s2&quot;&gt;&amp;quot;${OUTPUT_FILENAME}&amp;quot;&lt;/span&gt; &amp;gt;/dev/null 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Image created: ${OUTPUT_FILENAME}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Remove the temporary directory&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -n &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    rm &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}/&amp;quot;&lt;/span&gt;*.png&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    rmdir &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Save this into your directory as &lt;code&gt;~/earth/download.sh&lt;/code&gt;, and replace the path &lt;code&gt;/Users/[you]/earth/composite.png&lt;/code&gt; with the &lt;em&gt;absolute&lt;/em&gt; path. Then try running it in your terminal:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh ~/earth/download.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You may need to install a few dependencies, but if all goes well after a few moments you’ll have a new image downloaded to &lt;code&gt;~/earth/composite.png&lt;/code&gt;. Set this as your background manually and make sure it’s configured how you want, i.e. fit to screen and background colour of black.&lt;/p&gt;
+
+&lt;p&gt;Next we need to create an applescript which sets this image as the background. Open &lt;em&gt;Script Editor&lt;/em&gt; and write this, replacing the path again:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;span class=&quot;k&quot;&gt;tell&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;application&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Finder&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;desktop&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;picture&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;POSIX&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/Users/[you]/earth/composite.png&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;tell&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Try running it by clicking the play button, check it doesn’t error and then save it as &lt;code&gt;~/earth/set-background.scpt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now lastly you just need to make these run as often as you want the image to change. For this you can use cron or launchd, I went with cron as it’s what I’ve always used.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;crontab -e&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;0,30 * * * * sh /Users/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;you&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/earth/download.sh
+5,35 * * * * osascript /Users/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;you&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/earth/set-background.scpt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 11 Jul 2015 00:00:00 +0100</pubDate>
+        <link>http://gelatindesign.co.uk/coding/dynamic-earth-background</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/dynamic-earth-background</guid>
+        
+        
+        <category>coding</category>
+        
+      </item>
+    
+      <item>
         <title>Signals</title>
-        <description>&lt;p&gt;This is the second primer article in the series &lt;em&gt;“Developing Games in Elm”&lt;/em&gt; in which I discuss the two main fundamental differences between &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt; and more traditional programming languages. If you haven’t read the &lt;a href=&quot;/developing-games-in-elm/functional-programming&quot;&gt;previous article yet I recommend you do that first&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;p class=&quot;note&quot;&gt;Elm: v0.14&lt;br /&gt;
+Last updated: 03 Mar, 2015&lt;/p&gt;
+
+&lt;p&gt;This is the second primer article in the series &lt;em&gt;“Developing Games in Elm”&lt;/em&gt; in which I discuss the two main fundamental differences between &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt; and more traditional programming languages. If you haven’t read the &lt;a href=&quot;/developing-games-in-elm/functional-programming&quot;&gt;previous article yet I recommend you do that first&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Elm is not just a functional language, it is a functional &lt;em&gt;reactive&lt;/em&gt; language. It gives your game the ability to react to signals from the outside world; to player inputs and time.&lt;/p&gt;
 
@@ -151,6 +286,31 @@
 
 &lt;p class=&quot;share-elm&quot;&gt;&lt;a href=&quot;http://share-elm.com/sprout/54e69d1fe4b09711f39c2b81&quot;&gt;view on share-elm.com&lt;/a&gt;&lt;/p&gt;
 
+&lt;h2 id=&quot;channels&quot;&gt;Channels&lt;/h2&gt;
+
+&lt;p&gt;We are now able to communicate with the outside world, but what about communications between different parts of our game internally? For this we can use custom channels. A channel is what a signal is sent on and can be subscribed to by another piece of the game to receive updates to the value. All the in-built examples we’ve seen so far are channels.&lt;/p&gt;
+
+&lt;p&gt;To send our own signals we create a channel that can receive values of a set type and takes a default value. To get the signal from this channel we subscribe to it and can then handle it as before.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Text&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Graphics.Element&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mySubscriber&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asText&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;-- create a channel which takes values of type String and has an initial value of &amp;quot;foobar&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;myChannel&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Channel&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;myChannel&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;foobar&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;-- subscribe to the channel creating a signal of string values&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mySubscriber&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mySubscriber&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myChannel&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2 id=&quot;next&quot;&gt;Next&lt;/h2&gt;
 
 &lt;p&gt;So we’ve now looked into the two most important differences between traditional languages and elm. Functional programming provides a more descriptive way to write code, and signals allow your game to react to time and inputs.&lt;/p&gt;
@@ -159,66 +319,8 @@
 
 &lt;p&gt;While you wait, why not &lt;a href=&quot;https://twitter.com/gelatindesign&quot; class=&quot;external&quot;&gt;follow me on twitter&lt;/a&gt; and &lt;a href=&quot;http://streak.club/u/jellyislovely&quot; class=&quot;external&quot;&gt;streak club&lt;/a&gt; to hear updates about my own game’s progress and other development bits and bobs.&lt;/p&gt;
 
-&lt;!--
-## Invaders
-
-Lets put all this funky stuff into an actual game. Space Invaders seems like a nice basic one.
-
-
-
-
-
---&gt;
-
-&lt;!--
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Text&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Mouse&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Graphics.Element&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Points&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;draw&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Points&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;draw&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;foldp&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;click&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;click&lt;/span&gt;
-            &lt;span class=&quot;kr&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Window&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;ow&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;kr&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mouse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clicks&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asText&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;draw&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Mouse&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Signal&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Graphics.Collage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Graphics.Element&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reactiveSquare&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;reactiveSquare&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;reactiveSquare&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filled&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mouse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;colour&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;colour&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;=&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;Signal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;
-           &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;green&lt;/span&gt;
-           &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;otherwise&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blue&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
---&gt;
+&lt;p class=&quot;update-note&quot;&gt;Updated [02 Mar, 2015]: Added a lead note indicating using elm v0.14.&lt;br /&gt;
+Updated [05 Mar, 2015]: Added a section on custom channels.&lt;/p&gt;
 </description>
         <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
         <link>http://gelatindesign.co.uk/developing-games-in-elm/signals</link>
@@ -274,7 +376,10 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
     
       <item>
         <title>Functional Programming</title>
-        <description>&lt;p&gt;This is the first in a series of articles I will be writing about game development in &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt;. It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in &lt;a href=&quot;https://github.com/nwjs/nw.js&quot;&gt;nw.js&lt;/a&gt; to create a standalone app or game. These are not so much tutorials but more things I’ve had to learn as I progress. Since elm is in active development I’ll be updating the articles if and when they become out of date. And also for any mistakes I make…&lt;/p&gt;
+        <description>&lt;p class=&quot;note&quot;&gt;Elm: v0.14&lt;br /&gt;
+Last updated: 03 Mar, 2015&lt;/p&gt;
+
+&lt;p&gt;This is the first in a series of articles I will be writing about game development in &lt;a href=&quot;http://elm-lang.org&quot;&gt;elm&lt;/a&gt;. It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in &lt;a href=&quot;https://github.com/nwjs/nw.js&quot;&gt;nw.js&lt;/a&gt; to create a standalone app or game. These are not so much tutorials but more things I’ve had to learn as I progress. Since elm is in active development I’ll be updating the articles if and when they become out of date. And also for any mistakes I make…&lt;/p&gt;
 
 &lt;p&gt;Functional programming (FP) is a suprisingly ill-defined paradigm. It is many things to many people, but what it represents to me is a community who desire to write simpler composable code, to avoid strong &lt;a href=&quot;http://www.infoq.com/presentations/Simple-Made-Easy&quot;&gt;complecting&lt;/a&gt; and to create easy to debug software.&lt;/p&gt;
 
@@ -496,6 +601,8 @@ Lets put all this funky stuff into an actual game. Space Invaders seems like a n
 &lt;p class=&quot;update-note&quot;&gt;Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even number… changed to &lt;code&gt;squareIsOdd 6 == False&lt;/code&gt;&lt;/p&gt;
 
 &lt;p class=&quot;update-note&quot;&gt;Updated [16 Feb, 2015]: Improved some sentences to be less confusing and repetitive.&lt;/p&gt;
+
+&lt;p class=&quot;update-note&quot;&gt;Updated [03 Mar, 2015]: Added a lead note indicating using elm v0.14.&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
         <link>http://gelatindesign.co.uk/developing-games-in-elm/functional-programming</link>
@@ -746,63 +853,6 @@ $ g ps
         
         
         <category>codeclub</category>
-        
-      </item>
-    
-      <item>
-        <title>Isolationism, Division and Hate</title>
-        <description>&lt;h2 id=&quot;cause&quot;&gt;Cause&lt;/h2&gt;
-
-&lt;p&gt;I grew up being taught that I was in a special group of people that had been chosen to live in an eternal utopia and everyone else would burn. It came from a place of love and desire to help me, but it created a division between me and others. It isolated me and some of my friends from others around. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
-
-&lt;p&gt;I grew up being taught that I was in a special group of people who had been born in the greatest country, the one with the most history, the largest empire that has existed. Because I am English it is my destiny to conquer the world. I wasn’t directly taught that people of other countries were lesser, but that my English blood makes me stronger. I wasn’t taught to be racist, none of my friends or family were racist, but it created a division between me and others. It isolated me from others in the world. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
-
-&lt;p&gt;I grew up being taught that I was in a special group of people of my gender, and that as a male it was my role to grow up and lead my family, to be the breadwinner, to be the head of the family. I wasn’t taught women were lesser, indeed I was specifically taught that we are equal but the man is in charge. I wasn’t taught to be sexist, none of my friends or family were sexist, but it created a division between me and others. It isolated me from women and other genders in the world. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
-
-&lt;p&gt;I grew up being taught I was in a special group of people who were not broken, who were allowed to love since we were the ones who loved in the correct way. Because I am straight I am allowed my own family, I am allowed to declare my love for another and bind to them for life. I wasn’t taught to be homophobic, I was taught to “hate the sin not the sinner”,  to despise the act not the person. But this created a division between me and others. It isolated me from the full scope of love that exists. No matter the intent, isolationism and division generate hate.&lt;/p&gt;
-
-&lt;p&gt;No one intended to teach me to be isolationist, no one intended to teach me to be divisive, no one intended to teach me to hate. But I learnt isolationism, I learnt to be divisive and I learnt hate.&lt;/p&gt;
-
-&lt;p&gt;Let me clarify, hate doesn’t have to mean violence, it doesn’t have to mean bullying, it doesn’t have to mean directed aggression. Hate comes from the heart, it comes from deeply held beliefs that seperate you from others, it can be an entirely internal thought process.&lt;/p&gt;
-
-&lt;h2 id=&quot;effect&quot;&gt;Effect&lt;/h2&gt;
-
-&lt;p&gt;What is the result of this hate?&lt;/p&gt;
-
-&lt;p&gt;For society it’s an ongoing disaster. As political parties such as UKIP and the Scottish National Party continue to preach isolationism from international entities they are generating a society that fears and hates those of different nationality.&lt;/p&gt;
-
-&lt;p&gt;UKIP tell us to beware the dirty Bulgarians who might come to our country and steal our jobs, our money, our NHS, our land. As if we are any different. As if we don’t have our money and land as a direct result of going to other’s countries and stealing it from them.&lt;/p&gt;
-
-&lt;p&gt;A Bulgarian father is your father, a Syrian mother is your mother, an Israeli son is your son, a Palestinian daughter is your daughter, an Iranian cousin is your cousin and a North Korean grandmother is your grandmother. Your money is their money, your land is their land, your life is their life, your love is their love and this world is our world.&lt;/p&gt;
-
-&lt;p&gt;Have no judgement in your heart for those who act in the way their society has taught them to act, for you act with all the prejudices and inequalities of your society. Instead come together to create a single society that consists of all humanity, accepts all humanity and preaches humanity.&lt;/p&gt;
-
-&lt;p&gt;Does that sound like some unattainable utopia? Just let me say this, there is nothing that dictates what happens to us beyond ourselves. If we want to achieve something we can. We can achieve utopia through peace and abundance, a post-scarcity society built on freely available resources generated through technology. technology that comes from knowledge, knowledge that comes from education. You think that sounds like the silly statement of someone who hasn’t seen the world? Then you have been defeated by the world, stand up and try again.&lt;/p&gt;
-
-&lt;p&gt;Still don’t think it’s possible? Go read about &lt;a href=&quot;http://www.sesame.org.jo/sesame/about-us/what-is-sesame.html&quot;&gt;SESAME, Synchrotron-light for Experimental Science and Applications in the Middle East&lt;/a&gt;. It’s a joint effort of various Israeli, Palestinian, Iranian and other scientists building a particle accelerator in Jordan.&lt;/p&gt;
-
-&lt;p&gt;Without hate there is no limit to what humanity can achieve.&lt;/p&gt;
-
-&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
-
-&lt;p&gt;So what is the solution for hate on a personal level? What solved it for me?&lt;/p&gt;
-
-&lt;p&gt;If conflicts are caused by ignorance, fear and hate then peace is found through education, acceptance and equality.&lt;/p&gt;
-
-&lt;p&gt;Two years ago I was becoming disenchanted with my religious beliefs, I was beginning to see the cracks in the dogma. A religion of peace that has a god of war, a religion of life that condemns the ignorant to death. I took a step back and decided to look at both sides of the coin with as little emotion and bias as possible. It didn’t take long to realise the truth of hate behind the facade of love. I was educated through online discussion, books and videos that taught me to accept others as equally deserving of a future.&lt;/p&gt;
-
-&lt;p&gt;A bit less than a year ago I started a new job and made some new friends. One guy in particular struck me with a simple statement - “I’m a feminist”. I didn’t really understand, how can a man be a feminist? I had always been taught by society that feminists were this extreme group of women who hate men. Through conversation and discussion he and others educated me, I changed my opinion and accepted their viewpoint.&lt;/p&gt;
-
-&lt;p&gt;Today I continue to internally fight the thoughts and prejudices that occassionaly attempt to resurface. But through continued self-education and conversation I try to accept all who cross my path and strive for equality in all I do and where I go.&lt;/p&gt;
-
-&lt;p&gt;Please do the same.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 31 May 2014 00:00:00 +0100</pubDate>
-        <link>http://gelatindesign.co.uk/opinion/isolationism-division-and-hate</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/opinion/isolationism-division-and-hate</guid>
-        
-        
-        <category>opinion</category>
         
       </item>
     
