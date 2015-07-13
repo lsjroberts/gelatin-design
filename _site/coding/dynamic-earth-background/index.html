@@ -40,7 +40,7 @@
     <article class="post-content">
         <p>Japan have launched a new satellite that takes <a href="http://www.nytimes.com/interactive/2015/07/10/science/An-Image-of-Earth-Every-Ten-Minutes.html">super high resolution photos</a> of the earth every 10 minutes.</p>
 
-<p><img src="/images/blog/2015-07-11/earth-top.png" alt="foo" /></p>
+<p><img src="/images/blog/2015-07-13/earth-top.png" alt="Earth top" /></p>
 
 <p>Awesome. I immediately wanted to get this setup to create an automatically updating desktop background. If you are on OSX you can do this with a couple of scripts.</p>
 
@@ -158,6 +158,10 @@ montage <span class="s2">&quot;${TMP_IMAGE_DIR}/&quot;</span>*.png -geometry 550
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">0,30 * * * * sh /Users/<span class="o">[</span>you<span class="o">]</span>/earth/download.sh
 5,35 * * * * osascript /Users/<span class="o">[</span>you<span class="o">]</span>/earth/set-background.scpt</code></pre></div>
+
+<p>Now every half hour your background should update to show the rotating Earth, lovely.</p>
+
+<p><img src="/images/blog/2015-07-13/earth-background.png" alt="Earth background" /></p>
 
     </article>
 

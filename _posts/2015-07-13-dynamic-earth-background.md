@@ -8,7 +8,7 @@ category: coding
 
 Japan have launched a new satellite that takes [super high resolution photos](http://www.nytimes.com/interactive/2015/07/10/science/An-Image-of-Earth-Every-Ten-Minutes.html) of the earth every 10 minutes.
 
-![foo](/images/blog/2015-07-11/earth-top.png)
+![Earth top](/images/blog/2015-07-13/earth-top.png)
 
 Awesome. I immediately wanted to get this setup to create an automatically updating desktop background. If you are on OSX you can do this with a couple of scripts.
 
@@ -136,3 +136,7 @@ $ crontab -e
 0,30 * * * * sh /Users/[you]/earth/download.sh
 5,35 * * * * osascript /Users/[you]/earth/set-background.scpt
 {% endhighlight %}
+
+Now every half hour your background should update to show the rotating Earth, lovely.
+
+![Earth background](/images/blog/2015-07-13/earth-background.png)

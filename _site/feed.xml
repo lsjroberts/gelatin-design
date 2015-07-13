@@ -5,15 +5,15 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jul 2015 21:25:04 +0100</pubDate>
-    <lastBuildDate>Mon, 13 Jul 2015 21:25:04 +0100</lastBuildDate>
+    <pubDate>Mon, 13 Jul 2015 21:32:03 +0100</pubDate>
+    <lastBuildDate>Mon, 13 Jul 2015 21:32:03 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
         <title>Dynamic desktop background of Earth</title>
         <description>&lt;p&gt;Japan have launched a new satellite that takes &lt;a href=&quot;http://www.nytimes.com/interactive/2015/07/10/science/An-Image-of-Earth-Every-Ten-Minutes.html&quot;&gt;super high resolution photos&lt;/a&gt; of the earth every 10 minutes.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/blog/2015-07-11/earth-top.png&quot; alt=&quot;foo&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/blog/2015-07-13/earth-top.png&quot; alt=&quot;Earth top&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Awesome. I immediately wanted to get this setup to create an automatically updating desktop background. If you are on OSX you can do this with a couple of scripts.&lt;/p&gt;
 
@@ -131,6 +131,10 @@ montage &lt;span class=&quot;s2&quot;&gt;&amp;quot;${TMP_IMAGE_DIR}/&amp;quot;&l
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;0,30 * * * * sh /Users/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;you&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/earth/download.sh
 5,35 * * * * osascript /Users/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;you&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/earth/set-background.scpt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now every half hour your background should update to show the rotating Earth, lovely.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2015-07-13/earth-background.png&quot; alt=&quot;Earth background&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 13 Jul 2015 00:00:00 +0100</pubDate>
         <link>http://gelatindesign.co.uk/coding/dynamic-earth-background</link>
