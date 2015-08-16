@@ -5,9 +5,52 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Jul 2015 21:32:03 +0100</pubDate>
-    <lastBuildDate>Mon, 13 Jul 2015 21:32:03 +0100</lastBuildDate>
+    <pubDate>Sun, 16 Aug 2015 17:32:19 +0100</pubDate>
+    <lastBuildDate>Sun, 16 Aug 2015 17:32:19 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Halfway To Indie</title>
+        <description>&lt;p&gt;At the start of this year I set out on my &lt;a href=&quot;/games/a-road-to-creating-indie-games/&quot;&gt;road to creating indie games&lt;/a&gt;. I gave myself a personal goal of selling at least 1 copy of a game to a stranger by March 2016. Now I’m about halfway there in time, how close am I in progress?&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-gone-wrong&quot;&gt;What’s gone wrong?&lt;/h2&gt;
+
+&lt;p&gt;I’m sure any indie game dev who’s been around for some time could have told me the things I’d do wrong. But a lesson experienced is more valuable than a lesson taught.&lt;/p&gt;
+
+&lt;p&gt;The most obvious lesson is to realise when your ambition outstretches your ability and experience. The idea I began working on in January required a highly indepth AI for relationships between yourself and characters in the game. While there was a tactical combat portion of the game, the core was always how you manage the expectations of other characters and their reactions to your choices within combat.&lt;/p&gt;
+
+&lt;p&gt;I love the idea of this game, I still deeply want to make it. But realistically speaking it would be a massive task to design and develop a game of this nature. Without the experience of shipping a non-trivial and commercial game prior I could feel it was going to be a failure.&lt;/p&gt;
+
+&lt;p&gt;I know I could theorectically sit down and work through the programming challenges, but the timescale and hit on motivation would be too great to continue.&lt;/p&gt;
+
+&lt;p&gt;The second major mistake I made was choosing a new technology to develop in. I love learning, but when trying to make a commercial product it’s not the right time. I chose to use &lt;a href=&quot;http://elm-lang.org&quot;&gt;Elm&lt;/a&gt;, which is a fantastic approach to reactive web-based apps. However it’s a functional programming language which is the complete opposite approach of basically every existing game, and more importantly every game dev tutorial. When I was trying to solve common problems like path-solving, no one has written about them from an FP point of view. I’m not experienced enough with these things to be able to come up with the solution from scratch myself so that was a major pain for a long while.&lt;/p&gt;
+
+&lt;p&gt;I never quite solved that issue and it really killed the momentum I had for the game. I’ll still use Elm for other future &lt;a href=&quot;http://pimeariver.com&quot;&gt;non-game projects&lt;/a&gt; but for games I’ve gone back to well trodden technology stacks.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-gone-right&quot;&gt;What’s gone right?&lt;/h2&gt;
+
+&lt;p&gt;Since my day job is in web dev I don’t have any actual industry experience in the game dev sector. As such I felt it would be important to meet other devs and try and absorb as much of their stories and advice as I could.&lt;/p&gt;
+
+&lt;p&gt;I’ve actively attended events and passively absorbed an inordinate amount of twitch dev streams and video blogs.&lt;/p&gt;
+
+&lt;p&gt;Earlier this year I went to &lt;a href=&quot;https://www.egx.net/rezzed&quot;&gt;Rezzed&lt;/a&gt; to do three things: network with other devs, listen to the dev talks and to scout it out with the potentially not smart idea of exhibiting there in the future. It was fascinating meeting other small indie devs doing the same.&lt;/p&gt;
+
+&lt;p&gt;I also took some holiday from my day job to spend the days working in a &lt;a href=&quot;http://loadingonline.co.uk/&quot;&gt;shared “office”&lt;/a&gt; with other indie devs as a taster of what it might be like. There were several interesting take-aways from this, such as the amount of chat / distraction / downtime and the huge drop in my general stress levels. That is probably largely attributable to simply a change in environments, but I don’t doubt the stress accumlated working for oneself is much more preferable to that when working on a project that you… have less interest in.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h2&gt;
+
+&lt;p&gt;I’ll continue to work on my current, more realistically ambitious project with the first proper updates coming in couple of months, perhaps videos or streaming.&lt;/p&gt;
+
+&lt;p&gt;In March 2016 you’ll see the first commercial release by &lt;em&gt;gelatindesign&lt;/em&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 16 Aug 2015 00:00:00 +0100</pubDate>
+        <link>http://gelatindesign.co.uk/games/halfway-to-indie</link>
+        <guid isPermaLink="true">http://gelatindesign.co.uk/games/halfway-to-indie</guid>
+        
+        
+        <category>games</category>
+        
+      </item>
     
       <item>
         <title>Dynamic desktop background of Earth</title>
@@ -943,78 +986,6 @@ function blogTagLists(files, metalsmith, done) {
         <category>metalsmith</category>
         
         <category>jekyll</category>
-        
-        
-        <category>coding</category>
-        
-      </item>
-    
-      <item>
-        <title>Improve your terminal</title>
-        <description>&lt;p&gt;I believe one of the main contributing factors to people being wary of using the terminal is the terrible defaults for text and colours. The good news is that these are pretty easy to fix.&lt;/p&gt;
-
-&lt;p&gt;After going through the following changes you’ll end up with a lovely terminal like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/2014-05-15/lovely-terminal.png&quot; alt=&quot;lovely terminal&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;oh-my-zshell&quot;&gt;Oh my zshell!&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh&quot;&gt;on-my-zsh&lt;/a&gt; is a must-have tool for frequent terminal users. It makes it easy to use themes for styling, but provides so much more functionality than that.&lt;/p&gt;
-
-&lt;p&gt;If you trust the author of that tool then you can install it by just running&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ curl -L http://install.ohmyz.sh | sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That’ll set up the default config at &lt;code&gt;~/.zshrc&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to you can install it manually, check that out at the &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh&quot;&gt;github repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;pick-a-theme&quot;&gt;Pick a theme&lt;/h3&gt;
-
-&lt;p&gt;I personally use the &lt;code&gt;ys&lt;/code&gt; theme, it presents your current directory, git branch and status and the current type before each command you type. This lets you see at a glance what’s going on and when you fired a long running command allowing you to see how long it’s taking.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/2014-05-15/ys-line-header.png&quot; alt=&quot;ys line header&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To install your theme of choice, change your &lt;code&gt;~/.zshrc&lt;/code&gt; to include&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ZSH_THEME=ys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;fonts-and-colours&quot;&gt;Fonts and colours&lt;/h2&gt;
-
-&lt;p&gt;In addition to your theme you should set your default text font and colour and your terminal background colour. On a Mac you can do this quite easily within the terminal preferences by going to &lt;code&gt;Terminal &amp;gt; Preferences...&lt;/code&gt; and change the options under &lt;code&gt;Text&lt;/code&gt; and &lt;code&gt;Window&lt;/code&gt;. On Linux you can do this under &lt;code&gt;Edit &amp;gt; Profile Preferences&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Picking a font is pretty important, it has to be monospaced and some good choices are Monaco, Source Code Pro, Inconsolata. I personally use Iconsolata.&lt;/p&gt;
-
-&lt;p&gt;Secondly you really should think about setting the font size to something nice and large, I go with 18px. You will be staring at your terminal for a long time, don’t break your eyes to do it.&lt;/p&gt;
-
-&lt;p&gt;It’s worth nothing, that while background transparency might look cool, it will definitely hinder your ability to focus and work, so please just set it to 100% opacity.&lt;/p&gt;
-
-&lt;p&gt;Finally, I personally like to add extra space between lines, I find it really helps reading, so I set line spacing to &lt;code&gt;1.5&lt;/code&gt; and character spacing to &lt;code&gt;1.05&lt;/code&gt;. But this will depend on your personal tastes and the font you chose.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-terminal-is-the-best-place-for-a-developer-to-develop&quot;&gt;The terminal is the best place for a developer to develop&lt;/h2&gt;
-
-&lt;p&gt;So much of development requires running a command-line tool here and there that you may as well just stay in the terminal the whole time. Don’t use a gui program to manage your git repos, they are all slower than just running the git commands yourself. It takes time to learn but once you’ve learnt it you’ll gain that back in time saved getting things done.&lt;/p&gt;
-
-&lt;p&gt;With that in mind I’ve been looking to get away from my final non-terminal based development tool, the text editor (Sublime Text 2 in my case). I’ve been learning vim, indeed I wrote this article with vim. It’s fantastic. If you are interested in learning vim, run&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ vimtutor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and go through it’s lessons every day and you’ll soon get the hang of this powerful tool.&lt;/p&gt;
-
-&lt;p&gt;Once I’m comfortable using vim I’ll write up a tutorial on customising it, though it might take a few weeks to get to that stage.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Update: I never got comfortable with vim. It may be powerful, but good grief it’s just way too frustrating to get there.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Thu, 15 May 2014 00:00:00 +0100</pubDate>
-        <link>http://gelatindesign.co.uk/coding/improve-your-terminal</link>
-        <guid isPermaLink="true">http://gelatindesign.co.uk/coding/improve-your-terminal</guid>
-        
-        <category>terminal</category>
         
         
         <category>coding</category>

@@ -25,7 +25,7 @@ p, blockquote, pre, hr,
 dl, dd, ol, ul, figure {
   margin: 0;
   padding: 0;
-  font-size: 1em; }
+  font-size: 1.1rem; }
 
 /**
  * Basic styling
@@ -46,7 +46,7 @@ p, blockquote, pre,
 ul, ol, dl, figure,
 .home img,
 .highlight {
-  margin-bottom: 2.427rem; }
+  margin-bottom: 2.6697rem; }
 
 /**
  * Images
@@ -62,13 +62,13 @@ figure > img {
   display: block; }
 
 figcaption {
-  font-size: 0.875em; }
+  font-size: 0.9625rem; }
 
 /**
  * Lists
  */
 ul, ol {
-  margin-left: 4.854rem; }
+  margin-left: 5.3394rem; }
 
 li > ul,
 li > ol {
@@ -99,7 +99,7 @@ a {
 blockquote {
   color: #828282;
   border-left: 4px solid #e8e8e8;
-  padding-left: 2.427rem;
+  padding-left: 2.6697rem;
   font-size: 18px;
   font-style: italic; }
   blockquote > :last-child {
@@ -131,19 +131,19 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(800px - (4.854rem*2));
-  max-width: calc(800px - (4.854rem*2));
+  max-width: -webkit-calc(800px - (5.3394rem*2));
+  max-width: calc(800px - (5.3394rem*2));
   margin-right: auto;
   margin-left: auto;
-  padding: 9.708rem 4.854rem; }
+  padding: 10.6788rem 5.3394rem; }
   @media screen and (max-width: 800px) {
     .wrapper {
-      max-width: -webkit-calc(800px - (4.854rem));
-      max-width: calc(800px - (4.854rem));
-      padding: 2.427rem; } }
+      max-width: -webkit-calc(800px - (5.3394rem));
+      max-width: calc(800px - (5.3394rem));
+      padding: 2.6697rem; } }
   @media screen and (max-width: 600px) {
     .wrapper {
-      padding: 2.427rem 1.2135rem; } }
+      padding: 2.6697rem 1.33485rem; } }
 
 /**
  * Clearfix
@@ -174,7 +174,7 @@ pre {
   text-transform: capitalize; }
   @media screen and (max-width: 800px) {
     .page h1, .post-header .post-author, .post-title, .post-content h1, .essay .secondary-title span {
-      font-size: 1.3em; } }
+      font-size: 1.43rem; } }
 
 .post-title-icon {
   display: block;
@@ -199,15 +199,15 @@ pre {
 
 .post-content h2, .essay .secondary-title {
   font-size: 1.618rem;
-  margin-top: 4.854rem;
+  margin-top: 5.3394rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase; }
 
 .post-content h3 {
-  font-size: 1rem;
-  margin-top: 4.854rem;
+  font-size: 1.2rem;
+  margin-top: 5.3394rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-align: center;
@@ -286,18 +286,18 @@ pre {
     color: #d76a6c; }
 .post-content img {
   display: block;
-  margin-left: -4.854rem;
-  margin-right: -4.854rem;
-  max-width: calc(100% + 9.708rem); }
+  margin-left: -5.3394rem;
+  margin-right: -5.3394rem;
+  max-width: calc(100% + 10.6788rem); }
   @media screen and (max-width: 800px) {
     .post-content img {
       margin-left: 0;
       margin-right: 0;
       padding: 8px 12px; } }
 .post-content pre {
-  margin-left: -4.854rem;
-  margin-right: -4.854rem;
-  padding: 2.427rem 4.854rem; }
+  margin-left: -5.3394rem;
+  margin-right: -5.3394rem;
+  padding: 2.6697rem 5.3394rem; }
   @media screen and (max-width: 800px) {
     .post-content pre {
       margin-left: 0;
@@ -308,7 +308,7 @@ pre {
   font-size: 1.1rem; }
 .post-content .share-elm a {
   display: block;
-  margin-top: -2.427rem;
+  margin-top: -2.6697rem;
   padding: 8px 12px;
   border-radius: 0 0 4px 4px;
   text-align: right;
@@ -340,6 +340,8 @@ pre {
   margin-top: 4rem;
   border-top: 1px solid #e8e8e8;
   padding-top: 1rem; }
+  .post-footer .follow {
+    float: right; }
 
 .essay .secondary-title span {
   display: block;
