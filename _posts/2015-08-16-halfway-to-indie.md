@@ -33,6 +33,8 @@ I've actively attended events and passively absorbed an inordinate amount of twi
 
 Earlier this year I went to [Rezzed](https://www.egx.net/rezzed) to do three things: network with other devs, listen to the dev talks and to scout it out with the potentially not smart idea of exhibiting there in the future. It was fascinating meeting other small indie devs doing the same.
 
+It was also good in a way to see the "famous" indie devs milling around and essentially doing the same thing. It helped remove the little bit of jealousy and realise they are just people who work hard.
+
 I also took some holiday from my day job to spend the days working in a [shared "office"](http://loadingonline.co.uk/) with other indie devs as a taster of what it might be like. There were several interesting take-aways from this, such as the amount of chat / distraction / downtime and the huge drop in my general stress levels. That is probably largely attributable to simply a change in environments, but I don't doubt the stress accumlated working for oneself is much more preferable to that when working on a project that you... have less interest in.
 
 
