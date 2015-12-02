@@ -1,0 +1,3 @@
+[submodule "talks/procgen/ArrayOfFloats"]
+	path = talks/procgen/ArrayOfFloats
+	url = git@github.com:galaxykate/ArrayOfFloats.git
