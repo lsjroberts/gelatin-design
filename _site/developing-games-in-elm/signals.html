@@ -42,7 +42,7 @@
     </header>
 
     <article class="post-content">
-        <p class="note">Elm: v0.14<br />
+        <p class="note">Elm: v0.14
 Last updated: 03 Mar, 2015</p>
 
 <p>This is the second primer article in the series <em>“Developing Games in Elm”</em> in which I discuss the two main fundamental differences between <a href="http://elm-lang.org">elm</a> and more traditional programming languages. If you haven’t read the <a href="/developing-games-in-elm/functional-programming">previous article yet I recommend you do that first</a>.</p>
@@ -51,9 +51,9 @@ Last updated: 03 Mar, 2015</p>
 
 <p>In game development one of the most important concepts is the <em>event</em>. An event represents a thing that happened during the cycle of the game loop, for example mouse movement. The various modules in the code can attach a listener to the ‘mouse move’ event so that when it is triggered the listener function is run to modify some object(s).</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">events</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">events</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s1">'mousemove'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">world</span><span class="p">.</span><span class="nx">scroll</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span></code></pre></figure>
 
 <p>This is by it’s very nature a side effect, which as you’ll remember from the previous article is a bad idea.</p>
 
@@ -63,95 +63,95 @@ Last updated: 03 Mar, 2015</p>
 
 <p>A signal is a value that changes over time. The simplest example is time itself. Let’s say we have a signal of milliseconds that updates every second:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Time</span> <span class="p">(</span><span class="nf">every</span><span class="p">,</span> <span class="nf">second</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Time</span> <span class="p">(</span><span class="nf">every</span><span class="p">,</span> <span class="nf">second</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">)</span>
 
-<span class="nf">time</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Int</span>
-<span class="nf">time</span> <span class="ow">=</span>
-    <span class="n">every</span> <span class="n">second</span></code></pre></div>
+<span class="n">time</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Int</span>
+<span class="n">time</span> <span class="o">=</span>
+    <span class="n">every</span> <span class="n">second</span></code></pre></figure>
 
 <p>Since the value of the signal only changes each second, if we sample it multiple times within the same second we will get the same value back. The value isn’t fired to us in a listener when it changes, instead we sample it from the signal.</p>
 
 <p>Now we need a way to use this signal, since we can’t listen to it and change some other object directly we have to map it into the game’s state and handle the value from there.</p>
 
-<p>As is common, elm uses the <code>main</code> function as it’s entry point. This function should return an element which can be rendered:</p>
+<p>As is common, elm uses the <code class="highlighter-rouge">main</code> function as it’s entry point. This function should return an element which can be rendered:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">fromString</span><span class="p">,</span> <span class="nf">leftAligned</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">fromString</span><span class="p">,</span> <span class="nf">leftAligned</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
-    <span class="s">&quot;Hello, World!&quot;</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
+    <span class="s">"Hello, World!"</span>
         <span class="o">|&gt;</span> <span class="n">fromString</span>
-        <span class="o">|&gt;</span> <span class="n">leftAligned</span></code></pre></div>
+        <span class="o">|&gt;</span> <span class="n">leftAligned</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e696e4e4b09711f39c2b6f">view on share-elm.com</a></p>
 
 <p>But that is just static content, if we want dynamic content we output a signal of elements:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Time</span> <span class="p">(</span><span class="nf">every</span><span class="p">,</span> <span class="nf">second</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="n">every</span> <span class="n">second</span>
-        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></div>
+        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e692d3e4b09711f39c2b6d">view on share-elm.com</a></p>
 
-<p>The value of the signal is mapped to the <code>Text.asText</code> function which passes it as a string into an element.</p>
+<p>The value of the signal is mapped to the <code class="highlighter-rouge">Text.asText</code> function which passes it as a string into an element.</p>
 
 <p>But we don’t typically want to just blindly get the <a href="http://www.wikiwand.com/en/Unix_time" class="external">time since 1970</a>. When making a game you need to get the exact delta since the last frame to ensure you can scale your time based calculations appropriately. This scaling prevents your game logic running at erratic speeds if your fps varies.</p>
 
 <p>This is nice and simple in in elm, here we just output the delta every frame at a target of 60 frames per second:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Time</span> <span class="p">(</span><span class="nf">fps</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="n">fps</span> <span class="mi">60</span>
-        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></div>
+        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e6972ee4b09711f39c2b71">view on share-elm.com</a></p>
 
 <h2 id="input">Input</h2>
 
-<p>As well as time, we can get inputs from the player. Continuing with our mouse move example; instead of listening for mouse move events, with elm we map the <code>Mouse.position</code> to our game logic:</p>
+<p>As well as time, we can get inputs from the player. Continuing with our mouse move example; instead of listening for mouse move events, with elm we map the <code class="highlighter-rouge">Mouse.position</code> to our game logic:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Mouse</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="kt">Mouse</span><span class="o">.</span><span class="n">position</span>
-        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></div>
+        <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e698a4e4b09711f39c2b78">view on share-elm.com</a></p>
 
 <p>Few games only take one input, so we can merge a second or more signals together.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kt">Signal</span><span class="o">.</span><span class="n">merge</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span>
-<span class="kt">Signal</span><span class="o">.</span><span class="n">mergeMany</span> <span class="kt">:</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">Signal</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kt">Signal</span><span class="o">.</span><span class="n">merge</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span>
+<span class="kt">Signal</span><span class="o">.</span><span class="n">mergeMany</span> <span class="o">:</span> <span class="kt">List</span> <span class="p">(</span><span class="kt">Signal</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span></code></pre></figure>
 
-<p>If multiple signals change at the same time priority is given to the left most signal. In the following example if the mouse is moving at the same time as it is clicked the <code>position</code> signal is given priority over <code>isDown</code>:</p>
+<p>If multiple signals change at the same time priority is given to the left most signal. In the following example if the mouse is moving at the same time as it is clicked the <code class="highlighter-rouge">position</code> signal is given priority over <code class="highlighter-rouge">isDown</code>:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Mouse</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">,</span> <span class="nf">merge</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="n">merge</span>
          <span class="p">(</span><span class="kt">Mouse</span><span class="o">.</span><span class="n">position</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span><span class="p">)</span>
-         <span class="p">(</span><span class="kt">Mouse</span><span class="o">.</span><span class="n">isDown</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span><span class="p">)</span></code></pre></div>
+         <span class="p">(</span><span class="kt">Mouse</span><span class="o">.</span><span class="n">isDown</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span><span class="p">)</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e66a03e4b09711f39c2b37">view on share-elm.com</a></p>
 
@@ -159,29 +159,29 @@ Last updated: 03 Mar, 2015</p>
 
 <p>Now we have access to various input signals we want to apply these to our game state over time. Elm has this wonderful concept of folding over the past.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kt">Signal</span><span class="o">.</span><span class="n">foldp</span> <span class="kt">:</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">state</span> <span class="ow">-&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">state</span> <span class="ow">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Signal</span> <span class="n">state</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kt">Signal</span><span class="o">.</span><span class="n">foldp</span> <span class="o">:</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">Signal</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Signal</span> <span class="n">state</span></code></pre></figure>
 
 <p>This takes a function which transforms the state with the value of the input signal and then outputs a signal with the new value of the state.</p>
 
 <p>In this example we get the maximum position the mouse has been moved to, i.e. how far to the bottom right of the window.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Mouse</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="nf">map</span><span class="p">,</span> <span class="nf">foldp</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="n">maxMousePos</span>
         <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span>
 
-<span class="nf">maxMousePos</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="nf">maxMousePos</span> <span class="ow">=</span>
-    <span class="kr">let</span> <span class="n">update</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">)</span> <span class="ow">=</span>
+<span class="n">maxMousePos</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">maxMousePos</span> <span class="o">=</span>
+    <span class="kr">let</span> <span class="n">update</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">)</span> <span class="o">=</span>
             <span class="p">(</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">mx</span> <span class="kr">then</span> <span class="n">x</span> <span class="kr">else</span> <span class="n">mx</span>
             <span class="p">,</span> <span class="kr">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="n">my</span> <span class="kr">then</span> <span class="n">y</span> <span class="kr">else</span> <span class="n">my</span>
             <span class="p">)</span>
-    <span class="kr">in</span> <span class="n">foldp</span> <span class="n">update</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="kt">Mouse</span><span class="o">.</span><span class="n">position</span></code></pre></div>
+    <span class="kr">in</span> <span class="n">foldp</span> <span class="n">update</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="kt">Mouse</span><span class="o">.</span><span class="n">position</span></code></pre></figure>
 
 <p class="share-elm"><a href="http://share-elm.com/sprout/54e69d1fe4b09711f39c2b81">view on share-elm.com</a></p>
 
@@ -191,24 +191,24 @@ Last updated: 03 Mar, 2015</p>
 
 <p>To send our own signals we create a channel that can receive values of a set type and takes a default value. To get the signal from this channel we subscribe to it and can then handle it as before.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Text</span> <span class="p">(</span><span class="nf">asText</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Signal</span> <span class="p">(</span><span class="kt">Signal</span><span class="p">,</span> <span class="kt">Channel</span><span class="p">,</span> <span class="nf">map</span><span class="p">,</span> <span class="nf">channel</span><span class="p">,</span> <span class="nf">subscribe</span><span class="p">)</span>
 <span class="kr">import</span> <span class="nn">Graphics.Element</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span>
 
-<span class="nf">main</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
-<span class="nf">main</span> <span class="ow">=</span>
+<span class="n">main</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">Element</span>
+<span class="n">main</span> <span class="o">=</span>
     <span class="n">mySubscriber</span>
         <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">asText</span>
 
-<span class="c1">-- create a channel which takes values of type String and has an initial value of &quot;foobar&quot;</span>
-<span class="nf">myChannel</span> <span class="kt">:</span> <span class="kt">Channel</span> <span class="kt">String</span>
-<span class="nf">myChannel</span> <span class="ow">=</span>
-    <span class="n">channel</span> <span class="s">&quot;foobar&quot;</span>
+<span class="c1">-- create a channel which takes values of type String and has an initial value of "foobar"</span>
+<span class="n">myChannel</span> <span class="o">:</span> <span class="kt">Channel</span> <span class="kt">String</span>
+<span class="n">myChannel</span> <span class="o">=</span>
+    <span class="n">channel</span> <span class="s">"foobar"</span>
 
 <span class="c1">-- subscribe to the channel creating a signal of string values</span>
-<span class="nf">mySubscriber</span> <span class="kt">:</span> <span class="kt">Signal</span> <span class="kt">String</span>
-<span class="nf">mySubscriber</span> <span class="ow">=</span>
-    <span class="n">subscribe</span> <span class="n">myChannel</span></code></pre></div>
+<span class="n">mySubscriber</span> <span class="o">:</span> <span class="kt">Signal</span> <span class="kt">String</span>
+<span class="n">mySubscriber</span> <span class="o">=</span>
+    <span class="n">subscribe</span> <span class="n">myChannel</span></code></pre></figure>
 
 <h2 id="next">Next</h2>
 
@@ -218,7 +218,7 @@ Last updated: 03 Mar, 2015</p>
 
 <p>While you wait, why not <a href="https://twitter.com/gelatindesign" class="external">follow me on twitter</a> and <a href="http://streak.club/u/jellyislovely" class="external">streak club</a> to hear updates about my own game’s progress and other development bits and bobs.</p>
 
-<p class="update-note">Updated [02 Mar, 2015]: Added a lead note indicating using elm v0.14.<br />
+<p class="update-note">Updated [02 Mar, 2015]: Added a lead note indicating using elm v0.14.
 Updated [05 Mar, 2015]: Added a section on custom channels.</p>
 
     </article>

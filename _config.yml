@@ -5,7 +5,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://gelatindesign.co.uk" # the base hostname & protocol for your site
 permalink: :categories/:title
 
-highlighter: pygments
+highlighter: rouge
 
 category_archive:
   layout: category

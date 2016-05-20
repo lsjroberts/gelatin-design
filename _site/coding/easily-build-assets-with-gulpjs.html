@@ -58,26 +58,29 @@
 
 <p>You can install plugins through npm:</p>
 
-<pre><code>npm install gulp-concat gulp-coffee
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install gulp-concat gulp-coffee
 </code></pre>
+</div>
 
 <p>Then require them at the top of your <code>gulpfile.js</code>:</p>
 
-<pre><code class="language-js">var concat = require('gulp-concat');
-var coffee = require('gulp-coffee');
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">concat</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-concat'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">coffee</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-coffee'</span><span class="p">);</span>
 </code></pre>
+</div>
 
 <h3 id="writing-tasks">Writing tasks</h3>
 
 <p>A good use case of gulp is compiling and combining coffeescripts in a single javascript file. So lets start with our first task:</p>
 
-<pre><code class="language-js">gulp.task('coffeescripts', function() {
-    return gulp.src('assets/scripts/**/*.coffee')
-        .pipe(concat('combined.coffee'))
-        .pipe(coffee())
-        .pipe(gulp.dest('build/scripts/combined.js'));
-});
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'coffeescripts'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">'assets/scripts/**/*.coffee'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">concat</span><span class="p">(</span><span class="s1">'combined.coffee'</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">coffee</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">'build/scripts/combined.js'</span><span class="p">));</span>
+<span class="p">});</span>
 </code></pre>
+</div>
 
 <p>This task finds all <code>.coffee</code> files in any folder within your scripts directory. These are combined into a single file then piped into a plugin that compiles coffeescripts into javascript and finally pushed into your build directory.</p>
 
@@ -89,7 +92,7 @@ var coffee = require('gulp-coffee');
 
 <p>So now you’ve got your coffeescripts compiling, you may have some vendor javascripts that you want to also be built into the <code>combined.js</code> file. If you pipe these into your <code>coffee()</code> plugin you’ll get a bunch of errors. Instead it is best to have a separate task that only runs on <code>.js</code> files.</p>
 
-<pre><code>gulp.task('coffeescripts', function() {
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('coffeescripts', function() {
     return gulp.src('assets/scripts/**/*.coffee')
         .pipe(concat('combined-coffee.coffee'))
         .pipe(coffee())
@@ -103,13 +106,15 @@ gulp.task('scripts', ['coffeescripts'], function() {
         .pipe(gulp.dest('build/scripts'));
 });
 </code></pre>
+</div>
 
 <p>By passing in <code>['coffeescripts']</code> to the <code>scripts</code> task you ensure it is run first. This compiles the coffeescripts into <code>combined-coffee.js</code> which is then combined with normal javascript files.</p>
 
 <p>The uglify plugin minifies the scripts before they are piped into the build directory:</p>
 
-<pre><code>var uglify = require('gulp-uglify')
+<div class="highlighter-rouge"><pre class="highlight"><code>var uglify = require('gulp-uglify')
 </code></pre>
+</div>
 
 <p>Running <code>gulp scripts</code> will now run the coffeescripts and scripts tasks.</p>
 
@@ -117,7 +122,7 @@ gulp.task('scripts', ['coffeescripts'], function() {
 
 <p>Having to run the gulp command every time you make a change to a file is a bit of a faff, this can be automated for you using watchers.</p>
 
-<pre><code>gulp.task('watch', function() {
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('watch', function() {
     gulp.watch([
         'assets/scripts/**/*.coffee',
         'assets/scripts/**/*.js'
@@ -129,11 +134,13 @@ gulp.task('scripts', ['coffeescripts'], function() {
     ], ['styles']);
 });
 </code></pre>
+</div>
 
 <p>If any changes are made to one of the specified files, the related task will be run. You can start the watcher with:</p>
 
-<pre><code>gulp watch
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp watch
 </code></pre>
+</div>
 
 <h2 id="taking-it-further">Taking it further</h2>
 

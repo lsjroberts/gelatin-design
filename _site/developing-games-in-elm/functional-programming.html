@@ -42,7 +42,7 @@
     </header>
 
     <article class="post-content">
-        <p class="note">Elm: v0.14<br />
+        <p class="note">Elm: v0.14
 Last updated: 03 Mar, 2015</p>
 
 <p>This is the first in a series of articles I will be writing about game development in <a href="http://elm-lang.org">elm</a>. It is a language that currently compiles into html and javascript so you can deploy it straight to the web or package it in <a href="https://github.com/nwjs/nw.js">nw.js</a> to create a standalone app or game. These are not so much tutorials but more things I’ve had to learn as I progress. Since elm is in active development I’ll be updating the articles if and when they become out of date. And also for any mistakes I make…</p>
@@ -61,34 +61,34 @@ Last updated: 03 Mar, 2015</p>
 
 <p>Consider this basic example in javascript, squaring a list of numbers. With imperative code you describe how something will happen, with functional code (a subset of <a href="https://en.wikipedia.org/wiki/Declarative_programming">declarative</a>) you describe what you want to happen. So in the imperative style we have to define a temporary index variable and construct a loop to iterate through the list updating each value in turn:</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
     <span class="nx">i</span><span class="p">;</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
 <p>Compare this to the functional approach. If you are writing in javascript you can use the great <a href="https://lodash.com">lodash</a> library. However using a language specifically designed for FP is highly beneficial, so lets do it in <a href="http://elm-lang.org">elm</a>.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">List</span> <span class="p">(</span><span class="o">..</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">List</span> <span class="p">(</span><span class="o">..</span><span class="p">)</span>
 
-<span class="nf">square</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
-<span class="nf">square</span> <span class="n">n</span> <span class="ow">=</span>
+<span class="n">square</span> <span class="o">:</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">square</span> <span class="n">n</span> <span class="o">=</span>
     <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
 
-<span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
-<span class="nf">numbers</span> <span class="ow">=</span>
-    <span class="n">map</span> <span class="n">square</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span></code></pre></div>
+<span class="n">numbers</span> <span class="o">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="n">numbers</span> <span class="o">=</span>
+    <span class="n">map</span> <span class="n">square</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span></code></pre></figure>
 
-<p>With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With <code>map</code> we apply <code>square</code> onto each number in the list and return the new list.</p>
+<p>With elm we do not need to use temporary variables, we can construct our list of numbers easily, and define a function that can be used elsewhere. With <code class="highlighter-rouge">map</code> we apply <code class="highlighter-rouge">square</code> onto each number in the list and return the new list.</p>
 
-<p>As you can see, functions are type-hinted for each of the parameters with the final type referring to the output. The <code>import List (..)</code> line simply brings in all the core list functions that elm provides such as <code>map</code> and <code>filter</code>.</p>
+<p>As you can see, functions are type-hinted for each of the parameters with the final type referring to the output. The <code class="highlighter-rouge">import List (..)</code> line simply brings in all the core list functions that elm provides such as <code class="highlighter-rouge">map</code> and <code class="highlighter-rouge">filter</code>.</p>
 
 <h2 id="filtering">Filtering</h2>
 
 <p>Now imagine we want to remove odd numbers from a list and only square the remaining even numbers. Approaching this imperatively we may write:</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
     <span class="nx">squaredNumbers</span> <span class="o">=</span> <span class="p">[],</span>
     <span class="nx">i</span><span class="p">;</span>
 
@@ -98,163 +98,163 @@ Last updated: 03 Mar, 2015</p>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">numbers</span> <span class="o">=</span> <span class="nx">squaredNumbers</span><span class="p">;</span></code></pre></div>
+<span class="nx">numbers</span> <span class="o">=</span> <span class="nx">squaredNumbers</span><span class="p">;</span></code></pre></figure>
 
-<p>Sure, it works, but having to define a second array is messy and we’ve had to write the <code>for</code> loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.</p>
+<p>Sure, it works, but having to define a second array is messy and we’ve had to write the <code class="highlighter-rouge">for</code> loop definition again. This is one of my least favourite things about the imperative style; you’ll write the same 35 boilerplate characters a thousand times throughout your codebase.</p>
 
 <p>Let’s try it functionally:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">isEven</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
-<span class="nf">isEven</span> <span class="n">n</span> <span class="ow">=</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isEven</span> <span class="o">:</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isEven</span> <span class="n">n</span> <span class="o">=</span>
     <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
 
-<span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
-<span class="nf">numbers</span> <span class="ow">=</span>
-    <span class="n">map</span> <span class="n">square</span> <span class="p">(</span><span class="n">filter</span> <span class="n">isEven</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">])</span></code></pre></div>
+<span class="n">numbers</span> <span class="o">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="n">numbers</span> <span class="o">=</span>
+    <span class="n">map</span> <span class="n">square</span> <span class="p">(</span><span class="n">filter</span> <span class="n">isEven</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">])</span></code></pre></figure>
 
-<p>We apply the filter to the list of numbers and can reuse our <code>square</code> function from before so we don’t need to repeat ourselves for a slightly different behaviour.</p>
+<p>We apply the filter to the list of numbers and can reuse our <code class="highlighter-rouge">square</code> function from before so we don’t need to repeat ourselves for a slightly different behaviour.</p>
 
 <p>And here’s the brilliant thing about FP, you spend less time working out what the author intended; you can simply read it. And this improves further with chaining.</p>
 
 <h2 id="chaining">Chaining</h2>
 
-<p>If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use the <code>|&gt;</code> operator to help us chain function calls.</p>
+<p>If you were thinking the nesting of functions could get out of hand, you are right. In elm we can use the <code class="highlighter-rouge">|&gt;</code> operator to help us chain function calls.</p>
 
-<p>The <code>|&gt;</code> operator is an alias for function application. It takes the value to it’s left and passes this as the tail argument to the function on it’s right. There is also <code>&lt;|</code> which does this in the reverse direction.</p>
+<p>The <code class="highlighter-rouge">|&gt;</code> operator is an alias for function application. It takes the value to it’s left and passes this as the tail argument to the function on it’s right. There is also <code class="highlighter-rouge">&lt;|</code> which does this in the reverse direction.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
 <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">2</span>
 
 <span class="c1">-- is equivalent to this</span>
-<span class="nf">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></pre></div>
+<span class="n">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></pre></figure>
 
 <p>When we have multiple functions to call it’s easy to see the benefit:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
 <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">2</span>
   <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">3</span>
   <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">4</span>
 
 <span class="c1">-- is equivalent to this</span>
-<span class="nf">add</span> <span class="mi">4</span> <span class="p">(</span><span class="n">add</span> <span class="mi">3</span> <span class="p">(</span><span class="n">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)))</span></code></pre></div>
+<span class="n">add</span> <span class="mi">4</span> <span class="p">(</span><span class="n">add</span> <span class="mi">3</span> <span class="p">(</span><span class="n">add</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">1</span><span class="p">)))</span></code></pre></figure>
 
 <p>This helps reduce the number of brackets you have to write, and makes your code easier to read. It becomes more like a sentence:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">numbers</span> <span class="kt">:</span> <span class="kt">List</span> <span class="kt">Int</span>
-<span class="nf">numbers</span> <span class="ow">=</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">numbers</span> <span class="o">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+<span class="n">numbers</span> <span class="o">=</span>
     <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span> <span class="o">|&gt;</span> <span class="n">filter</span> <span class="n">isEven</span>
-           <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">square</span></code></pre></div>
+           <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">square</span></code></pre></figure>
 
 <h2 id="composition">Composition</h2>
 
 <p>An often better alternative to chaining is composition, <a href="https://en.wikipedia.org/wiki/Function_composition_(computer_science)">combining simple functions to build more complicated ones</a>.</p>
 
-<p>In elm we can compose functions together using the <code>&gt;&gt;</code> operator. This composes two functions together without us needing to specify the way inputs are passed.</p>
+<p>In elm we can compose functions together using the <code class="highlighter-rouge">&gt;&gt;</code> operator. This composes two functions together without us needing to specify the way inputs are passed.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="c1">-- this</span>
 <span class="p">(</span><span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span><span class="p">)</span>
 
 <span class="c1">-- is equivalent to</span>
-<span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="n">not</span> <span class="p">(</span><span class="n">isEven</span> <span class="n">n</span><span class="p">))</span></code></pre></div>
+<span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="p">(</span><span class="n">isEven</span> <span class="n">n</span><span class="p">))</span></code></pre></figure>
 
-<p>To get a bit logical, if we know that <code>g : A -&gt; B</code> and <code>f : B -&gt; C</code> we can then compose them together to create <code>g &gt;&gt; f : A -&gt; C</code>. The call order can be reversed using <code>&lt;&lt;</code>.</p>
+<p>To get a bit logical, if we know that <code class="highlighter-rouge">g : A -&gt; B</code> and <code class="highlighter-rouge">f : B -&gt; C</code> we can then compose them together to create <code class="highlighter-rouge">g &gt;&gt; f : A -&gt; C</code>. The call order can be reversed using <code class="highlighter-rouge">&lt;&lt;</code>.</p>
 
 <p>In this example we are checking to see if the square of a given number is odd:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">squareIsOdd</span> <span class="ow">=</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">squareIsOdd</span> <span class="o">=</span>
     <span class="n">square</span> <span class="o">&gt;&gt;</span> <span class="n">isEven</span> <span class="o">&gt;&gt;</span> <span class="n">not</span> <span class="c1">-- `not` is a built-in function that inverts booleans</span>
 
-<span class="nf">squareIsOdd</span> <span class="mi">3</span> <span class="o">==</span> <span class="kt">True</span>
-<span class="nf">squareIsOdd</span> <span class="mi">6</span> <span class="o">==</span> <span class="kt">False</span></code></pre></div>
+<span class="n">squareIsOdd</span> <span class="mi">3</span> <span class="o">==</span> <span class="kt">True</span>
+<span class="n">squareIsOdd</span> <span class="mi">6</span> <span class="o">==</span> <span class="kt">False</span></code></pre></figure>
 
-<p>The inputs given to <code>squareIsOdd</code> are implicitly passed through to the composed functions, each one in turn passing it’s output on to the next.</p>
+<p>The inputs given to <code class="highlighter-rouge">squareIsOdd</code> are implicitly passed through to the composed functions, each one in turn passing it’s output on to the next.</p>
 
 <h2 id="state">State</h2>
 
 <p><a href="http://en.wikipedia.org/wiki/State_(computer_science)">State</a> is the data that the program stores in variables and as properties on objects. The problem with state stored in this way is that it allows the developer to modify a variable that is outside the scope of the current block, creating a side effect. For example:</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">;</span>
 
 <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;baz&quot;</span><span class="o">:</span> <span class="mi">1</span>
-    <span class="s2">&quot;setBaz&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s2">"baz"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">"setBaz"</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">baz</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
         <span class="nx">bar</span><span class="p">.</span><span class="nx">qux</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// yuck!</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="nx">bar</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;qux&quot;</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="s2">"qux"</span><span class="p">:</span> <span class="mi">2</span>
 <span class="p">};</span>
 
-<span class="nx">foo</span><span class="p">.</span><span class="nx">setBaz</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></code></pre></div>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">setBaz</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></code></pre></figure>
 
-<p>There may be a valid reason for changing the value of <code>bar.qux</code>, if it should always be double <code>foo.baz</code>. But unless a developer knows or reads the definition of <code>setBaz</code> they won’t know that it changes <code>bar.qux</code>. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I’ve seen and done it a great deal.</p>
+<p>There may be a valid reason for changing the value of <code class="highlighter-rouge">bar.qux</code>, if it should always be double <code class="highlighter-rouge">foo.baz</code>. But unless a developer knows or reads the definition of <code class="highlighter-rouge">setBaz</code> they won’t know that it changes <code class="highlighter-rouge">bar.qux</code>. The api of the object lies. In this trivial example you could easily, and correctly, identify that this is bad code. But the availability of this almost inevitably leads to programmers writing these side effects. I’ve seen and done it a great deal.</p>
 
 <p>So how do we solve this issue? By providing no way for the developer to write side effects. With elm there is no global state, there are no variables, there is just input data and output data.</p>
 
 <p>However if the function performs no update operation and only returns the input, the output is the same piece of data to prevent unnecessary copies.</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">noop</span> <span class="n">input</span> <span class="ow">=</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">noop</span> <span class="n">input</span> <span class="o">=</span>
     <span class="n">input</span>
 
-<span class="nf">sameAsInput</span> <span class="ow">=</span> <span class="n">noop</span> <span class="p">{</span> <span class="n">a</span> <span class="ow">=</span> <span class="s">&quot;b&quot;</span> <span class="p">}</span></code></pre></div>
+<span class="n">sameAsInput</span> <span class="o">=</span> <span class="n">noop</span> <span class="p">{</span> <span class="n">a</span> <span class="o">=</span> <span class="s">"b"</span> <span class="p">}</span></code></pre></figure>
 
-<p>So taking this to our <code>setBaz</code> example in elm:</p>
+<p>So taking this to our <code class="highlighter-rouge">setBaz</code> example in elm:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">Foo</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">baz</span> <span class="kt">:</span> <span class="kt">Int</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">Foo</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">baz</span> <span class="o">:</span> <span class="kt">Int</span>
     <span class="p">}</span>
 
-<span class="kr">type</span> <span class="n">alias</span> <span class="kt">Bar</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">qux</span> <span class="kt">:</span> <span class="kt">Int</span>
+<span class="kr">type</span> <span class="n">alias</span> <span class="kt">Bar</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">qux</span> <span class="o">:</span> <span class="kt">Int</span>
     <span class="p">}</span>
 
-<span class="nf">foo</span> <span class="kt">:</span> <span class="kt">Foo</span>
-<span class="nf">foo</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">baz</span> <span class="ow">=</span> <span class="mi">1</span>
+<span class="n">foo</span> <span class="o">:</span> <span class="kt">Foo</span>
+<span class="n">foo</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">baz</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="p">}</span>
 
-<span class="nf">bar</span> <span class="kt">:</span> <span class="kt">Bar</span>
-<span class="nf">bar</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">qux</span> <span class="ow">=</span> <span class="mi">2</span>
+<span class="n">bar</span> <span class="o">:</span> <span class="kt">Bar</span>
+<span class="n">bar</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">qux</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="p">}</span>
 
-<span class="nf">setFooBaz</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Foo</span> <span class="ow">-&gt;</span> <span class="kt">Foo</span>
-<span class="nf">setFooBaz</span> <span class="n">baz&#39;</span> <span class="n">foo</span> <span class="ow">=</span>
+<span class="n">setFooBaz</span> <span class="o">:</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Foo</span> <span class="o">-&gt;</span> <span class="kt">Foo</span>
+<span class="n">setFooBaz</span> <span class="n">baz'</span> <span class="n">foo</span> <span class="o">=</span>
     <span class="p">{</span> <span class="n">foo</span>
-        <span class="o">|</span> <span class="n">baz</span> <span class="ow">&lt;-</span> <span class="n">baz&#39;</span>
+        <span class="o">|</span> <span class="n">baz</span> <span class="o">&lt;-</span> <span class="n">baz'</span>
     <span class="p">}</span>
 
-<span class="nf">foo</span> <span class="ow">=</span> <span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="mi">2</span></code></pre></div>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="mi">2</span></code></pre></figure>
 
-<p>We can see that there is no way for <code>setFooBaz</code> to modify <code>bar.qux</code>. The function can not access data outside it’s scope and can only return the new version of <code>foo</code>.</p>
+<p>We can see that there is no way for <code class="highlighter-rouge">setFooBaz</code> to modify <code class="highlighter-rouge">bar.qux</code>. The function can not access data outside it’s scope and can only return the new version of <code class="highlighter-rouge">foo</code>.</p>
 
-<p>To clarify, you may be thinking that <code>foo : Foo</code> is a variable of type <code>Foo</code>, but it is not. It is a function that takes no input and outputs a data object. We could easily change it to <code>foo : Int -&gt; Foo</code>, to allow <code>baz</code> to be initialised to some value.</p>
+<p>To clarify, you may be thinking that <code class="highlighter-rouge">foo : Foo</code> is a variable of type <code class="highlighter-rouge">Foo</code>, but it is not. It is a function that takes no input and outputs a data object. We could easily change it to <code class="highlighter-rouge">foo : Int -&gt; Foo</code>, to allow <code class="highlighter-rouge">baz</code> to be initialised to some value.</p>
 
-<p>If we still want to ensure <code>bar.qux</code> is updated to be double <code>foo.baz</code>, we can create a function which takes a data object comprising of both, calls the two update functions and returns the modified parent:</p>
+<p>If we still want to ensure <code class="highlighter-rouge">bar.qux</code> is updated to be double <code class="highlighter-rouge">foo.baz</code>, we can create a function which takes a data object comprising of both, calls the two update functions and returns the modified parent:</p>
 
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">FooBar</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">foo</span> <span class="kt">:</span> <span class="kt">Foo</span>
-    <span class="p">,</span> <span class="n">bar</span> <span class="kt">:</span> <span class="kt">Bar</span>
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="n">alias</span> <span class="kt">FooBar</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Foo</span>
+    <span class="p">,</span> <span class="n">bar</span> <span class="o">:</span> <span class="kt">Bar</span>
     <span class="p">}</span>
 
-<span class="nf">fooBar</span> <span class="kt">:</span> <span class="kt">FooBar</span>
-<span class="nf">fooBar</span> <span class="ow">=</span>
-    <span class="p">{</span> <span class="n">foo</span> <span class="ow">=</span> <span class="n">foo</span> <span class="c1">-- our previously created `foo` function</span>
-    <span class="p">,</span> <span class="n">bar</span> <span class="ow">=</span> <span class="n">bar</span>
+<span class="n">fooBar</span> <span class="o">:</span> <span class="kt">FooBar</span>
+<span class="n">fooBar</span> <span class="o">=</span>
+    <span class="p">{</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">foo</span> <span class="c1">-- our previously created `foo` function</span>
+    <span class="p">,</span> <span class="n">bar</span> <span class="o">=</span> <span class="n">bar</span>
     <span class="p">}</span>
 
-<span class="nf">update</span> <span class="kt">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span> <span class="ow">-&gt;</span> <span class="kt">FooBar</span>
-<span class="nf">update</span> <span class="n">baz</span> <span class="n">fooBar</span> <span class="ow">=</span>
+<span class="n">update</span> <span class="o">:</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">FooBar</span> <span class="o">-&gt;</span> <span class="kt">FooBar</span>
+<span class="n">update</span> <span class="n">baz</span> <span class="n">fooBar</span> <span class="o">=</span>
     <span class="p">{</span> <span class="n">fooBar</span>
-        <span class="o">|</span> <span class="n">foo</span> <span class="ow">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="n">baz</span>
-        <span class="p">,</span> <span class="n">bar</span> <span class="ow">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">bar</span> <span class="o">|&gt;</span> <span class="n">setBarQux</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="o">|</span> <span class="n">foo</span> <span class="o">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">foo</span> <span class="o">|&gt;</span> <span class="n">setFooBaz</span> <span class="n">baz</span>
+        <span class="p">,</span> <span class="n">bar</span> <span class="o">&lt;-</span> <span class="n">fooBar</span><span class="o">.</span><span class="n">bar</span> <span class="o">|&gt;</span> <span class="n">setBarQux</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">2</span>
     <span class="p">}</span>
 
-<span class="nf">fooBar</span> <span class="ow">=</span> <span class="n">fooBar</span> <span class="o">|&gt;</span> <span class="n">update</span> <span class="mi">2</span></code></pre></div>
+<span class="n">fooBar</span> <span class="o">=</span> <span class="n">fooBar</span> <span class="o">|&gt;</span> <span class="n">update</span> <span class="mi">2</span></code></pre></figure>
 
-<p>We are able to update the values as desired, but without side effects. The output of <code>update</code> contains all the effects of it’s operations.</p>
+<p>We are able to update the values as desired, but without side effects. The output of <code class="highlighter-rouge">update</code> contains all the effects of it’s operations.</p>
 
 <h2 id="elm">Elm</h2>
 
@@ -262,9 +262,9 @@ Last updated: 03 Mar, 2015</p>
 
 <p>Coming next: Signals. To hear when this is published and for news about the game I’m creating <a href="https://twitter.com/gelatindesign">follow me on twitter</a>.</p>
 
-<p class="update-note">Updated [08 Feb, 2015]: Corrected a section regarding a <code>noop</code> function, only record updates produce a new value.</p>
+<p class="update-note">Updated [08 Feb, 2015]: Corrected a section regarding a <code class="highlighter-rouge">noop</code> function, only record updates produce a new value.</p>
 
-<p class="update-note">Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even number… changed to <code>squareIsOdd 6 == False</code></p>
+<p class="update-note">Updated [13 Feb, 2015]: Corrected my bad maths, the square of 7 is not an even number… changed to <code class="highlighter-rouge">squareIsOdd 6 == False</code></p>
 
 <p class="update-note">Updated [16 Feb, 2015]: Improved some sentences to be less confusing and repetitive.</p>
 

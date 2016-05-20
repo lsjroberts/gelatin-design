@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Creating a blog with metalsmith - Coding</title>
+    <meta name="description" content="  Update: Since writing this article I’ve actually updated the site to use Jekyll. Various packages kept breaking due to version compatibility issues etc. I ...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://gelatindesign.co.uk/coding/creating-a-blog-with-metalsmith">
+    <link rel="alternate" type="application/rss+xml" title="gelatindesign" href="http://gelatindesign.co.uk/feed.xml">
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+
+
+    <body>
+
+        <header class="site-header">
+
+</header>
+
+        <div class="page-content">
+            <div class="wrapper">
+                <div class="post">
+
+    <header class="post-header">
+        <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
+        <h1 class="post-title">Creating a blog with <strong>Metalsmith</strong></h1>
+        <p class="post-meta">24 May, 2014</p>
+        <p class="post-meta post-categories">
+            <a href="/coding/">coding</a>
+            
+                • javascript
+            
+                • nodejs
+            
+                • metalsmith
+            
+                • jekyll
+            
+        </p>
+    </header>
+
+    <article class="post-content">
+        <blockquote>
+  <p>Update: Since writing this article I’ve actually updated the site to use Jekyll. Various packages kept breaking due to version compatibility issues etc. I got bored and just switched over to a more stable solution.</p>
+</blockquote>
+
+<p>I’ve been looking at converting this site to use a static-site generator. Prior to this I’ve been using a simple custom blog on top of Laravel. As much as I love Laravel, it seems a touch pointless to have all this dynamic code behind what is just static content pages.</p>
+
+<p>With that in mind I had a look around at what the available options were. Jekyll seemed like a good choice and I began working on porting my content to it. However I wasn’t particuarly sold, not sure why I just didn’t feel happy using it. I wanted more control and to organise my files how I wanted.</p>
+
+<p>Yesterday I saw a retweet about <a href="http://metalsmith.io">Metalsmith</a> which looked very similar to <a href="/blog/post/easily-build-assets-with-gulpjs">Gulpjs which I am already a big fan of</a>. I started a few hours ago writing my build script and porting my content and now not long later it’s all done.</p>
+
+<p>I did have to do some work to get things how I wanted. Metalsmith is very hands-off so if you want list pages, pagination, tag pages etc you will have to write these yourself.</p>
+
+<p>Fortunately it’s dead simple to do. Plugins are easy to write and you can just manipulate the files being generated. So for example a tagging plugin could be written as so:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">metalsmith</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'metalsmith'</span><span class="p">),</span>
+    <span class="nx">collections</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'metalsmith-collections'</span><span class="p">);</span>
+
+<span class="nx">metalsmith</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">)</span>
+
+    <span class="c1">// group together all files in the `/blog/` directory as posts</span>
+    <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">collections</span><span class="p">({</span>
+        <span class="na">posts</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">pattern</span><span class="p">:</span> <span class="s1">'blog/*'</span><span class="p">,</span>
+            <span class="na">sortBy</span><span class="p">:</span> <span class="s1">'date'</span><span class="p">,</span>
+            <span class="na">reverse</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}))</span>
+
+    <span class="c1">// generate the tag listing pages</span>
+    <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">blogTagLists</span><span class="p">)</span>
+
+    <span class="c1">// build</span>
+    <span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">});</span>
+
+<span class="kd">function</span> <span class="nx">blogTagLists</span><span class="p">(</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="c1">// loop the posts collection, creating new groups on the tags</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">p</span> <span class="k">in</span> <span class="nx">metalsmith</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">posts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">t</span> <span class="k">in</span> <span class="nx">metalsmith</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">posts</span><span class="p">[</span><span class="nx">p</span><span class="p">].</span><span class="nx">tags</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tag</span> <span class="o">=</span> <span class="nx">metalsmith</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">posts</span><span class="p">[</span><span class="nx">p</span><span class="p">].</span><span class="nx">tags</span><span class="p">[</span><span class="nx">t</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nx">tags</span><span class="p">[</span><span class="nx">tag</span><span class="p">])</span> <span class="p">{</span>
+                <span class="nx">tags</span><span class="p">[</span><span class="nx">tag</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="p">}</span>
+
+            <span class="nx">tags</span><span class="p">[</span><span class="nx">tag</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">metalsmith</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">posts</span><span class="p">[</span><span class="nx">p</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// loop the tags and create a new index file for each tag</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">tag</span> <span class="k">in</span> <span class="nx">tags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">files</span><span class="p">[</span><span class="s1">'blog/tag/'</span> <span class="o">+</span> <span class="nx">tag</span> <span class="o">+</span> <span class="s1">'/index.md'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">template</span><span class="p">:</span> <span class="s1">'list.html'</span><span class="p">,</span>
+            <span class="na">mode</span><span class="p">:</span> <span class="s1">'0644'</span><span class="p">,</span>
+            <span class="na">contents</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+            <span class="na">title</span><span class="p">:</span> <span class="s2">"Posts tagged '"</span> <span class="o">+</span> <span class="nx">tag</span> <span class="o">+</span> <span class="s2">"'"</span><span class="p">,</span>
+            <span class="na">posts</span><span class="p">:</span> <span class="nx">tags</span><span class="p">[</span><span class="nx">tag</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You can see my full <a href="http://github.com/lsjroberts/gelatin-design/tree/master/build.js">build.js file here</a> along with the rest of the code for this site.</p>
+
+<p>If you’re looking for a static-site generator which gives you a lot of control then I really recommend <a href="http://metalsmith.io">Metalsmith</a>.</p>
+
+    </article>
+
+    
+
+    <footer class="post-footer">
+        <a class="back" href="/">&laquo; read more articles</a>
+        <a class="follow" href="https://twitter.com/gelatindesign">follow me @gelatindesign</a>
+    </footer>
+
+</div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+    <a href="https://weheart.github.io/"><img src="/images/heart.png"></a>
+</footer>
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.gelatindesign.co.uk/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.gelatindesign.co.uk/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+    </body>
+
+</html>
