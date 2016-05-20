@@ -8,12 +8,11 @@
 }
 
 %title {
-    @include font-size(2);
+    @include font-size(3);
     font-family: $secondary-font-family;
     font-style: italic;
     font-weight: 600;
     line-height: 1.2;
-    text-align: center;
     text-transform: capitalize;
 
     @include media-query($on-laptop) {
@@ -24,8 +23,7 @@
 %title-icon {
     display: block;
     width: 60px;
-    margin: 0 auto 2rem;
-    text-align: center;
+    margin: 0 0 2rem;
 }
 
 %title-strong {
@@ -34,7 +32,6 @@
     font-family: $base-font-family;
     font-style: normal;
     line-height: 1;
-    text-align: center;
     color: $brand-color;
 
     @include media-query($on-laptop) {
@@ -47,50 +44,37 @@
 }
 
 %subtitle {
-    @include font-size(2);
+    @include font-size(3);
     margin-top: $spacing-unit;
     font-family: $secondary-font-family;
     font-weight: 600;
-    text-align: center;
     text-transform: uppercase;
 }
 
 %heading {
-    // @include font-size(1);
-    font-size: 1.2rem;
+    @include font-size(2);
     margin-top: $spacing-unit;
     font-family: $secondary-font-family;
     font-weight: 600;
-    text-align: center;
     text-transform: uppercase;
 }
 
 .home {
     img {
         @extend %vertical-rhythm;
-        display: block;
+        display: inline-block;
         width: 6.85em;
-        margin-left: auto;
-        margin-right: auto;
+    }
+
+    h1 {
+        display: inline-block;
+        margin-left: 3rem;
     }
 }
 
 .post-list {
-    margin-left: auto;
-    margin-right: auto;
-
-    // &:before {
-    //     display: block;
-    //     content: " ";
-    //     background: $grey-color-light;
-    //     margin: 1rem auto;
-    //     width: 5%;
-    //     height: 1px;
-    // }
-
     h4 {
-        @include font-size(2);
-        text-align: center;
+        @extend %subtitle;
     }
 
     ul {
@@ -100,11 +84,10 @@
     li {
         display: block;
         list-style: none;
-        text-align: center;
+        margin-bottom: 3rem;
 
-        &:after {
-            display: block;
-            content: " • "
+        > a {
+            @include font-size(3);
         }
 
         &:last-child:after {
@@ -113,8 +96,8 @@
     }
 
     .post-meta {
+        @include font-size(1);
         display: block;
-        font-size: 0.61rem;
     }
 }
 
@@ -159,14 +142,15 @@
 
 .page {
     h1 {
-        @extend %title;
+        // @extend %title;
+        @extend %title-strong;
 
         &.lowercase {
             text-transform: lowercase;
         }
 
         & strong {
-            @extend %title-strong;
+            // @extend %title-strong;
         }
     }
 
@@ -190,10 +174,11 @@
 }
 
 .post-title {
-    @extend %title;
+    // @extend %title;
+    @extend %title-strong;
 
     & strong {
-        @extend %title-strong;
+        // @extend %title-strong;
     }
 }
 
@@ -205,13 +190,10 @@
     @include font-size(1);
     font-family: $secondary-font-family;
     font-weight: 600;
-    text-align: center;
     text-transform: uppercase;
 }
 
 .post-content {
-    // text-align: justify;
-
     h1 {
         @extend %title;
     }
@@ -235,19 +217,19 @@
     }
 
     p {
+        max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}*2));
+        max-width:         calc(#{$content-width} - (#{$spacing-unit}*2));
 
+        @include media-query($on-laptop) {
+            max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
+            max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+        }
     }
 
     img {
         display: block;
-        margin-left: -$spacing-unit;
-        margin-right: -$spacing-unit;
-        // padding: $spacing-unit/2 $spacing-unit;
-        max-width: calc(100% + #{$spacing-unit*2});
 
         @include media-query($on-laptop) {
-            margin-left: 0;
-            margin-right: 0;
             padding: 8px 12px;
         }
     }

@@ -63,7 +63,7 @@
 $base-font-family: "latolight", Helvetica, Arial, sans-serif;
 $secondary-font-family: "josefin_slabregular", Georgia, serif;
 $mono-font-family: "pt_monoregular", Courier, monospace;
-$base-font-size:   1.1rem;
+$base-font-size:   1.4rem;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.618;
 
@@ -78,7 +78,7 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+$content-width:    900px;
 
 $on-palm:          600px;
 $on-laptop:        800px;

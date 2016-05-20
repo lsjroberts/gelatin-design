@@ -134,7 +134,7 @@ blockquote {
 pre,
 code {
     font-family: $mono-font-family;
-    font-size: 15px;
+    font-size: 20px;
     color: #fff;
     border-radius: 3px;
     background-color: #333;
@@ -161,16 +161,10 @@ pre {
  * Wrapper
  */
 .wrapper {
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}*2));
-    max-width:         calc(#{$content-width} - (#{$spacing-unit}*2));
-    margin-right: auto;
-    margin-left: auto;
     padding: $spacing-unit*2 $spacing-unit;
     @extend %clearfix;
 
     @include media-query($on-laptop) {
-        max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
-        max-width:         calc(#{$content-width} - (#{$spacing-unit}));
         padding: $spacing-unit/2;
     }
 
