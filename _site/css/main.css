@@ -16,6 +16,10 @@
   src: url("/fonts/ptm55ft-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/ptm55ft-webfont.woff2") format("woff2"), url("/fonts/ptm55ft-webfont.woff") format("woff"), url("/fonts/ptm55ft-webfont.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 0.875rem; } }
+
 /**
  * Reset some basic elements
  */
@@ -114,6 +118,10 @@ code {
   color: #fff;
   border-radius: 3px;
   background-color: #333; }
+  @media screen and (max-width: 600px) {
+    pre,
+    code {
+      font-size: 15px; } }
 
 code {
   padding: 2px 8px; }
@@ -193,6 +201,9 @@ pre {
   font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
   text-transform: uppercase; }
+  @media screen and (max-width: 600px) {
+    .post-list h4, .post-content h2, .essay .secondary-title {
+      font-size: 1.618rem; } }
 
 .post-content h3 {
   font-size: 1.618rem;
@@ -204,9 +215,19 @@ pre {
 .home img {
   display: inline-block;
   width: 6.85em; }
+  @media screen and (max-width: 1010px) {
+    .home img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; } }
 .home h1 {
   display: inline-block;
   margin-left: 3rem; }
+  @media screen and (max-width: 1010px) {
+    .home h1 {
+      display: block;
+      margin-left: 0;
+      text-align: center; } }
 
 .post-list ul {
   margin: 0; }
@@ -216,6 +237,9 @@ pre {
   margin-bottom: 3rem; }
   .post-list li > a {
     font-size: 2.61792rem; }
+    @media screen and (max-width: 600px) {
+      .post-list li > a {
+        font-size: 1.618rem; } }
   .post-list li:last-child:after {
     display: none; }
 .post-list .post-meta {
@@ -249,9 +273,6 @@ pre {
   text-transform: lowercase; }
 .page h2 {
   font-size: 1.618rem; }
-  @media screen and (max-width: 800px) {
-    .page h2 {
-      font-size: 1rem; } }
 
 .post-meta {
   font-size: 1rem;
@@ -272,6 +293,9 @@ pre {
     .post-content p {
       max-width: -webkit-calc(900px - (5.3394rem));
       max-width: calc(900px - (5.3394rem)); } }
+  @media screen and (max-width: 600px) {
+    .post-content p {
+      font-size: 1.3rem; } }
 .post-content img {
   display: block; }
   @media screen and (max-width: 800px) {

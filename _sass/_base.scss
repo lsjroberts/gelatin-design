@@ -1,3 +1,9 @@
+html {
+    @include media-query($on-palm) {
+        font-size: 0.875rem;
+    }
+}
+
 /**
  * Reset some basic elements
  */
@@ -138,6 +144,10 @@ code {
     color: #fff;
     border-radius: 3px;
     background-color: #333;
+
+    @include media-query($on-palm) {
+        font-size: 15px;
+    }
 }
 
 code {

@@ -49,6 +49,10 @@
     font-family: $secondary-font-family;
     font-weight: 600;
     text-transform: uppercase;
+
+    @include media-query($on-palm) {
+        @include font-size(2);
+    }
 }
 
 %heading {
@@ -64,11 +68,23 @@
         @extend %vertical-rhythm;
         display: inline-block;
         width: 6.85em;
+
+        @include media-query(1010px) {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 
     h1 {
         display: inline-block;
         margin-left: 3rem;
+
+        @include media-query(1010px) {
+            display: block;
+            margin-left: 0;
+            text-align: center;
+        }
     }
 }
 
@@ -88,6 +104,10 @@
 
         > a {
             @include font-size(3);
+
+            @include media-query($on-palm) {
+                @include font-size(2);
+            }
         }
 
         &:last-child:after {
@@ -156,10 +176,6 @@
 
     h2 {
         @include font-size(2);
-
-        @include media-query($on-laptop) {
-            @include font-size(1);
-        }
     }
 }
 
@@ -223,6 +239,10 @@
         @include media-query($on-laptop) {
             max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
             max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+        }
+
+        @include media-query($on-palm) {
+            font-size: 1.3rem;
         }
     }
 
