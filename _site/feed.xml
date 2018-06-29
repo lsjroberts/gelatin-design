@@ -5,13 +5,17 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Jun 2018 21:05:06 +0100</pubDate>
-    <lastBuildDate>Fri, 29 Jun 2018 21:05:06 +0100</lastBuildDate>
+    <pubDate>Fri, 29 Jun 2018 22:10:10 +0100</pubDate>
+    <lastBuildDate>Fri, 29 Jun 2018 22:10:10 +0100</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
         <title>A Better Javascript Ecosystem</title>
-        <description>&lt;h3 id=&quot;why&quot;&gt;Why?&lt;/h3&gt;
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;NOTE: THIS IS A DRAFT&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;why&quot;&gt;Why?&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/&quot;&gt;NPM&lt;/a&gt; is wonderful, and the huge volume of packages it has enabled has been a tremendous boon to the world of javascript development. It has formed the backbone of the growth in this sector.&lt;/p&gt;
 

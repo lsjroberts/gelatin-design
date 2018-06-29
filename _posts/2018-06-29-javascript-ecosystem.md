@@ -8,6 +8,8 @@ category: coding
 tags: wool javascript
 ---
 
+> **NOTE: THIS IS A DRAFT**
+
 ### Why?
 
 [NPM](https://www.npmjs.com/) is wonderful, and the huge volume of packages it has enabled has been a tremendous boon to the world of javascript development. It has formed the backbone of the growth in this sector.
