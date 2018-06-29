@@ -30,7 +30,7 @@
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
         <h1 class="post-title">Speeding up your <strong>git workflow</strong></h1>
-        <p class="post-meta">10 Oct, 2014</p>
+        <p class="post-meta">10 October, 2014</p>
         <p class="post-meta post-categories">
             <a href="/coding/">coding</a>
             
@@ -48,9 +48,8 @@
 
 <p>First things first, you are going to want to alias <code class="highlighter-rouge">git</code> to something even shorter. Open up your <code class="highlighter-rouge">.bash_profile</code> (or <code class="highlighter-rouge">.zshrc</code> <a href="/blog/post/improve-your-terminal">if you are using that</a>) in nano or whatever and append:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>alias g="git"
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alias g="git"
+</code></pre></div></div>
 
 <p>Now you will be able to reference commands like <code class="highlighter-rouge">git checkout master</code> using just <code class="highlighter-rouge">g checkout master</code>.</p>
 
@@ -58,7 +57,7 @@
 
 <p>That’s a good start but <code class="highlighter-rouge">checkout</code> is a lot of characters, let’s bring that down along with all the other git commands. Git comes with it’s own aliasing which you can configure by running this in your terminal:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>g config --global alias.a add
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g config --global alias.a add
 g config --global alias.b branch
 g config --global alias.c commit
 g config --global alias.cf config
@@ -67,17 +66,15 @@ g config --global alias.s status
 g config --global alias.sh stash
 g config --global alias.pl pull
 g config --global alias.ps push
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now your typical workflow can be reduced to:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ g co -b "feature/foo"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ g co -b "feature/foo"
 $ g a .
 $ g c -m "Added foo"
 $ g ps
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is pretty great, it may seem like only a few characters but if you are typing those characters dozens of times a day it can add up quickly.</p>
 
@@ -85,17 +82,15 @@ $ g ps
 
 <p>And we can take it one final step further. What is your most common action? Pulling down the latest changes, adding and commiting yours on top and then pushing back up. So lets shorten that as far as we possibly can. Once again, open up and edit your <code class="highlighter-rouge">.bash_profile</code> or <code class="highlighter-rouge">.zshrc</code> file and append it with a custom method:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>gqc() {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gqc() {
     g sh &amp;&amp; g pl &amp;&amp; g sh pop &amp;&amp; g a -A &amp;&amp; g c -m $1 &amp;&amp; g ps
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here we stash any local changes, pull the remote, pop our local changes, add them, then commit with the first argument as the message and finally push them up. You can call it like so:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gqc "Updated foo"
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gqc "Updated foo"
+</code></pre></div></div>
 
 <p>What would have required 80 keystrokes can now be done in 18. At 60 wpm that’s a saving of about 4.5 seconds each time (not counting waiting) which could be up to 3 minutes a day. That’s around 12 hours a year. Or 20 days in a 40 year career! 20 days saved, from what is a 5 minute job!</p>
 
@@ -109,7 +104,7 @@ $ g ps
 
     <footer class="post-footer">
         <a class="back" href="/">&laquo; read more articles</a>
-        <a class="follow" href="https://twitter.com/gelatindesign">follow me @gelatindesign</a>
+        <a class="follow" href="https://twitter.com/lsjroberts">follow me @lsjroberts</a>
     </footer>
 
 </div>

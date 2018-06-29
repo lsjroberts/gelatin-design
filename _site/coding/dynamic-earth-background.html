@@ -30,7 +30,7 @@
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
         <h1 class="post-title">Dynamic desktop background of <strong>Earth</strong></h1>
-        <p class="post-meta">13 Jul, 2015</p>
+        <p class="post-meta">13 July, 2015</p>
         <p class="post-meta post-categories">
             <a href="/coding/">coding</a>
             
@@ -58,89 +58,89 @@
 <span class="c">##  jq(1) from https://stedolan.github.io/jq/</span>
 
 <span class="c">## Configuration</span>
-<span class="nv">OUTPUT_FILENAME</span><span class="o">=</span><span class="s2">"/Users/[you]/earth/composite.png"</span>;
-<span class="nv">URL_BASE</span><span class="o">=</span><span class="s1">'http://himawari8.nict.go.jp/img/D531106'</span>;
+<span class="nv">OUTPUT_FILENAME</span><span class="o">=</span><span class="s2">"/Users/[you]/earth/composite.png"</span><span class="p">;</span>
+<span class="nv">URL_BASE</span><span class="o">=</span><span class="s1">'http://himawari8.nict.go.jp/img/D531106'</span><span class="p">;</span>
 <span class="c">## The amount of tiles on one side</span>
 <span class="c">## This value should be either 1, 2, 4, or 16</span>
 <span class="c">## Each tile is 550px x 550px, so 4 (default) will produce an image 2,200px x 2,200px</span>
-<span class="nv">TILE_COUNT</span><span class="o">=</span><span class="s1">'4'</span>;
+<span class="nv">TILE_COUNT</span><span class="o">=</span><span class="s1">'4'</span><span class="p">;</span>
 
 <span class="c">## Check requirements</span>
-<span class="k">if</span> ! jq --version &gt;/dev/null 2&gt;&amp;1; <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"jq(1) is not installed, but is required by this script."</span>;
-    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at https://stedolan.github.io/jq/"</span>;
-    <span class="nb">exit </span>1;
-<span class="k">fi</span>;
-<span class="k">if</span> ! curl --version &gt;/dev/null 2&gt;&amp;1; <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"curl(1) is not installed, but is required by this script."</span>;
-    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at http://curl.haxx.se/"</span>;
-    <span class="nb">exit </span>1;
-<span class="k">fi</span>;
-<span class="k">if</span> ! montage --version &gt;/dev/null 2&gt;&amp;1; <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"montage(1) from ImageMagick is not installed, but is required by this script."</span>;
-    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at http://www.imagemagick.org/"</span>;
-    <span class="nb">exit </span>1;
-<span class="k">fi</span>;
-<span class="k">if</span> ! date &gt;/dev/null 2&gt;&amp;1; <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"date(1) is not installed, but is required by this script."</span>;
-    <span class="nb">echo</span> <span class="s2">"Please get a copy for your OS from either GNU or BSD utils."</span>;
-    <span class="nb">exit </span>1;
-<span class="k">fi</span>;
+<span class="k">if</span> <span class="o">!</span> jq <span class="nt">--version</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"jq(1) is not installed, but is required by this script."</span><span class="p">;</span>
+    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at https://stedolan.github.io/jq/"</span><span class="p">;</span>
+    <span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">!</span> curl <span class="nt">--version</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"curl(1) is not installed, but is required by this script."</span><span class="p">;</span>
+    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at http://curl.haxx.se/"</span><span class="p">;</span>
+    <span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">!</span> montage <span class="nt">--version</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"montage(1) from ImageMagick is not installed, but is required by this script."</span><span class="p">;</span>
+    <span class="nb">echo</span> <span class="s2">"Please see installation instructions at http://www.imagemagick.org/"</span><span class="p">;</span>
+    <span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">!</span> <span class="nb">date</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"date(1) is not installed, but is required by this script."</span><span class="p">;</span>
+    <span class="nb">echo</span> <span class="s2">"Please get a copy for your OS from either GNU or BSD utils."</span><span class="p">;</span>
+    <span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
 
 <span class="c">## Get the latest picture</span>
-<span class="nv">LATEST_FILE</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl -s <span class="s2">"</span><span class="k">${</span><span class="nv">URL_BASE</span><span class="k">}</span><span class="s2">/latest.json"</span> | jq -r -e .date<span class="k">)</span><span class="s2">"</span>;
-<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span> -ne 0 <span class="o">]</span>; <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"Unable to get latest picture date"</span>;
-    <span class="nb">exit </span>1;
-<span class="k">fi</span>;
+<span class="nv">LATEST_FILE</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>curl <span class="nt">-s</span> <span class="s2">"</span><span class="k">${</span><span class="nv">URL_BASE</span><span class="k">}</span><span class="s2">/latest.json"</span> | jq <span class="nt">-r</span> <span class="nt">-e</span> .date<span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Unable to get latest picture date"</span><span class="p">;</span>
+    <span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
 
 <span class="c">## Parse the date into the filename</span>
-<span class="nv">DATE_FORMAT</span><span class="o">=</span><span class="s1">'+%Y/%m/%d/%H%M%S'</span>;
+<span class="nv">DATE_FORMAT</span><span class="o">=</span><span class="s1">'+%Y/%m/%d/%H%M%S'</span><span class="p">;</span>
 <span class="c">### Check if we're using GNU or BSD</span>
-<span class="k">if </span>date -j &gt;/dev/null 2&gt;&amp;1; <span class="k">then</span>
+<span class="k">if </span><span class="nb">date</span> <span class="nt">-j</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then</span>
     <span class="c">## Get the date for date(1) from BSD utils</span>
-    <span class="nv">IMAGE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date -jf <span class="s1">'%Y-%m-%d %H:%M:%S'</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LATEST_FILE</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DATE_FORMAT</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>;
+    <span class="nv">IMAGE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">date</span> <span class="nt">-jf</span> <span class="s1">'%Y-%m-%d %H:%M:%S'</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LATEST_FILE</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DATE_FORMAT</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
 <span class="k">else</span>
     <span class="c">## Get the date for date(1) from GNU utils</span>
-    <span class="nv">IMAGE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date -d <span class="s2">"</span><span class="k">${</span><span class="nv">LATEST_FILE</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DATE_FORMAT</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>;
-<span class="k">fi</span>;
+    <span class="nv">IMAGE_URL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">date</span> <span class="nt">-d</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LATEST_FILE</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">DATE_FORMAT</span><span class="k">}</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
 
 <span class="c">## Make the directory for the images</span>
-<span class="nv">TMP_IMAGE_DIR</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>mktemp -d /tmp/himawari8.XXXXXXXX<span class="k">)</span><span class="s2">"</span>;
+<span class="nv">TMP_IMAGE_DIR</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span> /tmp/himawari8.XXXXXXXX<span class="k">)</span><span class="s2">"</span><span class="p">;</span>
 
 <span class="c">## Download each of the files</span>
-<span class="nb">echo</span> <span class="s2">"Downloading tiles..."</span>;
-<span class="nv">X</span><span class="o">=</span>0;
-<span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">"</span> -lt <span class="s2">"</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">do
-    </span><span class="nv">Y</span><span class="o">=</span>0;
-    <span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">"</span> -lt <span class="s2">"</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">do
-        </span>curl -so <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">.png"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">URL_BASE</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">d/550/</span><span class="k">${</span><span class="nv">IMAGE_URL</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">.png"</span>;
-        <span class="nb">printf</span> <span class="s2">"</span><span class="se">\r</span><span class="s2">Downloaded </span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2"> (</span><span class="k">$((</span>X <span class="o">*</span> TILE_COUNT <span class="o">+</span> Y <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="s2"> / </span><span class="k">$((</span>TILE_COUNT <span class="o">*</span> TILE_COUNT<span class="k">))</span><span class="s2">)"</span>;
-        <span class="nb">printf</span> <span class="s1">' %0.s'</span> <span class="o">{</span>0..9<span class="o">}</span>;
-        <span class="nv">Y</span><span class="o">=</span><span class="s2">"</span><span class="k">$((</span>Y+1<span class="k">))</span><span class="s2">"</span>;
-    <span class="k">done</span>;
-    <span class="nv">X</span><span class="o">=</span><span class="s2">"</span><span class="k">$((</span>X+1<span class="k">))</span><span class="s2">"</span>;
-<span class="k">done</span>;
+<span class="nb">echo</span> <span class="s2">"Downloading tiles..."</span><span class="p">;</span>
+<span class="nv">X</span><span class="o">=</span>0<span class="p">;</span>
+<span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">"</span> <span class="nt">-lt</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">do
+    </span><span class="nv">Y</span><span class="o">=</span>0<span class="p">;</span>
+    <span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">"</span> <span class="nt">-lt</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">do
+        </span>curl <span class="nt">-so</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">.png"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">URL_BASE</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">TILE_COUNT</span><span class="k">}</span><span class="s2">d/550/</span><span class="k">${</span><span class="nv">IMAGE_URL</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2">.png"</span><span class="p">;</span>
+        <span class="nb">printf</span> <span class="s2">"</span><span class="se">\r</span><span class="s2">Downloaded </span><span class="k">${</span><span class="nv">X</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">Y</span><span class="k">}</span><span class="s2"> (</span><span class="k">$((</span>X <span class="o">*</span> TILE_COUNT <span class="o">+</span> Y <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="s2"> / </span><span class="k">$((</span>TILE_COUNT <span class="o">*</span> TILE_COUNT<span class="k">))</span><span class="s2">)"</span><span class="p">;</span>
+        <span class="nb">printf</span> <span class="s1">' %0.s'</span> <span class="o">{</span>0..9<span class="o">}</span><span class="p">;</span>
+        <span class="nv">Y</span><span class="o">=</span><span class="s2">"</span><span class="k">$((</span>Y+1<span class="k">))</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+    <span class="nv">X</span><span class="o">=</span><span class="s2">"</span><span class="k">$((</span>X+1<span class="k">))</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
 
 <span class="c">## Beautiful code</span>
-<span class="nb">printf</span> <span class="s2">"</span><span class="se">\r</span><span class="s2">Tiles downloaded."</span>; <span class="nb">printf</span> <span class="s1">' %0.s'</span> <span class="o">{</span>0..9<span class="o">}</span>; <span class="nb">printf</span> <span class="s1">'\n\n'</span>;
+<span class="nb">printf</span> <span class="s2">"</span><span class="se">\r</span><span class="s2">Tiles downloaded."</span><span class="p">;</span> <span class="nb">printf</span> <span class="s1">' %0.s'</span> <span class="o">{</span>0..9<span class="o">}</span><span class="p">;</span> <span class="nb">printf</span> <span class="s1">'\n\n'</span><span class="p">;</span>
 
 <span class="c">## Create the image</span>
-<span class="nb">echo</span> <span class="s2">"Creating image..."</span>;
-montage <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/"</span><span class="k">*</span>.png -geometry 550x550 <span class="s2">"</span><span class="k">${</span><span class="nv">OUTPUT_FILENAME</span><span class="k">}</span><span class="s2">"</span> &gt;/dev/null 2&gt;&amp;1;
-<span class="nb">echo</span> <span class="s2">"Image created: </span><span class="k">${</span><span class="nv">OUTPUT_FILENAME</span><span class="k">}</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"Creating image..."</span><span class="p">;</span>
+montage <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/"</span><span class="k">*</span>.png <span class="nt">-geometry</span> 550x550 <span class="s2">"</span><span class="k">${</span><span class="nv">OUTPUT_FILENAME</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">"Image created: </span><span class="k">${</span><span class="nv">OUTPUT_FILENAME</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span>
 
 <span class="c">## Remove the temporary directory</span>
-<span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
-    </span>rm <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/"</span><span class="k">*</span>.png;
-    rmdir <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">"</span>;
-<span class="k">fi</span>;
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">rm</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">/"</span><span class="k">*</span>.png<span class="p">;</span>
+    <span class="nb">rmdir</span> <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_IMAGE_DIR</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
 
-<span class="nb">exit </span>0;</code></pre></figure>
+<span class="nb">exit </span>0<span class="p">;</span></code></pre></figure>
 
 <p>Save this into your directory as <code class="highlighter-rouge">~/earth/download.sh</code>, and replace the path <code class="highlighter-rouge">/Users/[you]/earth/composite.png</code> with the <em>absolute</em> path. Then try running it in your terminal:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>sh ~/earth/download.sh</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sh ~/earth/download.sh</code></pre></figure>
 
 <p>You may need to install a few dependencies, but if all goes well after a few moments you’ll have a new image downloaded to <code class="highlighter-rouge">~/earth/composite.png</code>. Set this as your background manually and make sure it’s configured how you want, i.e. fit to screen and background colour of black.</p>
 
@@ -154,7 +154,7 @@ montage <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_I
 
 <p>Now lastly you just need to make these run as often as you want the image to change. For this you can use cron or launchd, I went with cron as it’s what I’ve always used.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>crontab -e</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>crontab <span class="nt">-e</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">0,30 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> sh /Users/[you]/earth/download.sh
 5,35 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> osascript /Users/[you]/earth/set-background.scpt</code></pre></figure>
@@ -169,7 +169,7 @@ montage <span class="s2">"</span><span class="k">${</span><span class="nv">TMP_I
 
     <footer class="post-footer">
         <a class="back" href="/">&laquo; read more articles</a>
-        <a class="follow" href="https://twitter.com/gelatindesign">follow me @gelatindesign</a>
+        <a class="follow" href="https://twitter.com/lsjroberts">follow me @lsjroberts</a>
     </footer>
 
 </div>

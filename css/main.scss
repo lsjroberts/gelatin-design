@@ -20,6 +20,7 @@
     @return $ret;
 }
 
+/*
 @font-face {
     font-family: 'latolight';
     src: url('/fonts/lato-lig-webfont-webfont.eot');
@@ -32,35 +33,39 @@
     font-style: normal;
 
 }
+*/
+
+@font-face {
+    font-family: 'open_sans';
+    src: url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sans';
+    src: url('/fonts/OpenSans-Light-webfont.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'josefin_slabregular';
-    src: url('/fonts/josefinslab-regular-webfont.eot');
-    src: url('/fonts/josefinslab-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/josefinslab-regular-webfont.woff2') format('woff2'),
-         url('/fonts/josefinslab-regular-webfont.woff') format('woff'),
-         url('/fonts/josefinslab-regular-webfont.ttf') format('truetype'),
-         url('/fonts/josefinslab-regular-webfont.svg#josefin_slabregular') format('svg');
+    src: url('/fonts/josefinslab-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
     font-family: 'pt_monoregular';
-    src: url('/fonts/ptm55ft-webfont.eot');
-    src: url('/fonts/ptm55ft-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/ptm55ft-webfont.woff2') format('woff2'),
-         url('/fonts/ptm55ft-webfont.woff') format('woff'),
-         url('/fonts/ptm55ft-webfont.ttf') format('truetype');
+    src: url('/fonts/ptm55ft-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 
 // Our variables
-$base-font-family: "latolight", Helvetica, Arial, sans-serif;
+$base-font-family: "open_sans", Helvetica, Arial, sans-serif;
 $secondary-font-family: "josefin_slabregular", Georgia, serif;
 $mono-font-family: "pt_monoregular", Courier, monospace;
 $base-font-size:   1.4rem;

@@ -222,6 +222,10 @@
         @extend %heading;
     }
 
+    p + h4 {
+        margin-top: $spacing-unit;
+    }
+
     .part-header {
         @include font-size(1);
 

@@ -3,7 +3,7 @@
     <header class="post-header">
         <a href="/" class="post-title-icon"><img src="/images/logo.png"></a>
         <h1 class="post-title">{{ page.titleSmall }} <strong>{{ page.titleStrong }}</strong></h1>
-        <p class="post-meta">{{ page.date | date: "%d %b, %Y" }}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+        <p class="post-meta">{{ page.date | date: "%d %B, %Y" }}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
         <p class="post-meta post-categories">
             <a href="/{{ page.category }}/">{{ page.category }}</a>
             {% for tag in page.tags %}
@@ -22,7 +22,7 @@
 
     <footer class="post-footer">
         <a class="back" href="/">&laquo; read more articles</a>
-        <a class="follow" href="https://twitter.com/gelatindesign">follow me @gelatindesign</a>
+        <a class="follow" href="https://twitter.com/lsjroberts">follow me @lsjroberts</a>
     </footer>
 
 </div>

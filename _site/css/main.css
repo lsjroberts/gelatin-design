@@ -1,19 +1,35 @@
+/*
 @font-face {
-  font-family: 'latolight';
-  src: url("/fonts/lato-lig-webfont-webfont.eot");
-  src: url("/fonts/lato-lig-webfont-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/lato-lig-webfont-webfont.woff2") format("woff2"), url("/fonts/lato-lig-webfont-webfont.woff") format("woff"), url("/fonts/lato-lig-webfont-webfont.ttf") format("truetype"), url("/fonts/lato-lig-webfont-webfont.svg#latolight") format("svg");
+    font-family: 'latolight';
+    src: url('/fonts/lato-lig-webfont-webfont.eot');
+    src: url('/fonts/lato-lig-webfont-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/lato-lig-webfont-webfont.woff2') format('woff2'),
+         url('/fonts/lato-lig-webfont-webfont.woff') format('woff'),
+         url('/fonts/lato-lig-webfont-webfont.ttf') format('truetype'),
+         url('/fonts/lato-lig-webfont-webfont.svg#latolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+*/
+@font-face {
+  font-family: 'open_sans';
+  src: url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 @font-face {
+  font-family: 'open_sans';
+  src: url("/fonts/OpenSans-Light-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: normal; }
+@font-face {
   font-family: 'josefin_slabregular';
-  src: url("/fonts/josefinslab-regular-webfont.eot");
-  src: url("/fonts/josefinslab-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/josefinslab-regular-webfont.woff2") format("woff2"), url("/fonts/josefinslab-regular-webfont.woff") format("woff"), url("/fonts/josefinslab-regular-webfont.ttf") format("truetype"), url("/fonts/josefinslab-regular-webfont.svg#josefin_slabregular") format("svg");
+  src: url("/fonts/josefinslab-regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'pt_monoregular';
-  src: url("/fonts/ptm55ft-webfont.eot");
-  src: url("/fonts/ptm55ft-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/ptm55ft-webfont.woff2") format("woff2"), url("/fonts/ptm55ft-webfont.woff") format("woff"), url("/fonts/ptm55ft-webfont.ttf") format("truetype");
+  src: url("/fonts/ptm55ft-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 @media screen and (max-width: 600px) {
@@ -34,7 +50,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font-family: "latolight", Helvetica, Arial, sans-serif;
+  font-family: "open_sans", Helvetica, Arial, sans-serif;
   line-height: 1.618;
   font-weight: 300;
   color: #333;
@@ -113,6 +129,8 @@ blockquote {
  */
 pre,
 code {
+  white-space: pre-wrap;
+  word-break: break-word;
   font-family: "pt_monoregular", Courier, monospace;
   font-size: 20px;
   color: #fff;
@@ -166,7 +184,7 @@ pre {
     fill: #828282; }
 
 .post-header .post-author, .post-content h1, .essay .secondary-title span {
-  font-size: 2.61792rem;
+  font-size: 2.617924rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-style: italic;
   font-weight: 600;
@@ -182,21 +200,21 @@ pre {
   margin: 0 0 2rem; }
 
 .page h1, .post-title {
-  font-size: 6.85353rem;
+  font-size: 6.8535260698rem;
   display: block;
-  font-family: "latolight", Helvetica, Arial, sans-serif;
+  font-family: "open_sans", Helvetica, Arial, sans-serif;
   font-style: normal;
   line-height: 1;
   color: #d76a6c; }
   @media screen and (max-width: 800px) {
     .page h1, .post-title {
-      font-size: 4.2358rem; } }
+      font-size: 4.235801032rem; } }
   @media screen and (max-width: 600px) {
     .page h1, .post-title {
-      font-size: 2.61792rem; } }
+      font-size: 2.617924rem; } }
 
 .post-list h4, .post-content h2, .essay .secondary-title {
-  font-size: 2.61792rem;
+  font-size: 2.617924rem;
   margin-top: 5.3394rem;
   font-family: "josefin_slabregular", Georgia, serif;
   font-weight: 600;
@@ -236,7 +254,7 @@ pre {
   list-style: none;
   margin-bottom: 3rem; }
   .post-list li > a {
-    font-size: 2.61792rem; }
+    font-size: 2.617924rem; }
     @media screen and (max-width: 600px) {
       .post-list li > a {
         font-size: 1.618rem; } }
@@ -251,7 +269,7 @@ pre {
   padding: 1rem 2rem;
   border: 1px solid #e8e8e8; }
   .project-banner h3 {
-    font-size: 2.61792rem; }
+    font-size: 2.617924rem; }
   .project-banner .post-list {
     float: left;
     width: 50%;
@@ -280,10 +298,12 @@ pre {
   font-weight: 600;
   text-transform: uppercase; }
 
+.post-content p + h4 {
+  margin-top: 5.3394rem; }
 .post-content .part-header {
   font-size: 1rem; }
   .post-content .part-header strong {
-    font-size: 2.61792rem;
+    font-size: 2.617924rem;
     display: block;
     color: #d76a6c; }
 .post-content p {
