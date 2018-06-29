@@ -54,21 +54,21 @@ And reduces the need for ever creative package names, so they can be more descri
 
 [Lerna](https://lernajs.io/) is cool. [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) are cool. But they are both fairly rigid and limited in scope.
 
-Imagine being able to have a true monorepo for all the packages within your purview at your job, yet also able to version packages independently or shared, in any grouping.
+Imagine being able to have a true monorepo for all the packages within your purview at your job, yet also able to version packages independently and/or shared, in any grouping.
 
 With all installed dependencies cached in your home directory and symlinked from your project, there would be no need for hoisting.
 
 #### Decentralise registries for package hosting
 
-Development ecosystems should be decentralised to help prevent monopolies and improve community agility, while empowering teams to work in the best way for them.
+Development ecosystems should be decentralised to help prevent monopolies and improve community agility, while empowering teams to work in the best way for their situation.
 
-The ecosystem should allow developers to install from and publish to multiple registries, including their own, or even an entirely local registry running on their machine.
+The ecosystem should allow developers to install from and publish to multiple registries, including their own, even an entirely local registry running on their machine.
 
 #### Support businesses using on premise registries
 
 A package registry should be free and open source to allow small businesses to benefit from the ability to host internal private packages.
 
-It should be as simple as initialising a new registry, configuring a handful of parameters and running serve.
+It should be as simple as initialising a new registry, configuring a handful of parameters and running start.
 
 ### Proposal
 
@@ -78,7 +78,7 @@ Below there are three sections:
 2. [Registries](#registries)
 3. [Taking it Further](#further)
 
-The ideas presented are based on my experience, what I like and dislike about various package managers across several languages and where I think it can be a bit more ambitious.
+The ideas presented are based on my experience, what I like and dislike about various package managers across several languages and where I think they can be a bit more ambitious.
 
 If you have any ideas or feedback, supportive or critical, please send me a tweet [@lsjroberts](https://twitter.com/lsjroberts) and I'd be more than happy to listen (and a little excited you read it to be honest).
 
@@ -91,6 +91,10 @@ If you have any ideas or feedback, supportive or critical, please send me a twee
 > **Also note**
 >
 > These are just ideas I am spouting into the wind, none of it exists yet.
+
+> **Also also note**
+>
+> I do not intend this to be an attack on NPM or anything else, and I am genuinely grateful to all the work put into it, since I use it every day. This is just some opining.
 
 <h2 id="package-manager" class="part-header">
     Part One
@@ -609,7 +613,7 @@ Installed 1 npm package.
     <strong>Registries</strong>
 </h2>
 
-As stated earlier, development ecosystems should be decentralised. To make it easy and actually practical it should be based on open source packages and baked in to the package manager.
+As stated earlier, development ecosystems should be decentralised. To make this easy and actually practical it should be based on open source packages and baked in to the package manager.
 
 ```
 wool init --registry
@@ -667,7 +671,7 @@ You can configure your registry to work exactly how you want.
 
 Perhaps you want to limit it to just typescript projects to further guarantee semantic versioning. Or reject packages that include dependencies from other registries, like NPM or outside your company.
 
-Perhaps even require all packages before reviewed and approved before they can be published.
+Perhaps even require all packages be reviewed and approved before they can be published.
 
 ```js
 // wool.json
@@ -676,6 +680,7 @@ Perhaps even require all packages before reviewed and approved before they can b
   // ...
   "registryRules": {
     "extensions": [".ts"]
+    "rejectConflicts": true,
     "rejectRegistries": ["https://npmjs.org"],
     "requireApproval": false,
   }
@@ -684,11 +689,25 @@ Perhaps even require all packages before reviewed and approved before they can b
 
 <h2 id="further" class="part-header">
     Part Three
-    <strong>Taking It Further</strong>
+    <strong>Taking it Further</strong>
 </h2>
 
-By opening up the registries in this way it leaves open space for innovation and ideas.
+By creating the registries in this way it leaves open a space for innovation and ideas.
 
-How about a peer-to-peer registry with distributed code?
+How about a peer-to-peer registry with distributed code? Perhaps utilising the [Dat protocol](https://datproject.org/). Publishing a package would create a `.dat` folder on your machine then share its `dat://` url with the network to be synchronised and distributed.
 
 It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages giving you coins you can spend promoting other packages or buying hats for your avatar.
+
+If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big ol' cloud server farm, and mirror any less reliable registries you don't want to block your team from downtime.
+
+And if your team is smaller and just needs to share a handful of in-house packages you can boot up a registry on the old spare box in the corner.
+
+---
+
+There's a lot that could be done with this approach, and I feel giving developers and businesses the control and freedom to choose how they build their personal and community ecosystem would only strengthen this rapidly growing sector.
+
+## Addendum
+
+If you've used [Elm](http://elm-lang.org/) you may have noticed some similarities in language and concepts. If you haven't then I'd recommend taking a look to get some of the benefits outlined here.
+
+If you have any ideas or feedback, supportive or critical, please send me a tweet [@lsjroberts](https://twitter.com/lsjroberts) and let's have a chat.

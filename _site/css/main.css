@@ -300,8 +300,22 @@ pre {
 
 .post-content p + h4 {
   margin-top: 5.3394rem; }
+.post-content hr {
+  display: block;
+  margin: 5.3394rem auto;
+  width: 40%;
+  height: 1px;
+  border: 0;
+  background: #d76a6c; }
 .post-content .part-header {
   font-size: 1rem; }
+  .post-content .part-header:before {
+    display: block;
+    margin: 0 auto 5.3394rem;
+    width: 40%;
+    height: 1px;
+    background: #d76a6c;
+    content: ' '; }
   .post-content .part-header strong {
     font-size: 2.617924rem;
     display: block;

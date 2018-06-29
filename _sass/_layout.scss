@@ -226,8 +226,26 @@
         margin-top: $spacing-unit;
     }
 
+    hr {
+        display: block;
+        margin: $spacing-unit auto;
+        width: 40%;
+        height: 1px;
+        border: 0;
+        background: $brand-color;
+    }
+
     .part-header {
         @include font-size(1);
+
+        &:before {
+            display: block;
+            margin: 0 auto $spacing-unit;
+            width: 40%;
+            height: 1px;
+            background: $brand-color;
+            content: ' ';
+        }
 
         strong {
             @include font-size(3);
