@@ -5,8 +5,8 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jun 2018 11:33:00 +0100</pubDate>
-    <lastBuildDate>Sat, 30 Jun 2018 11:33:00 +0100</lastBuildDate>
+    <pubDate>Sat, 30 Jun 2018 11:39:44 +0100</pubDate>
+    <lastBuildDate>Sat, 30 Jun 2018 11:39:44 +0100</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -17,7 +17,7 @@
 
 &lt;p&gt;However, I feel it has some deep rooted flaws that can not be brushed over with tools or considered approaches.&lt;/p&gt;
 
-&lt;p&gt;To this end, here I am proposing a new ecosystem built upon tools and architecture that present solutions to the primary flaws of NPM.&lt;/p&gt;
+&lt;p&gt;To this end, here I am proposing a new, modern ecosystem built upon tools and architecture that present solutions to the primary flaws of NPM.&lt;/p&gt;
 
 &lt;h3 id=&quot;goals&quot;&gt;Goals&lt;/h3&gt;
 

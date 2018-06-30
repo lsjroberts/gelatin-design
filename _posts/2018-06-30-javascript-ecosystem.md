@@ -6,6 +6,7 @@ author: Laurence Roberts
 date: 2018-06-30
 category: coding
 tags: wool javascript
+metaSummary: A proposal for a new, modern javascript ecosystem beyond npm
 ---
 
 ### Why?
@@ -14,7 +15,7 @@ tags: wool javascript
 
 However, I feel it has some deep rooted flaws that can not be brushed over with tools or considered approaches.
 
-To this end, here I am proposing a new ecosystem built upon tools and architecture that present solutions to the primary flaws of NPM.
+To this end, here I am proposing a new, modern ecosystem built upon tools and architecture that present solutions to the primary flaws of NPM.
 
 ### Goals
 
