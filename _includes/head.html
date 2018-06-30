@@ -12,12 +12,13 @@
 
     <link rel="icon" type="image/png" href="/favicon.png">
 
+    <meta name="twitter:card" content="summary"></meta>
     <meta name="twitter:site" content="@lsjroberts"></meta>
     <meta name="twitter:creator" content="@lsjroberts"></meta>
     <meta name="og:title" content="{{ page.title }}"></meta>
     <meta name="og:url" content="{{ site.url }}{{ page.url }}"></meta>
+    <meta name="og:image" content="{{ site.url }}/images/logo.png"></meta>
     {% if page.metaSummary %}
-        <meta name="twitter:card" content="{{ page.metaSummary }}"></meta>
         <meta name="og:description" content="{{ page.metaSummary }}"></meta>
     {% endif %}
 </head>
