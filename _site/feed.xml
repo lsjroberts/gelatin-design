@@ -5,8 +5,8 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Jun 2018 22:10:10 +0100</pubDate>
-    <lastBuildDate>Fri, 29 Jun 2018 22:10:10 +0100</lastBuildDate>
+    <pubDate>Sat, 30 Jun 2018 11:32:01 +0100</pubDate>
+    <lastBuildDate>Sat, 30 Jun 2018 11:32:01 +0100</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -35,19 +35,19 @@
 
 &lt;p&gt;And by caching each package in your home directory, each version is truly only installed once on your local machine.&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Aside:&lt;/strong&gt; This is possible with &lt;a href=&quot;https://nodejs.org/api/esm.html#esm_loader_hooks&quot;&gt;esm loader hooks&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h4 id=&quot;improve-stability-when-upgrading-dependencies&quot;&gt;Improve stability when upgrading dependencies&lt;/h4&gt;
 
 &lt;p&gt;In theory, semantic versioning is supposed to protect you from upgrading a dependency to an incompatible version.&lt;/p&gt;
 
-&lt;p&gt;However, in practise, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.&lt;/p&gt;
+&lt;p&gt;However, in practice, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.&lt;/p&gt;
 
-&lt;p&gt;This is not the worst thing ever, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Particularly for typescript projects.&lt;/p&gt;
+&lt;p&gt;So when you update dependencies to the latest versions within your existing constraints things can break unexpectedly. Particularly with large projects and several layers to the dependency tree.&lt;/p&gt;
 
-&lt;h4 id=&quot;naturally-deprecate-stale-and-unsupported-packages&quot;&gt;Naturally deprecate stale and unsupported packages&lt;/h4&gt;
-
-&lt;p&gt;By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.&lt;/p&gt;
-
-&lt;p&gt;It will help developers better identify the packages they should be using.&lt;/p&gt;
+&lt;p&gt;Due to the nature of javascript it is impossible to eliminate this entirely, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Especially for typescript projects.&lt;/p&gt;
 
 &lt;h4 id=&quot;namespaces-for-all&quot;&gt;Namespaces for all&lt;/h4&gt;
 
@@ -57,13 +57,27 @@
 
 &lt;p&gt;And reduces the need for ever creative package names, so they can be more descriptive and clear.&lt;/p&gt;
 
+&lt;h4 id=&quot;naturally-deprecate-stale-and-unsupported-packages&quot;&gt;Naturally deprecate stale and unsupported packages&lt;/h4&gt;
+
+&lt;p&gt;By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.&lt;/p&gt;
+
+&lt;p&gt;Packages will become stale if they are not updated in line with new releases of node and other packages they use.&lt;/p&gt;
+
+&lt;p&gt;If a package you are using does become stale and there is no-one left to maintain it, you can fork it under your namespace and start maintaining it yourself.&lt;/p&gt;
+
+&lt;p&gt;Stale packages are a hidden problem on NPM, it is often difficult to tell if it simply does not require any updates or if it is no longer viable and will cause bugs. A combination of upfront dependencies, enforced node version compatibility and namespaces will help alleviate this issue.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Aside:&lt;/strong&gt; This is something &lt;a href=&quot;http://elm-lang.org&quot;&gt;Elm&lt;/a&gt; does, and I’ve yet to see any major complaints about dependency hell so… ¯\&lt;em&gt;(ツ)&lt;/em&gt;/¯ should be fine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h4 id=&quot;enable-a-flexible-architecture-for-large-scale-projects&quot;&gt;Enable a flexible architecture for large scale projects&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://lernajs.io/&quot;&gt;Lerna&lt;/a&gt; is cool. &lt;a href=&quot;https://yarnpkg.com/lang/en/docs/workspaces/&quot;&gt;Yarn workspaces&lt;/a&gt; are cool. But they are both fairly rigid and limited in scope.&lt;/p&gt;
 
 &lt;p&gt;Imagine being able to have a true monorepo for all the packages within your purview at your job, yet also able to version packages independently and/or shared, in any grouping.&lt;/p&gt;
 
-&lt;p&gt;With all installed dependencies cached in your home directory and symlinked from your project, there would be no need for hoisting.&lt;/p&gt;
+&lt;p&gt;With all installed dependencies installed in your home directory there would be no need for hoisting and so resolves the often nightmarish issues that causes.&lt;/p&gt;
 
 &lt;h4 id=&quot;decentralise-registries-for-package-hosting&quot;&gt;Decentralise registries for package hosting&lt;/h4&gt;
 
@@ -102,7 +116,7 @@
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Also note&lt;/strong&gt;&lt;/p&gt;
 
-  &lt;p&gt;These are just ideas I am spouting into the wind, none of it exists yet.&lt;/p&gt;
+  &lt;p&gt;These are just ideas I am spouting into the wind, none of it exists yet outside small experiments. It is all open to change based on feedback, feasibility and other issues.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -125,7 +139,7 @@
   &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;registries&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.wooljs.org&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;nodeVersion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;10.5.0 &amp;lt;= v &amp;lt; 11.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&quot;entry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index.ts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;entry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index.mjs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -171,37 +185,53 @@ Your dependencies now total 87.9kb in size.
 
 &lt;p&gt;And maintain a record of the exact versions installed.&lt;/p&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-stuff/exact-dependencies.json&lt;/span&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-lock.json&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;alice/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.2.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.2.0 &amp;lt;= v &amp;lt; 3.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;registry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://registry.wooljs.org&quot;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;bob/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;3.4.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;3.4.0 &amp;lt;= v &amp;lt; 3.5.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;registry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://registry.wooljs.org&quot;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;lsjroberts/other&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.0.13&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.0.0 &amp;lt;= v &amp;lt; 2.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;registry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://registry.wooljs.org&quot;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;repo/
-├─ wool-stuff/
-│  ├─ exact-dependencies.json
-│  └─ packages/
-│     ├─ alice/
-│     │  └─ package/
-│     ├─ bob/
-│     │  └─ package/
-│     └─ lsjroberts/
-│        └─ other/
-└─ wool.json
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+
+  &lt;p&gt;Other potential methods include: removing the &lt;code class=&quot;highlighter-rouge&quot;&gt;wool-lock.json&lt;/code&gt; and having the full dependency specification in &lt;code class=&quot;highlighter-rouge&quot;&gt;wool.json&lt;/code&gt;, only putting directly added packages in &lt;code class=&quot;highlighter-rouge&quot;&gt;wool.json&lt;/code&gt; and moving secondary dependencies into &lt;code class=&quot;highlighter-rouge&quot;&gt;wool-lock.json&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;automated-adding&quot;&gt;Automated adding&lt;/h3&gt;
+
+&lt;p&gt;It should detect missing dependencies in my code and install them for me.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;missing&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'lsjroberts/missing'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;missing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;offline-caching&quot;&gt;Offline caching&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;It looks like lsjroberts/missing has not been installed, should I add this for you? [Y/n]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To add lsjroberts/missing I would like to install the following dependencies:
+
+    lsjroberts/missing  1.0.0 &amp;lt;= v &amp;lt; 2.0.0
+
+Adding a total of 12.1kb to your dependencies
+
+May I install these for you? [Y/n]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;offline-first&quot;&gt;Offline first&lt;/h3&gt;
 
 &lt;p&gt;It should cache the dependencies on my machine to allow offline development.&lt;/p&gt;
 
@@ -309,18 +339,28 @@ May I install these for you? [Y/n]
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-stuff/exact-dependencies.json&lt;/span&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-lock.json&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;alice/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.2.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.2.0 &amp;lt;= v &amp;lt; 3.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;registry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://registry.wooljs.org&quot;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;company/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.0.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.0.0 &amp;lt;= v &amp;lt; 2.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;registry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://registry.company.com&quot;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It the same package name is found on multiple registries, it would be resolved in priority from first to last registry listed.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;It may be useful for a developer to manually specifiy which registry is to be used for a dependency by using the full dependency specification as seen in &lt;code class=&quot;highlighter-rouge&quot;&gt;wool-lock.json&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;registry-mirrors&quot;&gt;Registry mirrors&lt;/h3&gt;
 
@@ -347,6 +387,8 @@ May I install these for you? [Y/n]
 
 &lt;p&gt;It should support flexible workspaces.&lt;/p&gt;
 
+&lt;p&gt;Say I want a single repo for all my work, with the &lt;code class=&quot;highlighter-rouge&quot;&gt;main-core&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;main-extra&lt;/code&gt; packages sharing a version and &lt;code class=&quot;highlighter-rouge&quot;&gt;other&lt;/code&gt; indendently versioned.&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;repo/
 ├─ workspaces/
 │  └─ main/
@@ -372,7 +414,7 @@ May I install these for you? [Y/n]
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;With nested workspaces and independent or shared versioning.&lt;/p&gt;
+&lt;p&gt;Nested workspaces with independent or shared versioning can be freely defined.&lt;/p&gt;
 
 &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// workspaces/main/wool.json&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -560,7 +602,7 @@ Are you sure you wish to continue? [Y/n]
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-stuff/exact-dependencies.json&lt;/span&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// wool-lock.json&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;alice/package&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.2.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -661,9 +703,9 @@ Are you sure you wish to continue? [Y/n]
 
 &lt;p&gt;How about a peer-to-peer registry with distributed code? Perhaps utilising the &lt;a href=&quot;https://datproject.org/&quot;&gt;Dat protocol&lt;/a&gt;. Publishing a package would create a &lt;code class=&quot;highlighter-rouge&quot;&gt;.dat&lt;/code&gt; folder on your machine then share its &lt;code class=&quot;highlighter-rouge&quot;&gt;dat://&lt;/code&gt; url with the network to be synchronised and distributed.&lt;/p&gt;
 
-&lt;p&gt;It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages giving you coins you can spend promoting other packages or buying hats for your avatar.&lt;/p&gt;
+&lt;p&gt;It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages gives you coins you can spend promoting other packages or buying hats for your avatar.&lt;/p&gt;
 
-&lt;p&gt;If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big ol’ cloud server farm, and mirror any less reliable registries you don’t want to block your team from downtime.&lt;/p&gt;
+&lt;p&gt;If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big cloud server farm, and mirror any less reliable registries you don’t want to block your team from downtime.&lt;/p&gt;
 
 &lt;p&gt;And if your team is smaller and just needs to share a handful of in-house packages you can boot up a registry on the old spare box in the corner.&lt;/p&gt;
 

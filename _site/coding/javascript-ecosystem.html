@@ -66,19 +66,19 @@
 
 <p>And by caching each package in your home directory, each version is truly only installed once on your local machine.</p>
 
+<blockquote>
+  <p><strong>Aside:</strong> This is possible with <a href="https://nodejs.org/api/esm.html#esm_loader_hooks">esm loader hooks</a>.</p>
+</blockquote>
+
 <h4 id="improve-stability-when-upgrading-dependencies">Improve stability when upgrading dependencies</h4>
 
 <p>In theory, semantic versioning is supposed to protect you from upgrading a dependency to an incompatible version.</p>
 
-<p>However, in practise, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.</p>
+<p>However, in practice, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.</p>
 
-<p>This is not the worst thing ever, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Particularly for typescript projects.</p>
+<p>So when you update dependencies to the latest versions within your existing constraints things can break unexpectedly. Particularly with large projects and several layers to the dependency tree.</p>
 
-<h4 id="naturally-deprecate-stale-and-unsupported-packages">Naturally deprecate stale and unsupported packages</h4>
-
-<p>By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.</p>
-
-<p>It will help developers better identify the packages they should be using.</p>
+<p>Due to the nature of javascript it is impossible to eliminate this entirely, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Especially for typescript projects.</p>
 
 <h4 id="namespaces-for-all">Namespaces for all</h4>
 
@@ -88,13 +88,27 @@
 
 <p>And reduces the need for ever creative package names, so they can be more descriptive and clear.</p>
 
+<h4 id="naturally-deprecate-stale-and-unsupported-packages">Naturally deprecate stale and unsupported packages</h4>
+
+<p>By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.</p>
+
+<p>Packages will become stale if they are not updated in line with new releases of node and other packages they use.</p>
+
+<p>If a package you are using does become stale and there is no-one left to maintain it, you can fork it under your namespace and start maintaining it yourself.</p>
+
+<p>Stale packages are a hidden problem on NPM, it is often difficult to tell if it simply does not require any updates or if it is no longer viable and will cause bugs. A combination of upfront dependencies, enforced node version compatibility and namespaces will help alleviate this issue.</p>
+
+<blockquote>
+  <p><strong>Aside:</strong> This is something <a href="http://elm-lang.org">Elm</a> does, and I’ve yet to see any major complaints about dependency hell so… ¯\<em>(ツ)</em>/¯ should be fine.</p>
+</blockquote>
+
 <h4 id="enable-a-flexible-architecture-for-large-scale-projects">Enable a flexible architecture for large scale projects</h4>
 
 <p><a href="https://lernajs.io/">Lerna</a> is cool. <a href="https://yarnpkg.com/lang/en/docs/workspaces/">Yarn workspaces</a> are cool. But they are both fairly rigid and limited in scope.</p>
 
 <p>Imagine being able to have a true monorepo for all the packages within your purview at your job, yet also able to version packages independently and/or shared, in any grouping.</p>
 
-<p>With all installed dependencies cached in your home directory and symlinked from your project, there would be no need for hoisting.</p>
+<p>With all installed dependencies installed in your home directory there would be no need for hoisting and so resolves the often nightmarish issues that causes.</p>
 
 <h4 id="decentralise-registries-for-package-hosting">Decentralise registries for package hosting</h4>
 
@@ -133,7 +147,7 @@
 <blockquote>
   <p><strong>Also note</strong></p>
 
-  <p>These are just ideas I am spouting into the wind, none of it exists yet.</p>
+  <p>These are just ideas I am spouting into the wind, none of it exists yet outside small experiments. It is all open to change based on feedback, feasibility and other issues.</p>
 </blockquote>
 
 <blockquote>
@@ -156,7 +170,7 @@
   <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
   <span class="s2">"registries"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"https://registry.wooljs.org"</span><span class="p">],</span>
   <span class="s2">"nodeVersion"</span><span class="p">:</span> <span class="s2">"10.5.0 &lt;= v &lt; 11.0.0"</span><span class="p">,</span>
-  <span class="s2">"entry"</span><span class="p">:</span> <span class="s2">"index.ts"</span><span class="p">,</span>
+  <span class="s2">"entry"</span><span class="p">:</span> <span class="s2">"index.mjs"</span><span class="p">,</span>
   <span class="s2">"dependencies"</span><span class="p">:</span> <span class="p">{}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -202,37 +216,53 @@ Your dependencies now total 87.9kb in size.
 
 <p>And maintain a record of the exact versions installed.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-stuff/exact-dependencies.json</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-lock.json</span>
 <span class="p">{</span>
   <span class="s2">"alice/package"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"2.2.3"</span><span class="p">,</span>
+    <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"2.2.0 &lt;= v &lt; 3.0.0"</span><span class="p">,</span>
     <span class="s2">"registry"</span><span class="p">:</span> <span class="s2">"https://registry.wooljs.org"</span>
   <span class="p">},</span>
   <span class="s2">"bob/package"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"3.4.0"</span><span class="p">,</span>
+    <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"3.4.0 &lt;= v &lt; 3.5.0"</span><span class="p">,</span>
     <span class="s2">"registry"</span><span class="p">:</span> <span class="s2">"https://registry.wooljs.org"</span>
   <span class="p">},</span>
   <span class="s2">"lsjroberts/other"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.13"</span><span class="p">,</span>
+    <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"1.0.0 &lt;= v &lt; 2.0.0"</span><span class="p">,</span>
     <span class="s2">"registry"</span><span class="p">:</span> <span class="s2">"https://registry.wooljs.org"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo/
-├─ wool-stuff/
-│  ├─ exact-dependencies.json
-│  └─ packages/
-│     ├─ alice/
-│     │  └─ package/
-│     ├─ bob/
-│     │  └─ package/
-│     └─ lsjroberts/
-│        └─ other/
-└─ wool.json
+<blockquote>
+  <p><strong>Note</strong>:</p>
+
+  <p>Other potential methods include: removing the <code class="highlighter-rouge">wool-lock.json</code> and having the full dependency specification in <code class="highlighter-rouge">wool.json</code>, only putting directly added packages in <code class="highlighter-rouge">wool.json</code> and moving secondary dependencies into <code class="highlighter-rouge">wool-lock.json</code>.</p>
+</blockquote>
+
+<h3 id="automated-adding">Automated adding</h3>
+
+<p>It should detect missing dependencies in my code and install them for me.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">missing</span> <span class="k">from</span> <span class="s1">'lsjroberts/missing'</span><span class="p">;</span>
+<span class="nx">missing</span><span class="p">();</span>
 </code></pre></div></div>
 
-<h3 id="offline-caching">Offline caching</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>It looks like lsjroberts/missing has not been installed, should I add this for you? [Y/n]
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To add lsjroberts/missing I would like to install the following dependencies:
+
+    lsjroberts/missing  1.0.0 &lt;= v &lt; 2.0.0
+
+Adding a total of 12.1kb to your dependencies
+
+May I install these for you? [Y/n]
+</code></pre></div></div>
+
+<h3 id="offline-first">Offline first</h3>
 
 <p>It should cache the dependencies on my machine to allow offline development.</p>
 
@@ -340,18 +370,28 @@ May I install these for you? [Y/n]
 <span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-stuff/exact-dependencies.json</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-lock.json</span>
 <span class="p">{</span>
   <span class="s2">"alice/package"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"2.2.3"</span><span class="p">,</span>
+    <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"2.2.0 &lt;= v &lt; 3.0.0"</span><span class="p">,</span>
     <span class="s2">"registry"</span><span class="p">:</span> <span class="s2">"https://registry.wooljs.org"</span>
   <span class="p">},</span>
   <span class="s2">"company/package"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.2"</span><span class="p">,</span>
+    <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"1.0.0 &lt;= v &lt; 2.0.0"</span><span class="p">,</span>
     <span class="s2">"registry"</span><span class="p">:</span> <span class="s2">"https://registry.company.com"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
+<p>It the same package name is found on multiple registries, it would be resolved in priority from first to last registry listed.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>It may be useful for a developer to manually specifiy which registry is to be used for a dependency by using the full dependency specification as seen in <code class="highlighter-rouge">wool-lock.json</code>.</p>
+</blockquote>
 
 <h3 id="registry-mirrors">Registry mirrors</h3>
 
@@ -378,6 +418,8 @@ May I install these for you? [Y/n]
 
 <p>It should support flexible workspaces.</p>
 
+<p>Say I want a single repo for all my work, with the <code class="highlighter-rouge">main-core</code> and <code class="highlighter-rouge">main-extra</code> packages sharing a version and <code class="highlighter-rouge">other</code> indendently versioned.</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo/
 ├─ workspaces/
 │  └─ main/
@@ -403,7 +445,7 @@ May I install these for you? [Y/n]
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>With nested workspaces and independent or shared versioning.</p>
+<p>Nested workspaces with independent or shared versioning can be freely defined.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// workspaces/main/wool.json</span>
 <span class="p">{</span>
@@ -591,7 +633,7 @@ Are you sure you wish to continue? [Y/n]
 <span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-stuff/exact-dependencies.json</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// wool-lock.json</span>
 <span class="p">{</span>
   <span class="s2">"alice/package"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"2.2.3"</span><span class="p">,</span>
@@ -692,9 +734,9 @@ Are you sure you wish to continue? [Y/n]
 
 <p>How about a peer-to-peer registry with distributed code? Perhaps utilising the <a href="https://datproject.org/">Dat protocol</a>. Publishing a package would create a <code class="highlighter-rouge">.dat</code> folder on your machine then share its <code class="highlighter-rouge">dat://</code> url with the network to be synchronised and distributed.</p>
 
-<p>It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages giving you coins you can spend promoting other packages or buying hats for your avatar.</p>
+<p>It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages gives you coins you can spend promoting other packages or buying hats for your avatar.</p>
 
-<p>If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big ol’ cloud server farm, and mirror any less reliable registries you don’t want to block your team from downtime.</p>
+<p>If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big cloud server farm, and mirror any less reliable registries you don’t want to block your team from downtime.</p>
 
 <p>And if your team is smaller and just needs to share a handful of in-house packages you can boot up a registry on the old spare box in the corner.</p>
 

@@ -222,8 +222,19 @@
         @extend %heading;
     }
 
-    p + h4 {
+    p + h4,
+    blockquote + h4 {
         margin-top: $spacing-unit;
+    }
+
+    a {
+        border-bottom: 1px solid $brand-color;
+        transition: border-bottom-width 0.1s linear;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom-width: 2px;
+        }
     }
 
     hr {

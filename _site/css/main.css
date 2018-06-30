@@ -298,8 +298,15 @@ pre {
   font-weight: 600;
   text-transform: uppercase; }
 
-.post-content p + h4 {
+.post-content p + h4,
+.post-content blockquote + h4 {
   margin-top: 5.3394rem; }
+.post-content a {
+  border-bottom: 1px solid #d76a6c;
+  transition: border-bottom-width 0.1s linear; }
+  .post-content a:hover {
+    text-decoration: none;
+    border-bottom-width: 2px; }
 .post-content hr {
   display: block;
   margin: 5.3394rem auto;

@@ -30,19 +30,17 @@ Even just presenting that information upfront will encourage developers to pay a
 
 And by caching each package in your home directory, each version is truly only installed once on your local machine.
 
+> **Aside:** This is possible with [esm loader hooks](https://nodejs.org/api/esm.html#esm_loader_hooks).
+
 #### Improve stability when upgrading dependencies
 
 In theory, semantic versioning is supposed to protect you from upgrading a dependency to an incompatible version.
 
-However, in practise, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.
+However, in practice, since the version of every NPM package is manually entered it still leaves a lot up to human interpretation.
 
-This is not the worst thing ever, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Particularly for typescript projects.
+So when you update dependencies to the latest versions within your existing constraints things can break unexpectedly. Particularly with large projects and several layers to the dependency tree.
 
-#### Naturally deprecate stale and unsupported packages
-
-By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.
-
-It will help developers better identify the packages they should be using.
+Due to the nature of javascript it is impossible to eliminate this entirely, but it would not be hard to bake in automatic versioning support for at least the most clear-cut cases. Especially for typescript projects.
 
 #### Namespaces for all
 
@@ -52,13 +50,25 @@ It lets groups be formed that focus on [maintaining high quality packages](https
 
 And reduces the need for ever creative package names, so they can be more descriptive and clear.
 
+#### Naturally deprecate stale and unsupported packages
+
+By forcing packages to declare all their dependencies upfront, it will naturally encourage maintained packages to rise and stale packages to fall in usage.
+
+Packages will become stale if they are not updated in line with new releases of node and other packages they use.
+
+If a package you are using does become stale and there is no-one left to maintain it, you can fork it under your namespace and start maintaining it yourself.
+
+Stale packages are a hidden problem on NPM, it is often difficult to tell if it simply does not require any updates or if it is no longer viable and will cause bugs. A combination of upfront dependencies, enforced node version compatibility and namespaces will help alleviate this issue.
+
+> **Aside:** This is something [Elm](http://elm-lang.org) does, and I've yet to see any major complaints about dependency hell so... ¯\\_(ツ)_/¯ should be fine.
+
 #### Enable a flexible architecture for large scale projects
 
 [Lerna](https://lernajs.io/) is cool. [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) are cool. But they are both fairly rigid and limited in scope.
 
 Imagine being able to have a true monorepo for all the packages within your purview at your job, yet also able to version packages independently and/or shared, in any grouping.
 
-With all installed dependencies cached in your home directory and symlinked from your project, there would be no need for hoisting.
+With all installed dependencies installed in your home directory there would be no need for hoisting and so resolves the often nightmarish issues that causes.
 
 #### Decentralise registries for package hosting
 
@@ -92,7 +102,7 @@ If you have any ideas or feedback, supportive or critical, please send me a twee
 
 > **Also note**
 >
-> These are just ideas I am spouting into the wind, none of it exists yet.
+> These are just ideas I am spouting into the wind, none of it exists yet outside small experiments. It is all open to change based on feedback, feasibility and other issues.
 
 > **Also also note**
 >
@@ -114,7 +124,7 @@ wool init
   "version": "1.0.0",
   "registries": ["https://registry.wooljs.org"],
   "nodeVersion": "10.5.0 <= v < 11.0.0",
-  "entry": "index.ts",
+  "entry": "index.mjs",
   "dependencies": {}
 }
 ```
@@ -165,38 +175,54 @@ It should list all installed dependencies upfront.
 And maintain a record of the exact versions installed.
 
 ```js
-// wool-stuff/exact-dependencies.json
+// wool-lock.json
 {
   "alice/package": {
     "version": "2.2.3",
+    "range": "2.2.0 <= v < 3.0.0",
     "registry": "https://registry.wooljs.org"
   },
   "bob/package": {
     "version": "3.4.0",
+    "range": "3.4.0 <= v < 3.5.0",
     "registry": "https://registry.wooljs.org"
   },
   "lsjroberts/other": {
     "version": "1.0.13",
+    "range": "1.0.0 <= v < 2.0.0",
     "registry": "https://registry.wooljs.org"
   }
 }
 ```
 
-```
-repo/
-├─ wool-stuff/
-│  ├─ exact-dependencies.json
-│  └─ packages/
-│     ├─ alice/
-│     │  └─ package/
-│     ├─ bob/
-│     │  └─ package/
-│     └─ lsjroberts/
-│        └─ other/
-└─ wool.json
+> **Note**:
+>
+> Other potential methods include: removing the `wool-lock.json` and having the full dependency specification in `wool.json`, only putting directly added packages in `wool.json` and moving secondary dependencies into `wool-lock.json`.
+
+### Automated adding
+
+It should detect missing dependencies in my code and install them for me.
+
+```js
+import missing from 'lsjroberts/missing';
+missing();
 ```
 
-### Offline caching
+```
+It looks like lsjroberts/missing has not been installed, should I add this for you? [Y/n]
+```
+
+```
+To add lsjroberts/missing I would like to install the following dependencies:
+
+    lsjroberts/missing  1.0.0 <= v < 2.0.0
+
+Adding a total of 12.1kb to your dependencies
+
+May I install these for you? [Y/n]
+```
+
+### Offline first
 
 It should cache the dependencies on my machine to allow offline development.
 
@@ -315,18 +341,26 @@ May I install these for you? [Y/n]
 ```
 
 ```js
-// wool-stuff/exact-dependencies.json
+// wool-lock.json
 {
   "alice/package": {
     "version": "2.2.3",
+    "range": "2.2.0 <= v < 3.0.0",
     "registry": "https://registry.wooljs.org"
   },
   "company/package": {
     "version": "1.0.2",
+    "range": "1.0.0 <= v < 2.0.0",
     "registry": "https://registry.company.com"
   }
 }
 ```
+
+It the same package name is found on multiple registries, it would be resolved in priority from first to last registry listed.
+
+> **Note**
+>
+> It may be useful for a developer to manually specifiy which registry is to be used for a dependency by using the full dependency specification as seen in `wool-lock.json`.
 
 ### Registry mirrors
 
@@ -353,6 +387,8 @@ It should install from mirrors if a registry is down.
 ### Workspaces
 
 It should support flexible workspaces.
+
+Say I want a single repo for all my work, with the `main-core` and `main-extra` packages sharing a version and `other` indendently versioned.
 
 ```
 repo/
@@ -381,7 +417,7 @@ repo/
 }
 ```
 
-With nested workspaces and independent or shared versioning.
+Nested workspaces with independent or shared versioning can be freely defined.
 
 ```js
 // workspaces/main/wool.json
@@ -588,7 +624,7 @@ Installed 1 npm package.
 ```
 
 ```js
-// wool-stuff/exact-dependencies.json
+// wool-lock.json
 {
   "alice/package": {
     "version": "2.2.3",
@@ -698,9 +734,9 @@ By creating the registries in this way it leaves open a space for innovation and
 
 How about a peer-to-peer registry with distributed code? Perhaps utilising the [Dat protocol](https://datproject.org/). Publishing a package would create a `.dat` folder on your machine then share its `dat://` url with the network to be synchronised and distributed.
 
-It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages giving you coins you can spend promoting other packages or buying hats for your avatar.
+It you enjoy a bit of the hype train perhaps you could create a registry on a blockchain. Maintaining popular packages gives you coins you can spend promoting other packages or buying hats for your avatar.
 
-If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big ol' cloud server farm, and mirror any less reliable registries you don't want to block your team from downtime.
+If your business is true enterprise scale and needs to serve thousands of developers across the world you can host your own registry on some big cloud server farm, and mirror any less reliable registries you don't want to block your team from downtime.
 
 And if your team is smaller and just needs to share a handful of in-house packages you can boot up a registry on the old spare box in the corner.
 
