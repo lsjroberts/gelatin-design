@@ -5,17 +5,13 @@
     <description></description>
     <link>http://gelatindesign.co.uk/</link>
     <atom:link href="http://gelatindesign.co.uk/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jun 2018 11:32:01 +0100</pubDate>
-    <lastBuildDate>Sat, 30 Jun 2018 11:32:01 +0100</lastBuildDate>
+    <pubDate>Sat, 30 Jun 2018 11:33:00 +0100</pubDate>
+    <lastBuildDate>Sat, 30 Jun 2018 11:33:00 +0100</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
         <title>A Better Javascript Ecosystem</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE: THIS IS A DRAFT&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;why&quot;&gt;Why?&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;why&quot;&gt;Why?&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/&quot;&gt;NPM&lt;/a&gt; is wonderful, and the huge volume of packages it has enabled has been a tremendous boon to the world of javascript development. It has formed the backbone of the growth in this sector.&lt;/p&gt;
 
@@ -719,7 +715,7 @@ Are you sure you wish to continue? [Y/n]
 
 &lt;p&gt;If you have any ideas or feedback, supportive or critical, please send me a tweet &lt;a href=&quot;https://twitter.com/lsjroberts&quot;&gt;@lsjroberts&lt;/a&gt; and let’s have a chat.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 29 Jun 2018 00:00:00 +0100</pubDate>
+        <pubDate>Sat, 30 Jun 2018 00:00:00 +0100</pubDate>
         <link>http://gelatindesign.co.uk/coding/javascript-ecosystem</link>
         <guid isPermaLink="true">http://gelatindesign.co.uk/coding/javascript-ecosystem</guid>
         

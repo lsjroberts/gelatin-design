@@ -3,12 +3,10 @@ title: A Better Javascript Ecosystem
 titleSmall: A Better
 titleStrong: Javascript Ecosystem
 author: Laurence Roberts
-date: 2018-06-29
+date: 2018-06-30
 category: coding
 tags: wool javascript
 ---
-
-> **NOTE: THIS IS A DRAFT**
 
 ### Why?
 
